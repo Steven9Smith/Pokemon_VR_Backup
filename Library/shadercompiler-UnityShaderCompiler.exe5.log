@@ -1,0 +1,239 @@
+Base path: 'C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=113853 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=31162 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=34321 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=42675 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=34365 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=64177 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=39120 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=45871 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=49391 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=56255 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=42908 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=25750 outsize=14181 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=25750 outsize=15619 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1326 outsize=620 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=10881 outsize=9840 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9347 outsize=7442 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=17415 outsize=10499 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=4855 outsize=4117 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=4061 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=4918 outsize=2435 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=11912 outsize=953 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7423 outsize=1044 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1946 outsize=1238 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=18299 outsize=8653 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=18299 outsize=10507 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=21453 outsize=14705 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1957 outsize=559 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=21751 outsize=21741 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=18634 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=20668 outsize=94969 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=35006 outsize=34422 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=35006 outsize=34422 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=8350 outsize=2100 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=1503 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=911 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=8541 outsize=0 ok=0
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=9349 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=9814 outsize=3581 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7712 outsize=4433 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7712 outsize=7804 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3918 outsize=2660 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5725 outsize=5009 ok=1
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=18981 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=13143 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=31948 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=28697 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=61744 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=31021 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=73736 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=31098 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=94110 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=56255 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15475 outsize=66254 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=25750 outsize=15695 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=25750 outsize=324 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3797 outsize=1603 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9347 outsize=7851 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=4918 outsize=2360 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=11912 outsize=953 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7423 outsize=1033 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=11993 outsize=603 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=21453 outsize=14343 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=18634 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=2905 outsize=1865 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7883 outsize=5629 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=20668 outsize=94969 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=35006 outsize=34422 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=35006 outsize=34422 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=4699 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=8541 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=15001 outsize=2925 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl(59): undeclared identifier 'FastTonemapPerChannel'
+  api=4 insize=9349 outsize=0 ok=0
+Cmd: compileComputeKernel
+  api=4 insize=7712 outsize=6689 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3918 outsize=897 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5725 outsize=629 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1628 outsize=1398 ok=1
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=2549 outsize=947 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=31896 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=28749 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=38790 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=37195 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=53928 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=44077 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=41583 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=53126 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=64349 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=32677 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=36306 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=32811 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=36010 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=33523 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14406 outsize=49247 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=26648 outsize=15981 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3797 outsize=1603 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7423 outsize=1044 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=20012 outsize=14699 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3022 outsize=2047 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=20668 outsize=27246 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=34508 outsize=32125 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=34508 outsize=30869 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=34508 outsize=32125 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5133 outsize=1267 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=17193 outsize=7889 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=1503 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=707 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5089 outsize=910 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=14985 outsize=2925 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7712 outsize=4542 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3918 outsize=674 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3506 outsize=1047 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5723 outsize=629 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3425 outsize=4281 ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler

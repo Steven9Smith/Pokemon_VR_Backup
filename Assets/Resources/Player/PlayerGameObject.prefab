@@ -1,0 +1,336 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8183866463420424098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299096146996154964}
+  - component: {fileID: 6234965737288874022}
+  - component: {fileID: -6050401005345282688}
+  - component: {fileID: -359905808117459415}
+  - component: {fileID: 4391566065420692149}
+  - component: {fileID: -1799687083964904755}
+  - component: {fileID: 7201315966075994281}
+  m_Layer: 0
+  m_Name: PlayerGameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299096146996154964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0200001, y: 1, z: -17.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6234965737288874022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0
+--- !u!114 &-6050401005345282688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886ced0c302870b469f5db204eba1883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntityId: Player
+  EntityName: _blank_
+  PokemonName: _blank_
+--- !u!114 &-359905808117459415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e38244241005cf498966314d7d04dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: _blank_
+  pokemonName: _blank_
+--- !u!114 &4391566065420692149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a1b8b88cfc86b4d9d7246de1a46c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Move:
+    x: 0
+    y: 0
+    z: 0
+  Rotation:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  SpaceDown: 0
+  LShiftDown: 0
+  RShiftDown: 0
+  Mouse1Down: 0
+  Mouse2Down: 0
+  LCtrlDown: 0
+  MaxInputVelocity: 0
+  PlayerCurrentAcceleration: 0
+  CameraOffset: 0
+--- !u!114 &-1799687083964904755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccea9ea98e38942e0b0938c27ed1903e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MotionType: 0
+  m_Mass: 1
+  m_LinearDamping: 0.01
+  m_AngularDamping: 0.05
+  m_InitialLinearVelocity:
+    x: 0
+    y: 0
+    z: 0
+  m_InitialAngularVelocity:
+    x: 0
+    y: 0
+    z: 0
+  m_GravityFactor: 1
+  m_OverrideDefaultMassDistribution: 0
+  m_CenterOfMass:
+    x: 0
+    y: 0
+    z: 0
+  m_Orientation:
+    Value:
+      x: 0
+      y: 0
+      z: 0
+    RotationOrder: 4
+  m_InertiaTensor:
+    x: 0.4
+    y: 0.4
+    z: 0.4
+--- !u!114 &7201315966075994281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183866463420424098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5712ce844e5754ba6273fd3c50eece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PokedexNumber: 0
+  Height: 0
+  experienceYield: 0
+  LevelingRate: 0
+  Freindship: 0
+  Speed: 0
+  Acceleration: 0
+  Hp: 0
+  Attack: 0
+  Defense: 0
+  SpecialAttack: 0
+  SpecialDefense: 0
+  pokemonMoveData:
+    pokemonMoveA:
+      name:
+        A: 0
+        B: 0
+        C: 0
+        D: 0
+        E: 0
+        F: 0
+        G: 0
+        H: 0
+        I: 0
+        J: 0
+        K: 0
+        L: 0
+        M: 0
+        N: 0
+        O: 0
+        P: 0
+        Q: 0
+        R: 0
+        S: 0
+        T: 0
+        U: 0
+        V: 0
+        W: 0
+        X: 0
+        Y: 0
+        Z: 0
+        AA: 0
+        AB: 0
+        AC: 0
+        AD: 0
+        length: 0
+      matterType: 0
+      statusType: 0
+      contactType: 0
+      baseDamage: 0
+      basePP: 0
+      pp: 0
+      maxPP: 0
+    pokemonMoveB:
+      name:
+        A: 0
+        B: 0
+        C: 0
+        D: 0
+        E: 0
+        F: 0
+        G: 0
+        H: 0
+        I: 0
+        J: 0
+        K: 0
+        L: 0
+        M: 0
+        N: 0
+        O: 0
+        P: 0
+        Q: 0
+        R: 0
+        S: 0
+        T: 0
+        U: 0
+        V: 0
+        W: 0
+        X: 0
+        Y: 0
+        Z: 0
+        AA: 0
+        AB: 0
+        AC: 0
+        AD: 0
+        length: 0
+      matterType: 0
+      statusType: 0
+      contactType: 0
+      baseDamage: 0
+      basePP: 0
+      pp: 0
+      maxPP: 0
+    pokemonMoveC:
+      name:
+        A: 0
+        B: 0
+        C: 0
+        D: 0
+        E: 0
+        F: 0
+        G: 0
+        H: 0
+        I: 0
+        J: 0
+        K: 0
+        L: 0
+        M: 0
+        N: 0
+        O: 0
+        P: 0
+        Q: 0
+        R: 0
+        S: 0
+        T: 0
+        U: 0
+        V: 0
+        W: 0
+        X: 0
+        Y: 0
+        Z: 0
+        AA: 0
+        AB: 0
+        AC: 0
+        AD: 0
+        length: 0
+      matterType: 0
+      statusType: 0
+      contactType: 0
+      baseDamage: 0
+      basePP: 0
+      pp: 0
+      maxPP: 0
+    pokemonMoveD:
+      name:
+        A: 0
+        B: 0
+        C: 0
+        D: 0
+        E: 0
+        F: 0
+        G: 0
+        H: 0
+        I: 0
+        J: 0
+        K: 0
+        L: 0
+        M: 0
+        N: 0
+        O: 0
+        P: 0
+        Q: 0
+        R: 0
+        S: 0
+        T: 0
+        U: 0
+        V: 0
+        W: 0
+        X: 0
+        Y: 0
+        Z: 0
+        AA: 0
+        AB: 0
+        AC: 0
+        AD: 0
+        length: 0
+      matterType: 0
+      statusType: 0
+      contactType: 0
+      baseDamage: 0
+      basePP: 0
+      pp: 0
+      maxPP: 0
+  AutoLoadUsingPokemonName: 0

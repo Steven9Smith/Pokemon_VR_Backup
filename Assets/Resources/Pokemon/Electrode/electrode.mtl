@@ -1,0 +1,10 @@
+newmtl HUMAN__groupSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Body_Fixed.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Electrode_SpecColor.png
+Ns 18.00

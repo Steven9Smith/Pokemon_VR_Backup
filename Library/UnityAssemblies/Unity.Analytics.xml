@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>Unity.Analytics</name>
+	</assembly>
+	<members>
+		<member name="T:UnityEngine.Analytics.LocationInfo">
+			<summary>Structure describing device location.</summary>
+		</member>
+		<member name="F:UnityEngine.Analytics.LocationInfo.longitude">
+			<summary>Geographical device location latitude.</summary>
+		</member>
+		<member name="F:UnityEngine.Analytics.LocationInfo.latitude">
+			<summary>Geographical device location latitude.</summary>
+		</member>
+	</members>
+</doc>
