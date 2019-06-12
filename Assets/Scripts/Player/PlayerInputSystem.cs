@@ -28,6 +28,17 @@ namespace Pokemon.Player
 			public float deltaTime;
 			public float Horizontal;
 			public float Vertical, MouseX, MouseY;
+		public float3 gravity = -new float3(0,-9.81f,0);
+		protected override void OnCreate()
+		{
+			GravityQuery = GetEntityQuery(typeof(PhysicsStep));
+		}
+		[BurstCompile]
+		struct PlayerInputJob : IJobForEach<PlayerInput,PokemonEntityData, PhysicsVelocity, StateData, PhysicsCollider>
+		{
+			public float deltaTime;
+			public float Horizontal;
+			public float Vertical,MouseX,MouseY;
 			public float3 gravity;
 			public BlittableBool spaceDown;
 			public BlittableBool LShiftDown;
@@ -45,6 +56,12 @@ namespace Pokemon.Player
 				UpdatePlayerInput(ref playerInput);
 				PlayerMovement(playerInput, ref pokemonEntityData, ref physicsVelocity, ref stateData);
 				gainEnergy(ref pokemonEntityData, deltaTime);
+			public BlittableBool EDown;
+
+			public void Execute(ref PlayerInput playerInput,ref PokemonEntityData pokemonEntityData, ref PhysicsVelocity physicsVelocity, ref StateData stateData,ref PhysicsCollider physicsCollider)
+			{
+				UpdatePlayerInput(ref playerInput);
+				PlayerMovement(playerInput,pokemonEntityData,ref physicsVelocity,ref stateData);
 			}
 			private void UpdatePlayerInput(ref PlayerInput playerInput)
 			{
@@ -63,6 +80,9 @@ namespace Pokemon.Player
 				playerInput.attackDDown = attackDDown;
 			}
 			private void PlayerMovement([ReadOnly]PlayerInput input, ref PokemonEntityData pokemonEntityData, ref PhysicsVelocity velocity, ref StateData stateData)
+				playerInput.EDown = EDown;
+			}
+			private void PlayerMovement([ReadOnly]PlayerInput input, [ReadOnly] PokemonEntityData pokemonEntityData, ref PhysicsVelocity velocity,ref StateData stateData)
 			{
 				float3 force = float3.zero;
 				float3 maxVelocity = math.abs(velocity.Linear);
@@ -83,6 +103,8 @@ namespace Pokemon.Player
 					{
 						maxVelocity *= 0.5f;
 						acceleration *= 0.5f;
+						maxVelocity *= 2;
+						acceleration *= 2;
 						stateData.isRunning = true;
 					}
 					if (maxVelocity.x < pokemonEntityData.Speed && maxVelocity.z < pokemonEntityData.Speed)
@@ -110,6 +132,8 @@ namespace Pokemon.Player
 						float realJumpheight = pokemonEntityData.jumpHeight < pokemonEntityData.currentStamina ? pokemonEntityData.jumpHeight : pokemonEntityData.currentStamina;
 						velocity.Linear.y += realJumpheight;
 						pokemonEntityData.currentStamina = math.clamp(pokemonEntityData.currentStamina - realJumpheight, 0, pokemonEntityData.maxStamina);
+				//		Debug.Log("attempting to jump! "+pokemonEntityData.jumpHeight);
+						velocity.Linear.y += pokemonEntityData.jumpHeight;
 					}
 				}
 
@@ -119,6 +143,46 @@ namespace Pokemon.Player
 				//		Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
 			}
 			private void gainEnergy(ref PokemonEntityData ped, float time) { if (ped.currentStamina < ped.maxStamina && ped.currentHp > 0) ped.currentStamina = math.clamp(ped.currentStamina + (ped.Mass / (ped.Hp / ped.currentHp) * time), 0, ped.maxStamina); }
+	//			Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
+				velocity.Linear += force;
+		//		Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
+			}
+
+		}
+		/// <summary>
+		/// preforms boolean tests
+		/// </summary>
+		/// <param name="a">a float3</param>
+		/// <param name="b">another float3</param>
+		/// <param name="mode">which test to preform
+		/// 1 && ==
+		/// 2 && <
+		/// 3 && >
+		/// 4 && <=
+		/// 5 && >=
+		/// 6 || ==
+		/// 7 || <
+		/// 8 || >
+		/// 9 || <=
+		/// 10 || >=
+		/// </param>
+		/// <returns></returns>
+		public static bool CompareFloat3(float3 a, float3 b,int mode=0)
+		{
+			switch (mode)
+			{
+				case 1: return a.x == b.x && a.y == b.y && a.z == b.z;
+				case 2: return a.x < b.x && a.y < b.y && a.z < b.z;
+				case 3: return a.x > b.x && a.y > b.y && a.z > b.z;
+				case 4: return a.x <= b.x && a.y <= b.y && a.z <= b.z;
+				case 5: return a.x >= b.x && a.y >= b.y && a.z >= b.z;
+				case 6: return a.x == b.x || a.y == b.y || a.z == b.z;
+				case 7: return a.x < b.x || a.y < b.y || a.z < b.z;
+				case 8: return a.x > b.x || a.y > b.y || a.z > b.z;
+				case 9: return a.x <= b.x || a.y <= b.y || a.z <= b.z;
+				case 10: return a.x >= b.x || a.y >= b.y || a.z >= b.z;
+				default: return a.x == b.x || a.y == b.y || a.z == b.z;
+			}
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
@@ -140,6 +204,7 @@ namespace Pokemon.Player
 				attackBDown = inputDefinitionsClass.isAttackB(),
 				attackCDown = inputDefinitionsClass.isAttackC(),
 				attackDDown = inputDefinitionsClass.isAttackD(),
+				EDown = Input.GetKeyDown(KeyCode.E),
 				gravity = gravity
 			};
 			a.Dispose();

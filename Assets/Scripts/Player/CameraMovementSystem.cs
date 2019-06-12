@@ -1,6 +1,11 @@
 ﻿using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+﻿using System;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -36,6 +41,7 @@ namespace Pokemon.Player
 				//get components
 				Camera cam = EntityManager.GetComponentObject<Camera>(cameraEntities[0]);
 		//		Debug.Log("fieldofView = "+cam.fieldOfView);
+				Debug.Log("fieldofView = "+cam.fieldOfView);
 				cameraTransform = EntityManager.GetComponentObject<Transform>(cameraEntities[0]);
 				cameraDataComponent = EntityManager.GetSharedComponentData<CameraDataComponent>(cameraEntities[0]);
 				playerPosition = EntityManager.GetComponentData<Translation>(playerEntities[0]);

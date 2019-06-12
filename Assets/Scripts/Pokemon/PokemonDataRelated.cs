@@ -14,6 +14,37 @@ namespace Pokemon
 		public Translation Position;
 		public Rotation Rotation;
 	}
+	/// <summary>
+	/// This holds four pokemon Moves
+	/// </summary>
+	[Serializable]
+	public struct PokemonMoveData : IComponentData
+	{
+		public PokemonMove pokemonMoveA;
+		public PokemonMove pokemonMoveB;
+		public PokemonMove pokemonMoveC;
+		public PokemonMove pokemonMoveD;
+	}
+
+	/// <summary>
+	/// Pokemon Move 
+	/// </summary>
+	[Serializable]
+	public struct PokemonMove
+	{
+		public ByteString30 name;             //name of pokemon move
+											  //Attack Type Varibles
+		public ushort matterType;         //substance of the type e.g. electric, rock,ground
+		public ushort statusType;         //e.g. sleep,paralisys
+		public ushort contactType;        //type of move e.g. physical, sspecial attack
+										  //Damage Varibles
+		public ushort baseDamage;          //base damage of attack
+										   //PP varibles
+		public ushort basePP;             //base PP for attack
+		public ushort pp;                 //current PP 
+		public ushort maxPP;              //max PP
+	}
+
 	[Serializable]
 	public struct PokemonData : IComponentData
 	{

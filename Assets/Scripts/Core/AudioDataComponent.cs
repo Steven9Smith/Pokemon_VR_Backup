@@ -37,5 +37,10 @@ public struct AudioSharedData : ISharedComponentData , IEquatable<AudioSharedDat
 	public override int GetHashCode(){return base.GetHashCode();}
 }
 
+public struct AudioSharedData : ISharedComponentData
+{
+	public AudioSource source;
+	public bool playOnStart;
+}
 [Serializable]
 public struct AudioData : IComponentData { }

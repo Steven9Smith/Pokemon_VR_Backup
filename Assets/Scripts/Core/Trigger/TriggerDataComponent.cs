@@ -6,6 +6,35 @@ using UnityEngine;
 
 namespace Pokemon
 {
+	[RequiresEntityConversion]
+	public class TriggerDataComponent : MonoBehaviour, IConvertGameObjectToEntity
+	{
+		public enum TriggerType
+		{
+			Default,
+			Floor,
+			Area
+		}
+		public TriggerType triggerType = TriggerType.Default;
+		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+		{
+			dstManager.AddComponentData(entity, new TriggerData
+			{
+				triggerType = getTriggerType(triggerType)
+			});
+		}
+		private int getTriggerType(TriggerType triggerType)
+		{
+			switch (triggerType)
+			{
+				case TriggerType.Default: return 0;
+				case TriggerType.Floor: return 1;
+				case TriggerType.Area: return 2;
+				default: return 0;
+			}
+		}
+
+	}
 	//not in use
 	public struct EverythingTrigger : IComponentData{}
 	public struct FloorTrigger : IComponentData { }
@@ -14,6 +43,20 @@ namespace Pokemon
 	public struct StructureTrigger : IComponentData { }
 	public struct InteractionTrigger : IComponentData {}
 	public struct NPCTrigger : IComponentData { }
+
+	public struct InteractionTrigger : IComponentData {
+	}
+
+	public struct PairOColliders : IComponentData
+	{
+		public PhysicsCollider entityACollider;
+		public PhysicsCollider entityBCollider;
+		public ATriggerEvent entityATriggerEvent;
+		public BlittableBool aHasInteraction;
+		public BlittableBool bHasInteraction;
+	}
+	public struct NPCTrigger : IComponentData { }
+
 
 	public class TriggerEventClass
 	{
@@ -49,6 +92,17 @@ namespace Pokemon
 			return false;
 		}
 
+				case uint.MaxValue: return physicsCategory + ":Everything";
+				default: return physicsCategory + "~:unknown";
+			}
+		}
+		
+	}
+
+	[Serializable]
+	public struct TriggerData : IComponentData
+	{
+		public int triggerType;
 	}
 	[Serializable]
 	public struct ATriggerEvent : IComponentData{
@@ -64,6 +118,12 @@ namespace Pokemon
 		public static bool operator ==(ATriggerEvent c1, ATriggerEvent c2)
 		{
 			return ((c1.entityA == c2.entityA && c1.entityB == c2.entityB) || (c1.entityA == c2.entityB && c1.entityB == c2.entityA));
+			return "ATriggerEvent[EntityA = " + entityA.ToString() + ",EntityB = " + entityB.ToString() + "," + triggerType + "," + valid;
+		}
+		public static bool operator ==(ATriggerEvent c1, ATriggerEvent c2)
+		{
+			//since ATrigger can have entityA and entityB is either position we have to test for them both
+			return (c1.entityA == c2.entityA && c1.entityB == c2.entityB) || (c1.entityA == c2.entityB && c1.entityB == c2.entityA);
 		}
 
 		public static bool operator !=(ATriggerEvent c1, ATriggerEvent c2)
@@ -77,6 +137,7 @@ namespace Pokemon
 			{
 				return this == (ATriggerEvent)obj;
 			}
+			return (c1.entityA != c2.entityA && c1.entityA != c2.entityB) || (c1.entityB != c2.entityB && c1.entityB == c2.entityA);
 		}
 	}
 	

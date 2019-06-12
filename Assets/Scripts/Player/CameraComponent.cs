@@ -29,6 +29,7 @@ namespace Pokemon
 	}
 	[Serializable]
 	public struct CameraDataComponent : ISharedComponentData, IEquatable<CameraDataComponent>
+	public struct CameraDataComponent : ISharedComponentData
 	{
 		public float3 offset;
 		public float smoothingSpeed;
@@ -45,5 +46,6 @@ namespace Pokemon
 		}
 		public bool Equals(CameraDataComponent other) { return this.offset.Equals(other.offset) && this.smoothingSpeed == other.smoothingSpeed && this.isCamera == other.isCamera && this.cam.Equals(other.cam); }
 		public override int GetHashCode() { return base.GetHashCode(); }
+	}
 	}
 }

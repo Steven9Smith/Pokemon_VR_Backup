@@ -67,6 +67,7 @@ namespace Pokemon
 							}
 						}
 						
+						jumpHeight = pd.Height*10
 				};
 				dstManager.AddComponentData(entity, ped);
 			}
@@ -89,6 +90,7 @@ namespace Pokemon
 					SpecialDefense = SpecialDefense,
 					guiId = guiId,
 					currentHp = Hp
+					SpecialDefense = SpecialDefense
 				};
 				dstManager.AddComponentData(entity, ped);
 			}
@@ -110,6 +112,7 @@ namespace Pokemon
 		public float Speed;
 		public float Acceleration;
 		public float Hp;
+		public ushort Hp;
 		public ushort Attack;
 		public ushort Defense;
 		public ushort SpecialAttack;
@@ -123,6 +126,12 @@ namespace Pokemon
 		public PokemonMoveSet pokemonMoveSet;
 		public int guiId;
 
+		public int currentStamina;
+		public int maxStamina;
+		public int currentHp;
+		public float Mass;
+		public float jumpHeight;
+		public PokemonMoveData pokemonMoveData;
 	}
 
 }

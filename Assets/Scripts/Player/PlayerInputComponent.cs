@@ -22,6 +22,7 @@ namespace Pokemon
 		public bool attackBDown;
 		public bool attackCDown;
 		public bool attackDDown;
+		public bool EDown;
 		//max speed the player can acheive on their own using the player acceleration
 		public float MaxInputVelocity;
 		//acceleration the player is currently allowed to move
@@ -49,6 +50,7 @@ namespace Pokemon
 				attackBDown = attackBDown,
 				attackCDown = attackCDown,
 				attackDDown = attackDDown
+				EDown = EDown
 			});
 			dstManager.AddComponentData(entity, new StateData { });
 		}
@@ -72,6 +74,7 @@ namespace Pokemon
 		public BlittableBool attackBDown;
 		public BlittableBool attackCDown;
 		public BlittableBool attackDDown;
+		public BlittableBool EDown;
 		//max speed the player can acheive on their own using the player acceleration
 		public float MaxInputVelocity;
 		//acceleration the player is currently allowed to move

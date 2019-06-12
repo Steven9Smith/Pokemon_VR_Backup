@@ -18,6 +18,7 @@ namespace Pokemon
 		public quaternion quan;
 		public BlittableBool valid;
 	}
+	[UpdateAfter(typeof(TriggerEventSystem))]
 	public class InteractionTriggerSystem : JobComponentSystem
 	{
 		private EntityQuery interactionTriggerQuery;
@@ -58,6 +59,7 @@ namespace Pokemon
 				for (i = 0; i < entities.Length; i++)
 				{
 					if (playerInputs[i].attackADown)
+					if (playerInputs[i].EDown)
 					{
 				//		Debug.Log("Detected an E press!");
 						float3 nPosition = translations[i].Value;
@@ -109,6 +111,7 @@ namespace Pokemon
 		{
 			// Sphere with default filter and material. Add to Create() call if you want non default:
 			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(float3.zero, radius, new CollisionFilter { BelongsTo= TriggerEventClass.NPC, CollidesWith = uint.MaxValue, GroupIndex = 0 });
+			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(float3.zero, radius, new CollisionFilter { CategoryBits = TriggerEventClass.NPC, MaskBits = uint.MaxValue, GroupIndex = 0 });
 			return CreateBody(displayMesh, position, orientation, spCollider, float3.zero, float3.zero, 1.0f, true);
 		}
 		public Entity CreateBody(RenderMesh displayMesh, float3 position, quaternion orientation,
