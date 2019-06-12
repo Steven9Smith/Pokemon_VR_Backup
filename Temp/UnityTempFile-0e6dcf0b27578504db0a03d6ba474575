@@ -1,0 +1,583 @@
+/target:library
+/nowarn:0169
+/out:Temp/Unity.InputSystem.dll
+/unsafe
+/debug:portable
+/optimize-
+/nostdlib+
+/preferreduilang:en-US
+/langversion:latest
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AndroidJNIModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.InputLegacyModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ProfilerModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEditor.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/Managed/UnityEditor.Graphs.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.collections@0.0.9-preview.20/System.Runtime.CompilerServices.Unsafe.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll
+/reference:D:/Unity/Projects/Pokemon_VR/Library/PackageCache/com.unity.render-pipelines.high-definition@6.7.1-preview/Editor/Core/ShaderGenerator/ICSharpCode.NRefactory.dll
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/Microsoft.Win32.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.AppContext.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Concurrent.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.NonGeneric.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Specialized.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.EventBasedAsync.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.TypeConverter.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Console.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Data.Common.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Contracts.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Debug.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Process.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.StackTrace.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tools.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TraceSource.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tracing.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Drawing.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Dynamic.Runtime.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Calendars.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Extensions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.ZipFile.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Watcher.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.IsolatedStorage.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.MemoryMappedFiles.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Pipes.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Expressions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Parallel.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Queryable.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Http.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NameResolution.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NetworkInformation.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Ping.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Requests.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Security.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Sockets.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebHeaderCollection.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.Client.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ObjectModel.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Extensions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Reader.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.ResourceManager.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Writer.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Extensions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Handles.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Numerics.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Json.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Xml.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Claims.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Csp.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Encoding.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Primitives.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Principal.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.SecureString.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.Extensions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.RegularExpressions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Overlapped.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.Parallel.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Thread.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.ThreadPool.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Timer.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ValueTuple.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.ReaderWriter.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XDocument.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlDocument.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlSerializer.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.XDocument.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/Extensions/2.0.0/System.Numerics.Vectors.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ComponentModel.Composition.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Core.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Data.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Drawing.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.IO.Compression.FileSystem.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Net.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Numerics.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Runtime.Serialization.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ServiceModel.Web.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Transactions.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Web.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Windows.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Linq.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.0a14/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll"
+/define:UNITY_2019_2_0
+/define:UNITY_2019_2
+/define:UNITY_2019
+/define:UNITY_5_3_OR_NEWER
+/define:UNITY_5_4_OR_NEWER
+/define:UNITY_5_5_OR_NEWER
+/define:UNITY_5_6_OR_NEWER
+/define:UNITY_2017_1_OR_NEWER
+/define:UNITY_2017_2_OR_NEWER
+/define:UNITY_2017_3_OR_NEWER
+/define:UNITY_2017_4_OR_NEWER
+/define:UNITY_2018_1_OR_NEWER
+/define:UNITY_2018_2_OR_NEWER
+/define:UNITY_2018_3_OR_NEWER
+/define:UNITY_2019_1_OR_NEWER
+/define:UNITY_2019_2_OR_NEWER
+/define:PLATFORM_ARCH_64
+/define:UNITY_64
+/define:UNITY_INCLUDE_TESTS
+/define:ENABLE_AUDIO
+/define:ENABLE_CACHING
+/define:ENABLE_CLOTH
+/define:ENABLE_MICROPHONE
+/define:ENABLE_MULTIPLE_DISPLAYS
+/define:ENABLE_PHYSICS
+/define:ENABLE_TEXTURE_STREAMING
+/define:ENABLE_UNET
+/define:ENABLE_LZMA
+/define:ENABLE_UNITYEVENTS
+/define:ENABLE_WEBCAM
+/define:ENABLE_WWW
+/define:ENABLE_CLOUD_SERVICES_COLLAB
+/define:ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS
+/define:ENABLE_CLOUD_SERVICES_ADS
+/define:ENABLE_CLOUD_SERVICES_USE_WEBREQUEST
+/define:ENABLE_CLOUD_SERVICES_UNET
+/define:ENABLE_CLOUD_SERVICES_BUILD
+/define:ENABLE_CLOUD_LICENSE
+/define:ENABLE_EDITOR_HUB_LICENSE
+/define:ENABLE_WEBSOCKET_CLIENT
+/define:ENABLE_DIRECTOR_AUDIO
+/define:ENABLE_DIRECTOR_TEXTURE
+/define:ENABLE_MANAGED_JOBS
+/define:ENABLE_MANAGED_TRANSFORM_JOBS
+/define:ENABLE_MANAGED_ANIMATION_JOBS
+/define:ENABLE_MANAGED_AUDIO_JOBS
+/define:INCLUDE_DYNAMIC_GI
+/define:ENABLE_MONO_BDWGC
+/define:ENABLE_SCRIPTING_GC_WBARRIERS
+/define:PLATFORM_SUPPORTS_MONO
+/define:RENDER_SOFTWARE_CURSOR
+/define:ENABLE_VIDEO
+/define:PLATFORM_STANDALONE_WIN
+/define:PLATFORM_STANDALONE
+/define:UNITY_STANDALONE_WIN
+/define:UNITY_STANDALONE
+/define:ENABLE_RUNTIME_GI
+/define:ENABLE_MOVIES
+/define:ENABLE_NETWORK
+/define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+/define:ENABLE_UNITYWEBREQUEST
+/define:ENABLE_CLOUD_SERVICES
+/define:ENABLE_CLOUD_SERVICES_ANALYTICS
+/define:ENABLE_CLOUD_SERVICES_PURCHASING
+/define:ENABLE_CLOUD_SERVICES_CRASH_REPORTING
+/define:ENABLE_OUT_OF_PROCESS_CRASH_HANDLER
+/define:ENABLE_EVENT_QUEUE
+/define:ENABLE_CLUSTER_SYNC
+/define:ENABLE_CLUSTERINPUT
+/define:ENABLE_VR
+/define:ENABLE_AR
+/define:ENABLE_WEBSOCKET_HOST
+/define:ENABLE_MONO
+/define:NET_STANDARD_2_0
+/define:ENABLE_PROFILER
+/define:DEBUG
+/define:TRACE
+/define:UNITY_ASSERTIONS
+/define:UNITY_EDITOR
+/define:UNITY_EDITOR_64
+/define:UNITY_EDITOR_WIN
+/define:ENABLE_UNITY_COLLECTIONS_CHECKS
+/define:ENABLE_BURST_AOT
+/define:UNITY_TEAM_LICENSE
+/define:ENABLE_CUSTOM_RENDER_TEXTURE
+/define:ENABLE_DIRECTOR
+/define:ENABLE_LOCALIZATION
+/define:ENABLE_SPRITES
+/define:ENABLE_TERRAIN
+/define:ENABLE_TILEMAP
+/define:ENABLE_TIMELINE
+/define:UNITY_POST_PROCESSING_STACK_V2
+/define:CSHARP_7_OR_LATER
+/define:CSHARP_7_3_OR_NEWER
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Composites\AxisComposite.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Composites\Vector2Composite.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\IInputActionCollection.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\IInputInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputAction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionAsset.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionChange.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionMap.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionPhase.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionProperty.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionRebindingExtensions.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionReference.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionSetupExtensions.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionState.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputActionTrace.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputBinding.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputBindingComposite.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputBindingCompositeContext.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputBindingResolver.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputControlScheme.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\InputInteractionContext.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Interactions\HoldInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Interactions\MultiTapInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Interactions\PressInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Interactions\SlowTapInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Actions\Interactions\TapInteraction.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\AssemblyInfo.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\AnyKeyControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\AxisControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\ButtonControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\CommonUsages.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\DiscreteButtonControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\DpadControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlAttribute.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlExtensions.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlLayout.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlLayoutAttribute.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlLayoutChange.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlList.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputControlPath.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\InputProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\IntegerControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\KeyControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\PointerPhaseControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\AxisDeadzoneProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\ClampProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\CompensateDirectionProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\CompensateRotationProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\CurveProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\EditorWindowSpaceProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\InvertProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\InvertVector2Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\InvertVector3Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\NormalizeProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\NormalizeVector2Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\NormalizeVector3Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\ScaleProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\ScaleVector2Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\ScaleVector3Processor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Processors\StickDeadzoneProcessor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\QuaternionControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\StickControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\TouchControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Vector2Control.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Controls\Vector3Control.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\DisableDeviceCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\EnableDeviceCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\EnableIMECompositionCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\IInputDeviceCommandInfo.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\InitiateUserAccountPairingCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\InputDeviceCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryCanRunInBackground.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryDimensionsCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryEditorWindowCoordinatesCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryEnabledStateCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryKeyboardLayoutCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryKeyNameCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryPairedUserAccountCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QuerySamplingFrequencyCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\QueryUserIdCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\RequestResetCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\RequestSyncCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\SetIMECursorPositionCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\SetSamplingFrequencyCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Commands\WarpMousePositionCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Gamepad.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Haptics\DualMotorRumble.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Haptics\DualMotorRumbleCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Haptics\IDualMotorRumble.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Haptics\IHaptics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\IInputUpdateCallbackReceiver.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDevice.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDeviceBuilder.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDeviceChange.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDeviceDescription.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDeviceMatcher.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\InputDeviceReference.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\ITextInputReceiver.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Joystick.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Keyboard.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Mouse.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Pen.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Pointer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Remote\InputRemoting.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Remote\RemoteInputPlayerConnection.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Sensor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\TouchManager.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Devices\Touchscreen.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionAssetManager.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionEditorToolbar.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionEditorWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionPropertiesView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionTreeView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputActionTreeViewItems.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\InputBindingPropertiesView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\NameAndParameterListView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\ParameterListView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetEditor\PropertiesViewBase.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetImporter\InputActionAssetEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetImporter\InputActionCodeGenerator.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetImporter\InputActionImporter.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\AssetImporter\InputActionImporterEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\ControlPicker\InputControlDropdownItem.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\ControlPicker\InputControlPathEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\ControlPicker\InputControlPicker.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\ControlPicker\InputControlPickerDropdown.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\ControlPicker\InputControlPickerState.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Debugger\InputActionDebuggerWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Debugger\InputDebuggerWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Debugger\InputDeviceDebuggerWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\EditorInputControlLayoutCache.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\InputDiagnostics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\InputParameterEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdown.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdownDataSource.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdownGUI.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdownItem.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdownState.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\AdvancedDropdownWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\CallbackDataSource.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\AdvancedDropdown\MultiLevelDataSource.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\EditorHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\GUIHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\InputActionSerializationHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\InputControlTreeView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\InputEventTreeView.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\InputStateWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\SerializedPropertyHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Internal\TreeViewHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputActionDrawer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputActionDrawerBase.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputActionMapDrawer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputActionPropertyDrawer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputBindingDrawer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\PropertyDrawers\InputControlPathDrawer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Settings\EditorPlayerSettingHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Settings\InputEditorUserSettings.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Settings\InputSettingsBuildProvider.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Editor\Settings\InputSettingsProvider.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\ActionEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\DeltaStateEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\DeviceConfigurationEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\DeviceRemoveEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\IInputEventTypeInfo.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\IMECompositionEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\InputEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\InputEventBuffer.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\InputEventPtr.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\InputEventTrace.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\StateEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Events\TextEvent.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\IInputDiagnostics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\IInputRuntime.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputAnalytics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputManager.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputMetrics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputSettings.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputSystem.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputSystemObject.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\InputUpdateType.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\NativeInputRuntime.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Android\AndroidAxis.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Android\AndroidGameController.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Android\AndroidKeyCode.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Android\AndroidSensors.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Android\AndroidSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\DualShock\DualShockGamepad.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\DualShock\DualShockGamepadHID.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\DualShock\DualShockSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\DualShock\IDualShockHaptics.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Flightsticks\Flightstick.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Flightsticks\Rudder.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Flightsticks\Throttle.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\HID\HID.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\HID\HIDDescriptorWindow.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\HID\HIDParser.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\HID\HIDSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\InputSimulation\InputSimulation.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\iOS\IOSGameController.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\iOS\iOSSensors.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\iOS\iOSSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Linux\LinuxSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Linux\SDLDeviceBuilder.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\OnScreen\OnScreenButton.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\OnScreen\OnScreenControl.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\OnScreen\OnScreenStick.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\OnScreen\OnScreenSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\InputValue.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerInput.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerInputEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerInputManager.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerInputManagerEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerJoinBehavior.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PlayerInput\PlayerNotifications.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PS4\DualShockGamepadPS4.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PS4\MoveControllerPS4.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\PS4\PS4Support.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\IStreamControllerAPI.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\SteamController.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\SteamControllerType.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\SteamHandle.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\SteamIGAConverter.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Steam\SteamSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\SteeringWheels\SteeringWheel.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Switch\INPadRumble.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Switch\NPad.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Switch\SwitchSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\InputSystemUIInputModule.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\InputSystemUIInputModuleEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\JoystickModel.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\MouseModel.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\MultiplayerEventSystem.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\StandaloneInputModuleEditor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\TouchModel.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\TrackedDeviceModel.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\TrackedDeviceRaycaster.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\UI\UIInputModule.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Users\InputUser.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Users\InputUserAccountHandle.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Users\InputUserChange.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Users\InputUserPairingOptions.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\Users\InputUserSettings.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\WebGL\WebGLGamepad.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\WebGL\WebGLJoystick.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\WebGL\WebGLSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\IXboxOneRumble.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\XboxOneGamepad.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\XInputController.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\XInputControllerOSX.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\XInputControllerWindows.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XInput\XInputSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Daydream.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\GearVR.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\GenericXRDevice.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Haptics\BufferedRumble.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Haptics\GetCurrentHapticStateCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Haptics\GetHapticCapabilitiesCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Haptics\SendBufferedHapticsCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Haptics\SendHapticImpulseCommand.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Oculus.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\TrackedPoseDriver.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\Vive.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\WindowsMR.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\XRSupport.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Plugins\XR\XRTemplateBuilder.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\State\IInputStateCallbackReceiver.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\State\IInputStateChangeMonitor.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\State\IInputStateTypeInfo.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\State\InputStateBlock.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\State\InputStateBuffers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\ArrayHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\CSharpCodeHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\DelegateHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\DynamicBitfield.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\ExceptionHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\FourCC.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\InlinedArray.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\InternedString.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\JsonParser.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\MemoryHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\NameAndParameters.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\NamedValue.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\NumberHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\OneOrMore.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\PrimitiveValue.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\PrimitiveValueOrArray.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\ReadOnlyArray.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\ReadWriteArray.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\StringHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\Substring.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\TypeHelpers.cs
+D:\Unity\Projects\Pokemon_VR\Library\PackageCache\com.unity.inputsystem@0.2.10-preview\InputSystem\Utilities\TypeTable.cs
