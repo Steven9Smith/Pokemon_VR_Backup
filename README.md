@@ -1,7 +1,9 @@
 # Pokemon_VR_Backup
 Just a For-Fun educational project with the Unity ECS+DOTS system\
 
-Unity Version 2019.2.5f1\
+Use Unity Hub to access the project\
+
+Unity Version 2019.3.0b4\
 
 required additional packages (some may be experimental).\
 To install them go to your package manager and look for the corresponding packages.\
@@ -47,3 +49,4 @@ Pokemon System\
 VR Input System\
 etc\
 
+an updated list of finished and unfinished things will be posted in the future.\
