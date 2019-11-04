@@ -132,113 +132,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1772048998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8468433226966375709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1477a1793da8eb54890b7024dfe24574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EntityId: 0123456
-  EntityName: 0123456
-  PokemonName: Eletrode
---- !u!114 &1772049000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8468433226966375709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dda9cabc9727ec4cb403a67f8a0624c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guiId: 123
-  PokedexNumber: 0
-  Height: 0
-  experienceYield: 0
-  LevelingRate: 0
-  Freindship: 0
-  Speed: 0
-  Acceleration: 0
-  Hp: 0
-  Attack: 0
-  Defense: 0
-  SpecialAttack: 0
-  SpecialDefense: 0
-  AutoLoadUsingPokemonName: 1
---- !u!114 &1772049007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8468433226966375709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShapeType: 2
-  m_PrimitiveCenter:
-    x: 0
-    y: 0
-    z: 0
-  m_PrimitiveSize:
-    x: 1.2
-    y: 1.2
-    z: 1.2
-  m_PrimitiveOrientation:
-    Value:
-      x: -0
-      y: 0
-      z: 0
-    RotationOrder: 4
-  m_Capsule:
-    Height: 1.2
-    Radius: 0.6
-    Axis: 1
-  m_Cylinder:
-    Height: 1.2
-    Radius: 0.6
-    Axis: 2
-  m_SphereRadius: 0.6
-  m_ConvexRadius: 0.05
-  m_CustomMesh: {fileID: 0}
-  m_Material:
-    m_SupportsTemplate: 1
-    m_Template: {fileID: 0}
-    m_IsTrigger:
-      m_Override: 0
-      m_Value: 0
-    m_Friction:
-      m_Override: 0
-      m_Value:
-        Value: 0.5
-        CombineMode: 0
-    m_Restitution:
-      m_Override: 0
-      m_Value:
-        Value: 0
-        CombineMode: 2
-    m_BelongsTo:
-      m_Override: 0
-      m_Value: 0001000000000000000000000000000000000000000000000000000000000000
-    m_CollidesWith:
-      m_Override: 0
-      m_Value: 0101010101010101010101010101010101010101010101010101010101010101
-    m_RaisesCollisionEvents:
-      m_Override: 0
-      m_Value: 0
-    m_CustomTags:
-      m_Override: 0
-      m_Value: 0000000000000000
 --- !u!1001 &294708796240560831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,47 +142,12 @@ PrefabInstance:
     - target: {fileID: 8183866463420424098, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
       propertyPath: m_Name
-      value: PlayerGameObject
+      value: Electrode
       objectReference: {fileID: 0}
     - target: {fileID: 8183866463420424098, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 7201315966075994281, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: AutoLoadUsingPokemonName
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4391566065420692149, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: CameraOffset
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -359905808117459415, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: playerName
-      value: Kurama
-      objectReference: {fileID: 0}
-    - target: {fileID: -359905808117459415, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: pokemonName
-      value: Electrode
-      objectReference: {fileID: 0}
-    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: EntityId
-      value: Player01
-      objectReference: {fileID: 0}
-    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: EntityName
-      value: Kurama
-      objectReference: {fileID: 0}
-    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: PokemonName
-      value: Bulbasaur
       objectReference: {fileID: 0}
     - target: {fileID: 1299096146996154964, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
@@ -299,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 1299096146996154964, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 1299096146996154964, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
@@ -376,10 +234,46 @@ PrefabInstance:
       propertyPath: m_AngularDamping
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -359905808117459415, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: playerName
+      value: Kurama
+      objectReference: {fileID: 0}
+    - target: {fileID: -359905808117459415, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: pokemonName
+      value: Electrode
+      objectReference: {fileID: 0}
+    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: EntityId
+      value: Player01
+      objectReference: {fileID: 0}
+    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: EntityName
+      value: Kurama
+      objectReference: {fileID: 0}
+    - target: {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: PokemonName
+      value: Bulbasaur
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391566065420692149, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: CameraOffset
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201315966075994281, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: AutoLoadUsingPokemonName
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7201315966075994281, guid: 4327e2c762b9ffe4c9819e7eb2a04a25, type: 3}
     - {fileID: -6050401005345282688, guid: 4327e2c762b9ffe4c9819e7eb2a04a25, type: 3}
     - {fileID: 4391566065420692149, guid: 4327e2c762b9ffe4c9819e7eb2a04a25, type: 3}
+    - {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4327e2c762b9ffe4c9819e7eb2a04a25, type: 3}
 --- !u!1 &8468433226966375709 stripped
 GameObject:
