@@ -6,55 +6,56 @@ using Unity.Burst;
 using Unity.Physics.Systems;
 using UnityEngine;
 using Unity.Mathematics;
+using System;
 
 namespace Pokemon
 {
-	/*
-	public struct AnimationEvent : IComponentData {}
-	public struct AnimationData : ISharedComponentData { public Animator animator; }
-	public class AnimatorSystem : ComponentSystem
+	namespace Animation
 	{
-		EntityQuery animQuery;
-		int i;
-		protected override void OnCreate()
-		{
-			animQuery = GetEntityQuery(ComponentType.ReadOnly(typeof(AnimationEvent)),ComponentType.ReadOnly(typeof(StateData)),ComponentType.ReadOnly(typeof(AnimationData)));
-			i = 0;
-		}
+		public struct PokemonAnimationData : ISharedComponentData,IEquatable<PokemonAnimationData> {
+			public Animator animator;
 
-		protected override void OnUpdate()
-		{
-			animQuery = GetEntityQuery(ComponentType.ReadOnly(typeof(AnimationEvent)));
-			if (animQuery.CalculateLength() < 1)
-				return;
-			else Debug.Log("Detected an Animation Trigger!");
-			NativeArray<StateData> states = animQuery.ToComponentDataArray<StateData>(Allocator.TempJob);
-			NativeArray<Entity> entities = animQuery.ToEntityArray(Allocator.TempJob);
-			for (i = 0; i < animQuery.CalculateLength();i++)
+			public bool Equals(PokemonAnimationData other)
 			{
-				adjustState(entities[i],states[i]);
+				if (animator == null) return false;
+				else return animator.Equals(other);
 			}
-			states.Dispose();
-			entities.Dispose();
-		}
-		private void adjustState(Entity entity, StateData data)
-		{
-			Animator anim = EntityManager.GetSharedComponentData<AnimationData>(entity).animator;
-			if (data.onGround)
+			public override int GetHashCode()
 			{
-				switch (true)
+				return base.GetHashCode();
+			}
+		}
+		public struct PokemonAnimationVerifier : IComponentData
+		{
+			
+		}
+		public class AnimatorSystem : ComponentSystem
+		{
+			EntityQuery animQuery;
+			int size;
+			protected override void OnCreate()
+			{
+				animQuery = GetEntityQuery(ComponentType.ReadOnly(typeof(StateData)),ComponentType.ReadOnly(typeof(PokemonAnimationVerifier)));
+			}
+
+			protected override void OnUpdate()
+			{
+				size = animQuery.CalculateEntityCount();
+				if (size == 0) return;
+				else Debug.Log("Detected an Animation Trigger!");
+				NativeArray<StateData> states = animQuery.ToComponentDataArray<StateData>(Allocator.TempJob);
+				NativeArray<Entity> entities = animQuery.ToEntityArray(Allocator.TempJob);
+				for (int i = 0; i < size; i++)
 				{
-
-					default:    //play idle if not playing
-				//		anim.pl
-						break;
+					PokemonAnimationData pokemonAnimationData = EntityManager.GetSharedComponentData<PokemonAnimationData>(entities[i]);
+					Animator anim = pokemonAnimationData.animator;
+					if(anim.GetBool("isJumping") != states[i].isJumping)anim.SetBool("isJumping",states[i].isJumping);
+					if (anim.GetBool("onGround") != states[i].onGround) anim.SetBool("onGround",states[i].onGround);
+					if (anim.GetBool("Idle") != states[i].isIdle) anim.SetBool("Idle",states[i].isIdle);
 				}
-			}
-			else
-			{
-
+				states.Dispose();
+				entities.Dispose();
 			}
 		}
 	}
-	*/
 }

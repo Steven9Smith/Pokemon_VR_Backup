@@ -21,7 +21,6 @@ namespace Pokemon
 		public ushort Defense;
 		public ushort SpecialAttack;
 		public ushort SpecialDefense;
-		public PokemonMoveData pokemonMoveData;
 		public bool AutoLoadUsingPokemonName = false;
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
@@ -30,7 +29,7 @@ namespace Pokemon
 				//get the pokemone entity to get the pokemon name
 				PokemonEntity pe = dstManager.GetComponentData<PokemonEntity>(entity);
 				//load pokeomn base data
-				PokemonData pd = PokemonDataClass.getBasePokemonData(PokemonIO.StringToPokedexEntry(PokemonIO.ByteString30ToString(pe.pokemonName)));
+				PokemonData pd = PokemonDataClass.getBasePokemonData(PokemonDataClass.StringToPokedexEntry(PokemonIO.ByteString30ToString(pe.pokemonName)));
 				//convert base data to pokemon eneity data
 				PokemonEntityData ped = new PokemonEntityData {
 						Acceleration = pd.BaseAcceleration,
@@ -55,19 +54,16 @@ namespace Pokemon
 						{
 							pokemonMoveA = new PokemonMove
 							{
-								followEntity = true,
 								isValid = true,
 								name = PokemonIO.StringToByteString30("Tackle")
 							},
 							pokemonMoveB = new PokemonMove
 							{
 								isValid = true,
-								name = PokemonIO.StringToByteString30("ThunderShock"),
-								followEntity = false
+								name = PokemonIO.StringToByteString30("ThunderShock")
 							}
 						}
 						
-						jumpHeight = pd.Height*10
 				};
 				dstManager.AddComponentData(entity, ped);
 			}
@@ -90,7 +86,6 @@ namespace Pokemon
 					SpecialDefense = SpecialDefense,
 					guiId = guiId,
 					currentHp = Hp
-					SpecialDefense = SpecialDefense
 				};
 				dstManager.AddComponentData(entity, ped);
 			}
@@ -112,7 +107,6 @@ namespace Pokemon
 		public float Speed;
 		public float Acceleration;
 		public float Hp;
-		public ushort Hp;
 		public ushort Attack;
 		public ushort Defense;
 		public ushort SpecialAttack;
@@ -125,13 +119,7 @@ namespace Pokemon
 		public int currentLevel;
 		public PokemonMoveSet pokemonMoveSet;
 		public int guiId;
+		public char BodyType;
 
-		public int currentStamina;
-		public int maxStamina;
-		public int currentHp;
-		public float Mass;
-		public float jumpHeight;
-		public PokemonMoveData pokemonMoveData;
 	}
-
 }

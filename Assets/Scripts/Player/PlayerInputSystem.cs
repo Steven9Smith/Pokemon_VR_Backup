@@ -8,6 +8,9 @@ using Unity.Physics;
 using Unity.Burst;
 using Pokemon.Move;
 using Unity.Transforms;
+using Unity.Rendering;
+using Core.Particles;
+using Core.ParentChild;
 
 namespace Pokemon.Player
 {
@@ -16,29 +19,17 @@ namespace Pokemon.Player
 		public EntityQuery GravityQuery;
 		public PhysicsStep step;
 		public float3 gravity = -new float3(0, -9.81f, 0);
-		private InputDefinitionsClass inputDefinitionsClass;
+		private InputDefinitionsClass inputDefinitionsClass;	
 		protected override void OnCreate()
 		{
 			GravityQuery = GetEntityQuery(typeof(PhysicsStep));
 			inputDefinitionsClass = new InputDefinitionsClass();
 		}
-		[BurstCompile]
 		struct PlayerInputJob : IJobForEach<PlayerInput, PokemonEntityData, PhysicsVelocity, StateData, PhysicsCollider>
 		{
 			public float deltaTime;
 			public float Horizontal;
 			public float Vertical, MouseX, MouseY;
-		public float3 gravity = -new float3(0,-9.81f,0);
-		protected override void OnCreate()
-		{
-			GravityQuery = GetEntityQuery(typeof(PhysicsStep));
-		}
-		[BurstCompile]
-		struct PlayerInputJob : IJobForEach<PlayerInput,PokemonEntityData, PhysicsVelocity, StateData, PhysicsCollider>
-		{
-			public float deltaTime;
-			public float Horizontal;
-			public float Vertical,MouseX,MouseY;
 			public float3 gravity;
 			public BlittableBool spaceDown;
 			public BlittableBool LShiftDown;
@@ -55,14 +46,12 @@ namespace Pokemon.Player
 			{
 				UpdatePlayerInput(ref playerInput);
 				PlayerMovement(playerInput, ref pokemonEntityData, ref physicsVelocity, ref stateData);
-				gainEnergy(ref pokemonEntityData, deltaTime);
-			public BlittableBool EDown;
-
-			public void Execute(ref PlayerInput playerInput,ref PokemonEntityData pokemonEntityData, ref PhysicsVelocity physicsVelocity, ref StateData stateData,ref PhysicsCollider physicsCollider)
-			{
-				UpdatePlayerInput(ref playerInput);
-				PlayerMovement(playerInput,pokemonEntityData,ref physicsVelocity,ref stateData);
+				gainEnergy(stateData,ref pokemonEntityData, deltaTime);
 			}
+			/// <summary>
+			/// updates the key the player is pressing
+			/// </summary>
+			/// <param name="playerInput">PLayerInput struct</param>
 			private void UpdatePlayerInput(ref PlayerInput playerInput)
 			{
 				playerInput.SpaceDown = spaceDown;
@@ -79,34 +68,48 @@ namespace Pokemon.Player
 				playerInput.attackCDown = attackCDown;
 				playerInput.attackDDown = attackDDown;
 			}
+			/// <summary>
+			/// executes the player movement per frame
+			/// </summary>
+			/// <param name="input"></param>
+			/// <param name="pokemonEntityData"></param>
+			/// <param name="velocity"></param>
+			/// <param name="stateData"></param>
 			private void PlayerMovement([ReadOnly]PlayerInput input, ref PokemonEntityData pokemonEntityData, ref PhysicsVelocity velocity, ref StateData stateData)
-				playerInput.EDown = EDown;
-			}
-			private void PlayerMovement([ReadOnly]PlayerInput input, [ReadOnly] PokemonEntityData pokemonEntityData, ref PhysicsVelocity velocity,ref StateData stateData)
 			{
+	//			Debug.Log("This is running");
 				float3 force = float3.zero;
+				//store the the velocity 
 				float3 maxVelocity = math.abs(velocity.Linear);
 				float acceleration = pokemonEntityData.Acceleration;
-				//improve ground detection funciton in future
-				if (math.abs(velocity.Linear.y) < 1 && math.abs(velocity.Linear.y) > 0) stateData.onGround = true;
+				//improve ground detection by using Collision Filters rather than bad math
+				if (maxVelocity.y < 1 && maxVelocity.y >= 0) stateData.onGround = true;
 				else stateData.onGround = false;
+
 				if (stateData.onGround)
 				{
+					//entity is running
 					if (input.LShiftDown)
 					{
 						maxVelocity *= 2;
 						acceleration *= 2;
-						stateData.isCreeping = false;
-						stateData.isRunning = true;
+						//veruify if the pokemon is moving own its own
+						if (maxVelocity.x > 0 || maxVelocity.z > 0) {if (!stateData.isRunning) StateDataClass.SetState(ref stateData, StateDataClass.State.Running);}
+						else if (!stateData.isIdle) StateDataClass.SetState(ref stateData, StateDataClass.State.Idle);
 					}
+					//entity is crouching
 					else if (input.LCtrlDown)
 					{
 						maxVelocity *= 0.5f;
 						acceleration *= 0.5f;
-						maxVelocity *= 2;
-						acceleration *= 2;
-						stateData.isRunning = true;
+						//veruify if the pokemon is moving own its own
+						if (maxVelocity.x > 0 || maxVelocity.z > 0) { if (!stateData.isCreeping) StateDataClass.SetState(ref stateData, StateDataClass.State.Creeping); }
+						else if (!stateData.isIdle) StateDataClass.SetState(ref stateData, StateDataClass.State.Crouching);
 					}
+					//entity is Walking
+					else if (maxVelocity.x > 0 || maxVelocity.z > 0){if (!stateData.isWalking) StateDataClass.SetState(ref stateData, StateDataClass.State.Crouching);}
+					else if (!stateData.isIdle) StateDataClass.SetState(ref stateData, StateDataClass.State.Idle);
+					//add speed if pokemon has not reach its max speed
 					if (maxVelocity.x < pokemonEntityData.Speed && maxVelocity.z < pokemonEntityData.Speed)
 					{
 						if (input.Move.z > 0)
@@ -132,57 +135,16 @@ namespace Pokemon.Player
 						float realJumpheight = pokemonEntityData.jumpHeight < pokemonEntityData.currentStamina ? pokemonEntityData.jumpHeight : pokemonEntityData.currentStamina;
 						velocity.Linear.y += realJumpheight;
 						pokemonEntityData.currentStamina = math.clamp(pokemonEntityData.currentStamina - realJumpheight, 0, pokemonEntityData.maxStamina);
-				//		Debug.Log("attempting to jump! "+pokemonEntityData.jumpHeight);
-						velocity.Linear.y += pokemonEntityData.jumpHeight;
+						if (!stateData.isJumping) StateDataClass.SetState(ref stateData, StateDataClass.State.Jumping);
 					}
 				}
 
 				force *= deltaTime;
-				//			Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
+				//Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
 				velocity.Linear += force;
-				//		Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
+				//Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
 			}
-			private void gainEnergy(ref PokemonEntityData ped, float time) { if (ped.currentStamina < ped.maxStamina && ped.currentHp > 0) ped.currentStamina = math.clamp(ped.currentStamina + (ped.Mass / (ped.Hp / ped.currentHp) * time), 0, ped.maxStamina); }
-	//			Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
-				velocity.Linear += force;
-		//		Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
-			}
-
-		}
-		/// <summary>
-		/// preforms boolean tests
-		/// </summary>
-		/// <param name="a">a float3</param>
-		/// <param name="b">another float3</param>
-		/// <param name="mode">which test to preform
-		/// 1 && ==
-		/// 2 && <
-		/// 3 && >
-		/// 4 && <=
-		/// 5 && >=
-		/// 6 || ==
-		/// 7 || <
-		/// 8 || >
-		/// 9 || <=
-		/// 10 || >=
-		/// </param>
-		/// <returns></returns>
-		public static bool CompareFloat3(float3 a, float3 b,int mode=0)
-		{
-			switch (mode)
-			{
-				case 1: return a.x == b.x && a.y == b.y && a.z == b.z;
-				case 2: return a.x < b.x && a.y < b.y && a.z < b.z;
-				case 3: return a.x > b.x && a.y > b.y && a.z > b.z;
-				case 4: return a.x <= b.x && a.y <= b.y && a.z <= b.z;
-				case 5: return a.x >= b.x && a.y >= b.y && a.z >= b.z;
-				case 6: return a.x == b.x || a.y == b.y || a.z == b.z;
-				case 7: return a.x < b.x || a.y < b.y || a.z < b.z;
-				case 8: return a.x > b.x || a.y > b.y || a.z > b.z;
-				case 9: return a.x <= b.x || a.y <= b.y || a.z <= b.z;
-				case 10: return a.x >= b.x || a.y >= b.y || a.z >= b.z;
-				default: return a.x == b.x || a.y == b.y || a.z == b.z;
-			}
+			private void gainEnergy(StateData stateData,ref PokemonEntityData ped, float time) { if (ped.currentStamina < ped.maxStamina && ped.currentHp > 0 && !stateData.isRunning ) ped.currentStamina = math.clamp(ped.currentStamina + (ped.Mass / (ped.Hp / ped.currentHp) * time), 0, ped.maxStamina); }
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
@@ -204,7 +166,6 @@ namespace Pokemon.Player
 				attackBDown = inputDefinitionsClass.isAttackB(),
 				attackCDown = inputDefinitionsClass.isAttackC(),
 				attackDDown = inputDefinitionsClass.isAttackD(),
-				EDown = Input.GetKeyDown(KeyCode.E),
 				gravity = gravity
 			};
 			a.Dispose();
@@ -228,9 +189,9 @@ namespace Pokemon.Player
 	{
 		private EntityCommandBufferSystem ecbs;
 		private EntityQuery pokemonMoveQuery;
-		private Entity entity;
 		private EntityArchetype pokemonMoveArchtype;
-		protected override void OnCreateManager()
+
+		protected override void OnCreate()
 		{
 			ecbs = World.GetOrCreateSystem<EntityCommandBufferSystem>();
 			pokemonMoveQuery = GetEntityQuery(ComponentType.ReadOnly(typeof(PlayerInput)),
@@ -240,16 +201,31 @@ namespace Pokemon.Player
 					typeof(Translation),
 					typeof(Rotation),
 					typeof(PokemonMoveDataEntity),
-					typeof(MeshRenderer),
-					typeof(LocalToWorld)
+					typeof(RenderMesh),
+					typeof(LocalToWorld),
+					typeof(PhysicsCollider),
+					typeof(PhysicsVelocity),
+					typeof(PokemonMoveEntity),
+					typeof(EntityParent),
+					typeof(TranslationProxy),
+					typeof(RotationProxy)
 				);
-			entity = EntityManager.CreateEntity(pokemonMoveArchtype);
+			//			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			//			defaultSphereRadius = go.GetComponent<UnityEngine.SphereCollider>().radius;
+			//			renderMeshDefault = new RenderMesh
+			//			{
+			//				mesh = go.GetComponent<MeshFilter>().sharedMesh,
+			//				material = go.GetComponent<MeshRenderer>().material,
+			//				castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
+			//				receiveShadows = true
+			//			};
+			//			GameObject.Destroy(go);
 		}
 		private struct AttackInputJob : IJob
 		{
 			public EntityCommandBuffer ecb;
 			public NativeArray<Entity> entities;
-			[DeallocateOnJobCompletion] public NativeArray<PlayerInput> playerInputs;
+			public NativeArray<PlayerInput> playerInputs;
 			public NativeArray<PokemonEntityData> pokemonEntityDatas;
 			public NativeArray<PokemonMove> moveSpawnArray;
 			private int counter;
@@ -261,85 +237,60 @@ namespace Pokemon.Player
 					PokemonMove pm = playerInputs[i].attackADown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveA :
 						playerInputs[i].attackBDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveB :
 						playerInputs[i].attackCDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveC :
-						playerInputs[i].attackDDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveD : new PokemonMove { isValid = false };
+						playerInputs[i].attackDDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveD :
+						new PokemonMove { isValid = false };
+					//			Debug.Log(pm.isValid.Value+","+PokemonIO.ByteString30ToString(pm.name)+","+pm.isValid.Value);
 					if (pm.isValid)
 					{
-						Debug.Log("Detected an attack");
-						if (pm.followEntity)
+						pm = new PokemonMove
 						{
-							Debug.Log("add component");
-							ecb.AddComponent<PokemonMoveData>(entities[i], PokemonMoves.getPokemonMoveData(pm.name,pokemonEntityDatas[i]));
-						}
-						else
-						{
-							Debug.Log("not adding");
-							pm = new PokemonMove
-							{
-								followEntity = pm.followEntity,
-								index = i,
-								isValid = true,
-								name = pm.name
-							};
-							moveSpawnArray[counter] = pm;
-							counter++;
-						}
+							index = i,
+							isValid = true,
+							name = pm.name
+						};
+						moveSpawnArray[counter] = pm;
+						counter++;
 					}
 				}
 			}
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			if (pokemonMoveQuery.CalculateLength() == 0) return inputDeps;
-			
-			NativeArray<PokemonMove> pokemonMoves = new NativeArray<PokemonMove>(pokemonMoveQuery.CalculateLength(), Allocator.TempJob);
-			NativeArray<PlayerInput> playerInputs = new NativeArray<PlayerInput>(pokemonMoves.Length, Allocator.TempJob);
+			if (pokemonMoveQuery.CalculateEntityCount() == 0) return inputDeps;
+
+			NativeArray<PokemonMove> pokemonMoves = new NativeArray<PokemonMove>(pokemonMoveQuery.CalculateEntityCount(), Allocator.TempJob);
+			NativeArray<PokemonEntityData> pmds = pokemonMoveQuery.ToComponentDataArray<PokemonEntityData>(Allocator.TempJob);
+			NativeArray<PlayerInput> playerInputs = pokemonMoveQuery.ToComponentDataArray<PlayerInput>(Allocator.TempJob);
 			NativeArray<Entity> entities = pokemonMoveQuery.ToEntityArray(Allocator.TempJob);
-			JobHandle jh = new AttackInputJob {
+			JobHandle jh = new AttackInputJob
+			{
 				ecb = ecbs.CreateCommandBuffer(),
 				entities = entities,
-				pokemonEntityDatas = pokemonMoveQuery.ToComponentDataArray<PokemonEntityData>(Allocator.TempJob),
-				playerInputs = pokemonMoveQuery.ToComponentDataArray<PlayerInput>(Allocator.TempJob),
+				pokemonEntityDatas = pmds,
+				playerInputs = playerInputs,
 				moveSpawnArray = pokemonMoves
 			}.Schedule(inputDeps);
 			jh.Complete();
 			int i = 0, counter = 0;
-			for (; i < pokemonMoves.Length; i++)
-				if (pokemonMoves[i].isValid) counter++;
+			for (; i < pokemonMoves.Length; i++) if (pokemonMoves[i].isValid) counter++;
 			if (counter > 0)
 			{
-				NativeArray<Entity> pokemonMoveEntities = new NativeArray<Entity>(counter,Allocator.TempJob);
-				for (i = 0; i < counter; i++) {
-					Entity tempEntity = EntityManager.CreateEntity(pokemonMoveArchtype);
-					PokemonMoveDataSpawn pmds = PokemonMoves.getPokemonMoveDataSpawn(pokemonMoves[i].name,
-						EntityManager.GetComponentData<PokemonEntityData>(entities[pokemonMoves[i].index]));
-					EntityManager.SetComponentData<Translation>(tempEntity,new Translation {
-						Value = pmds.TranslationOffset.getFromEntity ? 
-							EntityManager.GetComponentData<Translation>(entities[pokemonMoves[i].index]).Value+pmds.TranslationOffset.value : 
-							pmds.TranslationOffset.value
-						});
-					EntityManager.SetComponentData<Rotation>(tempEntity, new Rotation
-					{
-						//https://answers.unity.com/questions/1353333/how-to-add-2-quaternions.html
-						Value = pmds.RotationOffset.getFromEntity ?
-							EntityManager.GetComponentData<Rotation>(entities[pokemonMoves[i].index]).Value.value + pmds.RotationOffset.value.value :
-							pmds.RotationOffset.value
-					});
-
-					EntityManager.SetComponentData<PokemonMoveDataEntity>(tempEntity, PokemonMoves.GetPokemonMoveDataEntity(
-						pokemonMoves[i].name,
-						EntityManager.GetComponentData<PokemonEntityData>(entities[pokemonMoves[i].index])
-					));
-					EntityManager.SetName(entities[pokemonMoves[i].index],PokemonIO.ByteString30ToString(pokemonMoves[i].name)+i);
+				NativeArray<Entity> pokemonMoveEntities = new NativeArray<Entity>(counter, Allocator.TempJob);
+				EntityManager.CreateEntity(pokemonMoveArchtype, pokemonMoveEntities);
+				for (i = 0; i < pokemonMoveEntities.Length; i++)
+				{
+					Core.Spawning.PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
+						entities[i], pokemonMoveEntities[i], pmds[i]);
 
 				}
 				pokemonMoveEntities.Dispose();
 			}
 			entities.Dispose();
+			pmds.Dispose();
+			playerInputs.Dispose();
 			pokemonMoves.Dispose();
-			
 			return jh;
 
 		}
 	}
-
 }

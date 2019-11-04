@@ -3,7 +3,11 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.Physics;
+using Unity.Physics.Authoring;
 using Unity.Entities;
+using Pokemon;
+
+
 [RequiresEntityConversion]
 public class EnviromentTerrain : MonoBehaviour, IConvertGameObjectToEntity
 {
@@ -65,7 +69,17 @@ namespace Core.Terrain
 			else
 			{
 				Debug.Log("Creating terrain...");
-				BlobAssetReference<Unity.Physics.Collider> collider = Unity.Physics.TerrainCollider.Create(size, scale, heights, Method);
+				BlobAssetReference<Unity.Physics.Collider> collider = Unity.Physics.TerrainCollider.Create(size, scale, heights, Method,
+					new CollisionFilter {
+						BelongsTo = TriggerEventClass.Floor,
+						CollidesWith = TriggerEventClass.Pokemon | TriggerEventClass.Player | TriggerEventClass.NPC | TriggerEventClass.Collidable,
+						GroupIndex = 0
+					}
+			//		,
+			//		new Unity.Physics.Material {
+			//			
+			//		}
+			);
 				float3 position = new float3(size.x - 1, 0f, size.y - 1) * scale * -0.5f;
 				staticEntity = Bodies.Bodies.CreateStaticBodyWithMesh(entityManager, mat,mesh, position, quaternion.identity, collider);
 			}

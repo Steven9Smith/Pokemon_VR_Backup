@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Rendering;
-using UnityEngine;
+using Unity.Physics;
+using Unity.Transforms;
+using Core.Particles;
 
 namespace Pokemon
 {
@@ -19,39 +18,16 @@ namespace Pokemon
 			public PokemonMove pokemonMoveB;
 			public PokemonMove pokemonMoveC;
 			public PokemonMove pokemonMoveD;
-			
+
 		}
 		[Serializable]
 		public struct PokemonMove : IComponentData
 		{
 			public ByteString30 name;
 			public BlittableBool isValid;
-			public BlittableBool followEntity;
 			public int index; //used for spawning moves
 		}
 
-		/// <summary>
-		/// Pokemon Move 
-		/// </summary>
-		[Serializable]
-		public struct PokemonMoveData : IComponentData
-		{
-			public ByteString30 name;             //name of pokemon move
-												  //Attack Type Varibles
-			public PokemonMoves.AttackType attackType;         //substance of the type e.g. electric, rock,ground
-			public PokemonMoves.StatusType statusType;         //e.g. sleep,paralisys
-			public PokemonMoves.ContactType contactType;
-			//	public ushort contactType;        //type of move e.g. physical, sspecial attack
-															   //Damage Varibles
-			public float damage;          //damage of attack
-											  //PP varibles
-			public float accuracy;
-
-			public BlittableBool isValid;
-			//executing stuff
-			public float3 forward;
-			public PokemonMoveAdjustmentData pokemonMoveAdjustmentData;
-		}
 		//this allows for custom stuff. here we go again
 		[Serializable]
 		public struct PokemonMoveAdjustmentData : IComponentData
@@ -61,6 +37,7 @@ namespace Pokemon
 			public PokemonMoveRotationSet pokemonMoveRotationSet;
 			public PokemonMoveVelocitySet pokemonMoveVelocitySet;
 			public PokemonMoveAngularVelocitySet pokemonMoveAngularVelocitySet;
+			public PokemonMoveScaleSet pokemonMoveScaleSet;
 		}
 		//used for multiple things...im too tired to explain
 		public struct PokemonMoveAdjustment : IComponentData
@@ -69,7 +46,6 @@ namespace Pokemon
 			public float timeLength;            //how long the affect lasts
 			public BlittableBool useCameraDirection;
 			public float staminaCost;       //how much stamina does this move cost
-			public float3 colliderBounds;
 		}
 		[Serializable]
 		public struct PokemonMoveAdjustmentSet : IComponentData {
@@ -100,12 +76,52 @@ namespace Pokemon
 			public PokemonMoveAdjustment X;
 			public PokemonMoveAdjustment Y;
 		}
-		[Serializable]
-		//allows for up to 30 position adjustments
+		
+		public struct PokemonMoveScaleAdjustment : IComponentData
+		{
+			public float value;
+			public float timeLength;
+			public float staminaCost;
+		}
 		/// <summary>
-		/// a set of translation adjustments
+		/// allows for up to 30 scale adjustments
 		/// </summary>
-		public struct PokemonMoveTranslationSet : IComponentData{
+		[Serializable]
+		public struct PokemonMoveScaleSet : IComponentData
+		{
+			public PokemonMoveScaleAdjustment A;
+			public PokemonMoveScaleAdjustment B;
+			public PokemonMoveScaleAdjustment C;
+			public PokemonMoveScaleAdjustment D;
+			public PokemonMoveScaleAdjustment E;
+			public PokemonMoveScaleAdjustment F;
+			public PokemonMoveScaleAdjustment G;
+			public PokemonMoveScaleAdjustment H;
+			public PokemonMoveScaleAdjustment I;
+			public PokemonMoveScaleAdjustment J;
+			public PokemonMoveScaleAdjustment K;
+			public PokemonMoveScaleAdjustment L;
+			public PokemonMoveScaleAdjustment M;
+			public PokemonMoveScaleAdjustment N;
+			public PokemonMoveScaleAdjustment O;
+			public PokemonMoveScaleAdjustment P;
+			public PokemonMoveScaleAdjustment Q;
+			public PokemonMoveScaleAdjustment R;
+			public PokemonMoveScaleAdjustment S;
+			public PokemonMoveScaleAdjustment T;
+			public PokemonMoveScaleAdjustment U;
+			public PokemonMoveScaleAdjustment V;
+			public PokemonMoveScaleAdjustment W;
+			public PokemonMoveScaleAdjustment X;
+			public PokemonMoveScaleAdjustment Y;
+			public PokemonMoveScaleAdjustment Z;
+			public BlittableBool isValid;
+		}
+		[Serializable]
+		/// <summary>
+		/// allows for up to 30 position adjustments
+		/// </summary>
+		public struct PokemonMoveTranslationSet : IComponentData {
 			public PokemonMoveAdjustmentSet value;
 		}
 		[Serializable]
@@ -134,40 +150,47 @@ namespace Pokemon
 		{
 			public PokemonMoveAdjustmentSet value;
 		}
-		public struct TranslationOffsetData : IComponentData
-		{
-			public float3 value;
-			public BlittableBool getFromEntity;
-		}
-		public struct RotationOffsetData : IComponentData
-		{
-			public quaternion value;
-			public BlittableBool getFromEntity;
-			public BlittableBool getCameraForward;
-		}
+
+		public struct PokemonMoveEntity : IComponentData { public char a; }
 		/// <summary>
 		/// spawn data
 		/// </summary>
 		[Serializable]
 		public struct PokemonMoveDataSpawn : IComponentData
 		{
-			
-			public TranslationOffsetData TranslationOffset;
-			public RotationOffsetData RotationOffset;
+			public Translation translation;
+			public Rotation rotation;
+			public PhysicsCollider physicsCollider;
+			public PhysicsDamping physicsDamping;
+			public PhysicsGravityFactor physicsGravityFactor;
+			public PhysicsMass physicsMass;
+			public PhysicsVelocity physicsVelocity;
+			public BlittableBool hasDamping;
+			public BlittableBool hasGravityFactor;
+			public BlittableBool hasMass;
+			public BlittableBool hasCollider;
+			public BlittableBool hasPhysicsVelocity;
+			public BlittableBool hasParticles;
+			public BlittableBool hasEntity;
 		}
-		public struct PokemonMoveDataEntity : IComponentData{
+		public struct PokemonMoveDataEntity : IComponentData {
 			public ByteString30 name;
 			public PokemonMoves.AttackType attackType;
 			public PokemonMoves.StatusType statusType;
 			public PokemonMoves.ContactType contactType;
 			public BlittableBool isValid;
+			public BlittableBool hasParticles;
 			public PokemonMoveAdjustmentData pokemonMoveAdjustmentData;
 			public PokemonMoveParticleDataSet pokemonMoveParticleDataSet;
 			public float damage;
 			public float accuracy;
 			public float3 forward;
 		}
-
+		public struct PokemonMoveFollowEnityData : IComponentData {
+			public Entity entity;
+		};
+		public struct PokemonMoveEntityRemoveRequest : IComponentData{ };
+		
 		public struct PokemonMoveParticleData
 		{
 			public float3 velocity;
@@ -201,6 +224,17 @@ namespace Pokemon
 			public PokemonMoveParticleData X;
 			public PokemonMoveParticleData Y;
 		}
+
+
+		/// <summary>
+		/// Data realted to Physical Attacks
+		/// </summary>
+		public struct PhysicalAttackData : IComponentData
+		{
+			public char statusEffect;
+			public char ability;
+		}
+
 
 		public class PokemonMoves
 		{
@@ -241,144 +275,240 @@ namespace Pokemon
 				burn = 6
 				//add more statuses
 			}
-	
-			public static PokemonMoveDataSpawn getPokemonMoveDataSpawn(ByteString30 name,PokemonEntityData ped)
+			public static ref PokemonMoveAdjustment getAdjustment(ref PokemonMoveAdjustmentSet set, int index)
 			{
-				PokemonMoveDataSpawn pmds = new PokemonMoveDataSpawn { };
-				switch (PokemonIO.ByteString30ToString(name))
+				switch (index)
 				{
-					case "ThunderShock":
-						pmds = new PokemonMoveDataSpawn
-						{
-						
-							TranslationOffset = new TranslationOffsetData {
-								value = new float3 { x = 0, y = 0, z = 0 },
-								getFromEntity = true
-							},
-							RotationOffset = new RotationOffsetData
-							{
-								value = new float4 { x = 0, y = 0, z = 0,w = 0 },
-								getFromEntity = true,
-								getCameraForward = true
-							}
-							
-
-						};
-						break;
-					default:
-						Debug.Log("failed to find a matching pokemon move data spawn");
-						break;
+					case 0: return ref set.A;
+					case 1: return ref set.B;
+					case 2: return ref set.C;
+					case 3: return ref set.D;
+					case 4: return ref set.E;
+					case 5: return ref set.F;
+					case 6: return ref set.G;
+					case 7: return ref set.H;
+					case 8: return ref set.I;
+					case 9: return ref set.J;
+					case 10: return ref set.K;
+					case 11: return ref set.L;
+					case 12: return ref set.M;
+					case 13: return ref set.N;
+					case 14: return ref set.O;
+					case 15: return ref set.P;
+					case 16: return ref set.Q;
+					case 17: return ref set.R;
+					case 18: return ref set.S;
+					case 19: return ref set.T;
+					case 20: return ref set.U;
+					case 21: return ref set.V;
+					case 22: return ref set.W;
+					case 23: return ref set.X;
+					case 24: return ref set.Y;
+					default: return ref set.A;
 				}
-				return pmds;
 			}
-			public static PokemonMoveDataEntity GetPokemonMoveDataEntity(ByteString30 name,PokemonEntityData ped)
+			public static ref PokemonMoveScaleAdjustment getScaleAdjustment(ref PokemonMoveScaleSet set, int index)
 			{
-				PokemonMoveDataEntity pmde = new PokemonMoveDataEntity { };
-				switch (PokemonIO.ByteString30ToString(name))
+				switch (index)
+				{
+					case 0: return ref set.A;
+					case 1: return ref set.B;
+					case 2: return ref set.C;
+					case 3: return ref set.D;
+					case 4: return ref set.E;
+					case 5: return ref set.F;
+					case 6: return ref set.G;
+					case 7: return ref set.H;
+					case 8: return ref set.I;
+					case 9: return ref set.J;
+					case 10: return ref set.K;
+					case 11: return ref set.L;
+					case 12: return ref set.M;
+					case 13: return ref set.N;
+					case 14: return ref set.O;
+					case 15: return ref set.P;
+					case 16: return ref set.Q;
+					case 17: return ref set.R;
+					case 18: return ref set.S;
+					case 19: return ref set.T;
+					case 20: return ref set.U;
+					case 21: return ref set.V;
+					case 22: return ref set.W;
+					case 23: return ref set.X;
+					case 24: return ref set.Y;
+					default: return ref set.A;
+				}
+			}
+			public static float3 getNextPokemonMoveAdjustment(ref PokemonMoveAdjustmentSet set, ref float currentStamina, float time, float3 forward)
+			{
+				for (int i = 0; i < 25; i++)
+				{
+					ref PokemonMoveAdjustment pma = ref getAdjustment(ref set, i);
+					if (pma.timeLength == -1f)
+					{
+		//				Debug.Log("Detected 1 time addition" + time + " forward = " + forward);
+						//one time thing
+						pma.timeLength = 0;
+						set.isValid = false;
+						if (currentStamina - pma.staminaCost < 0)
+						{
+							float3 temp = pma.useCameraDirection ? pma.timeLength * forward * pma.value : pma.timeLength * pma.value;
+							temp *= currentStamina / pma.staminaCost;
+							currentStamina = 0;
+							return temp;
+						}
+						else
+						{
+							currentStamina -= pma.staminaCost;
+							return pma.useCameraDirection ? forward * pma.value : pma.value;
+						}
+					}
+					else if (pma.timeLength > 0)
+					{
+		//				Debug.Log("Detected it's not over");
+						if (pma.timeLength - time >= 0)
+						{
+							pma.timeLength -= time;
+							if (currentStamina - pma.staminaCost < 0)
+							{
+								float3 temp = pma.useCameraDirection ? pma.timeLength * forward * pma.value : pma.timeLength * pma.value;
+								temp *= currentStamina / pma.staminaCost;
+								currentStamina = 0;
+								return temp;
+							}
+							else
+							{
+								currentStamina -= pma.staminaCost;
+								return pma.useCameraDirection ? time * forward * pma.value : time * pma.value;
+							}
+						}
+						else
+						{
+							float3 temp = pma.timeLength;
+							pma.timeLength = 0;
+							if (currentStamina - pma.staminaCost < 0)
+							{
+								temp = pma.useCameraDirection ? temp * forward * pma.value : time * pma.value;
+								temp *= currentStamina / pma.staminaCost;
+								currentStamina = 0;
+								return temp;
+							}
+							else
+							{
+								currentStamina -= pma.staminaCost;
+								return pma.useCameraDirection ? temp * forward * pma.value : time * pma.value;
+							}
+						}
+					}
+					else if (i == 24) set.isValid = false;
+				}
+				return float3.zero;
+			}
+			public static float3 getNextPokemonMoveAdjustment(ref PokemonMoveAdjustmentSet set, float time, float3 forward)
+			{
+				for (int i = 0; i < 25; i++)
+				{
+				//	Debug.Log("i = " + i);
+					ref PokemonMoveAdjustment pma = ref getAdjustment(ref set, i);
+					if (pma.timeLength == -1f)
+					{
+		//				Debug.Log("AADetected 1 time addition" + time + " forward = " + forward);
+						//one time thing
+						pma.timeLength = 0;
+						set.isValid = false;
+						return pma.useCameraDirection ? forward * pma.value : pma.value;
+					}
+					else if (pma.timeLength > 0)
+					{
+					//	Debug.Log("AADetected it's not over:" + pma.timeLength.ToString("F3") + "," + time + "," + pma.value+','+forward);
+						if (pma.timeLength - time >= 0)
+						{
+							pma.timeLength -= time;
+			//				Debug.Log("AADetected it's not overB:" + pma.timeLength.ToString("F3") + "," + time + "," + pma.value);
+							return pma.useCameraDirection ? time * forward * pma.value : time * pma.value;
+						}
+						else
+						{
+							float3 temp = pma.useCameraDirection ?
+								pma.timeLength * forward * pma.value : time * pma.value;
+							pma.timeLength = 0;
+
+			//				Debug.Log("AADetected it's not overBBBBBB:" + pma.timeLength.ToString("F3") + "," + time + "," + pma.value);
+							return temp;
+						}
+					}
+					else if (i == 24) set.isValid = false;
+				}
+				return float3.zero;
+			}
+			public static float getNextPokemonMoveAdjustment(ref PokemonMoveScaleSet set, float time)
+			{
+				for (int i = 0; i < 25; i++)
+				{
+					ref PokemonMoveScaleAdjustment pma = ref getScaleAdjustment(ref set, i);
+					if (pma.timeLength == -1f)
+					{
+						//one time thing
+						pma.timeLength = 0;
+						set.isValid = false;
+						return pma.value;
+					}
+					else if (pma.timeLength > 0)
+					{
+						pma.timeLength = pma.timeLength - time >= 0 ? pma.timeLength-time : 0;
+						return pma.value;
+					}
+					else if (i == 24) set.isValid = false;
+				}
+				return 1f;
+			}
+
+			public static ParticleSystemSpawnData getPokemonMoveParticleSystemData(ushort pokedexNumber,string pokemonMoveName)
+			{
+
+				ParticleSystemSpawnData pssd = new ParticleSystemSpawnData { isValid = false };
+				switch (pokemonMoveName)
 				{
 					case "Tackle":
-						pokemonMove = new PokemonMoveData
-						{
-							name = name,
-							accuracy = 1f,
-							attackType = AttackType.normal,
-							damage = calculateDamage(ped.currentLevel, 40f),
-							statusType = StatusType.none,
-							contactType = ContactType.physical,
-							isValid = true,
-							pokemonMoveAdjustmentData = new PokemonMoveAdjustmentData
-							{
-								isValid = true,
-								pokemonMoveVelocitySet = new PokemonMoveVelocitySet
+						switch (pokedexNumber) {
+							case 101:
+								pssd = new ParticleSystemSpawnData
 								{
-									value = new PokemonMoveAdjustmentSet
-									{
-										A = new PokemonMoveAdjustment
-										{
-											value = new float3 { x = 5f, y = 1f, z = 5f },
-											timeLength = -1f,
-											useCameraDirection = true,
-											staminaCost = 5f
-										},
-										isValid = true
-									}
-								}
-							}
-						};
-						break;
-					case "ThunderShock" :
-						pmde = new PokemonMoveDataEntity
-						{
-							attackType = AttackType.electric,
-							contactType = ContactType.phychich,
-							name = name,
-							isValid = true,
-							statusType = StatusType.none,
-							accuracy = 1f,
-							damage = calculateDamage(ped.currentLevel, 40f),
-							pokemonMoveAdjustmentData = new PokemonMoveAdjustmentData
-							{
-								isValid = true,
-								pokemonMoveVelocitySet = new PokemonMoveVelocitySet
-								{
-									value = new PokemonMoveAdjustmentSet
+									particleSystemSpawnDataShape = new ParticleSystemSpawnDataShape
 									{
 										isValid = true,
-										A = new PokemonMoveAdjustment
-										{
-											colliderBounds = new float3 { x = 1f, y = 1f, z = 1f },
-											timeLength = 2f,
-											value = new float3 { x = 5f, y = 0, z = 5f },
-											useCameraDirection = true
-										}
-									}
-								}
-							}
-						};
+										offsetPostiion = new float3(0,-0.6f,-0.34f),
+										offsetRotation = new float3(200f,0,0),
+										offsetScale = 1f
+									},
+									paticleSystemName = PokemonIO.StringToByteString30(pokemonMoveName),
+									isValid = true
+
+								};
+								break;	
+						}
 						break;
-					default:
-						Debug.Log("failed to find a matching pokemon move data entity");
+					case "ThunderBolt":
+						switch (pokedexNumber)
+						{
+							case 101:
+								pssd = new ParticleSystemSpawnData
+								{
+									isValid = true,
+									particleSystemSpawnDataShape = new ParticleSystemSpawnDataShape
+									{
+										isValid = true,
+										offsetPostiion = new float3(0, 0, 0),
+										offsetRotation = new float3(0, 0, 0),
+										offsetScale = 1f
+									},
+									paticleSystemName = PokemonIO.StringToByteString30(pokemonMoveName)
+								};
+								break;
+						}
 						break;
 				}
-				return pmde;
-			}
-			public static RenderMesh getPokemonMoveRenderMesh(ByteString30 name)
-			{
-				RenderMesh renderMesh = new RenderMesh { };
-				GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
-				switch (PokemonIO.ByteString30ToString(name))
-				{
-					case "ThunderShock":
-						renderMesh = new RenderMesh
-						{
-							mesh = go.GetComponent<MeshFilter>().sharedMesh,
-							material = go.GetComponent<MeshRenderer>().material,
-							castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-							receiveShadows = true
-						};
-						break;
-					default:
-						
-						renderMesh = new RenderMesh
-						{
-							mesh = go.GetComponent<MeshFilter>().sharedMesh,
-							material = go.GetComponent<MeshRenderer>().material,
-							castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-							receiveShadows = true
-						};
-						break;
-				}
-				GameObject.Destroy(go);
-				return renderMesh;
-			}
-
-
-
-			//damage is calculated using the base damage and level
-			private static float calculateDamage(float pokemonLevel,float baseDamage)
-			{
-				return (pokemonLevel / 100) / baseDamage;
+				return pssd;
 			}
 		}
 	}

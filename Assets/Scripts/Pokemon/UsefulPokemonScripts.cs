@@ -12,6 +12,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Physics;
 using Unity.Mathematics;
+using System;
+using Pokemon.Animation;
 
 namespace Pokemon
 {
@@ -29,22 +31,23 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName"></param>
 		/// <returns></returns>
-		public static RenderMesh LoadMeshInstaceRenderer(string pokemonName)
+		public static RenderMesh LoadPokemonRenderMesh(string pokemonName)
 		{
-			string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName + "/" + pokemonName + ".prefab";
-			if (!File.Exists(dataPath))
-			{
-				Debug.LogError(dataPath);
-			}
-			Debug.Log("pokemonName = " + pokemonName);
+		///	string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName + "/" + pokemonName + ".prefab";
+		//	if (!File.Exists(dataPath))
+		//	{
+		//		Debug.LogError(dataPath);
+		//	}
 			GameObject go = Resources.Load("Pokemon/" + pokemonName + "/" + pokemonName, typeof(GameObject)) as GameObject;
+			if (go == null) Debug.LogError("Failed to get the render mesh gameobject");
+			else Debug.Log("Succesfully Loaded \""+pokemonName+"\"");
 			//verify this works with physics
-			UnityEngine.Material _mat = Resources.Load("Pokemon/" + pokemonName + "/" + pokemonName, typeof(UnityEngine.Material)) as UnityEngine.Material;
-			UnityEngine.Mesh _mesh = go.GetComponent<MeshFilter>().sharedMesh;
 			RenderMesh renderer = new RenderMesh
 			{
-				mesh = _mesh,
-				material = _mat
+				mesh = go.GetComponent<MeshFilter>().sharedMesh,
+				material = go.GetComponent<MeshRenderer>().sharedMaterial,
+				castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
+				receiveShadows = true
 			};
 
 			return renderer;
@@ -303,40 +306,6 @@ namespace Pokemon
 			//	if (scale.Value == 0f && scale.Value.y == 0f && scale.Value.z == 0f) scale.Value = new float3(0f,0f,0f); 
 			SaveEnviromentData(enviromentData, position, rotation, scale);
 		}
-		//Player Related
-		/// <summary>
-		/// Loads the pokemon data using its location which is generated using the scene name, pokemon name, and id of the entity
-		/// </summary>
-		/// <param name="entityId">id of the entity</param>
-		/// <returns></returns>
-		public static bool LoadPlayerData(string playerDataPath, ref PlayerData playerData, ref Translation position, ref Rotation rotation)
-		{
-			//	string dataPath = Application.dataPath + "/Resources/Player/Data/" + playerId+".dat";
-			if (File.Exists(playerDataPath))
-			{
-				BinaryFormatter bf = new BinaryFormatter();
-				FileStream file = File.Open(playerDataPath, FileMode.Open);
-				PlayerDataSave playerDataSave = new PlayerDataSave();
-				try { playerDataSave = (PlayerDataSave)bf.Deserialize(file); }
-				catch (System.ArgumentNullException ex) { PrintString("LoadPlayerData", "The given file information was null or invalid:" + ex.Message, 2); return false; }
-				catch (SerializationException ex) { PrintString("LoadPlayerData", "Failed to Deserialize the data with path:" + playerDataPath + "," + ex.Message); return false; }
-				catch (System.Security.SecurityException ex) { PrintString("LoadPlayerData", "Deserialization security Exception:" + ex.Message); return false; }
-				playerData = new PlayerData() {
-					Name = playerDataSave.Name,
-//					PokemonEntityData = playerDataSave.PokemonEntityData,
-					PokemonName = playerDataSave.PokemonName
-				};
-				position = playerDataSave.Position;
-				rotation = playerDataSave.Rotation;
-				file.Close();
-				return true;
-			}
-			else
-			{
-				Debug.LogWarning("Detected player has invliad or missing pokemon data,");
-			}
-			return false;
-		}
 		/// <summary>
 		/// creates new Player Data
 		/// </summary>
@@ -353,97 +322,8 @@ namespace Pokemon
 //				PokemonEntityData = pokemonEntityData
 			};
 		}
-		/// <summary>
-		/// Saves the player data in the generated path using the given values
-		/// </summary>
-		/// <param name="data">PokemonData to be saved</param>
-		/// <param name="entityId">id of entity</param>
-		public static void SavePlayerData(PlayerData playerData, Translation position = new Translation(), Rotation rotation = new Rotation())
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			string dataPath = Application.dataPath + "/Resources/Player/Data/" + ByteString30ToString(playerData.Name) + ".dat";
-			FileStream file;
-			file = File.OpenWrite(dataPath);
-			PlayerDataSave playerDataSave = new PlayerDataSave() {
-				Name = playerData.Name,
-	//			PokemonEntityData = playerData.PokemonEntityData,
-				Rotation = rotation,
-				Position = position,
-				PokemonName = playerData.PokemonName
-			};
-			bf.Serialize(file, playerDataSave);
-			file.Close();
-		}
-
 		//Pokemon Entity Data Related
 
-		/// <summary>
-		/// Saves a Pokemon Entity
-		/// </summary>
-		/// <param name="position">current position of entity</param>
-		/// <param name="rotation">current rotation of entity</param>
-		/// <param name="pokemonEntity">Pokemon Entity to be saved</param>
-	/*	public static void SavePokemonEntity(PokemonEntity pokemonEntity, Translation position = new Translation(), Rotation rotation = new Rotation(), Velocity Velocity = new Velocity(), Mass mass = new Mass())
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file;
-	//		string dataPath = Application.dataPath + "/Resources/Scenes/" + GetCurrentSceneName() + "/IPokemon/" + PokedexEntryToString(pokemonEntity.PokemonEntityData.PokedexNumber) + "/" + ByteString30ToString(pokemonEntity.EntityId) + ".dat";
-//			if (File.Exists(dataPath))
-//				File.Create(dataPath);
-//			file = File.OpenWrite(dataPath);
-			if (mass.value == 0f)
-			{
-				Debug.LogWarning("Detected an invalid mass setting the mass to 1");
-				mass.value = 1f;
-			}
-			PokemonEntityDataSave pokemonEntityDataSave = new PokemonEntityDataSave()
-			{
-	//			PokemonEntityData = pokemonEntity.PokemonEntityData,
-				entityId = pokemonEntity.EntityId,
-				entityName = pokemonEntity.EntityName,
-				Position = position,
-				Rotation = rotation,
-				Velocity = Velocity,
-				Mass = mass
-
-			};
-//			bf.Serialize(file, pokemonEntityDataSave);
-//			file.Close();
-		}*/
-		/// <summary>
-		/// Loads the PokemonEntity with the proper stuff
-		/// </summary>
-		/// <param name="entityPath">path to the eneity</param>
-		/// <param name="pokemonEntity">the pokemonEntity Component</param>
-		/// <param name="position">Position Component</param>
-		/// <param name="rotation">Rotation Component</param>
-		/// <returns></returns>
-		public static bool LoadPokemonEntity(string entityPath, ref PokemonEntity pokemonEntity, ref Translation position, ref Rotation rotation)
-		{
-			if (File.Exists(entityPath))
-			{
-				BinaryFormatter bf = new BinaryFormatter();
-				FileStream file = File.Open(entityPath, FileMode.Open);
-				PokemonEntityDataSave pokemonEntityDataSave;
-				try { pokemonEntityDataSave = (PokemonEntityDataSave)bf.Deserialize(file); }
-				catch (System.ArgumentNullException ex) { PrintString("LoadPokemonEntity", "The given file information was null or invalid:" + ex.Message, 2); file.Close(); return false; }
-				catch (SerializationException ex) { PrintString("LoadPokemonEntity", "Failed to Deserialize the data with path:" + entityPath + "," + ex.Message); file.Close(); return false; }
-				catch (System.Security.SecurityException ex) { PrintString("LoadPokemonEntity", "Deserialization security Exception:" + ex.Message); file.Close(); return false; }
-				pokemonEntity = new PokemonEntity()
-				{
-					EntityId = pokemonEntityDataSave.entityId,
-					EntityName = pokemonEntityDataSave.entityName,
-	//				PokemonEntityData = pokemonEntityDataSave.PokemonEntityData
-				};
-				position = pokemonEntityDataSave.Position;
-				rotation = pokemonEntityDataSave.Rotation;
-				file.Close();
-				return true;
-			}
-			else
-				PrintString("LoadPokemonEntity", "Failed to load Entity with path: \"" + entityPath + "\"");
-			return false;
-		}
 		/// <summary>
 		/// Returns Invalid PokemonEntityData (since the structs can't be null)
 		/// </summary>
@@ -453,37 +333,7 @@ namespace Pokemon
 			PokemonEntityData pokemonEntityData = new PokemonEntityData() { PokedexNumber = 0, Height = -1.0f };
 			return pokemonEntityData;
 		}
-		/// <summary>
-		/// Creates new PokemonEntityData based on the given Pokedex Entry (Note the Data can point to invalid pokemon data and should be checked after retreival)
-		/// </summary>
-		/// <param name="pokedexEntry">This is used to retreive the pokemon data</param>
-		/// <returns></returns>
-		public static PokemonEntityData CreateNewPokemonEntityData(ushort pokedexEntry)
-		{
-			PokemonEntityData pokemonEntityData = new PokemonEntityData();
-			PokemonData pokemonData = new PokemonData();
-			if (LoadPokemonData(PokedexEntryToString(pokedexEntry), ref pokemonData))
-			{
-				pokemonEntityData = new PokemonEntityData()
-				{
-					Attack = pokemonData.BaseAttack,
-					SpecialAttack = pokemonData.BaseSpecialAttack,
-					Hp = pokemonData.BaseHp,
-					PokedexNumber = pokemonData.PokedexNumber,
-					Height = RandomizeHeight(pokemonData.Height, pokemonData.HeightVariation),
-					experienceYield = pokemonData.BaseExpericeYield,
-					LevelingRate = pokemonData.LevelingRate,
-					Freindship = pokemonData.BaseFriendship,
-					Speed = pokemonData.BaseSpeed,
-					Acceleration = pokemonData.BaseAcceleration,
-					SpecialDefense = pokemonData.BaseSpcialDefense,
-					Defense = pokemonData.BaseDefense
-				};
-				PrintString("CreateNewPokemonEntityData", "Pokemon Acceleration = " + pokemonData.BaseAcceleration, 1);
-			}
-			else PrintString("CreateNewPokemonEntityData", "Failed to Load Pokemon Data", 2);
-			return pokemonEntityData;
-		}
+	
 		/// <summary>
 		/// generates and randomized height based on the default height given and the height varibation range
 		/// </summary>
@@ -498,240 +348,139 @@ namespace Pokemon
 		/// <param name="MassVariation">Mass variation of the pokemon (Default is 0.5f)</param>
 		/// <returns></returns>
 		public static float RandomizeMass(float defaultMass, float MassVariation = 0.5f) { return (defaultMass * UnityEngine.Random.Range((MassVariation * -1), MassVariation)) + defaultMass; }
-		/// <summary>
-		/// Loads stored pokemon data (the pokemon data is different from the entity data)
-		/// </summary>
-		/// <param name="pokemonName">Name of the pokemon data to be loaded</param>
-		/// <returns>PokemonData</returns>
-		public static bool LoadPokemonData(string pokemonName, ref PokemonData pokemonData)
+		
+		public static void LoadPokemonEntity(Entity entity,EntityManager entityManager,PlayerSaveData psd)
 		{
-			PrintString("LoadPokemonData", "LoadPokemonData:\tLoading Data for Pokemon \"" + pokemonName + "\"");
-			pokemonData = new PokemonData();
-			string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName + "/" + pokemonName + ".dat";
-			if (File.Exists(dataPath))
+			string pokemonName = ByteString30ToString(psd.playerData.PokemonName);
+			string playerName = ByteString30ToString(psd.playerData.Name);
+			//get and add renderMesh
+			RenderMesh renderMesh = LoadPokemonRenderMesh(pokemonName);
+			if (entityManager.HasComponent<RenderMesh>(entity)) entityManager.SetSharedComponentData(entity, renderMesh);
+			else entityManager.AddSharedComponentData(entity, renderMesh);
+			if (entityManager.HasComponent<PokemonEntityData>(entity)) entityManager.SetComponentData(entity,psd.pokemonEntityData);
+			else entityManager.AddComponentData(entity,psd.pokemonEntityData);
+			//add the PokemonEntity
+			if (entityManager.HasComponent<PokemonEntity>(entity)) entityManager.SetComponentData(entity, new PokemonEntity
 			{
-				BinaryFormatter bf = new BinaryFormatter();
-				FileStream file = File.Open(dataPath, FileMode.Open);
-				try { pokemonData = (PokemonData)bf.Deserialize(file); }
-				catch (System.ArgumentNullException ex) { Debug.LogError("The given file information was null or invalid:" + ex.Message); return false; }
-				catch (SerializationException ex) { Debug.LogError("Failed to Deserialize the data for  the pokemon:" + pokemonName + ", with path:" + dataPath + "," + ex.Message); return false; }
-				catch (System.Security.SecurityException ex) { Debug.LogError("Deserialization security Exception:" + ex.Message); return false; }
-				file.Close();
-				Debug.LogWarning("LOADED MASS = " + pokemonData.Mass);
-				PrintString("LoadPokemonData", "Finished Loading PokemonData");
-				return true;
-			}
-			else
-			{
-				PrintString("LoadPokemonData", "Failed to Load PokemonData for \"" + pokemonName + "\" with path \"" + dataPath + "\"", 2);
-				//create blank data with some easy to test for defaults
-				return false;
-			}
-		}
-		/// <summary>
-		/// Creates and Saves new pokemon data (For Dev use Only)
-		/// </summary>
-		/// <param name="pokedexNumber">number entry in the pokedex</param>
-		/// <param name="catchRate">pokemon base catch Chance</param>
-		/// <param name="maleChance">changce of a male spawning</param>
-		/// <param name="eggGroup">pokemon egg group
-		/// <para>0 = Monster   1 = Human-Like  2 = Water 1		4 = Water 2			5 = Water 3</para>
-		/// <para>6 = Bug		7 = Mineral		8 = Flying		9 = Amorphous		10 = Field</para>
-		/// <para>11 = Fairy	12 = Ditto		13 = Grass		14 = Dragon			15 = Undiscovered</para>
-		/// </param>
-		/// <param name="minimumSteps">minimum steps to hatch pokemon</param>
-		/// <param name="maximumSteps">maximim steps to hatch pokemon</param>
-		/// <param name="height">pokemon base height</param>
-		/// <param name="Mass">pokemon base Mass</param>
-		/// <param name="baseExperienceYield">pokemon base experience yield</param>
-		/// <param name="levelingRate">pokemon base leveling rate</param>
-		/// <param name="baseFriendship">pokemon base freindship</param>
-		/// <param name="baseHp">pokemon base HP</param>
-		/// <param name="baseAttack">pokemon base Attack</param>
-		/// <param name="baseDefense">pokemon baseDefense</param>
-		/// <param name="baseSpeed">pokemon base Speed</param>
-		/// <param name="baseAcceleration">pokemon base Acceleration</param>
-		/// <param name="baseSpecialAttack">pokemon base Special Attack</param>
-		/// <param name="baseSpecialDefense">pokemon special Defense</param>
-		/// <returns></returns>
-		public static void SavePokemonData(string pokemonName, ushort pokedexNumber = 0, float catchRate = 0.01f, float maleChance = 1.0f, ushort eggGroup = 0,
-			ushort minimumSteps = 10, ushort maximumSteps = 11, float height = 10f, float heightVariation = 0.5f, float Mass = 1.0f, float wightVariation = 0.5f,
-			ushort baseExperienceYield = 1, ushort levelingRate = 1, ushort baseFriendship = 1, ushort baseHp = 1, ushort baseAttack = 1, ushort baseDefense = 1,
-			float baseSpeed = 10f, float baseAcceleration = 10f, ushort baseSpecialAttack = 1, ushort baseSpecialDefense = 1)
-		{
-			PokemonData data = new PokemonData() {
-				PokedexNumber = pokedexNumber,
-				CatchRate = catchRate,
-				MaleChance = maleChance,
-				EggGroup = eggGroup,
-				MinimumSteps = minimumSteps,
-				MaximumSteps = maximumSteps,
-				Height = height,
-				HeightVariation = heightVariation,
-				Mass = Mass,
-				MassVariation = wightVariation,
-				BaseExpericeYield = baseExperienceYield,
-				LevelingRate = levelingRate,
-				BaseFriendship = baseFriendship,
-				BaseHp = baseHp,
-				BaseDefense = baseDefense,
-				BaseAttack = baseAttack,
-				BaseSpeed = baseSpeed,
-				BaseSpecialAttack = baseSpecialAttack,
-				BaseSpcialDefense = baseSpecialDefense,
-				BaseAcceleration = baseAcceleration
-			};
-			BinaryFormatter bf = new BinaryFormatter();
-			string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName;
-			if (File.Exists(dataPath))
-			{
-				//Folder Exists
-				dataPath += "/" + pokemonName + ".dat";
-				FileStream file = File.Open(dataPath + "/" + pokemonName + ".dat", FileMode.OpenOrCreate);
-				bf.Serialize(file, data);
-				file.Close();
-			}
-			else
-			{
-				//create missing directory
-				Directory.CreateDirectory(dataPath);
-				FileStream file = File.Open(dataPath + "/" + pokemonName + ".dat", FileMode.OpenOrCreate); // returns a FileInfo object
-				bf.Serialize(file, data);
-				file.Close();
-			}
-		}
-
-		//General stuff
-		/// <summary>
-		/// Loads the entity based on the given parameters
-		/// </summary>
-		/// <param name="entityManager">an EntityManager</param>
-		/// <param name="entity">an Entity</param>
-		/// <param name="entityPath">path the the entity to load the data from</param>
-		/// <param name="entityType">type of entity<para>0 = enviroment   1 = pokemon   2 = player</para></param>
-	/*	public static void LoadEntity(EntityManager entityManager, ref Entity entity, string entityPath, byte entityType)
-		{
-			if (File.Exists(entityPath))
-			{
-				BinaryFormatter bf = new BinaryFormatter();
-				Translation position = new Translation();
-				Rotation rotation = new Rotation();
-				Scale scale = new Scale();
-				Velocity velocity = new Velocity();
-				Mass mass = new Mass();
-				switch (entityType)
+				EntityName = StringToByteString30(playerName),
+				pokemonName = StringToByteString30(pokemonName)
+			});
+			else entityManager.AddComponentData(entity, new PokemonEntity
 				{
-					case TYPE_ENVIROMENT:
-						{
-							Debug.Log("LoadEntity:\tLoading Enviroment Entity");
-							EnviromentData enviromentData = new EnviromentData();
-							string enviromentPath = GenerateEnviromentPath(enviromentData);
-							if (LoadEnviromentData(entityPath, ref enviromentData, ref position, ref rotation, ref scale, ref velocity, ref mass))
-							{
-								velocity.id = currentId;
-								currentId++;
-								entityManager.AddSharedComponentData(entity, LoadEnviromentRenderMesh(enviromentData, enviromentPath));
-								entityManager.SetComponentData(entity, enviromentData);
-								entityManager.SetComponentData(entity, position);
-								entityManager.SetComponentData(entity, rotation);
-								entityManager.SetComponentData(entity, scale);
-								entityManager.SetComponentData(entity, velocity);
-								entityManager.SetComponentData(entity, mass);
-								entityManager.SetComponentData(entity, new Friction() { value = 0.02f });
-							}
-							break;
-						}
-					case TYPE_POKEMON:
-						{
-							Debug.Log("LoadEntity:\tLoading Pokemon Entity");
-							//create some place holder variables
-							PokemonEntity pokemonEntity = new PokemonEntity();
-							if (LoadPokemonEntity(entityPath, ref pokemonEntity, ref position, ref rotation, ref velocity, ref mass))
-							{
-								velocity.id = currentId;
-								currentId++;
-								//add the mesh render component
-								entityManager.AddSharedComponentData(entity,
-				//					 LoadMeshInstaceRenderer(PokedexEntryToString(pokemonEntity.PokemonEntityData.PokedexNumber)));
-								//Set PokemonEntity COmponent
-								entityManager.SetComponentData(entity, pokemonEntity);
-								//Set Position Component
-								position = new Translation() { Value = new float3(10f, 0f, 0f) };
-								entityManager.SetComponentData(entity, position);
-								//Set Rotation Component
-								entityManager.SetComponentData(entity, rotation);
-								entityManager.SetComponentData(entity, velocity);
-								entityManager.SetComponentData(entity, mass);
-								entityManager.SetComponentData(entity, new Friction() { value = 0.02f });
-
-							}
-							else PrintString("LoadEntity", "Failed to Load Entity with path: \"" + entityPath + "\"", 2);
-							break;
-						}
-					case TYPE_PLAYER:
-						Debug.Log("LoadEntity:\tLoading Player Entity");
-						PlayerData playerData = new PlayerData();
-						if (LoadPlayerData(entityPath, ref playerData, ref position, ref rotation, ref velocity, ref mass))
-						{
-							velocity.id = currentId;
-							currentId++;
-							//since we loading pokemon we use pokemon type. player types wiull be added later
-		//					entityManager.AddSharedComponentData(entity, LoadMeshInstaceRenderer(PokedexEntryToString(playerData.PokemonEntityData.PokedexNumber)));
-							entityManager.SetComponentData(entity, playerData);
-							entityManager.SetComponentData(entity, position);
-							entityManager.SetComponentData(entity, rotation);
-							entityManager.SetComponentData(entity, velocity);
-							entityManager.SetComponentData(entity, mass);
-			//				entityManager.SetComponentData(entity, new PlayerInput { MaxInputVelocity = playerData.PokemonEntityData.Speed, PlayerCurrentAcceleration = playerData.PokemonEntityData.Acceleration });
-							entityManager.SetComponentData(entity, new Friction() { value = 0.02f });
-						}
-						break;
-					default:
-						PrintString("LoadEntity", "No Entity with type '" + entityType + "' was found with path: \"" + entityPath + "\"");
-						break;
-				}
-			}
-			else Debug.LogError("LoadEntity:\tfailed to open the data for the specific entity with path: \"" + entityPath + "\"");
-			PrintString("LoadEntity", "Finished Loading Enitty");
-		}
-		*/
-		/// <summary>
-		/// Saves and Entity based on its type
-		/// </summary>
-		/// <param name="entityManager">the entityt manager</param>
-		/// <param name="entity">An Entity</param>
-		/// <param name="sceneName">Name of current scene</param>
-		/// <param name="enviromentName">name of current envioement</param>
-		/// <param name="modelName">name of entity</param>
-		/// <param name="entityType">type of entity</param>
-	/*	public static void SaveEntity(EntityManager entityManager, ref Entity entity, string sceneName, string enviromentName, string modelName, ushort entityType)
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			switch (entityType)
+					EntityName = StringToByteString30(playerName),
+					pokemonName = StringToByteString30(pokemonName)
+				});
+			//add third and first person camera offets
+			PokemonDataClass.SetPokemonCameraData(pokemonName, entity, entityManager);
+			
+			//add the state data
+			if (!entityManager.HasComponent<StateData>(entity)) entityManager.AddComponentData(entity, new StateData { });
+			switch (pokemonName)
 			{
-				case 0:
-					//Enviroment models
-					SaveEnviromentData(entityManager.GetComponentData<EnviromentData>(entity), entityManager.GetComponentData<Translation>(entity),
-						entityManager.GetComponentData<Rotation>(entity), entityManager.GetComponentData<Scale>(entity),
-						entityManager.GetComponentData<Velocity>(entity), entityManager.GetComponentData<Mass>(entity));
+				case "Cubone":
 					break;
-				case 1:
-					//pokemon
-					PokemonIO.SavePokemonEntity(entityManager.GetComponentData<PokemonEntity>(entity), entityManager.GetComponentData<Translation>(entity),
-						entityManager.GetComponentData<Rotation>(entity),
-						entityManager.GetComponentData<Velocity>(entity), entityManager.GetComponentData<Mass>(entity));
-					break;
-				case 2:
-					//player
-					PokemonIO.SavePlayerData(entityManager.GetComponentData<PlayerData>(entity),
-						entityManager.GetComponentData<Translation>(entity), entityManager.GetComponentData<Rotation>(entity), entityManager.GetComponentData<Velocity>(entity), entityManager.GetComponentData<Mass>(entity));
+				case "Electrode":
 					break;
 				default:
-					PokemonIO.PrintString("SaveEntity", "Failed to Save Entity with modelName \"" + modelName + "\"", 2);
+					Debug.Log("Failed to get pokemon data for \""+pokemonName+"\"");
 					break;
 			}
+			//add the PhysicsCollider data
+			PhysicsCollider ps = PokemonDataClass.getPokemonPhysicsCollider(pokemonName, new CollisionFilter
+			{
+				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.Player,
+				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.PokemonMove | TriggerEventClass.Player,
+				GroupIndex = 1
+			});
+			
+			if (!entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.AddComponentData(entity,ps );
+			else entityManager.SetComponentData<PhysicsCollider>(entity, ps);
+			//add mass
+			if (!entityManager.HasComponent<PhysicsMass>(entity)) entityManager.AddComponentData(entity, PokemonDataClass.getPokemonPhysicsMass(ps,psd.pokemonEntityData.Mass));
+			//add physics velocity
+			if (!entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.AddComponentData(entity, new PhysicsVelocity {
+				Linear = float3.zero,
+				Angular = float3.zero
+			});
+			//add position and rotation
+			if (!entityManager.HasComponent<Translation>(entity)) entityManager.AddComponentData(entity, new Translation { Value = float3.zero });
+			if (!entityManager.HasComponent<Rotation>(entity)) entityManager.AddComponentData(entity, new Rotation { Value = new quaternion() });
 		}
-		*/
+
+		public static void LoadPlayerData(EntityManager entityManager, Entity entity, string playerName)
+		{
+			FileStream file = null;
+			PlayerSaveData psd = new PlayerSaveData { };
+			try
+			{
+				BinaryFormatter bf = new BinaryFormatter();
+				file = File.Open(Application.persistentDataPath + "/Players/" + playerName + ".dat", FileMode.Open);
+				psd = (PlayerSaveData)bf.Deserialize(file);
+			}
+			catch (Exception e)
+			{
+				if (e != null)
+				{
+					//handle exception
+					Debug.LogError("Failed to load the player data");
+				}
+
+			}
+			finally
+			{
+				if (file != null) file.Close();
+				if (psd.isValid)
+				{
+					Debug.Log("Loading player data, pokemon = '"+PokemonIO.ByteString30ToString(psd.playerData.Name)+"' pokemon = '"+ PokemonIO.ByteString30ToString(psd.playerData.PokemonName)+"'");
+					string pokemonName = ByteString30ToString(psd.playerData.PokemonName);
+					if (entityManager.HasComponent<PlayerData>(entity)) entityManager.SetComponentData(entity, psd.isValid ? psd.playerData : new PlayerData { Name = StringToByteString30(playerName), PokemonName = StringToByteString30("Bulbasaur") });
+					else entityManager.AddComponentData(entity, psd.isValid ? psd.playerData : new PlayerData { Name = StringToByteString30(playerName), PokemonName = StringToByteString30("Electrode") });
+					LoadPokemonEntity(entity, entityManager, psd);
+				}
+				else
+				{
+					Debug.LogWarning("Attempting to save new player data and reload");
+					string pokemonName = ByteString30ToString(psd.playerData.PokemonName);
+					if (pokemonName == "") pokemonName = "Electrode";
+					PlayerData pd = new PlayerData { Name = StringToByteString30(playerName), PokemonName = StringToByteString30(pokemonName) };
+					PokemonEntityData ped = PokemonDataClass.GenerateBasePokemonEntityData(pokemonName);
+					if (SavePlayerData(pd, ped))
+						LoadPlayerData(entityManager, entity, playerName);
+				}
+			}
+		}
+		
+		public static bool SavePlayerData(PlayerData pd,PokemonEntityData ped)
+		{
+			FileStream file = null;
+			PlayerSaveData psd = new PlayerSaveData
+			{
+				playerData = pd,
+				pokemonEntityData = ped,
+				isValid = true
+			};
+			try
+			{
+				BinaryFormatter bf = new BinaryFormatter();
+				file = File.Create(Application.persistentDataPath + "/Players/" + ByteString30ToString(psd.playerData.Name) + ".dat");
+				bf.Serialize(file,psd);
+				return true;
+			}
+			catch (Exception e)
+			{
+				if(e != null)
+				{
+					//handle exception
+					Debug.LogError("Failed to save the player data"+e);
+				}
+			}
+			finally
+			{
+				if(file!=null)file.Close();
+			}
+			return false;
+		}
+		//General stuff
 		/// <summary>
 		/// returns the name for the current scene
 		/// </summary>
@@ -1003,22 +752,7 @@ namespace Pokemon
 			}
 			return bs;
 		}
-		/// <summary>
-		/// Takes in a pokemon name and returns a corresponding Pokedex Entry name
-		/// </summary>
-		/// <param name="name">name of the pokemon (First letter capitialized)</param>
-		/// <returns>ushort</returns>
-		public static ushort StringToPokedexEntry(string name)
-		{
-			switch (name)
-			{
-				case "Bulbasaur": return 1;
-				case "Ivysaur": return 2;
-				case "Venasaur": return 3;
-				case "Electrode": return 101;
-				default: return 0;
-			}
-		}
+		
 		/// <summary>
 		/// Takes in a ushort pokedex entry number and retuns the name of the pokemon
 		/// </summary>
@@ -1127,21 +861,6 @@ namespace Pokemon
 			return fileNames;
 		}
 
-		public static void createPokemonData()
-		{
-			PrintString("CreatePokemonDataABC123", "Creating Missing or new Base Pokemon Data");
-			SavePokemonData("Bulbasaur", 1, 0.59f, 0.875f, 14, 5140, 5396, 0.7f, 0.5f, 6.9f, 0.5f, 64, 2, 70, 45, 49, 49, 45f, 5f, 65, 65);
-			SavePokemonData("_00", 1, 0.59f, 0.875f, 14, 5140, 5396, 0.7f, 0.5f, 6.9f, 0.5f, 64, 2, 70, 45, 49, 49, 45f, 5f, 65, 65);
-			SavePokemonData("Ivysaur", 2, 0.59f, 0.875f, 14, 5140, 5396, 1.0f, 0.5f, 13.0f, 0.5f, 142, 2, 70, 60, 62, 63, 60f, 3f, 80, 80);
-			SavePokemonData("Venasaur", 3, 0.59f, 0.875f, 14, 5140, 5396, 1.0f, 0.5f, 13.0f, 0.5f, 142, 2, 70, 80, 82, 83, 80f, 2f, 100, 100);
-
-		}
-		public static void GeneratePokemonBounds()
-		{
-			//FOR DEV USE ONLY
-			//STORES BASE COLLIDER INFO FOR EACH POKEMON
-
-		}
 	}
 	public class PokemonArchetypes
 	{

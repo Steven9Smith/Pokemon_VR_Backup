@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using System;
 using Pokemon;
 using Unity.Transforms;
-using UnityEngine.Experimental.VFX;
 using Unity.Jobs;
 using Unity.Collections;
+using UnityEngine.VFX;
 
 namespace Core
 {

@@ -18,7 +18,6 @@ namespace Pokemon
 		public quaternion quan;
 		public BlittableBool valid;
 	}
-	[UpdateAfter(typeof(TriggerEventSystem))]
 	public class InteractionTriggerSystem : JobComponentSystem
 	{
 		private EntityQuery interactionTriggerQuery;
@@ -26,7 +25,7 @@ namespace Pokemon
 		private int spawnSpheresLength;
 		private RenderMesh rm;
 		private int i;
-		protected override void OnCreateManager()
+		protected override void OnCreate()
 		{
 			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
@@ -59,7 +58,6 @@ namespace Pokemon
 				for (i = 0; i < entities.Length; i++)
 				{
 					if (playerInputs[i].attackADown)
-					if (playerInputs[i].EDown)
 					{
 				//		Debug.Log("Detected an E press!");
 						float3 nPosition = translations[i].Value;
@@ -74,7 +72,7 @@ namespace Pokemon
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			spawnSpheresLength = interactionTriggerQuery.CalculateLength();
+			spawnSpheresLength = interactionTriggerQuery.CalculateEntityCount();
 			if (spawnSpheresLength == 0) return inputDeps;
 	//		Debug.Log("running InteractionTrigger");
 			spawnSpheres = new NativeArray<SpawnSphere>(spawnSpheresLength,Allocator.TempJob);
@@ -111,7 +109,6 @@ namespace Pokemon
 		{
 			// Sphere with default filter and material. Add to Create() call if you want non default:
 			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(float3.zero, radius, new CollisionFilter { BelongsTo= TriggerEventClass.NPC, CollidesWith = uint.MaxValue, GroupIndex = 0 });
-			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(float3.zero, radius, new CollisionFilter { CategoryBits = TriggerEventClass.NPC, MaskBits = uint.MaxValue, GroupIndex = 0 });
 			return CreateBody(displayMesh, position, orientation, spCollider, float3.zero, float3.zero, 1.0f, true);
 		}
 		public Entity CreateBody(RenderMesh displayMesh, float3 position, quaternion orientation,
@@ -137,10 +134,6 @@ namespace Pokemon
 
 			Entity entity = entityManager.CreateEntity(componentTypes);
 
-
-
-
-
 			entityManager.SetName(entity, "randomSphere");
 			entityManager.SetSharedComponentData(entity, displayMesh);
 
@@ -151,16 +144,16 @@ namespace Pokemon
 			if (isDynamic)
 			{
 				MassProperties massProperties = collider.Value.MassProperties;
-				entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(massProperties, mass));
-
-				float3 angularVelocityLocal = math.mul(math.inverse(massProperties.MassDistribution.Transform.rot), angularVelocity);
-				entityManager.SetComponentData(entity, new PhysicsVelocity()
-				{
+				entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(
+					massProperties, mass));
+				float3 angularVelocityLocal = math.mul(
+					math.inverse(massProperties.MassDistribution.Transform.rot),
+					angularVelocity);
+				entityManager.SetComponentData(entity, new PhysicsVelocity(){
 					Linear = linearVelocity,
 					Angular = angularVelocityLocal
 				});
-				entityManager.SetComponentData(entity, new PhysicsDamping()
-				{
+				entityManager.SetComponentData(entity, new PhysicsDamping(){
 					Linear = 0.01f,
 					Angular = 0.05f
 				});

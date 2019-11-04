@@ -14,7 +14,6 @@ namespace Pokemon
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
 			PokemonEntity pe = new PokemonEntity {
-				EntityId = PokemonIO.StringToByteString30(EntityId),
 				EntityName = PokemonIO.StringToByteString30(EntityName),
 				pokemonName = PokemonIO.StringToByteString30(PokemonName)
 				//			PokemonEntityData = PokemonEntityData
@@ -26,7 +25,6 @@ namespace Pokemon
 	[Serializable]
 	public struct PokemonEntity : IComponentData
 	{
-		public ByteString30 EntityId;
 		public ByteString30 EntityName;
 		public ByteString30 pokemonName;
 	//	public PokemonEntityData PokemonEntityData;

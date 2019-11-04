@@ -15,8 +15,4 @@ namespace Pokemon
 			dstManager.AddComponentData(entity, new DamageTriggerData { Value = damageValue });
 		}
 	}
-	public struct DamageTriggerData : IComponentData
-	{
-		public int Value;
-	}
 }
