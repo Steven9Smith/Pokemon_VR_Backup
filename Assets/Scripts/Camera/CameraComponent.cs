@@ -8,7 +8,6 @@ using UnityEngine;
 namespace Pokemon
 {
 	public class CameraComponent : MonoBehaviour {
-		public float3 offset;
 		public float smoothingSpeed;
 		public Camera camera;
 		public int viewMode = 0;

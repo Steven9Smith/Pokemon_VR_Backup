@@ -11,11 +11,15 @@ namespace Pokemon.Player
 
 		public EntityQuery PlayerQuery,AudioListenerQuery;
 		NativeArray<Entity> playerEntities,audioListenerEntities;
+		NativeArray<Translation> playerTranslations;
+		NativeArray<PlayerInput> playerInputs;
+		NativeArray<PokemonCameraData> playerCameras;
 		public CameraComponent cameraDataComponent;
 		public Transform cameraTransform,audioListenerTransform;
 		public Translation playerPosition;
 		public PlayerInput playerInput;
-		float3 offsetX, offsetY;
+		float3 offsetX = float3.zero;
+		float3 offsetY = float3.zero;
 
 
 		//0 = third person
@@ -25,8 +29,15 @@ namespace Pokemon.Player
 		private GameObject mainCameraParent;
 		protected override void OnCreate()
 		{
-			PlayerQuery = GetEntityQuery(typeof(PlayerData));
+			PlayerQuery = GetEntityQuery(typeof(PlayerData),typeof(Translation),typeof(PlayerInput),typeof(PokemonCameraData));
 			AudioListenerQuery = GetEntityQuery(typeof(AudioListenerData));
+		}
+		protected override void OnDestroy()
+		{
+			playerEntities.Dispose();
+			playerInputs.Dispose();
+			playerTranslations.Dispose();
+			audioListenerEntities.Dispose();
 		}
 		protected override void OnStartRunning()
 		{
@@ -37,47 +48,59 @@ namespace Pokemon.Player
 			else if (mainCamera == null) Debug.LogError("Failed to get Main Camera");
 			else if (cameraDataComponent == null) Debug.LogError("Failed to get Camera Data Component");
 			cameraTransform = mainCameraParent.GetComponent<Transform>();
-			offsetX = cameraDataComponent.offset;
-			offsetY = new float3(0, 0, cameraDataComponent.offset.z);
+			//	offsetX = cameraDataComponent.offset;
+			//	offsetY = new float3(0, 0, cameraDataComponent.offset.z);
+
+			playerCameras = PlayerQuery.ToComponentDataArray<PokemonCameraData>(Allocator.TempJob);
+			offsetX = playerCameras[0].thridPersonOffset.z;
+			offsetY = playerCameras[0].thridPersonOffset.y;
+			playerCameras.Dispose();
 			viewMode = cameraDataComponent.viewMode;
 		}
 		protected override void OnUpdate()
 		{
 			//get entity array
 			playerEntities = PlayerQuery.ToEntityArray(Allocator.TempJob);
-
+			playerTranslations = PlayerQuery.ToComponentDataArray<Translation>(Allocator.TempJob);
+			playerInputs = PlayerQuery.ToComponentDataArray<PlayerInput>(Allocator.TempJob);
 			audioListenerEntities = AudioListenerQuery.ToEntityArray(Allocator.TempJob);
 			if (playerEntities.Length > 0)
 			{
 				//get components
-		//		Debug.Log("fieldofView = "+cam.fieldOfView);
-				playerPosition = EntityManager.GetComponentData<Translation>(playerEntities[0]);
-				playerInput = EntityManager.GetComponentData<PlayerInput>(playerEntities[0]);
-
-				if(playerInput.smoothingSpeed != cameraDataComponent.smoothingSpeed) playerInput.smoothingSpeed = cameraDataComponent.smoothingSpeed;
-				if (viewMode == 0)
+				//Debug.Log("fieldofView = "+cam.fieldOfView);
+				playerPosition = playerTranslations[0];
+				playerInput = playerInputs[0];
+		//		Debug.Log(playerPosition.Value + ",," + playerInput.ToString());
+				if (!float.IsNaN(playerPosition.Value.x))
 				{
-					offsetX = Quaternion.AngleAxis(playerInput.MouseX * cameraDataComponent.smoothingSpeed, Vector3.up) * offsetX;
-					offsetY = Quaternion.AngleAxis(playerInput.MouseY * cameraDataComponent.smoothingSpeed, Vector3.right) * offsetY;
+	//				Debug.Log(playerPosition.Value);
 
-					offsetY.x = 0f;
-					offsetY.z = 0f;
-			//		Debug.Log("Camera Before: offset = " + offsetX + "," + offsetY + "\nposition = " + cameraTransform.position + "   rotation = " + cameraTransform.rotation + " playterPosition =" + playerPosition.Value);
-					cameraTransform.position = playerPosition.Value + offsetX + offsetY;
-					cameraTransform.LookAt(playerPosition.Value);
+					if (playerInput.smoothingSpeed != cameraDataComponent.smoothingSpeed) playerInput.smoothingSpeed = cameraDataComponent.smoothingSpeed;
+					if (viewMode == 0)
+					{
+						offsetX = Quaternion.AngleAxis(playerInput.MouseX * cameraDataComponent.smoothingSpeed, Vector3.up) * offsetX;
+						offsetY = Quaternion.AngleAxis(playerInput.MouseY * cameraDataComponent.smoothingSpeed, Vector3.right) * offsetY;
+
+						offsetY.x = 0f;
+						offsetY.z = 0f;
+						offsetX.y = 0f;
+			//			Debug.Log("Camera Before: offset = " + offsetX + "," + offsetY + "\nposition = " + cameraTransform.position + "   rotation = " + cameraTransform.rotation + " playterPosition =" + playerPosition.Value);
+						cameraTransform.position = playerPosition.Value + offsetX+ offsetY;
+						cameraTransform.LookAt(playerPosition.Value);
+					}
+					else
+					{
+						cameraTransform.position = playerPosition.Value + new float3(0, 0.5f, 0.5f);
+					}
+					PlayerInput temp = playerInput;
+					temp.forward = cameraTransform.forward;
+					temp.right = cameraTransform.right;
+
+					if (audioListenerEntities.Length > 0)
+						EntityManager.GetComponentObject<Transform>(audioListenerEntities[0]).position = playerPosition.Value;
+					EntityManager.SetComponentData(playerEntities[0], temp);
 				}
-				else
-				{
-					cameraTransform.position = playerPosition.Value+new float3(0,0.5f,0.5f);
-
-				}
-				PlayerInput temp = playerInput;
-				temp.forward = cameraTransform.forward;
-				temp.right = cameraTransform.right;
-
-				if (audioListenerEntities.Length > 0)
-					EntityManager.GetComponentObject<Transform>(audioListenerEntities[0]).position = playerPosition.Value;
-				EntityManager.SetComponentData(playerEntities[0], temp);
+				else Debug.Log("Waiting for valid translation...amount of entities = "+playerEntities.Length);
 			}
 			else
 			{
@@ -85,8 +108,10 @@ namespace Pokemon.Player
 		//		CameraQuery = GetEntityQuery(typeof(CameraDataComponent));
 		//		PlayerQuery = GetEntityQuery(typeof(PlayerData));
 			}
-			audioListenerEntities.Dispose();
 			playerEntities.Dispose();
+			playerInputs.Dispose();
+			playerTranslations.Dispose();
+			audioListenerEntities.Dispose();
 		}
 
 	}
