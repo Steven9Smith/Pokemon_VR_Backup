@@ -1,0 +1,317 @@
+{
+  "actions": [
+    {
+      "name": "/actions/default/in/InteractUI",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Teleport",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/GrabPinch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/GrabGrip",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Pose",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/default/in/SkeletonLeftHand",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/default/in/SkeletonRightHand",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/default/in/Squeeze",
+      "type": "vector1",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/HeadsetOnHead",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/TouchPadTouch",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/Trigger",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/out/Haptic",
+      "type": "vibration"
+    },
+    {
+      "name": "/actions/platformer/in/Move",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/platformer/in/Jump",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/buggy/in/Steering",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/buggy/in/Throttle",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/buggy/in/Brake",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/buggy/in/Reset",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/mixedreality/in/ExternalCamera",
+      "type": "pose",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Trigger_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Trigger_Pull",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Trigger_Touch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Trigger_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Trigger_Pull",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Trigger_Touch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_System_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_System_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_A_Button",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_B_Button",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_A_Button",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_B_Button",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Grip_Grab",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Grip_Force",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Grip_Grab",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Grip_Force",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Grab_Pinch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Grab_Pinch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Thumbstick_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Thumbstick_Position",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Thumbstick_Touch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Thumbstick_Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Thumbstick_Touch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Thumbstick_Position",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Trackpad_Touch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_TrackPad_Position",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_TrackPad_Position",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_TrackPad_Touch",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_Skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Hand_Skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_Pose_Base",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Hand_Pose_base",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_GDC",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_hand_GDC",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_Hand_Grip",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Hand_Hand_Grip",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_Raw",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_Hand_Raw",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Left_Hand_Tip",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/Controller_Tests/in/Right_hand_Tip",
+      "type": "pose"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/default",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/platformer",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/buggy",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/mixedreality",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/Controller_Tests",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "vive",
+      "binding_url": "binding_vive.json"
+    },
+    {
+      "controller_type": "vive_pro",
+      "binding_url": "binding_vive_pro.json"
+    },
+    {
+      "controller_type": "rift",
+      "binding_url": "binding_rift.json"
+    },
+    {
+      "controller_type": "holographic_hmd",
+      "binding_url": "binding_holographic_hmd.json"
+    },
+    {
+      "controller_type": "vive_tracker_camera",
+      "binding_url": "binding_vive_tracker_camera.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/platformer/in/Jump": "Jump",
+      "/actions/default/in/Trigger": "TriggerA",
+      "/actions/Controller_Tests/in/Left_Trigger_Click": "Left_Trigger_Click",
+      "/actions/Controller_Tests/in/Left_Trigger_Touch": "Left_Trigger_Touch",
+      "/actions/Controller_Tests/in/Left_Trigger_Pull": "Left_Trigger_Pull"
+    }
+  ]
+}

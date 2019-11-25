@@ -124,19 +124,24 @@ namespace Pokemon
 				}
 				if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
 				{
+					Debug.Log("Doing the execute");
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
 					{
 						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
 							 deltaTime, pokemonMoveDataEntity.forward);
 						velocity.Angular += realValue;
+						Debug.Log("Angular = "+velocity.Angular.ToString());
 					}
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
 					{
 						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
 						ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
 							 deltaTime, pokemonMoveDataEntity.forward);
+						Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
+							+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
+
 						velocity.Linear += realValue;
-						//		Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
+						//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
 					}
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
 					{

@@ -170,8 +170,8 @@ namespace Pokemon
 			public BlittableBool hasMass;
 			public BlittableBool hasCollider;
 			public BlittableBool hasPhysicsVelocity;
-			public BlittableBool hasParticles;
 			public BlittableBool hasEntity;
+			public BlittableBool hasParticles;
 		}
 		public struct PokemonMoveDataEntity : IComponentData {
 			public ByteString30 name;
@@ -240,10 +240,11 @@ namespace Pokemon
 		{
 			public enum ContactType
 			{
-				physical = 0,
-				phychich = 1,
-				emotional = 2,
-				philisophical = 3
+				Physical = 0,
+				Special = 1,
+				Emotional = 2,
+				Philisophical = 3,
+				Invalid = 4,
 			}
 			public enum AttackType{
 				normal = 0,
@@ -462,7 +463,6 @@ namespace Pokemon
 				}
 				return 1f;
 			}
-
 			public static ParticleSystemSpawnData getPokemonMoveParticleSystemData(ushort pokedexNumber,string pokemonMoveName)
 			{
 
@@ -509,6 +509,45 @@ namespace Pokemon
 						break;
 				}
 				return pssd;
+			}
+			//not currently used but will keep for now
+			public static ContactType GetPokemonMoveContactType(string pokemonMoveName)
+			{
+				switch (pokemonMoveName)
+				{
+					case "Tackle": return ContactType.Physical;
+					case "ThunderBolt":return ContactType.Special;
+					default: return ContactType.Invalid;
+				}
+			}
+			public static ContactType GetPokemonMoveContactType(ByteString30 pokemonMoveName)
+			{
+				string pokemonMoveName_ = PokemonIO.ByteString30ToString(pokemonMoveName);
+				switch (pokemonMoveName_)
+				{
+					case "Tackle": return ContactType.Physical;
+					case "ThunderBolt": return ContactType.Special;
+					default: return ContactType.Invalid;
+				}
+			}
+			public static BlittableBool GetPokemonMovesHaveParticles(string pokemonMoveName)
+			{
+				switch (pokemonMoveName)
+				{
+					case "Tackle": return false;
+					case "ThunderBolt": return true;
+					default: return false;
+				}
+			}
+			public static BlittableBool GetPokemonMovesHaveParticles(ByteString30 pokemonMoveName)
+			{
+				string pokemonMoveName_ = PokemonIO.ByteString30ToString(pokemonMoveName);
+				switch (pokemonMoveName_)
+				{
+					case "Tackle": return false;
+					case "ThunderBolt": return true;
+					default: return false;
+				}
 			}
 		}
 	}

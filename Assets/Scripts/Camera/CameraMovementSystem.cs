@@ -21,7 +21,6 @@ namespace Pokemon.Player
 		float3 offsetX = float3.zero;
 		float3 offsetY = float3.zero;
 
-
 		//0 = third person
 		//1 = first person
 		public int viewMode = 0;
@@ -31,13 +30,6 @@ namespace Pokemon.Player
 		{
 			PlayerQuery = GetEntityQuery(typeof(PlayerData),typeof(Translation),typeof(PlayerInput),typeof(PokemonCameraData));
 			AudioListenerQuery = GetEntityQuery(typeof(AudioListenerData));
-		}
-		protected override void OnDestroy()
-		{
-			playerEntities.Dispose();
-			playerInputs.Dispose();
-			playerTranslations.Dispose();
-			audioListenerEntities.Dispose();
 		}
 		protected override void OnStartRunning()
 		{

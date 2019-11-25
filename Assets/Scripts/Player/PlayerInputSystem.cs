@@ -210,16 +210,6 @@ namespace Pokemon.Player
 					typeof(TranslationProxy),
 					typeof(RotationProxy)
 				);
-			//			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			//			defaultSphereRadius = go.GetComponent<UnityEngine.SphereCollider>().radius;
-			//			renderMeshDefault = new RenderMesh
-			//			{
-			//				mesh = go.GetComponent<MeshFilter>().sharedMesh,
-			//				material = go.GetComponent<MeshRenderer>().material,
-			//				castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-			//				receiveShadows = true
-			//			};
-			//			GameObject.Destroy(go);
 		}
 		private struct AttackInputJob : IJob
 		{
@@ -239,7 +229,7 @@ namespace Pokemon.Player
 						playerInputs[i].attackCDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveC :
 						playerInputs[i].attackDDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveD :
 						new PokemonMove { isValid = false };
-					//			Debug.Log(pm.isValid.Value+","+PokemonIO.ByteString30ToString(pm.name)+","+pm.isValid.Value);
+					//Debug.Log(pm.isValid.Value+","+PokemonIO.ByteString30ToString(pm.name)+","+pm.isValid.Value);
 					if (pm.isValid)
 					{
 						pm = new PokemonMove
@@ -281,7 +271,6 @@ namespace Pokemon.Player
 				{
 					Core.Spawning.PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
 						entities[i], pokemonMoveEntities[i], pmds[i]);
-
 				}
 				pokemonMoveEntities.Dispose();
 			}

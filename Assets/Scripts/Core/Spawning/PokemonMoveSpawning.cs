@@ -120,7 +120,7 @@ namespace Core.Spawning {
 			PokemonMoveDataSpawn pmds = getPokemonMoveDataSpawn(entityManager,name,orgEntity,ped);
 			PlayerInput pi = entityManager.GetComponentData<PlayerInput>(orgEntity);
 			PokemonMoveDataEntity pmde = GetPokemonMoveDataEntity(PokemonIO.StringToByteString30(name), ped, pi.forward);
-			Debug.Log("PMDE: Valid = "+pmde.isValid+","+pmde.pokemonMoveAdjustmentData.isValid);
+	//		Debug.Log("PMDE: Valid = "+pmde.isValid+","+pmde.pokemonMoveAdjustmentData.isValid);
 			if (pmds.hasCollider)
 			{
 				if (entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.SetComponentData(entity, pmds.physicsCollider);
@@ -229,24 +229,24 @@ namespace Core.Spawning {
 			{
 				case "Tackle":
 					pmde = new PokemonMoveDataEntity
-					{ 
+					{
 						name = name,
 						accuracy = 1f,
 						attackType = PokemonMoves.AttackType.normal,
 						damage = calculateDamage(ped.currentLevel, 40f),
 						statusType = PokemonMoves.StatusType.none,
-						contactType = PokemonMoves.ContactType.physical,
+						contactType = PokemonMoves.ContactType.Physical,
 						isValid = true,
 						pokemonMoveAdjustmentData = new PokemonMoveAdjustmentData
 						{
 							isValid = true,
 							pokemonMoveVelocitySet = new PokemonMoveVelocitySet
-							{								
+							{
 								value = new PokemonMoveAdjustmentSet
 								{
 									A = new PokemonMoveAdjustment
 									{
-										value = new float3 { x = 10f, y = 1f, z = 10f },
+										value = new float3 { x = ped.Speed, y = 0f, z = ped.Speed },
 										timeLength = -1f,
 										useCameraDirection = true,
 										staminaCost = 5f
@@ -263,7 +263,7 @@ namespace Core.Spawning {
 					pmde = new PokemonMoveDataEntity
 					{
 						attackType = PokemonMoves.AttackType.electric,
-						contactType = PokemonMoves.ContactType.phychich,
+						contactType = PokemonMoves.ContactType.Special,
 						name = name,
 						isValid = true,
 						statusType = PokemonMoves.StatusType.none,
@@ -326,17 +326,24 @@ namespace Core.Spawning {
 		{
 			PhysicsCollider physicsCollider = new PhysicsCollider { };
 			float3 position = entityManager.GetComponentData<Translation>(pokemon).Value;
-			float scale = 1.0f;
 			switch (pokemonMoveName)
 			{
 				case "ThunderBolt"://currently uses thunderbolt v1
 					position.y = position.y + 2f;
-					physicsCollider = new PhysicsCollider { Value = Unity.Physics.SphereCollider.Create(position, 0.5f,
-						new CollisionFilter {
-							BelongsTo = TriggerEventClass.PokemonMove,
-							CollidesWith = uint.MaxValue,
-							GroupIndex = 0
-						}) };
+					physicsCollider = new PhysicsCollider
+					{
+						Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
+						{
+							Center = new float3(0,2f,0),
+							Radius = pokemonEntityData.Height / 2
+						},
+							new CollisionFilter
+							{
+								BelongsTo = TriggerEventClass.PokemonMove | TriggerEventClass.Damage,
+								CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+							},
+							Unity.Physics.Material.Default)
+					};
 					break;
 				case "Tackle":
 					switch (pokemonEntityData.BodyType)
@@ -344,16 +351,19 @@ namespace Core.Spawning {
 						case PokemonDataClass.BODY_TYPE_HEAD_ONLY:
 							//in this case the height represents the diameter.
 							//we use the scale float to hold the raduis of the head
-							scale = pokemonEntityData.Height / 2;
 							physicsCollider = new PhysicsCollider
 							{
-								Value = Unity.Physics.SphereCollider.Create(position, scale,
+								Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
+								{
+									Center = float3.zero,
+									Radius = pokemonEntityData.Height / 2
+								},
 								new CollisionFilter
 								{
-									BelongsTo = TriggerEventClass.PokemonMove,
-									CollidesWith = 0, //nothing for now
-							GroupIndex = 0
-								})
+									BelongsTo = TriggerEventClass.PokemonMove | TriggerEventClass.Damage,
+									CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+								},
+								Unity.Physics.Material.Default)
 							};
 							break;
 						default:
@@ -372,7 +382,8 @@ namespace Core.Spawning {
 		public static void ExecutePhysicalAttack(EntityManager entityManager,string pokemonName,Entity pokemonEntity,PokemonEntityData ped)
 		{
 			//change the Entity's CollisionFilter From player/entity to attacking player/ entity
-			entityManager.AddComponentData(pokemonEntity, PokemonDataClass.getPokemonPhysicsCollider(pokemonName, 
+			entityManager.AddComponentData(pokemonEntity, PokemonDataClass.getPokemonPhysicsCollider(pokemonName,
+				ped,
 				new CollisionFilter {
 					BelongsTo = TriggerEventClass.PokemonAttacking,
 					CollidesWith = uint.MaxValue,

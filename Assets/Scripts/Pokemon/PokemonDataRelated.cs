@@ -400,7 +400,7 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName">Name of the pokemon</param>
 		/// <returns>PhysicsCollider</returns>
-		public static PhysicsCollider getPokemonPhysicsCollider(string pokemonName,CollisionFilter collisionFilter = new CollisionFilter(),Unity.Physics.Material material = new Unity.Physics.Material()) 
+		public static PhysicsCollider getPokemonPhysicsCollider(string pokemonName,PokemonEntityData ped,CollisionFilter collisionFilter = new CollisionFilter(),Unity.Physics.Material material = new Unity.Physics.Material()) 
 		{
 			///FUTURE UPDATE
 			///allow specific colliders to recieve specific filters and materials!
@@ -464,7 +464,7 @@ namespace Pokemon
 					physicsCollider = new PhysicsCollider { Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
 						{
 							Center = float3.zero,
-							Radius = 0.5f
+							Radius = ped.Height/2
 						},
 						collisionFilter,
 						material

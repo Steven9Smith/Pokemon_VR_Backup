@@ -386,7 +386,7 @@ namespace Pokemon
 					break;
 			}
 			//add the PhysicsCollider data
-			PhysicsCollider ps = PokemonDataClass.getPokemonPhysicsCollider(pokemonName, new CollisionFilter
+			PhysicsCollider ps = PokemonDataClass.getPokemonPhysicsCollider(pokemonName, psd.pokemonEntityData,new CollisionFilter
 			{
 				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.Player,
 				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.PokemonMove | TriggerEventClass.Player,
