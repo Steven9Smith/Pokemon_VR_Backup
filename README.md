@@ -24,3 +24,6 @@ Note: this don't have to be made in any specific order unless specified\
 -Events\
     -include trigger events an game events like battles, and game modes like battle royale for example\
     
+    
+Here is our discord if you want to help or just stay updated!
+https://discord.gg/RPYdQup
