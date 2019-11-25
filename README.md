@@ -9,7 +9,7 @@ Unity Version: 2019.3.0b4
 
 The required packages are included in the Packages/manifest.json file\
 The packages should automatically download and install when first compiling the project\
-It is advised that you DO NOT update any packages due to some packages being incomplete or needing unreleases dependicies.
+It is advised that you DO NOT update any packages due to some packages being incomplete or needing unreleased dependencies.
 
 He are a list of things that need to be done.\
 Note: this don't have to be made in any specific order unless specified\
@@ -22,7 +22,7 @@ Note: this don't have to be made in any specific order unless specified\
     -skinned\
     -animated (this has to be talked about)\
 -Events\
-    -include trigger events an game events like battles, and game modes like battle royale for example\
+    -include trigger events an game events like battles, and game modes like battle royale for example
     
     
 Here is our discord if you want to help or just stay updated!
