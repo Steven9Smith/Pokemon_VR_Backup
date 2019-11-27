@@ -92,6 +92,7 @@ namespace Pokemon
 		public float3 thridPersonOffset;
 	}
 	public class PokemonDataClass {
+		//use char to save space
 		public const char BODY_TYPE_HEAD_ONLY = (char)0;
 		public const char BODY_TYPE_HEAD_AND_LEGS = (char)1;
 		public const char BODY_TYPE_WITH_FINS = (char)2;

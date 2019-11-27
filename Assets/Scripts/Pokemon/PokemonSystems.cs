@@ -8,6 +8,7 @@ using Pokemon.Move;
 using Unity.Transforms;
 using Core.Particles;
 using Core.ParentChild;
+using Unity.Burst;
 
 namespace Pokemon
 {
@@ -49,6 +50,9 @@ namespace Pokemon
 			return math.pow((volume / math.PI) * 0.75f, 1f / 3f);
 		}
 	}
+	/// <summary>
+	/// This Job listens for PokemonMove Remove Requests and preforms the right sets in order to remove a pokemonMove
+	/// </summary>
 	public class PokemonMoveDataRemoveSystem : JobComponentSystem
 	{
 		EntityCommandBufferSystem ecbs;
@@ -57,6 +61,7 @@ namespace Pokemon
 		protected override void OnCreate()
 		{
 			ecbs = World.GetOrCreateSystem<EntityCommandBufferSystem>();
+			//The Filter
 			pokemonMoveDataQuery = GetEntityQuery(typeof(PokemonMoveDataEntity), typeof(PokemonMoveEntity), typeof(EntityParent));
 			pokemonMoveFinishEntities = GetEntityQuery(typeof(PokemonMoveEntityRemoveRequest), typeof(PokemonMoveDataEntity));
 		}
@@ -65,7 +70,7 @@ namespace Pokemon
 			public EntityCommandBuffer ecb;
 			[DeallocateOnJobCompletion] public NativeArray<PokemonMoveDataEntity> pokemonMoveDatas;
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveDataEntities;
-			[DeallocateOnJobCompletion] public NativeArray<EntityParent> children;
+			[DeallocateOnJobCompletion] public NativeArray<EntityParent> parents;	//i really should call this parents
 			[ReadOnly] public ComponentDataFromEntity<ParticleSystemRemoveRequest> hasParticleRemoveRequest;
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveEntityEntities;
 			[DeallocateOnJobCompletion] public NativeArray<PokemonMoveDataEntity> pokemonMoveRemoveDatas;
@@ -75,18 +80,24 @@ namespace Pokemon
 				for (i = 0; i < pokemonMoveDatas.Length; i++)
 					if (!pokemonMoveDatas[i].isValid)
 					{
-						if (children[i].isValid)
+						//we have a valid pokemon move data
+						if (parents[i].isValid)
 						{
-							ecb.RemoveComponent<PokemonMoveDataEntity>(children[i].entity);
-							ecb.RemoveComponent<EntityChild>(children[i].entity);
+							//lets remove the PokemonMoveDataEntity Component so it no longer fires the PokemonMoveDataEntity Job
+							ecb.RemoveComponent<PokemonMoveDataEntity>(parents[i].entity);
+					//		ecb.RemoveComponent<EntityChild>(parents[i].entity); <-outdated (EntityChild was removed)
 						}
+						//remove the EntityParent Component so the Entity no longer follows the Pokemon Entity
 						ecb.RemoveComponent<EntityParent>(pokemonMoveDataEntities[i]);
+						//if the Pokemon Move has particles then request to get them removed
 						if (pokemonMoveDatas[i].hasParticles)
 							ecb.AddComponent(pokemonMoveDataEntities[i], new ParticleSystemRemoveRequest { });
+						//add the pokemon remove request
 						ecb.AddComponent(pokemonMoveDataEntities[i], new PokemonMoveEntityRemoveRequest { });
 					}
 				for (i = 0; i < pokemonMoveEntityEntities.Length; i++)
 				{
+					//destroy entities that match these conditions
 					if (!pokemonMoveRemoveDatas[i].hasParticles) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
 					else if (!hasParticleRemoveRequest.Exists(pokemonMoveEntityEntities[i])) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
 				}
@@ -94,14 +105,15 @@ namespace Pokemon
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
+			//test if we have any requests
 			if (pokemonMoveDataQuery.CalculateEntityCount() == 0 && pokemonMoveFinishEntities.CalculateEntityCount() == 0) return inputDeps;
-
+			//preform the job
 			JobHandle jh = new RemovePokemonData
 			{
 				pokemonMoveDataEntities = pokemonMoveDataQuery.ToEntityArray(Allocator.TempJob),
 				ecb = ecbs.CreateCommandBuffer(),
 				pokemonMoveDatas = pokemonMoveDataQuery.ToComponentDataArray<PokemonMoveDataEntity>(Allocator.TempJob),
-				children = pokemonMoveDataQuery.ToComponentDataArray<EntityParent>(Allocator.TempJob),
+				parents = pokemonMoveDataQuery.ToComponentDataArray<EntityParent>(Allocator.TempJob),
 				pokemonMoveEntityEntities = pokemonMoveFinishEntities.ToEntityArray(Allocator.TempJob),
 				hasParticleRemoveRequest = GetComponentDataFromEntity<ParticleSystemRemoveRequest>(),
 				pokemonMoveRemoveDatas = pokemonMoveFinishEntities.ToComponentDataArray<PokemonMoveDataEntity>(Allocator.TempJob)
@@ -110,8 +122,13 @@ namespace Pokemon
 			return jh;
 		}
 	}
+	/// <summary>
+	/// This is a Job. This Job preforms a move adjustment which is either a AngularVelocty, Velocity, Translation, Rotation, and/or Scale
+	/// </summary>
 	public class PokemoMoveDataEntity : JobComponentSystem
 	{
+		//NOTE: if you want to debug the values then remove the [BurstCompile] tag to prevent an error
+		[BurstCompile]
 		private struct PokemonMoveEntityJob : IJobForEach<PokemonMoveEntity, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
 		{
 			public float deltaTime;
@@ -124,21 +141,21 @@ namespace Pokemon
 				}
 				if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
 				{
-					Debug.Log("Doing the execute");
+				//	Debug.Log("Doing the execute");
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
 					{
 						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
 							 deltaTime, pokemonMoveDataEntity.forward);
 						velocity.Angular += realValue;
-						Debug.Log("Angular = "+velocity.Angular.ToString());
+				//		Debug.Log("Angular = "+velocity.Angular.ToString());
 					}
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
 					{
 						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
 						ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
 							 deltaTime, pokemonMoveDataEntity.forward);
-						Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
-							+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
+			//			Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
+			//				+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
 
 						velocity.Linear += realValue;
 						//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);

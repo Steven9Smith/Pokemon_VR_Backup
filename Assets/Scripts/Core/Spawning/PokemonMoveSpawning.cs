@@ -361,7 +361,8 @@ namespace Core.Spawning {
 								new CollisionFilter
 								{
 									BelongsTo = TriggerEventClass.PokemonMove | TriggerEventClass.Damage,
-									CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+								//	CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+								CollidesWith = TriggerEventClass.Nothing
 								},
 								Unity.Physics.Material.Default)
 							};
