@@ -20,6 +20,10 @@ namespace Pokemon
 		public Rotation Rotation;
 	}
 	[Serializable]
+	public struct LivingEntity : IComponentData {
+		public int type;
+	}
+	[Serializable]
 	public struct PokemonData : IComponentData
 	{
 		/*
@@ -401,7 +405,9 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName">Name of the pokemon</param>
 		/// <returns>PhysicsCollider</returns>
-		public static PhysicsCollider getPokemonPhysicsCollider(string pokemonName,PokemonEntityData ped,CollisionFilter collisionFilter = new CollisionFilter(),Unity.Physics.Material material = new Unity.Physics.Material()) 
+		public static PhysicsCollider getPokemonPhysicsCollider(string pokemonName,PokemonEntityData ped,
+			CollisionFilter collisionFilter = new CollisionFilter(),Unity.Physics.Material material = new Unity.Physics.Material(),
+			int groupIndex = 1) 
 		{
 			///FUTURE UPDATE
 			///allow specific colliders to recieve specific filters and materials!
@@ -418,9 +424,9 @@ namespace Pokemon
 				Debug.Log("Creating new Collision Filter");
 				collisionFilter = new CollisionFilter
 				{
-					BelongsTo = TriggerEventClass.Pokemon,
-					CollidesWith = uint.MaxValue,
-					GroupIndex = 1
+					BelongsTo = TriggerEventClass.Pokemon | TriggerEventClass.Collidable,
+					CollidesWith = TriggerEventClass.Collidable,
+					GroupIndex = groupIndex
 				};
 			}
 			if (material.Equals(new Unity.Physics.Material()))
@@ -462,6 +468,7 @@ namespace Pokemon
 					colliders.Dispose();
 					break;
 				case "Electrode":
+					Debug.Log("Creating PHysicwsCollider for Electrode");
 					physicsCollider = new PhysicsCollider { Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
 						{
 							Center = float3.zero,
@@ -469,11 +476,24 @@ namespace Pokemon
 						},
 						collisionFilter,
 						material
-						
 					)};
 					break;
+				default:
+					Debug.LogError("Failed to find collider for pokemon \""+pokemonName+"\"");
+					physicsCollider = new PhysicsCollider
+					{
+						Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
+						{
+							Center = float3.zero,
+							Radius = ped.Height / 2
+						},
+					   collisionFilter,
+					   material
+				   )
+					};
+					break;
 			}
-			Debug.Log("Returning Physics Collide for \""+pokemonName+"\"");
+	//		Debug.Log("Returning Physics Collide for \""+pokemonName+"\"");
 			return physicsCollider; 
 		}
 
@@ -488,6 +508,7 @@ namespace Pokemon
 					break;
 				default:
 					Debug.Log("PokemonDataRealted: GetPokemonColliderMaterial: Failed to get a ColliderMaterial for \""+pokemonName+"\"");
+					material = Unity.Physics.Material.Default;
 					break;
 			}
 			return material;
@@ -530,3 +551,62 @@ namespace Pokemon
 	//# Pokémon 	HP 	Attack 	Defense 	Sp. Attack 	Sp. Defense 	Speed 	Total 	Average
 	
 }
+/*
+ 
+	 public class PokemonArchetypes
+	{
+		public const ushort ENVIROMENT_ARCHTYPE = 1;
+		public const ushort TREE_ARCHTYPE = 2;
+		public const ushort PLAYER_ARCHTYPE = 3;
+		public const ushort POKEMON_ENTITY_ARCHTYPE = 4;
+		public const ushort ENVIROMENT_ENTITY_ARCHTYPE = 5;
+
+		/// <summary>
+		/// Returns the desired Archtype base on the given paramters
+		/// </summary>
+		/// <param name="entityManager">manager to generate the archtype</param>
+		/// <param name="type">the type of archType to generate</param>
+		/// <returns></returns>
+		public static EntityArchetype GenerateArchetype(EntityManager entityManager, ushort type)
+		{
+			switch (type)
+			{
+				case ENVIROMENT_ARCHTYPE:
+					return entityManager.CreateArchetype(
+							typeof(Translation),
+							typeof(Scale),
+							typeof(Rotation),
+							typeof(TransformMatrix),
+							typeof(EnviromentData),
+							//collision specific
+							typeof(PhysicsCollider)
+						);
+				case POKEMON_ENTITY_ARCHTYPE:
+					return entityManager.CreateArchetype(
+							typeof(Translation),
+							typeof(TransformMatrix),
+							typeof(Rotation),
+							typeof(PokemonEntity),
+							typeof(PhysicsCollider)
+						);
+				case PLAYER_ARCHTYPE:
+					return entityManager.CreateArchetype(
+							typeof(Translation),
+							typeof(TransformMatrix),
+							typeof(Rotation),
+							typeof(PlayerData),
+							typeof(PlayerInput),
+							typeof(PhysicsCollider)
+						);
+				default: //No Valid ArchType so create Base
+					PokemonIO.PrintString("GenerateArchType", "Failed to find a matching ArchType generating Base ArchType", 1);
+					return entityManager.CreateArchetype(
+							typeof(TransformMatrix),
+							typeof(Translation)
+						);
+			}
+		}
+
+	}
+	
+	 */

@@ -15,6 +15,7 @@ namespace Core
 		{
 			public Entity entity;
 			public BlittableBool isValid;
+			public BlittableBool followChild;
 			//maybe add offset
 		}
 		/// <summary>
@@ -24,6 +25,7 @@ namespace Core
 		{
 			public Entity entity;
 			public BlittableBool isValid;
+			public BlittableBool followParent;
 		}
 		/// <summary>
 		/// moves the child with the parent
@@ -49,12 +51,11 @@ namespace Core
 				 */
 				if (parents.CalculateEntityCount() > 0)
 				{
-					Debug.Log("Settiing Parent to Child");
 					NativeArray<EntityChild> entityChildren = parents.ToComponentDataArray<EntityChild>(Allocator.TempJob);
 					NativeArray<Entity> entities = parents.ToEntityArray(Allocator.TempJob);
 					for (int i = 0; i < entityChildren.Length; i++)
 					{
-						if (entityChildren[i].isValid)
+						if (entityChildren[i].isValid && entityChildren[i].followChild)
 							if(EntityManager.Exists(entityChildren[i].entity))
 								EntityManager.SetComponentData(entities[i], EntityManager.GetComponentData<Translation>(entityChildren[i].entity));
 					}
@@ -67,7 +68,7 @@ namespace Core
 					NativeArray<Entity> entities = childs.ToEntityArray(Allocator.TempJob);
 					for (int i = 0; i < entityParents.Length; i++)
 					{
-						if (entityParents[i].isValid)
+						if (entityParents[i].isValid && entityParents[i].followParent)
 							if (EntityManager.Exists(entityParents[i].entity))
 								EntityManager.SetComponentData(entities[i], EntityManager.GetComponentData<Translation>(entityParents[i].entity));
 					}

@@ -18,18 +18,18 @@ namespace Pokemon.Player
 		public Transform cameraTransform,audioListenerTransform;
 		public Translation playerPosition;
 		public PlayerInput playerInput;
-		float3 offsetX = float3.zero;
-		float3 offsetY = float3.zero;
-
+		float3 offset = float3.zero;
 		//0 = third person
 		//1 = first person
 		public int viewMode = 0;
 		private GameObject mainCamera;
 		private GameObject mainCameraParent;
+		private bool invertY = true,offsetSet = false;
 		protected override void OnCreate()
 		{
 			PlayerQuery = GetEntityQuery(typeof(PlayerData),typeof(Translation),typeof(PlayerInput),typeof(PokemonCameraData));
 			AudioListenerQuery = GetEntityQuery(typeof(AudioListenerData));
+
 		}
 		protected override void OnStartRunning()
 		{
@@ -44,10 +44,14 @@ namespace Pokemon.Player
 			//	offsetY = new float3(0, 0, cameraDataComponent.offset.z);
 
 			playerCameras = PlayerQuery.ToComponentDataArray<PokemonCameraData>(Allocator.TempJob);
-			offsetX = playerCameras[0].thridPersonOffset.z;
-			offsetY = playerCameras[0].thridPersonOffset.y;
-			playerCameras.Dispose();
-			viewMode = cameraDataComponent.viewMode;
+			if (playerCameras.Length > 0)
+			{
+				offset = playerCameras[0].thridPersonOffset.z;
+				playerCameras.Dispose();
+				viewMode = cameraDataComponent.viewMode;
+				offsetSet = true;
+			}
+		//	playerCameras.Dispose();
 		}
 		protected override void OnUpdate()
 		{
@@ -56,8 +60,17 @@ namespace Pokemon.Player
 			playerTranslations = PlayerQuery.ToComponentDataArray<Translation>(Allocator.TempJob);
 			playerInputs = PlayerQuery.ToComponentDataArray<PlayerInput>(Allocator.TempJob);
 			audioListenerEntities = AudioListenerQuery.ToEntityArray(Allocator.TempJob);
-			if (playerEntities.Length > 0)
+
+			playerCameras = PlayerQuery.ToComponentDataArray<PokemonCameraData>(Allocator.TempJob);
+			if (playerEntities.Length > 0 && playerCameras.Length > 0)
 			{
+				if (!offsetSet)
+				{
+					offset = playerCameras[0].thridPersonOffset.z;
+					playerCameras.Dispose();
+					viewMode = cameraDataComponent.viewMode;
+					offsetSet = true;
+				}
 				//get components
 				//Debug.Log("fieldofView = "+cam.fieldOfView);
 				playerPosition = playerTranslations[0];
@@ -70,14 +83,10 @@ namespace Pokemon.Player
 					if (playerInput.smoothingSpeed != cameraDataComponent.smoothingSpeed) playerInput.smoothingSpeed = cameraDataComponent.smoothingSpeed;
 					if (viewMode == 0)
 					{
-						offsetX = Quaternion.AngleAxis(playerInput.MouseX * cameraDataComponent.smoothingSpeed, Vector3.up) * offsetX;
-						offsetY = Quaternion.AngleAxis(playerInput.MouseY * cameraDataComponent.smoothingSpeed, Vector3.right) * offsetY;
-
-						offsetY.x = 0f;
-						offsetY.z = 0f;
-						offsetX.y = 0f;
-			//			Debug.Log("Camera Before: offset = " + offsetX + "," + offsetY + "\nposition = " + cameraTransform.position + "   rotation = " + cameraTransform.rotation + " playterPosition =" + playerPosition.Value);
-						cameraTransform.position = playerPosition.Value + offsetX+ offsetY;
+						offset = Quaternion.AngleAxis(playerInput.MouseX * cameraDataComponent.smoothingSpeed,Vector3.up) 
+							* Quaternion.AngleAxis(invertY ? -playerInput.MouseY : playerInput.MouseY*cameraDataComponent.smoothingSpeed,Vector3.right)*offset;
+						
+						cameraTransform.position = playerPosition.Value + offset;
 						cameraTransform.LookAt(playerPosition.Value);
 					}
 					else
@@ -96,7 +105,7 @@ namespace Pokemon.Player
 			}
 			else
 			{
-				Debug.LogError("Failed to find both player and camera components\nplayers = " + playerEntities.Length);
+				Debug.LogWarning("Failed to find both player and camera components\nplayers = " + playerEntities.Length);
 		//		CameraQuery = GetEntityQuery(typeof(CameraDataComponent));
 		//		PlayerQuery = GetEntityQuery(typeof(PlayerData));
 			}
@@ -104,6 +113,7 @@ namespace Pokemon.Player
 			playerInputs.Dispose();
 			playerTranslations.Dispose();
 			audioListenerEntities.Dispose();
+			playerCameras.Dispose();
 		}
 
 	}

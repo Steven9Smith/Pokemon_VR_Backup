@@ -23,7 +23,7 @@ public class EnviromentTerrain : MonoBehaviour, IConvertGameObjectToEntity
 		else if (material == null) Debug.LogError("Given Material is null");
 		else
 		{
-			Debug.Log(mesh.bounds.size);
+	//		Debug.Log(mesh.bounds.size);
 			entity = Core.Terrain.TerrianBuilder.generateTerrianEntity(dstManager, material,mesh,terrainData);;
 			dstManager.SetName(entity,name);
 			
@@ -58,7 +58,7 @@ namespace Core.Terrain
 			int2 size = new int2((int)terrainData.size.x,(int) terrainData.size.z);
 			
 			float3 scale = terrainData.heightmapScale;
-			Debug.Log(terrainData.size);
+	//		Debug.Log(terrainData.size);
 			Entity staticEntity = new Entity { };
 			if (heights == null)
 			{

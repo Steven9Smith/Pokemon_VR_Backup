@@ -5,7 +5,7 @@ using Pokemon.Move;
 
 namespace Pokemon
 {
-	[RequiresEntityConversion]
+/*	[RequiresEntityConversion]
 	public class PokemonEntityDataComponent : MonoBehaviour, IConvertGameObjectToEntity
 	{
 		public int guiId;
@@ -91,7 +91,7 @@ namespace Pokemon
 			}
 		}
 	}
-
+	*/
 	[Serializable]
 	///<summary>
 	///Holds the data of a pokemon Entity

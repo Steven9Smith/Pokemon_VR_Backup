@@ -509,7 +509,7 @@ namespace Pokemon
 							break;
 						}
 					}
-					Debug.Log("Cleared the persistant NativeArray");
+	//				Debug.Log("Cleared the persistant NativeArray");
 					alreadyCleared = true;
 				}
 				localAtes.Dispose();

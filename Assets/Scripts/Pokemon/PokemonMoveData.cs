@@ -172,6 +172,7 @@ namespace Pokemon
 			public BlittableBool hasPhysicsVelocity;
 			public BlittableBool hasEntity;
 			public BlittableBool hasParticles;
+			public BlittableBool projectOnParentInstead; //used with physical attacks. instead of the PokemonMove Entity moving you have the parent entity move instead
 		}
 		public struct PokemonMoveDataEntity : IComponentData {
 			public ByteString30 name;
@@ -180,6 +181,7 @@ namespace Pokemon
 			public PokemonMoves.ContactType contactType;
 			public BlittableBool isValid;
 			public BlittableBool hasParticles;
+			public BlittableBool preformActionsOn;
 			public PokemonMoveAdjustmentData pokemonMoveAdjustmentData;
 			public PokemonMoveParticleDataSet pokemonMoveParticleDataSet;
 			public float damage;
@@ -460,6 +462,31 @@ namespace Pokemon
 						return pma.value;
 					}
 					else if (i == 24) set.isValid = false;
+				}
+				return 1f;
+			}
+			public static float getNextPokemonMoveAdjustment(ref PokemonMoveScaleSet set, float time,ref float currentStamina)
+			{
+				for (int i = 0; i < 25; i++)
+				{
+					ref PokemonMoveScaleAdjustment pma = ref getScaleAdjustment(ref set, i);
+					currentStamina = math.clamp(currentStamina - pma.staminaCost, 0f, currentStamina);
+					if (currentStamina > 0f)
+					{
+						if (pma.timeLength == -1f)
+						{
+							//one time thing
+							pma.timeLength = 0;
+							set.isValid = false;
+							return pma.value;
+						}
+						else if (pma.timeLength > 0)
+						{
+							pma.timeLength = pma.timeLength - time >= 0 ? pma.timeLength - time : 0;
+							return pma.value;
+						}
+						else if (i == 24) set.isValid = false;
+					}
 				}
 				return 1f;
 			}

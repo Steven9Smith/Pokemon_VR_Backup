@@ -23,7 +23,7 @@ namespace Core.Spawning {
 		{
 			PokemonMoveDataSpawn pmds = new PokemonMoveDataSpawn { };
 			PlayerInput pi = entityManager.GetComponentData<PlayerInput>(entity);
-			PhysicsCollider physicsCollider = generatePokemonMoveCollider(name, entityManager, entity,pokemonEntityData);
+			PhysicsCollider physicsCollider = generatePokemonMoveCollider(name, entityManager, entity,pokemonEntityData,1);
 			switch (name)
 			{
 				case "ThunderBolt":
@@ -76,6 +76,7 @@ namespace Core.Spawning {
 						physicsCollider = physicsCollider,
 						physicsMass = entityManager.GetComponentData<PhysicsMass>(entity),
 						hasEntity = true,
+						projectOnParentInstead = true
 					};
 					break;
 				default:
@@ -114,78 +115,122 @@ namespace Core.Spawning {
 		/// <param name="orgEntity">the Entity that executed the move</param>
 		/// <param name="entity">the PokemonMove Entity</param>
 		/// <param name="ped">PokemonEntityData</param>
-		public static void ExecutePokemonMove(EntityManager entityManager,string name, Entity orgEntity,Entity entity, PokemonEntityData ped)
+		public static void ExecutePokemonMove(EntityManager entityManager,string name,ByteString30 pokemonName, Entity orgEntity,Entity entity, PokemonEntityData ped,GroupIndexSystem groupIndexSystem)
 		{
-			Debug.Log("executing pokemon move \""+name+"\"");
-			PokemonMoveDataSpawn pmds = getPokemonMoveDataSpawn(entityManager,name,orgEntity,ped);
-			PlayerInput pi = entityManager.GetComponentData<PlayerInput>(orgEntity);
-			PokemonMoveDataEntity pmde = GetPokemonMoveDataEntity(PokemonIO.StringToByteString30(name), ped, pi.forward);
-	//		Debug.Log("PMDE: Valid = "+pmde.isValid+","+pmde.pokemonMoveAdjustmentData.isValid);
-			if (pmds.hasCollider)
+			//test if a move is already being executed on the entity parent
+			if (!entityManager.HasComponent<EntityChild>(orgEntity))
 			{
-				if (entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.SetComponentData(entity, pmds.physicsCollider);
-				else entityManager.AddComponentData(entity, pmds.physicsCollider);
+				entityManager.AddComponentData<EntityChild>(orgEntity, new EntityChild { entity = entity, isValid = true,followChild = false });
+				if (groupIndexSystem == null) Debug.LogError("GroupIndexSystem is null");
+				Debug.Log("executing pokemon move \"" + name + "\"");
+				PokemonMoveDataSpawn pmds = getPokemonMoveDataSpawn(entityManager, name, orgEntity, ped);
+				PlayerInput pi = entityManager.GetComponentData<PlayerInput>(orgEntity);
+				PokemonMoveDataEntity pmde = GetPokemonMoveDataEntity(PokemonIO.StringToByteString30(name), ped, pi.forward);
+				if (pmds.hasEntity)
+				{
+					entityManager.SetComponentData(entity, new EntityParent { entity = orgEntity, isValid = true, followParent = true });
+					if (pmds.projectOnParentInstead)
+					{
+						if (pmde.isValid) Debug.Log("It be valid!");
+						entityManager.AddComponentData(orgEntity, pmde);
+						pmde.preformActionsOn = false;
+					}
+				}
+				entityManager.AddComponentData<CoreData>(entity, new CoreData
+				{
+					Name = PokemonIO.StringToByteString30(name),
+					BaseName = PokemonIO.StringToByteString30(name)
+				});
+				//get Pokemon's GroupIndex
+				GroupIndexInfo gii = entityManager.GetComponentData<GroupIndexInfo>(orgEntity);
+				entityManager.AddComponentData(orgEntity, new GroupIndexChangeRequest
+				{
+					pokemonName = pokemonName,
+					newIndexGroup = groupIndexSystem.getLength()
+				});
+				//add group index but we want this to 
+				gii = new GroupIndexInfo
+				{
+					GroupIndex = groupIndexSystem.GetAllGroupsBut(groupIndexSystem.getLength()),
+					oldIndexGroup = 1
+				};
+				entityManager.AddComponentData(entity, gii);
+				entityManager.AddComponentData(entity, new GroupIndexChangeRequest
+				{
+					newIndexGroup = gii.GroupIndex,
+					pokemonName = PokemonIO.StringToByteString30(name)
+				});
+
+				//add/set collider 
+				if (pmds.hasCollider)
+				{
+					if (entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.SetComponentData(entity, pmds.physicsCollider);
+					else entityManager.AddComponentData(entity, pmds.physicsCollider);
+				}
+				if (pmds.hasDamping)
+				{
+					if (entityManager.HasComponent<PhysicsDamping>(entity)) entityManager.SetComponentData(entity, pmds.physicsDamping);
+					else entityManager.AddComponentData(entity, pmds.physicsDamping);
+				}
+				if (pmds.hasGravityFactor)
+				{
+					if (entityManager.HasComponent<PhysicsGravityFactor>(entity)) entityManager.SetComponentData(entity, pmds.physicsGravityFactor);
+					else entityManager.AddComponentData(entity, pmds.physicsGravityFactor);
+				}
+				if (pmds.hasMass)
+				{
+					if (entityManager.HasComponent<PhysicsMass>(entity)) entityManager.SetComponentData(entity, pmds.physicsMass);
+					else entityManager.AddComponentData(entity, pmds.physicsMass);
+				}
+				if (entityManager.HasComponent<PokemonMoveDataEntity>(entity)) entityManager.SetComponentData(entity, pmde);
+				else entityManager.AddComponentData(entity, pmde);
+				if (pmds.hasPhysicsVelocity)
+				{
+					if (entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.SetComponentData(entity, pmds.physicsVelocity);
+					else entityManager.AddComponentData(entity, pmds.physicsVelocity);
+				}
+				if (entityManager.HasComponent<Translation>(entity)) entityManager.SetComponentData(entity, pmds.translation);
+				else entityManager.AddComponentData(entity, pmds.translation);
+				if (entityManager.HasComponent<Rotation>(entity)) entityManager.SetComponentData(entity, pmds.rotation);
+				else entityManager.AddComponentData(entity, pmds.rotation);
+				//add particle stuff
+				ParticleSystemSpawnData pssd = PokemonMoves.getPokemonMoveParticleSystemData(ped.PokedexNumber, name);
+				if (pssd.isValid)
+				{
+					Debug.Log("detected particleSystemspawn data");
+					entityManager.AddComponentData(entity, pssd);
+				}
+				else Debug.LogWarning("ExecutePokemonMove: Failed to get ParticleSystemSpawnData!");
+				if (pmds.hasParticles)
+				{
+					entityManager.AddComponentData(entity, new ParticleSystemRequest { });
+					entityManager.AddComponentData(entity, new ParticleSystemData { });
+				}
+				if (!entityManager.HasComponent<Scale>(entity)) entityManager.AddComponentData<Scale>(entity, new Scale { Value = 1f });
+				else entityManager.SetComponentData<Scale>(entity, new Scale { Value = 1f });
+				switch (name)
+				{
+					case "ThunderBolt":
+						Debug.Log("Spawning ThunderBolt");
+						//set name and render mesg
+						entityManager.SetName(entity, name);
+						//entityManager.SetSharedComponentData(entity, renderMesh);
+						SetPokemonMoveRenderMesh(entityManager, entity, name);
+						break;
+					case "Tackle":
+						entityManager.SetName(entity, name);
+						break;
+					default: Debug.Log("Failed to set pokemon move data for \"" + name + "\""); break;
+				}
+				//
+				PhysicsCollider op = entityManager.GetComponentData<PhysicsCollider>(orgEntity);
+				op = entityManager.GetComponentData<PhysicsCollider>(orgEntity);
+				PhysicsCollider tmpA = entityManager.GetComponentData<PhysicsCollider>(entity);
+				Debug.Log("Chaned original entities collision filter to " + op.Value.Value.Filter.GroupIndex.ToString() + " with entity index = " + tmpA.Value.Value.Filter.GroupIndex.ToString());
 			}
-			if (pmds.hasDamping)
+			else
 			{
-				if (entityManager.HasComponent<PhysicsDamping>(entity)) entityManager.SetComponentData(entity, pmds.physicsDamping);
-				else entityManager.AddComponentData(entity, pmds.physicsDamping);
-			}
-			if (pmds.hasGravityFactor)
-			{
-				if (entityManager.HasComponent<PhysicsGravityFactor>(entity)) entityManager.SetComponentData(entity, pmds.physicsGravityFactor);
-				else entityManager.AddComponentData(entity, pmds.physicsGravityFactor);
-			}
-			if (pmds.hasMass)
-			{
-				if (entityManager.HasComponent<PhysicsMass>(entity)) entityManager.SetComponentData(entity, pmds.physicsMass);
-				else entityManager.AddComponentData(entity, pmds.physicsMass);
-			}
-			if(pmds.hasEntity)
-			{
-				if(entityManager.HasComponent<EntityParent>(entity)) entityManager.SetComponentData(entity, new EntityParent {entity = orgEntity,isValid = true });
-				else entityManager.AddComponentData(entity, new EntityParent {entity = orgEntity,isValid = true });
-				entityManager.AddComponentData(orgEntity, pmde);
-			}
-			if (pmds.hasPhysicsVelocity)
-			{
-				if (entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.SetComponentData(entity, pmds.physicsVelocity);
-				else entityManager.AddComponentData(entity, pmds.physicsVelocity);
-			}
-			if (entityManager.HasComponent<PokemonMoveDataEntity>(entity)) entityManager.SetComponentData(entity, pmde);
-			else entityManager.AddComponentData(entity, pmde);
-			if (entityManager.HasComponent<Translation>(entity)) entityManager.SetComponentData(entity, pmds.translation);
-			else entityManager.AddComponentData(entity, pmds.translation);
-			if (entityManager.HasComponent<Rotation>(entity)) entityManager.SetComponentData(entity, pmds.rotation);
-			else entityManager.AddComponentData(entity, pmds.rotation);
-			//add particle stuff
-			ParticleSystemSpawnData pssd = PokemonMoves.getPokemonMoveParticleSystemData(ped.PokedexNumber, name);
-			if (pssd.isValid)
-			{
-				Debug.Log("detected particleSystemspawn data");
-				entityManager.AddComponentData(entity, pssd);
-			}
-			else Debug.LogWarning("ExecutePokemonMove: Failed to get ParticleSystemSpawnData!");
-			if (pmds.hasParticles)
-			{
-				entityManager.AddComponentData(entity, new ParticleSystemRequest { });
-				entityManager.AddComponentData(entity, new ParticleSystemData { });
-			}
-			if(!entityManager.HasComponent<Scale>(entity))entityManager.AddComponentData<Scale>(entity,new Scale {Value = 1f });
-			else entityManager.SetComponentData<Scale>(entity, new Scale { Value = 1f});
-			switch (name)
-			{
-				case "ThunderBolt":
-					Debug.Log("Spawning ThunderBolt");
-					//set name and render mesg
-					entityManager.SetName(entity,name);
-					//entityManager.SetSharedComponentData(entity, renderMesh);
-					SetPokemonMoveRenderMesh(entityManager, entity,name);
-					break;
-				case "Tackle":
-					entityManager.SetName(entity, name);
-					break;
-				default: Debug.Log("Failed to set pokemon move data for \"" + name + "\""); break;
+				//maybe cancel but for now we do nothing
 			}
 		}
 		/*public void setMoveEntityData(Entity moveEntity, Entity mEntity, PokemonMove pokemonMove,
@@ -256,7 +301,8 @@ namespace Core.Spawning {
 							}
 						},
 						forward = forward,
-						hasParticles = true
+						hasParticles = true,
+						preformActionsOn = true
 					};
 					break;
 				case "ThunderBolt":
@@ -300,7 +346,8 @@ namespace Core.Spawning {
 							}
 						},
 						forward = forward,
-						hasParticles = true
+						hasParticles = true,
+						preformActionsOn = true
 					};
 					break;
 				default:
@@ -322,7 +369,7 @@ namespace Core.Spawning {
 		/// <param name="pokemon">Entity that executes the move</param>
 		/// <returns></returns>
 		public static PhysicsCollider generatePokemonMoveCollider(string pokemonMoveName,
-			EntityManager entityManager, Entity pokemon,PokemonEntityData pokemonEntityData)
+			EntityManager entityManager, Entity pokemon,PokemonEntityData pokemonEntityData,int groupIndex = 1)
 		{
 			PhysicsCollider physicsCollider = new PhysicsCollider { };
 			float3 position = entityManager.GetComponentData<Translation>(pokemon).Value;
@@ -340,7 +387,8 @@ namespace Core.Spawning {
 							new CollisionFilter
 							{
 								BelongsTo = TriggerEventClass.PokemonMove | TriggerEventClass.Damage,
-								CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+								CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
+								GroupIndex = groupIndex
 							},
 							Unity.Physics.Material.Default)
 					};
@@ -361,8 +409,9 @@ namespace Core.Spawning {
 								new CollisionFilter
 								{
 									BelongsTo = TriggerEventClass.PokemonMove | TriggerEventClass.Damage,
-								//	CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
-								CollidesWith = TriggerEventClass.Nothing
+									GroupIndex = groupIndex,
+									CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon
+								//	CollidesWith = TriggerEventClass.Nothing
 								},
 								Unity.Physics.Material.Default)
 							};
@@ -388,7 +437,7 @@ namespace Core.Spawning {
 				new CollisionFilter {
 					BelongsTo = TriggerEventClass.PokemonAttacking,
 					CollidesWith = uint.MaxValue,
-					GroupIndex = 0
+					GroupIndex = 1
 				},new Unity.Physics.Material {
 					Flags = Unity.Physics.Material.MaterialFlags.IsTrigger
 				})

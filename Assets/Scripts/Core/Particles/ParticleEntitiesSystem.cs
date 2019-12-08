@@ -145,7 +145,7 @@ namespace Core
 				//test for any removal request
 				if (particleSystemRemoveRequestQuery.CalculateEntityCount() > 0)
 				{
-					Debug.Log("Detected "+ particleSystemRemoveRequestQuery.CalculateEntityCount()+" remove requests");
+	//				Debug.Log("Detected "+ particleSystemRemoveRequestQuery.CalculateEntityCount()+" remove requests");
 					//now we test if there are any particlesystems that are finished being used
 					NativeArray<Entity> psds = particleSystemRemoveRequestQuery.ToEntityArray(Allocator.TempJob);
 					for (i = 0; i < psds.Length; i++)
@@ -153,7 +153,7 @@ namespace Core
 						ParticleSystemData psd = EntityManager.GetComponentData<ParticleSystemData>(psds[i]);
 						for (j = 0; j < pses.Length; j++)
 						{
-							Debug.Log("testing "+pses[j].id +" with "+ psd.particleSystemEntity.id);
+			//				Debug.Log("testing "+pses[j].id +" with "+ psd.particleSystemEntity.id);
 							if (pses[j].id == psd.particleSystemEntity.id)
 							{
 			//					Debug.Log("Preforming remove request on id " + pses[j].id);

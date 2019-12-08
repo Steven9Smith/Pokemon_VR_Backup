@@ -5,12 +5,12 @@ using UnityEngine.Jobs;
 using Unity.Jobs;
 using Unity.Collections;
 using Unity.Physics;
-using Unity.Burst;
 using Pokemon.Move;
 using Unity.Transforms;
 using Unity.Rendering;
-using Core.Particles;
 using Core.ParentChild;
+using Core.Spawning;
+using Core;
 
 namespace Pokemon.Player
 {
@@ -19,11 +19,13 @@ namespace Pokemon.Player
 		public EntityQuery GravityQuery;
 		public PhysicsStep step;
 		public float3 gravity = -new float3(0, -9.81f, 0);
-		private InputDefinitionsClass inputDefinitionsClass;	
+		private InputDefinitionsClass inputDefinitionsClass;
+		private GroupIndexSystem groupIndexSystem;
 		protected override void OnCreate()
 		{
 			GravityQuery = GetEntityQuery(typeof(PhysicsStep));
 			inputDefinitionsClass = new InputDefinitionsClass();
+			groupIndexSystem = World.GetOrCreateSystem<GroupIndexSystem>();
 		}
 		struct PlayerInputJob : IJobForEach<PlayerInput, PokemonEntityData, PhysicsVelocity, StateData, PhysicsCollider>
 		{
@@ -185,11 +187,16 @@ namespace Pokemon.Player
 		public bool isAttackC() { return Input.GetKeyDown(attackC); }
 		public bool isAttackD() { return Input.GetKeyDown(attackD); }
 	}
+
+	/// <summary>
+	/// Handles the Pokemon Attacks
+	/// </summary>
 	public class AttackInputSystem : JobComponentSystem
 	{
 		private EntityCommandBufferSystem ecbs;
 		private EntityQuery pokemonMoveQuery;
 		private EntityArchetype pokemonMoveArchtype;
+		private GroupIndexSystem groupIndexSystem;
 
 		protected override void OnCreate()
 		{
@@ -210,6 +217,7 @@ namespace Pokemon.Player
 					typeof(TranslationProxy),
 					typeof(RotationProxy)
 				);
+			groupIndexSystem = World.GetExistingSystem<GroupIndexSystem>();
 		}
 		private struct AttackInputJob : IJob
 		{
@@ -269,8 +277,9 @@ namespace Pokemon.Player
 				EntityManager.CreateEntity(pokemonMoveArchtype, pokemonMoveEntities);
 				for (i = 0; i < pokemonMoveEntities.Length; i++)
 				{
-					Core.Spawning.PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
-						entities[i], pokemonMoveEntities[i], pmds[i]);
+					PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
+						EntityManager.GetComponentData<CoreData>(entities[i]).BaseName,entities[i], 
+						pokemonMoveEntities[i], pmds[i],groupIndexSystem);
 				}
 				pokemonMoveEntities.Dispose();
 			}

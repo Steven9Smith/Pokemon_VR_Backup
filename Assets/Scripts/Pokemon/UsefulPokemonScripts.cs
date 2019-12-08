@@ -13,7 +13,9 @@ using UnityEngine.SceneManagement;
 using Unity.Physics;
 using Unity.Mathematics;
 using System;
-using Pokemon.Animation;
+using Core.Spawning;
+using Core;
+using Core.UI;
 
 namespace Pokemon
 {
@@ -353,58 +355,86 @@ namespace Pokemon
 		{
 			string pokemonName = ByteString30ToString(psd.playerData.PokemonName);
 			string playerName = ByteString30ToString(psd.playerData.Name);
+			entityManager.SetName(entity,playerName+":"+pokemonName);
 			//get and add renderMesh
 			RenderMesh renderMesh = LoadPokemonRenderMesh(pokemonName);
 			if (entityManager.HasComponent<RenderMesh>(entity)) entityManager.SetSharedComponentData(entity, renderMesh);
 			else entityManager.AddSharedComponentData(entity, renderMesh);
 			if (entityManager.HasComponent<PokemonEntityData>(entity)) entityManager.SetComponentData(entity,psd.pokemonEntityData);
 			else entityManager.AddComponentData(entity,psd.pokemonEntityData);
-			//add the PokemonEntity
-			if (entityManager.HasComponent<PokemonEntity>(entity)) entityManager.SetComponentData(entity, new PokemonEntity
+			//add this component (filter to seperate living entities from nonliving)
+			if (!entityManager.HasComponent<LivingEntity>(entity)) entityManager.AddComponentData<LivingEntity>(entity, new LivingEntity { });
+			//add the CoreData
+			if (entityManager.HasComponent<CoreData>(entity)) entityManager.SetComponentData(entity, new CoreData
 			{
-				EntityName = StringToByteString30(playerName),
-				pokemonName = StringToByteString30(pokemonName)
+				Name = StringToByteString30(playerName),
+				BaseName = StringToByteString30(pokemonName)
 			});
-			else entityManager.AddComponentData(entity, new PokemonEntity
+			else entityManager.AddComponentData(entity, new CoreData
 				{
-					EntityName = StringToByteString30(playerName),
-					pokemonName = StringToByteString30(pokemonName)
+					Name = StringToByteString30(playerName),
+					BaseName = StringToByteString30(pokemonName)
 				});
+			//	Debug.LogWarning("Player name = "+playerName+", pokemon name = "+pokemonName);
+			//add the UI Components(s)
+			//		Core.UI.UIDataClass.GenerateEntityUIGameObject(entityManager, entity);
+			entityManager.AddComponentData<UIComponentRequest>(entity,new UIComponentRequest { addToWorld = false});
+		
 			//add third and first person camera offets
 			PokemonDataClass.SetPokemonCameraData(pokemonName, entity, entityManager);
 			
 			//add the state data
 			if (!entityManager.HasComponent<StateData>(entity)) entityManager.AddComponentData(entity, new StateData { });
-			switch (pokemonName)
-			{
-				case "Cubone":
-					break;
-				case "Electrode":
-					break;
-				default:
-					Debug.Log("Failed to get pokemon data for \""+pokemonName+"\"");
-					break;
-			}
 			//add the PhysicsCollider data
 			PhysicsCollider ps = PokemonDataClass.getPokemonPhysicsCollider(pokemonName, psd.pokemonEntityData,new CollisionFilter
 			{
 				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.Player,
-				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.PokemonMove | TriggerEventClass.Player,
+				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
 				GroupIndex = 1
 			});
-			
-			if (!entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.AddComponentData(entity,ps );
-			else entityManager.SetComponentData<PhysicsCollider>(entity, ps);
+			Debug.Log("Creating player eith group index of " + ps.Value.Value.Filter.GroupIndex.ToString());
+			if(!entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.AddComponentData(entity, ps);
+			else entityManager.SetComponentData(entity, ps);
+
 			//add mass
-			if (!entityManager.HasComponent<PhysicsMass>(entity)) entityManager.AddComponentData(entity, PokemonDataClass.getPokemonPhysicsMass(ps,psd.pokemonEntityData.Mass));
+			if (!entityManager.HasComponent<PhysicsMass>(entity)) entityManager.AddComponentData(entity, PhysicsMass.CreateDynamic(MassProperties.UnitSphere, psd.pokemonEntityData.Mass));
+			else entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(MassProperties.UnitSphere, 1f));
 			//add physics velocity
-			if (!entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.AddComponentData(entity, new PhysicsVelocity {
-				Linear = float3.zero,
-				Angular = float3.zero
-			});
-			//add position and rotation
-			if (!entityManager.HasComponent<Translation>(entity)) entityManager.AddComponentData(entity, new Translation { Value = float3.zero });
-			if (!entityManager.HasComponent<Rotation>(entity)) entityManager.AddComponentData(entity, new Rotation { Value = new quaternion() });
+			if (!entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.AddComponentData(entity, new PhysicsVelocity { });
+			else entityManager.SetComponentData<PhysicsVelocity>(entity, new PhysicsVelocity { });
+			
+				//add position and rotation
+					if (!entityManager.HasComponent<Translation>(entity))
+					{
+						Debug.Log("Adding translation!");
+						entityManager.AddComponentData(entity, new Translation { Value = float3.zero });
+					}
+					//	else entityManager.SetComponentData(entity, new Translation { Value = float3.zero });
+					if (!entityManager.HasComponent<Rotation>(entity))
+					{
+						Debug.Log("Adding Rotation!");
+						entityManager.AddComponentData(entity, new Rotation { Value = new quaternion() });
+					}
+					//	else entityManager.SetComponentData(entity, new Rotation { Value = new quaternion() });
+
+					if (!entityManager.HasComponent<Scale>(entity))
+					{
+						Debug.Log("Adding Scale");
+						entityManager.AddComponentData(entity, new Scale { Value = 1f });
+					}
+				//	else entityManager.SetComponentData(entity, new Scale { Value = 1f });
+					//add the group index
+					entityManager.AddComponentData(entity, new GroupIndexInfo
+					{
+						GroupIndex = 1,
+						oldIndexGroup = 1
+					});
+					//add entity to the GroupIndexSystem
+					entityManager.AddComponentData(entity, new GroupIndexChangeRequest
+					{
+						newIndexGroup = 1,
+						pokemonName = psd.playerData.PokemonName
+					});
 		}
 
 		public static void LoadPlayerData(EntityManager entityManager, Entity entity, string playerName)
@@ -862,61 +892,6 @@ namespace Pokemon
 		}
 
 	}
-	public class PokemonArchetypes
-	{
-		public const ushort ENVIROMENT_ARCHTYPE = 1;
-		public const ushort TREE_ARCHTYPE = 2;
-		public const ushort PLAYER_ARCHTYPE = 3;
-		public const ushort POKEMON_ENTITY_ARCHTYPE = 4;
-		public const ushort ENVIROMENT_ENTITY_ARCHTYPE = 5;
-
-		/// <summary>
-		/// Returns the desired Archtype base on the given paramters
-		/// </summary>
-		/// <param name="entityManager">manager to generate the archtype</param>
-		/// <param name="type">the type of archType to generate</param>
-		/// <returns></returns>
-		public static EntityArchetype GenerateArchetype(EntityManager entityManager, ushort type)
-		{
-			switch (type)
-			{
-				case ENVIROMENT_ARCHTYPE:
-					return entityManager.CreateArchetype(
-							typeof(Translation),
-							typeof(Scale),
-							typeof(Rotation),
-							typeof(TransformMatrix),
-							typeof(EnviromentData),
-							//collision specific
-							typeof(PhysicsCollider)
-						);
-				case POKEMON_ENTITY_ARCHTYPE:
-					return entityManager.CreateArchetype(
-							typeof(Translation),
-							typeof(TransformMatrix),
-							typeof(Rotation),
-							typeof(PokemonEntity),
-							typeof(PhysicsCollider)
-						);
-				case PLAYER_ARCHTYPE:
-					return entityManager.CreateArchetype(
-							typeof(Translation),
-							typeof(TransformMatrix),
-							typeof(Rotation),
-							typeof(PlayerData),
-							typeof(PlayerInput),
-							typeof(PhysicsCollider)
-						);
-				default: //No Valid ArchType so create Base
-					PokemonIO.PrintString("GenerateArchType", "Failed to find a matching ArchType generating Base ArchType", 1);
-					return entityManager.CreateArchetype(
-							typeof(TransformMatrix),
-							typeof(Translation)
-						);
-			}
-		}
-
-	}
 	public class PokemonConversion {
 		public static string PlayerInputToString(PlayerInput pi, bool includeAll = false)
 		{
@@ -949,6 +924,5 @@ namespace Pokemon
 				default: Debug.Log(message); break;
 			}
 		}
-	
 	}
 }

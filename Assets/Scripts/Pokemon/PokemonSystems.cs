@@ -9,6 +9,7 @@ using Unity.Transforms;
 using Core.Particles;
 using Core.ParentChild;
 using Unity.Burst;
+using Core.Spawning;
 
 namespace Pokemon
 {
@@ -72,20 +73,29 @@ namespace Pokemon
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveDataEntities;
 			[DeallocateOnJobCompletion] public NativeArray<EntityParent> parents;	//i really should call this parents
 			[ReadOnly] public ComponentDataFromEntity<ParticleSystemRemoveRequest> hasParticleRemoveRequest;
+			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRemoveRequest> hasGroupIndexChangeRemoveRequest;
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveEntityEntities;
 			[DeallocateOnJobCompletion] public NativeArray<PokemonMoveDataEntity> pokemonMoveRemoveDatas;
+			
 			private int i;
 			public void Execute()
 			{
 				for (i = 0; i < pokemonMoveDatas.Length; i++)
 					if (!pokemonMoveDatas[i].isValid)
 					{
+						//remove EntityChild from parent
+						ecb.RemoveComponent<EntityChild>(parents[i].entity);
+						//remove group index
+						ecb.AddComponent(pokemonMoveDataEntities[i], new GroupIndexChangeRemoveRequest {
+							removeFromArray = true
+						});
 						//we have a valid pokemon move data
 						if (parents[i].isValid)
 						{
 							//lets remove the PokemonMoveDataEntity Component so it no longer fires the PokemonMoveDataEntity Job
 							ecb.RemoveComponent<PokemonMoveDataEntity>(parents[i].entity);
-					//		ecb.RemoveComponent<EntityChild>(parents[i].entity); <-outdated (EntityChild was removed)
+							//		ecb.RemoveComponent<EntityChild>(parents[i].entity); <-outdated (EntityChild was removed)
+							ecb.AddComponent(parents[i].entity, new GroupIndexChangeRemoveRequest {removeFromArray = false });
 						}
 						//remove the EntityParent Component so the Entity no longer follows the Pokemon Entity
 						ecb.RemoveComponent<EntityParent>(pokemonMoveDataEntities[i]);
@@ -99,7 +109,7 @@ namespace Pokemon
 				{
 					//destroy entities that match these conditions
 					if (!pokemonMoveRemoveDatas[i].hasParticles) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
-					else if (!hasParticleRemoveRequest.Exists(pokemonMoveEntityEntities[i])) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
+					else if (!hasParticleRemoveRequest.Exists(pokemonMoveEntityEntities[i]) && !hasGroupIndexChangeRemoveRequest.Exists(pokemonMoveEntityEntities[i])) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
 				}
 			}
 		}
@@ -116,6 +126,7 @@ namespace Pokemon
 				parents = pokemonMoveDataQuery.ToComponentDataArray<EntityParent>(Allocator.TempJob),
 				pokemonMoveEntityEntities = pokemonMoveFinishEntities.ToEntityArray(Allocator.TempJob),
 				hasParticleRemoveRequest = GetComponentDataFromEntity<ParticleSystemRemoveRequest>(),
+				hasGroupIndexChangeRemoveRequest = GetComponentDataFromEntity<GroupIndexChangeRemoveRequest>(),
 				pokemonMoveRemoveDatas = pokemonMoveFinishEntities.ToComponentDataArray<PokemonMoveDataEntity>(Allocator.TempJob)
 			}.Schedule(inputDeps);
 			jh.Complete();
@@ -129,71 +140,140 @@ namespace Pokemon
 	{
 		//NOTE: if you want to debug the values then remove the [BurstCompile] tag to prevent an error
 		[BurstCompile]
-		private struct PokemonMoveEntityJob : IJobForEach<PokemonMoveEntity, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
+		private struct PokemonMoveEntityJob : IJobForEachWithEntity<PokemonMoveEntity, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
 		{
 			public float deltaTime;
-			public void Execute(ref PokemonMoveEntity pokemonMoveEntity, ref PokemonMoveDataEntity pokemonMoveDataEntity,
+			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
+			public void Execute(Entity entity, int index,ref PokemonMoveEntity pokemonMoveEntity, ref PokemonMoveDataEntity pokemonMoveDataEntity,
 				ref Translation translation, ref Rotation rotation, ref PhysicsVelocity velocity, ref Scale scale)
 			{
-				if (!pokemonMoveDataEntity.isValid)
+				if (!hasGroupIndexChangeRequest.Exists(entity))
 				{
-					return;
-				}
-				if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
-				{
-				//	Debug.Log("Doing the execute");
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
+					if (!pokemonMoveDataEntity.isValid)
 					{
-						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
-							 deltaTime, pokemonMoveDataEntity.forward);
-						velocity.Angular += realValue;
-				//		Debug.Log("Angular = "+velocity.Angular.ToString());
+						return;
 					}
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
 					{
-						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-						ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
-							 deltaTime, pokemonMoveDataEntity.forward);
-			//			Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
-			//				+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
+						//	Debug.Log("Doing the execute");
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
+								 deltaTime, pokemonMoveDataEntity.forward);
+							if(pokemonMoveDataEntity.preformActionsOn) velocity.Angular += realValue;
+							//		Debug.Log("Angular = "+velocity.Angular.ToString());
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+							ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
+								 deltaTime, pokemonMoveDataEntity.forward);
+							//			Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
+							//				+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
 
-						velocity.Linear += realValue;
-						//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
+							if(pokemonMoveDataEntity.preformActionsOn) velocity.Linear += realValue;
+							//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
+								deltaTime, pokemonMoveDataEntity.forward);
+							translation.Value += realValue;
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
+								 deltaTime, pokemonMoveDataEntity.forward);
+							if(pokemonMoveDataEntity.preformActionsOn) rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet.isValid)
+						{
+							float realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+									ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet, deltaTime);
+							if(pokemonMoveDataEntity.preformActionsOn) scale.Value = realValue;
+						}
+						pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
 					}
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
-					{
-						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
-							deltaTime, pokemonMoveDataEntity.forward);
-						translation.Value += realValue;
-					}
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
-					{
-						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
-							 deltaTime, pokemonMoveDataEntity.forward);
-						rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
-					}
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet.isValid)
-					{
-						float realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-								ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet, deltaTime);
-						scale.Value = realValue;
-					}
-					pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
-						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
-						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
-						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
-				}
-				else pokemonMoveDataEntity.isValid = false;
+					else pokemonMoveDataEntity.isValid = false;
+				}//else do nothing
 			}
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			return new PokemonMoveEntityJob { deltaTime = Time.deltaTime }.Schedule(this, inputDeps);
+			return new PokemonMoveEntityJob { deltaTime = Time.deltaTime,
+				hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
+			}.Schedule(this, inputDeps);
 		}
 
 	}
-
-
+	public class PokemonMoveParentSystem : JobComponentSystem
+	{
+		//NOTE: if you want to debug the values then remove the [BurstCompile] tag to prevent an error
+		[BurstCompile]
+		private struct PokemonMoveEntityJob : IJobForEachWithEntity<PokemonEntityData, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
+		{
+			public float deltaTime;
+			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
+			public void Execute(Entity entity, int index, ref PokemonEntityData ped, ref PokemonMoveDataEntity pokemonMoveDataEntity,
+				ref Translation translation, ref Rotation rotation, ref PhysicsVelocity velocity, ref Scale scale)
+			{
+				if (!hasGroupIndexChangeRequest.Exists(entity))
+				{
+					if (!pokemonMoveDataEntity.isValid)return;
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
+					{
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
+								 ref ped.currentStamina, deltaTime, pokemonMoveDataEntity.forward);
+							velocity.Angular += realValue;
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+							ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
+								 ref ped.currentStamina, deltaTime, pokemonMoveDataEntity.forward);
+							velocity.Linear += realValue;
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
+								ref ped.currentStamina, deltaTime, pokemonMoveDataEntity.forward);
+							translation.Value += realValue;
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
+						{
+							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
+								 ref ped.currentStamina, deltaTime, pokemonMoveDataEntity.forward);
+							rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
+						}
+						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet.isValid)
+						{
+							float realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+									ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet, deltaTime, ref ped.currentStamina);
+							scale.Value = realValue;
+						}
+						pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
+							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
+					}
+					else pokemonMoveDataEntity.isValid = false;
+				}
+			}
+		}
+		protected override JobHandle OnUpdate(JobHandle inputDeps)
+		{
+			return new PokemonMoveEntityJob
+			{
+				deltaTime = Time.deltaTime,
+				hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
+			}.Schedule(this, inputDeps);
+		}
+	}
 
 	/*	public class PokemonMoveData : JobComponentSystem
 		{

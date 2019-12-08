@@ -214,26 +214,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: m_Mass
-      value: 6.67
-      objectReference: {fileID: 0}
-    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: m_LinearDamping
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
-        type: 3}
-      propertyPath: m_AngularDamping
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: -359905808117459415, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}
       propertyPath: playerName
@@ -263,6 +243,26 @@ PrefabInstance:
         type: 3}
       propertyPath: CameraOffset
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: m_Mass
+      value: 6.67
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -1799687083964904755, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
+        type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7201315966075994281, guid: 4327e2c762b9ffe4c9819e7eb2a04a25,
         type: 3}

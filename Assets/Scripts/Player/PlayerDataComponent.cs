@@ -1,10 +1,14 @@
-﻿using Pokemon;
-using Pokemon.Animation;
+﻿using Core.UI;
 using System;
 using Unity.Entities;
-using Unity.Mathematics;
+using Unity.Jobs;
 using Unity.Transforms;
 using UnityEngine;
+using Unity.Mathematics;
+using Unity.Rendering;
+using Unity.Physics;
+using Core;
+using Unity.Collections;
 
 namespace Pokemon
 {
@@ -18,7 +22,7 @@ namespace Pokemon
 		{
 			if (playerName != "")
 			{
-				Debug.Log(Application.persistentDataPath);
+			//	Debug.Log(Application.persistentDataPath);
 				PlayerData pd = new PlayerData
 				{
 					Name = PokemonIO.StringToByteString30(playerName),
@@ -52,6 +56,60 @@ namespace Pokemon
 				else Debug.LogError("Cannot get Animator because the anim was not set");	*/
 			}
 			else Debug.LogError("Cannot load player data without a name");
+		}
+	}
+	public class PlayerSystem : JobComponentSystem
+	{
+	//	UISystem uiSystem;
+		Entity PlayerEntity;
+		EntityArchetype PlayerArchetype;
+
+		protected override void OnCreate()
+		{
+			/*	//	uiSystem = World.GetOrCreateSystem<UISystem>();
+					//create type thing
+					PlayerArchetype = EntityManager.CreateArchetype(
+						typeof(Translation),
+						typeof(Rotation),
+						typeof(RenderMesh),
+						typeof(LocalToWorld),
+					//	typeof(PhysicsMass),
+						typeof(PhysicsCollider),
+					//	typeof(PhysicsVelocity), //<-render and collider delete when this is added or set
+						typeof(Scale)
+					//	typeof(CoreData),
+					//	typeof(LivingEntity),
+					//	typeof(PlayerInput),
+					//	typeof(StateData),
+					);*/
+			PlayerArchetype = EntityManager.CreateArchetype(
+					typeof(Translation),
+					typeof(Rotation),
+					typeof(RenderMesh),
+					typeof(LocalToWorld),
+					typeof(PhysicsCollider),
+					typeof(PhysicsVelocity),
+					typeof(TranslationProxy),
+					typeof(RotationProxy)
+				);
+		}
+		protected override void OnStartRunning()
+		{
+			//LoadPlayer
+		//	NativeArray<Entity> playerEntities = new NativeArray<Entity>(3, Allocator.TempJob);
+		//	EntityManager.CreateEntity(PlayerArchetype, playerEntities);
+			//		EntityManager.SetComponentData(PlayerEntity, new PlayerData {
+			//			PokemonName = PokemonIO.StringToByteString30("Electrode"),
+			//			Name = PokemonIO.StringToByteString30("Player1")
+			//		});
+		//	EntityManager.SetComponentData(playerEntities[0], new Scale { Value = 1f });
+		//	PokemonIO.LoadPlayerData(EntityManager, playerEntities[0], "Player1");
+		//	playerEntities.Dispose();
+		}
+
+		protected override JobHandle OnUpdate(JobHandle inputDeps)
+		{
+			return inputDeps;
 		}
 	}
 	/// <summary>
