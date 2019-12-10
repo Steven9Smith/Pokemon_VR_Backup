@@ -378,7 +378,7 @@ namespace Pokemon
 			entityManager.AddComponentData<UIComponentRequest>(entity,new UIComponentRequest { addToWorld = false});
 		
 			//add third and first person camera offets
-			PokemonDataClass.SetPokemonCameraData(pokemonName, entity, entityManager);
+			PokemonDataClass.SetPokemonCameraData(new ByteString30(pokemonName), entity, entityManager);
 			
 			//add the state data
 			if (!entityManager.HasComponent<StateData>(entity)) entityManager.AddComponentData(entity, new StateData { });

@@ -286,13 +286,13 @@ namespace Pokemon
 		/// <param name="pokemonName"></param>
 		/// <param name="entity"></param>
 		/// <param name="entityManager"></param>
-		public static void SetPokemonCameraData(string pokemonName,Entity entity,EntityManager entityManager)
+		public static void SetPokemonCameraData(ByteString30 pokemonName,Entity entity,EntityManager entityManager)
 		{
 			PokemonCameraData pcd = new PokemonCameraData {
 				thridPersonOffset = new float3(0,5f,-10f),
 				firstPersonOffset = new float3(0,2f,0f)
 			};
-			switch (pokemonName)
+			switch (pokemonName.ToString())
 			{
 				case "Bulbasaur":
 					break;
@@ -338,12 +338,12 @@ namespace Pokemon
 			else
 			{
 				float jumpHeight = 1.0f;
-				switch (pokemonName){
+				switch (pokemonName.ToString()){
 					case "Electrode": jumpHeight = 5.0f; break;
 					case "Cubone": jumpHeight = 5f;break;
 					default: Debug.LogError("Failed to find a jumpHeight multipler for \""+pokemonName+"\"");break;
 				}
-				Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
+			//	Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
 				return new PokemonEntityData
 				{
 					Acceleration = pd.BaseAcceleration,
@@ -568,16 +568,29 @@ namespace Pokemon
 				typeof(PhysicsMass),
 				typeof(PhysicsCollider),
 				typeof(GroupIndexInfo)
-			//	typeof()
 				);
 			entity = entityManager.CreateEntity(ea);
 			entityManager.SetComponentData(entity, new Scale { Value = scale });
 			entityManager.SetComponentData(entity, new Rotation { Value = rotation });
 			entityManager.SetComponentData(entity, new Translation { Value = position });
-			if(SetRenderMesh(entityManager, entity, cdata.BaseName, 0))
+			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
+			SetPokemonCameraData(cdata.BaseName,entity, entityManager);
+			PokemonEntityData ped = GenerateBasePokemonEntityData(cdata.BaseName.ToString());
+			entityManager.SetComponentData(entity, ped);
+			PhysicsCollider pc = getPokemonPhysicsCollider(cdata.BaseName.ToString(), ped, new CollisionFilter
 			{
-
-			}
+				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
+				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
+				GroupIndex = 1
+			});
+			entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(pc.MassProperties, ped.Mass));
+			entityManager.SetComponentData(entity, pc);
+			entityManager.AddComponentData(entity, new GroupIndexChangeRequest
+			{
+				newIndexGroup = 1,
+				pokemonName = cdata.BaseName
+			});
+			
 
 			return entity;
 		}
@@ -585,10 +598,10 @@ namespace Pokemon
 		/// gets the render mesh for any gameobject (that has been coded) and set the RenderMesh Component Data
 		/// </summary>
 		/// <param name="entityManager">EntityManager</param>
-		/// <param name="entity">entity to be </param>
-		/// <param name="name"></param>
-		/// <param name="type"></param>
-		/// <returns></returns>
+		/// <param name="entity">entity to be modified</param>
+		/// <param name="name">base name of the entity</param>
+		/// <param name="type">type of entity 0 = Pokemon, 1 = PokemonMove</param>
+		/// <returns></return>
 		public static bool SetRenderMesh(EntityManager entityManager,Entity entity,ByteString30 name,int type = 0)
 		{
 			GameObject go;
@@ -618,7 +631,6 @@ namespace Pokemon
 			}
 			return false;
 		}
-
 	}
 	//# Pokémon 	HP 	Attack 	Defense 	Sp. Attack 	Sp. Defense 	Speed 	Total 	Average
 	

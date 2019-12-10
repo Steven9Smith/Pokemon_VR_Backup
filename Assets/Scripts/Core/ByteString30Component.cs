@@ -2,6 +2,7 @@
 using Unity.Mathematics;
 using System;
 using UnityEngine;
+using System.Text;
 
 namespace Pokemon
 {
@@ -40,6 +41,136 @@ namespace Pokemon
         public byte AC;
         public byte AD;
         public int length;
+		public ByteString30(string a)
+		{
+			byte[] bytes = Encoding.ASCII.GetBytes(a);
+			length = a.Length;
+			A = 0;
+			B = 0;
+			C = 0;
+			D = 0;
+			E = 0;
+			F = 0;
+			G = 0;
+			H = 0;
+			I = 0;
+			J = 0;
+			K = 0;
+			L = 0;
+			M = 0;
+			N = 0;
+			O = 0;
+			P = 0;
+			Q = 0;
+			R = 0;
+			S = 0;
+			T = 0;
+			U = 0;
+			V = 0;
+			W = 0;
+			X = 0;
+			Y = 0;
+			Z = 0;
+			AA = 0;
+			AB = 0;
+			AC = 0;
+			AD = 0;
+			for (int i = 0; i < length; i++)
+			{
+				switch (i) {
+					case 0:
+						A = bytes[i];
+						break;
+					case 1:
+						B = bytes[i];
+						break;
+					case 2:
+						C = bytes[i];
+						break;
+					case 3:
+						D = bytes[i];
+						break;
+					case 4:
+						E = bytes[i];
+						break;
+					case 5:
+						F = bytes[i];
+						break;
+					case 6:
+						G = bytes[i];
+						break;
+					case 7:
+						H = bytes[i];
+						break;
+					case 8:
+						I = bytes[i];
+						break;
+					case 9:
+						J = bytes[i];
+						break;
+					case 10:
+						K = bytes[i];
+						break;
+					case 11:
+						L = bytes[i];
+						break;
+					case 12:
+						M = bytes[i];
+						break;
+					case 13:
+						N = bytes[i];
+						break;
+					case 14:
+						O = bytes[i];
+						break;
+					case 15:
+						P = bytes[i];
+						break;
+					case 16:
+						Q = bytes[i];
+						break;
+					case 17:
+						R = bytes[i];
+						break;
+					case 18:
+						S = bytes[i];
+						break;
+					case 19:
+						T = bytes[i];
+						break;
+					case 20:
+						U = bytes[i];
+						break;
+					case 21:
+						V = bytes[i];
+						break;
+					case 22:
+						W = bytes[i];
+						break;
+					case 23:
+						X = bytes[i];
+						break;
+					case 24:
+						Y = bytes[i];
+						break;
+					case 25:
+						Z = bytes[i];
+						break;
+					case 26:
+						AA = bytes[i];
+						break;
+					case 27:
+						AB = bytes[i];
+						break;
+					case 28:
+						AC = bytes[i];
+						break;
+					case 29:
+						AD = bytes[i];
+						break;
+				}
+			}
+		}
 		//if you get A and exspect something else then check your values
 		public byte Get(int index)
 		{
