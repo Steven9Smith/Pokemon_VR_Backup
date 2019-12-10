@@ -33,7 +33,7 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName"></param>
 		/// <returns></returns>
-		public static RenderMesh LoadPokemonRenderMesh(string pokemonName)
+	/*	public static RenderMesh LoadPokemonRenderMesh(string pokemonName)
 		{
 		///	string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName + "/" + pokemonName + ".prefab";
 		//	if (!File.Exists(dataPath))
@@ -53,7 +53,7 @@ namespace Pokemon
 			};
 
 			return renderer;
-		}
+		}*/
 		public static RenderMesh LoadEnviromentRenderMesh(EnviromentData enviromentData, string startPath)
 		{
 			startPath += ByteString30ToString(enviromentData.entityName) + "/" + ByteString30ToString(enviromentData.entityName);
@@ -357,9 +357,7 @@ namespace Pokemon
 			string playerName = ByteString30ToString(psd.playerData.Name);
 			entityManager.SetName(entity,playerName+":"+pokemonName);
 			//get and add renderMesh
-			RenderMesh renderMesh = LoadPokemonRenderMesh(pokemonName);
-			if (entityManager.HasComponent<RenderMesh>(entity)) entityManager.SetSharedComponentData(entity, renderMesh);
-			else entityManager.AddSharedComponentData(entity, renderMesh);
+			PokemonDataClass.SetRenderMesh(entityManager,entity,psd.playerData.PokemonName,0);
 			if (entityManager.HasComponent<PokemonEntityData>(entity)) entityManager.SetComponentData(entity,psd.pokemonEntityData);
 			else entityManager.AddComponentData(entity,psd.pokemonEntityData);
 			//add this component (filter to seperate living entities from nonliving)
@@ -377,7 +375,6 @@ namespace Pokemon
 				});
 			//	Debug.LogWarning("Player name = "+playerName+", pokemon name = "+pokemonName);
 			//add the UI Components(s)
-			//		Core.UI.UIDataClass.GenerateEntityUIGameObject(entityManager, entity);
 			entityManager.AddComponentData<UIComponentRequest>(entity,new UIComponentRequest { addToWorld = false});
 		
 			//add third and first person camera offets

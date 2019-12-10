@@ -91,7 +91,7 @@ namespace Core.Spawning {
 		/// <param name="entityManager">EntityManager</param>
 		/// <param name="entity">PokemonMove Entity</param>
 		/// <param name="pokemonMoveName">name of the pokemonMove</param>
-		public static void SetPokemonMoveRenderMesh(EntityManager entityManager,Entity entity, string pokemonMoveName)
+	/*	public static void SetPokemonMoveRenderMesh(EntityManager entityManager,Entity entity, string pokemonMoveName)
 		{
 		//	Debug.Log("Pokemon/PokemonMoves/" + pokemonMoveName + "/" + pokemonMoveName);
 			GameObject go = Resources.Load("Pokemon/PokemonMoves/"+pokemonMoveName+"/"+pokemonMoveName) as GameObject;
@@ -106,7 +106,7 @@ namespace Core.Spawning {
 				});
 			}
 			else Debug.LogError("Failed to load pokemon move mesh");
-		}
+		}*/
 		/// <summary>
 		/// Initializes the pokemon move entity 
 		/// </summary>
@@ -215,7 +215,7 @@ namespace Core.Spawning {
 						//set name and render mesg
 						entityManager.SetName(entity, name);
 						//entityManager.SetSharedComponentData(entity, renderMesh);
-						SetPokemonMoveRenderMesh(entityManager, entity, name);
+						PokemonDataClass.SetRenderMesh(entityManager, entity, pokemonName,1);
 						break;
 					case "Tackle":
 						entityManager.SetName(entity, name);

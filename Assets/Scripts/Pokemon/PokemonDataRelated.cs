@@ -7,6 +7,9 @@ using Unity.Physics.Authoring;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.Collections;
+using Core;
+using Unity.Rendering;
+using Core.Spawning;
 
 namespace Pokemon
 {
@@ -18,6 +21,10 @@ namespace Pokemon
 		public ByteString30 entityName;
 		public Translation Position;
 		public Rotation Rotation;
+	}
+	[Serializable]
+	public struct PokemonSpawnRequest : IComponentData {
+		public CoreData coreData;
 	}
 	[Serializable]
 	public struct LivingEntity : IComponentData {
@@ -547,6 +554,71 @@ namespace Pokemon
 				radius = radius
 			};
 		}
+		public static Entity GeneratePokemonEntity(CoreData cdata,EntityManager entityManager,quaternion rotation,float3 position = new float3(),float scale = 1f)
+		{
+			Entity entity;
+			EntityArchetype ea = entityManager.CreateArchetype(
+				typeof(Translation),
+				typeof(Rotation),
+				typeof(Scale),
+				typeof(LocalToWorld),
+				typeof(RenderMesh),
+				typeof(PokemonCameraData),
+				typeof(PokemonEntityData),
+				typeof(PhysicsMass),
+				typeof(PhysicsCollider),
+				typeof(GroupIndexInfo)
+			//	typeof()
+				);
+			entity = entityManager.CreateEntity(ea);
+			entityManager.SetComponentData(entity, new Scale { Value = scale });
+			entityManager.SetComponentData(entity, new Rotation { Value = rotation });
+			entityManager.SetComponentData(entity, new Translation { Value = position });
+			if(SetRenderMesh(entityManager, entity, cdata.BaseName, 0))
+			{
+
+			}
+
+			return entity;
+		}
+		/// <summary>
+		/// gets the render mesh for any gameobject (that has been coded) and set the RenderMesh Component Data
+		/// </summary>
+		/// <param name="entityManager">EntityManager</param>
+		/// <param name="entity">entity to be </param>
+		/// <param name="name"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public static bool SetRenderMesh(EntityManager entityManager,Entity entity,ByteString30 name,int type = 0)
+		{
+			GameObject go;
+			string path = "";
+			switch (type)
+			{
+				case 0: path += "Pokemon/"+name+"/"+name; break;
+				case 1: path += "Pokemon/PokemonMoves/" + name+"/"+name;break;
+				default: Debug.LogWarning("Failed to load the render mesh for \"" + name + "\""); return false;
+			}
+			go = Resources.Load(path) as GameObject;
+			try
+			{
+				RenderMesh rm = new RenderMesh
+				{
+					mesh = go.GetComponent<MeshFilter>().sharedMesh,
+					castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
+					material = go.GetComponent<MeshRenderer>().sharedMaterial,
+					receiveShadows = true
+				};
+				if (entityManager.HasComponent<RenderMesh>(entity)) entityManager.SetSharedComponentData(entity, rm);
+				else entityManager.AddSharedComponentData(entity, rm);
+			}
+			catch
+			{
+				Debug.LogError("Exception Rose when trying to create RenderMesh with name \""+name+"\" with type "+type.ToString());
+			}
+			return false;
+		}
+
 	}
 	//# Pokémon 	HP 	Attack 	Defense 	Sp. Attack 	Sp. Defense 	Speed 	Total 	Average
 	

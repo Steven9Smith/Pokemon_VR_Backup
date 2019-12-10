@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Pokemon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,8 @@ namespace Core.UI {
 		public Image HealthBarImage;
 		public Image EnergyBarImage;
 		public BlittableBool isValid;
+		public float3 offset;
+		public GameObject UIGameObject;
 		public override bool Equals(object obj)
 		{
 			UIComponent other = (UIComponent)obj;
@@ -76,9 +80,11 @@ namespace Core.UI {
 				}
 				if (uic.BarBorder != null && uic.HealthBarImage != null && uic.EnergyBarImage != null && uic.HealthBarValue != null && uic.EnergyBarValue != null)
 					uic.isValid = true;
-
 				if (uic.isValid)
 				{
+					uic.UIGameObject = go;
+					//assumes that the entity has CoreData
+					uic.offset = GetEntityWorldCanvasUIOffeset(PokemonIO.ByteString30ToString(entityManager.GetComponentData<CoreData>(entity).BaseName));
 					if (entityManager.HasComponent<UIComponent>(entity)) entityManager.SetSharedComponentData<UIComponent>(entity, uic);
 					else entityManager.AddSharedComponentData(entity, uic);
 					if (!entityManager.HasComponent<UIComponentFilter>(entity)) entityManager.AddComponentData<UIComponentFilter>(entity, new UIComponentFilter { });
@@ -96,6 +102,13 @@ namespace Core.UI {
 			if (addToWorldCanvas) go.transform.SetParent(WorldCanvas.transform,false);
 			else go.transform.SetParent(PlayerCanvas.transform,false);
 		}
-
+		public static float3 GetEntityWorldCanvasUIOffeset(string name)
+		{
+			switch (name)
+			{
+				case "HumanA":return new float3(0,3.3f,0);
+				default: return float3.zero; 
+			}
+		}
 	}
 }

@@ -275,57 +275,22 @@ namespace Pokemon
 		}
 	}
 
-	/*	public class PokemonMoveData : JobComponentSystem
+	public class EntitySpawnSystem : JobComponentSystem
+	{
+		private EntityQuery pokemonRequestQuery;
+		protected override void OnCreate()
 		{
-			private struct PokemonMoveJob : IJobForEach<PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, PokemonEntityData,PlayerInput>
-			{
-				public float deltaTime;
-				public void Execute(ref PokemonMoveDataEntity pokemonMoveDataEntity, ref Translation translation,
-					ref Rotation rotation, ref PhysicsVelocity velocity, ref PokemonEntityData ped, ref PlayerInput pi)
-				{
-					if (!pokemonMoveDataEntity.isValid){return; }
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
-					{
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-								ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
-								ref ped.currentStamina, deltaTime, pi.forward);
-							velocity.Angular += realValue;
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-								ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
-								 ref ped.currentStamina, deltaTime, pi.forward);
-							velocity.Linear += realValue;
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
-								ref ped.currentStamina, deltaTime, pi.forward);
-							translation.Value += realValue;
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
-								 ref ped.currentStamina, deltaTime,  pi.forward);
-							rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
-						}
-						pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
-					}
-					else pokemonMoveDataEntity.isValid = false;
-				}
+			pokemonRequestQuery = GetEntityQuery(typeof(PokemonSpawnRequest));
+		}
+
+		protected override JobHandle OnUpdate(JobHandle inputDeps)
+		{
+			if (pokemonRequestQuery.CalculateEntityCount() == 0) return inputDeps;
+			NativeArray<PokemonSpawnRequest> pokemonRequests = pokemonRequestQuery.ToComponentDataArray<PokemonSpawnRequest>(Allocator.TempJob);
 
 
-			}
-			protected override JobHandle OnUpdate(JobHandle inputDeps)
-			{
-				return new PokemonMoveJob { deltaTime = Time.deltaTime }.Schedule(this, inputDeps);	
-			}
-		}*/
-
+			pokemonRequests.Dispose();
+			return inputDeps;
+		}
+	}
 }
