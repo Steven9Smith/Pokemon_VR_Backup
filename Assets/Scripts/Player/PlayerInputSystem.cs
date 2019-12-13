@@ -277,9 +277,26 @@ namespace Pokemon.Player
 				EntityManager.CreateEntity(pokemonMoveArchtype, pokemonMoveEntities);
 				for (i = 0; i < pokemonMoveEntities.Length; i++)
 				{
-					PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
-						EntityManager.GetComponentData<CoreData>(entities[i]).BaseName,entities[i], 
-						pokemonMoveEntities[i], pmds[i],groupIndexSystem);
+
+					if (pokemonMoves[i].name.ToString() != "spawnPoke")
+					{
+						PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
+							EntityManager.GetComponentData<CoreData>(entities[i]).BaseName, entities[i],
+							pokemonMoveEntities[i], pmds[i], groupIndexSystem);
+					}
+					else
+					{
+						EntityManager.DestroyEntity(pokemonMoveEntities[i]);
+						PokemonDataClass.GeneratePokemonEntity(new CoreData
+						{
+							BaseName = new ByteString30("Electrode"),
+							Name = new ByteString30("Entity")
+						},
+							EntityManager,
+							quaternion.identity,
+							EntityManager.GetComponentData<Translation>(entities[i]).Value + new float3(0, 10, 0)
+						);
+					}
 				}
 				pokemonMoveEntities.Dispose();
 			}

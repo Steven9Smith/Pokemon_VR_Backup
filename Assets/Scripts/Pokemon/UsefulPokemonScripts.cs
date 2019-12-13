@@ -356,6 +356,7 @@ namespace Pokemon
 			string pokemonName = ByteString30ToString(psd.playerData.PokemonName);
 			string playerName = ByteString30ToString(psd.playerData.Name);
 			entityManager.SetName(entity,playerName+":"+pokemonName);
+			Debug.Log(Application.persistentDataPath);
 			//get and add renderMesh
 			PokemonDataClass.SetRenderMesh(entityManager,entity,psd.playerData.PokemonName,0);
 			if (entityManager.HasComponent<PokemonEntityData>(entity)) entityManager.SetComponentData(entity,psd.pokemonEntityData);
@@ -423,14 +424,10 @@ namespace Pokemon
 					//add the group index
 					entityManager.AddComponentData(entity, new GroupIndexInfo
 					{
-						GroupIndex = 1,
-						oldIndexGroup = 1
-					});
-					//add entity to the GroupIndexSystem
-					entityManager.AddComponentData(entity, new GroupIndexChangeRequest
-					{
-						newIndexGroup = 1,
-						pokemonName = psd.playerData.PokemonName
+						CurrentGroupIndex = 1,
+						OldGroupIndex = 1,
+						OriginalGroupIndex = 1,
+						Update = true
 					});
 		}
 

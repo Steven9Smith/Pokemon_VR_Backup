@@ -131,7 +131,7 @@ namespace Core.Spawning {
 					entityManager.SetComponentData(entity, new EntityParent { entity = orgEntity, isValid = true, followParent = true });
 					if (pmds.projectOnParentInstead)
 					{
-						if (pmde.isValid) Debug.Log("It be valid!");
+		//				if (pmde.isValid) Debug.Log("It be valid!");
 						entityManager.AddComponentData(orgEntity, pmde);
 						pmde.preformActionsOn = false;
 					}
@@ -143,24 +143,20 @@ namespace Core.Spawning {
 				});
 				//get Pokemon's GroupIndex
 				GroupIndexInfo gii = entityManager.GetComponentData<GroupIndexInfo>(orgEntity);
-				entityManager.AddComponentData(orgEntity, new GroupIndexChangeRequest
-				{
-					pokemonName = pokemonName,
-					newIndexGroup = groupIndexSystem.getLength()
-				});
+				gii.CurrentGroupIndex = groupIndexSystem.GetNextEmptyGroup();
+				gii.Update = true;
+				entityManager.SetComponentData(orgEntity, gii);
+				int a = groupIndexSystem.ExludeGroupIndexNumber(gii.CurrentGroupIndex);
+		//		Debug.Log("AAAAAAAAAAAAA "+a);
 				//add group index but we want this to 
 				gii = new GroupIndexInfo
 				{
-					GroupIndex = groupIndexSystem.GetAllGroupsBut(groupIndexSystem.getLength()),
-					oldIndexGroup = 1
+					CurrentGroupIndex = gii.CurrentGroupIndex,
+					OldGroupIndex = 0,
+					OriginalGroupIndex = gii.CurrentGroupIndex,
+					Update = true,
 				};
 				entityManager.AddComponentData(entity, gii);
-				entityManager.AddComponentData(entity, new GroupIndexChangeRequest
-				{
-					newIndexGroup = gii.GroupIndex,
-					pokemonName = PokemonIO.StringToByteString30(name)
-				});
-
 				//add/set collider 
 				if (pmds.hasCollider)
 				{
@@ -226,7 +222,7 @@ namespace Core.Spawning {
 				PhysicsCollider op = entityManager.GetComponentData<PhysicsCollider>(orgEntity);
 				op = entityManager.GetComponentData<PhysicsCollider>(orgEntity);
 				PhysicsCollider tmpA = entityManager.GetComponentData<PhysicsCollider>(entity);
-				Debug.Log("Chaned original entities collision filter to " + op.Value.Value.Filter.GroupIndex.ToString() + " with entity index = " + tmpA.Value.Value.Filter.GroupIndex.ToString());
+		//		Debug.Log("Chaned original entities collision filter to " + op.Value.Value.Filter.GroupIndex.ToString() + " with entity index = " + tmpA.Value.Value.Filter.GroupIndex.ToString());
 			}
 			else
 			{

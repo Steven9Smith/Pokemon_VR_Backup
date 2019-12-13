@@ -17,7 +17,10 @@ namespace Core.UI {
 		public Image HealthBarImage;
 		public Image EnergyBarImage;
 		public BlittableBool isValid;
-		public float3 offset;
+		public BlittableBool onWorld;
+		public BlittableBool toggleVisibility;
+		public float3 positionOffset;
+		public float3 scaleOffset;
 		public GameObject UIGameObject;
 		public override bool Equals(object obj)
 		{
@@ -78,13 +81,19 @@ namespace Core.UI {
 						else if (containerChildren[j].name == "EnergyBarValue") uic.EnergyBarValue = containerChildren[j].GetComponent<TextMeshProUGUI>();
 					}
 				}
+				uic.onWorld = addToWorld;
 				if (uic.BarBorder != null && uic.HealthBarImage != null && uic.EnergyBarImage != null && uic.HealthBarValue != null && uic.EnergyBarValue != null)
 					uic.isValid = true;
 				if (uic.isValid)
 				{
 					uic.UIGameObject = go;
 					//assumes that the entity has CoreData
-					uic.offset = GetEntityWorldCanvasUIOffeset(PokemonIO.ByteString30ToString(entityManager.GetComponentData<CoreData>(entity).BaseName));
+					SetEntityWorldCanvasUIOffset(entityManager.GetComponentData<CoreData>(entity).BaseName.ToString(),ref uic);
+					//add world canvas height/2
+			//		uic.positionOffset.y += WorldCanvas.GetComponent<RectTransform>().rect.height/ 2;
+					//set the new scale offeset
+					if(addToWorld)uic.UIGameObject.GetComponent<RectTransform>().localScale = uic.scaleOffset;
+
 					if (entityManager.HasComponent<UIComponent>(entity)) entityManager.SetSharedComponentData<UIComponent>(entity, uic);
 					else entityManager.AddSharedComponentData(entity, uic);
 					if (!entityManager.HasComponent<UIComponentFilter>(entity)) entityManager.AddComponentData<UIComponentFilter>(entity, new UIComponentFilter { });
@@ -102,12 +111,14 @@ namespace Core.UI {
 			if (addToWorldCanvas) go.transform.SetParent(WorldCanvas.transform,false);
 			else go.transform.SetParent(PlayerCanvas.transform,false);
 		}
-		public static float3 GetEntityWorldCanvasUIOffeset(string name)
+		public static void SetEntityWorldCanvasUIOffset(string name,ref UIComponent uic)
 		{
+			uic.scaleOffset = new float3(0.0035f,0.0035f,0.0035f);
 			switch (name)
 			{
-				case "HumanA":return new float3(0,3.3f,0);
-				default: return float3.zero; 
+				case "HumanA":uic.positionOffset = new float3(0,3.3f,0); break;
+				case "Electrode": uic.positionOffset = new float3(0,2f,0); break;
+				default: uic.positionOffset = float3.zero; break; 
 			}
 		}
 	}

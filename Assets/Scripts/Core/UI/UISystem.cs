@@ -6,6 +6,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Transforms;
 
 namespace Core {
 	namespace UI {
@@ -51,19 +52,27 @@ namespace Core {
 				NativeArray<UIComponentRequest> requests = UIComponentRequests.ToComponentDataArray<UIComponentRequest>(Allocator.TempJob);
 				for (i = 0; i < requestEntitites.Length; i++)
 					UIDataClass.GenerateEntityUIGameObject(EntityManager, requestEntitites[i], ref PlayerCanvas, ref WorldCanvas, requests[i].addToWorld);
-				
 				requestEntitites.Dispose();
 				requests.Dispose();
-
-
 				NativeArray<Entity> entities = UIComponents.ToEntityArray(Allocator.TempJob);
 				NativeArray<PokemonEntityData> peds = UIComponents.ToComponentDataArray<PokemonEntityData>(Allocator.TempJob);
 				for (int i = 0; i < entities.Length; i++) {
+					
 					UIComponent uic = EntityManager.GetSharedComponentData<UIComponent>(entities[i]);
-					uic.HealthBarValue.SetText(peds[i].currentHp + "/" + peds[i].Hp);
-					uic.HealthBarImage.fillAmount = peds[i].currentHp / peds[i].Hp;
-					uic.EnergyBarValue.SetText(peds[i].currentStamina + "/" + peds[i].maxStamina);
-					uic.EnergyBarImage.fillAmount = peds[i].currentStamina / peds[i].maxStamina;
+					if(uic.toggleVisibility)
+					{
+						if (uic.UIGameObject.activeSelf) uic.UIGameObject.SetActive(false);
+						else uic.UIGameObject.SetActive(true);
+					}
+					if (uic.UIGameObject.activeSelf)
+					{
+						uic.HealthBarValue.SetText(peds[i].currentHp + "/" + peds[i].Hp);
+						uic.HealthBarImage.fillAmount = peds[i].currentHp / peds[i].Hp;
+						uic.EnergyBarValue.SetText(peds[i].currentStamina + "/" + peds[i].maxStamina);
+						uic.EnergyBarImage.fillAmount = peds[i].currentStamina / peds[i].maxStamina;
+						if (uic.onWorld) uic.UIGameObject.transform.localPosition = EntityManager.GetComponentData<Translation>(entities[i]).Value + uic.positionOffset;
+					}
+					else Debug.Log("Not Visible");
 				}
 				entities.Dispose();
 				peds.Dispose();

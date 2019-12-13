@@ -10,6 +10,7 @@ using Core.Particles;
 using Core.ParentChild;
 using Unity.Burst;
 using Core.Spawning;
+using Core;
 
 namespace Pokemon
 {
@@ -73,9 +74,10 @@ namespace Pokemon
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveDataEntities;
 			[DeallocateOnJobCompletion] public NativeArray<EntityParent> parents;	//i really should call this parents
 			[ReadOnly] public ComponentDataFromEntity<ParticleSystemRemoveRequest> hasParticleRemoveRequest;
-			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRemoveRequest> hasGroupIndexChangeRemoveRequest;
 			[DeallocateOnJobCompletion] public NativeArray<Entity> pokemonMoveEntityEntities;
 			[DeallocateOnJobCompletion] public NativeArray<PokemonMoveDataEntity> pokemonMoveRemoveDatas;
+
+			[DeallocateOnJobCompletion] public NativeArray<GroupIndexInfo> parentInfos;
 			
 			private int i;
 			public void Execute()
@@ -83,19 +85,19 @@ namespace Pokemon
 				for (i = 0; i < pokemonMoveDatas.Length; i++)
 					if (!pokemonMoveDatas[i].isValid)
 					{
-						//remove EntityChild from parent
-						ecb.RemoveComponent<EntityChild>(parents[i].entity);
-						//remove group index
-						ecb.AddComponent(pokemonMoveDataEntities[i], new GroupIndexChangeRemoveRequest {
-							removeFromArray = true
-						});
 						//we have a valid pokemon move data
 						if (parents[i].isValid)
 						{
+							//remove EntityChild from parent
+							ecb.RemoveComponent<EntityChild>(parents[i].entity);
 							//lets remove the PokemonMoveDataEntity Component so it no longer fires the PokemonMoveDataEntity Job
 							ecb.RemoveComponent<PokemonMoveDataEntity>(parents[i].entity);
 							//		ecb.RemoveComponent<EntityChild>(parents[i].entity); <-outdated (EntityChild was removed)
-							ecb.AddComponent(parents[i].entity, new GroupIndexChangeRemoveRequest {removeFromArray = false });
+							GroupIndexInfo gii = parentInfos[i];
+							gii.Revert = true;
+							gii.Update = true ;
+							ecb.SetComponent(parents[i].entity, gii);
+							
 						}
 						//remove the EntityParent Component so the Entity no longer follows the Pokemon Entity
 						ecb.RemoveComponent<EntityParent>(pokemonMoveDataEntities[i]);
@@ -109,7 +111,7 @@ namespace Pokemon
 				{
 					//destroy entities that match these conditions
 					if (!pokemonMoveRemoveDatas[i].hasParticles) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
-					else if (!hasParticleRemoveRequest.Exists(pokemonMoveEntityEntities[i]) && !hasGroupIndexChangeRemoveRequest.Exists(pokemonMoveEntityEntities[i])) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
+					else if (!hasParticleRemoveRequest.Exists(pokemonMoveEntityEntities[i])) ecb.DestroyEntity(pokemonMoveEntityEntities[i]);
 				}
 			}
 		}
@@ -117,16 +119,20 @@ namespace Pokemon
 		{
 			//test if we have any requests
 			if (pokemonMoveDataQuery.CalculateEntityCount() == 0 && pokemonMoveFinishEntities.CalculateEntityCount() == 0) return inputDeps;
+			NativeArray<EntityParent> entityParents = pokemonMoveDataQuery.ToComponentDataArray<EntityParent>(Allocator.TempJob);
+			NativeArray<GroupIndexInfo> parentInfos = new NativeArray<GroupIndexInfo>(entityParents.Length, Allocator.TempJob);
+			for (int i = 0; i < entityParents.Length; i++)
+				parentInfos[i] = EntityManager.GetComponentData<GroupIndexInfo>(entityParents[i].entity);
 			//preform the job
 			JobHandle jh = new RemovePokemonData
 			{
 				pokemonMoveDataEntities = pokemonMoveDataQuery.ToEntityArray(Allocator.TempJob),
 				ecb = ecbs.CreateCommandBuffer(),
 				pokemonMoveDatas = pokemonMoveDataQuery.ToComponentDataArray<PokemonMoveDataEntity>(Allocator.TempJob),
-				parents = pokemonMoveDataQuery.ToComponentDataArray<EntityParent>(Allocator.TempJob),
+				parents = entityParents,
+				parentInfos = parentInfos,
 				pokemonMoveEntityEntities = pokemonMoveFinishEntities.ToEntityArray(Allocator.TempJob),
 				hasParticleRemoveRequest = GetComponentDataFromEntity<ParticleSystemRemoveRequest>(),
-				hasGroupIndexChangeRemoveRequest = GetComponentDataFromEntity<GroupIndexChangeRemoveRequest>(),
 				pokemonMoveRemoveDatas = pokemonMoveFinishEntities.ToComponentDataArray<PokemonMoveDataEntity>(Allocator.TempJob)
 			}.Schedule(inputDeps);
 			jh.Complete();
@@ -143,68 +149,67 @@ namespace Pokemon
 		private struct PokemonMoveEntityJob : IJobForEachWithEntity<PokemonMoveEntity, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
 		{
 			public float deltaTime;
-			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
-			public void Execute(Entity entity, int index,ref PokemonMoveEntity pokemonMoveEntity, ref PokemonMoveDataEntity pokemonMoveDataEntity,
+			//	[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
+			public void Execute(Entity entity, int index, ref PokemonMoveEntity pokemonMoveEntity, ref PokemonMoveDataEntity pokemonMoveDataEntity,
 				ref Translation translation, ref Rotation rotation, ref PhysicsVelocity velocity, ref Scale scale)
 			{
-				if (!hasGroupIndexChangeRequest.Exists(entity))
+				//		if (!hasGroupIndexChangeRequest.Exists(entity)){
+				if (!pokemonMoveDataEntity.isValid)
 				{
-					if (!pokemonMoveDataEntity.isValid)
+					return;
+				}
+				if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
+				{
+					//	Debug.Log("Doing the execute");
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
 					{
-						return;
+						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
+							 deltaTime, pokemonMoveDataEntity.forward);
+						if (pokemonMoveDataEntity.preformActionsOn) velocity.Angular += realValue;
+						//		Debug.Log("Angular = "+velocity.Angular.ToString());
 					}
-					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
 					{
-						//	Debug.Log("Doing the execute");
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value,
-								 deltaTime, pokemonMoveDataEntity.forward);
-							if(pokemonMoveDataEntity.preformActionsOn) velocity.Angular += realValue;
-							//		Debug.Log("Angular = "+velocity.Angular.ToString());
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-							ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
-								 deltaTime, pokemonMoveDataEntity.forward);
-							//			Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
-							//				+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
+						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+						ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value,
+							 deltaTime, pokemonMoveDataEntity.forward);
+						//			Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.value.ToString()
+						//				+"::::"+velocity.Linear.ToString() + "::" + realValue + ":::" + pokemonMoveDataEntity.forward);
 
-							if(pokemonMoveDataEntity.preformActionsOn) velocity.Linear += realValue;
-							//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
-								deltaTime, pokemonMoveDataEntity.forward);
-							translation.Value += realValue;
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
-						{
-							float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
-								 deltaTime, pokemonMoveDataEntity.forward);
-							if(pokemonMoveDataEntity.preformActionsOn) rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
-						}
-						if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet.isValid)
-						{
-							float realValue = PokemonMoves.getNextPokemonMoveAdjustment(
-									ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet, deltaTime);
-							if(pokemonMoveDataEntity.preformActionsOn) scale.Value = realValue;
-						}
-						pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
-							pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
+						if (pokemonMoveDataEntity.preformActionsOn) velocity.Linear += realValue;
+						//Debug.Log(pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.A.timeLength);
 					}
-					else pokemonMoveDataEntity.isValid = false;
-				}//else do nothing
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid)
+					{
+						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value,
+							deltaTime, pokemonMoveDataEntity.forward);
+						translation.Value += realValue;
+					}
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid)
+					{
+						float3 realValue = PokemonMoves.getNextPokemonMoveAdjustment(ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value,
+							 deltaTime, pokemonMoveDataEntity.forward);
+						if (pokemonMoveDataEntity.preformActionsOn) rotation.Value.value += new float4 { x = realValue.x, y = realValue.y, z = realValue.z, w = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.w };
+					}
+					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet.isValid)
+					{
+						float realValue = PokemonMoves.getNextPokemonMoveAdjustment(
+								ref pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveScaleSet, deltaTime);
+						if (pokemonMoveDataEntity.preformActionsOn) scale.Value = realValue;
+					}
+					pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid = pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveAngularVelocitySet.value.isValid ||
+						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveVelocitySet.value.isValid ||
+						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveTranslationSet.value.isValid ||
+						pokemonMoveDataEntity.pokemonMoveAdjustmentData.pokemonMoveRotationSet.value.isValid;
+				}
+				else pokemonMoveDataEntity.isValid = false;
 			}
+		//	}
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
 			return new PokemonMoveEntityJob { deltaTime = Time.deltaTime,
-				hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
+			//	hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
 			}.Schedule(this, inputDeps);
 		}
 
@@ -216,12 +221,11 @@ namespace Pokemon
 		private struct PokemonMoveEntityJob : IJobForEachWithEntity<PokemonEntityData, PokemonMoveDataEntity, Translation, Rotation, PhysicsVelocity, Scale>
 		{
 			public float deltaTime;
-			[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
+		//	[ReadOnly] public ComponentDataFromEntity<GroupIndexChangeRequest> hasGroupIndexChangeRequest;
 			public void Execute(Entity entity, int index, ref PokemonEntityData ped, ref PokemonMoveDataEntity pokemonMoveDataEntity,
 				ref Translation translation, ref Rotation rotation, ref PhysicsVelocity velocity, ref Scale scale)
 			{
-				if (!hasGroupIndexChangeRequest.Exists(entity))
-				{
+			//	if (!hasGroupIndexChangeRequest.Exists(entity))	{
 					if (!pokemonMoveDataEntity.isValid)return;
 					if (pokemonMoveDataEntity.pokemonMoveAdjustmentData.isValid)
 					{
@@ -263,14 +267,14 @@ namespace Pokemon
 					}
 					else pokemonMoveDataEntity.isValid = false;
 				}
-			}
+		//	}
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
 			return new PokemonMoveEntityJob
 			{
 				deltaTime = Time.deltaTime,
-				hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
+			//	hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
 			}.Schedule(this, inputDeps);
 		}
 	}

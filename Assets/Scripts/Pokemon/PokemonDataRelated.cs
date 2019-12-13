@@ -10,6 +10,7 @@ using Unity.Collections;
 using Core;
 using Unity.Rendering;
 using Core.Spawning;
+using Core.UI;
 
 namespace Pokemon
 {
@@ -389,8 +390,9 @@ namespace Pokemon
 				case "Electrode":
 					pms = new PokemonMoveSet
 					{
-						pokemonMoveA = new PokemonMove { name= PokemonIO.StringToByteString30("ThunderBolt"), isValid= true},
-						pokemonMoveB = new PokemonMove { name = PokemonIO.StringToByteString30("Tackle"), isValid = true}
+						pokemonMoveA = new PokemonMove { name= new ByteString30("ThunderBolt"), isValid= true},
+						pokemonMoveB = new PokemonMove { name = new ByteString30("Tackle"), isValid = true},
+						pokemonMoveC = new PokemonMove { name = new ByteString30("spawnPoke"), isValid = true} 
 					};
 					break;
 			}
@@ -556,6 +558,7 @@ namespace Pokemon
 		}
 		public static Entity GeneratePokemonEntity(CoreData cdata,EntityManager entityManager,quaternion rotation,float3 position = new float3(),float scale = 1f)
 		{
+			Debug.Log("Generating new pokemon!");
 			Entity entity;
 			EntityArchetype ea = entityManager.CreateArchetype(
 				typeof(Translation),
@@ -567,13 +570,18 @@ namespace Pokemon
 				typeof(PokemonEntityData),
 				typeof(PhysicsMass),
 				typeof(PhysicsCollider),
-				typeof(GroupIndexInfo)
+				typeof(PhysicsVelocity),
+				typeof(PhysicsDamping),
+				typeof(GroupIndexInfo),
+				typeof(UIComponent),
+				typeof(CoreData)
 				);
 			entity = entityManager.CreateEntity(ea);
+			entityManager.SetName(entity,cdata.Name.ToString());
 			entityManager.SetComponentData(entity, new Scale { Value = scale });
 			entityManager.SetComponentData(entity, new Rotation { Value = rotation });
 			entityManager.SetComponentData(entity, new Translation { Value = position });
-			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
+			entityManager.SetComponentData(entity, cdata);
 			SetPokemonCameraData(cdata.BaseName,entity, entityManager);
 			PokemonEntityData ped = GenerateBasePokemonEntityData(cdata.BaseName.ToString());
 			entityManager.SetComponentData(entity, ped);
@@ -585,13 +593,25 @@ namespace Pokemon
 			});
 			entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(pc.MassProperties, ped.Mass));
 			entityManager.SetComponentData(entity, pc);
-			entityManager.AddComponentData(entity, new GroupIndexChangeRequest
+			entityManager.SetComponentData(entity, new PhysicsDamping {
+				Angular = 0.05f,
+				Linear = 0.01f
+			});
+			entityManager.SetComponentData(entity, new PhysicsVelocity { Angular = float3.zero, Linear = float3.zero });
+			entityManager.SetComponentData(entity, new GroupIndexInfo {
+				CurrentGroupIndex = 1,
+				OldGroupIndex = 1,
+				OriginalGroupIndex = 1,
+				Update = true
+			});
+		/*	entityManager.AddComponentData(entity, new GroupIndexChangeRequest
 			{
 				newIndexGroup = 1,
 				pokemonName = cdata.BaseName
-			});
+			});*/
+			entityManager.AddComponentData<UIComponentRequest>(entity, new UIComponentRequest { addToWorld = true });
+			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
 			
-
 			return entity;
 		}
 		/// <summary>
