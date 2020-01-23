@@ -25,15 +25,16 @@ namespace Pokemon
 			//	Debug.Log(Application.persistentDataPath);
 				PlayerData pd = new PlayerData
 				{
-					Name = PokemonIO.StringToByteString30(playerName),
-					PokemonName = PokemonIO.StringToByteString30(pokemonName)
+					Name = new ByteString30(playerName),
+					PokemonName = new ByteString30(pokemonName)
 				};
+				Debug.Log("aaa"+pd.Name+",,,ss "+pd.PokemonName);
 				dstManager.AddComponentData(entity, pd);
 				//add controls
 				dstManager.AddComponentData(entity, new PlayerInput { });
 				dstManager.AddComponentData(entity, new StateData { });
 
-				PlayerSaveData psd = new PlayerSaveData { };
+			//	PlayerSaveData psd = new PlayerSaveData { };
 				dstManager.SetName(entity, "Player \"" + playerName + "\"");
 				PokemonIO.LoadPlayerData(dstManager, entity, playerName);
 
@@ -99,8 +100,8 @@ namespace Pokemon
 		//	NativeArray<Entity> playerEntities = new NativeArray<Entity>(3, Allocator.TempJob);
 		//	EntityManager.CreateEntity(PlayerArchetype, playerEntities);
 			//		EntityManager.SetComponentData(PlayerEntity, new PlayerData {
-			//			PokemonName = PokemonIO.StringToByteString30("Electrode"),
-			//			Name = PokemonIO.StringToByteString30("Player1")
+			//			PokemonName = new ByteString30("Electrode"),
+			//			Name = new ByteString30("Player1")
 			//		});
 		//	EntityManager.SetComponentData(playerEntities[0], new Scale { Value = 1f });
 		//	PokemonIO.LoadPlayerData(EntityManager, playerEntities[0], "Player1");

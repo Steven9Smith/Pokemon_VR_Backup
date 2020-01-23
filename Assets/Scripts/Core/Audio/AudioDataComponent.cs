@@ -5,36 +5,55 @@ using System;
 [RequiresEntityConversion]
 public class AudioDataComponent : MonoBehaviour, IConvertGameObjectToEntity
 {
-	public AudioSource source;
+	public AudioSource music;
+	public AudioClip musicLoop;
+	public AudioClip musicStart;
+	public AudioSource ambientSounds;
 	public bool playOnStart;
+	public bool toggleMusicStart;
+	public bool toggleMusicLoop;
+	public bool toggleAmbientSounds;
+
 	public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 	{
 		dstManager.AddSharedComponentData(entity,new AudioSharedData {
-			source = source,
-			playOnStart = playOnStart
+			music = music,
+			ambientSounds = ambientSounds,
+			isValid = true,
+			musicLoop = musicLoop,
+			playOnStart = playOnStart,
+			musicStart = musicStart,
+			toggleMusicAmbientSounds = toggleAmbientSounds,
+			toggleMusicLoop = toggleMusicLoop,
+			toggleMusicStart = toggleMusicStart
 		});
 		dstManager.AddComponentData(entity, new AudioData { });
 	}
 }
-
-
-
 [Serializable]
+
 public struct AudioSharedData : ISharedComponentData , IEquatable<AudioSharedData>
 {
-	public AudioSource source;
 	public bool playOnStart;
-	public override bool Equals(object obj)
+	public bool toggleMusicLoop;
+	public bool toggleMusicStart;
+	public bool toggleMusicAmbientSounds;
+	public AudioClip musicLoop;
+	public AudioClip musicStart;
+	public AudioSource music;
+	public AudioSource ambientSounds;
+	public bool isValid;
+
+	public bool Equals(AudioSharedData other)
 	{
-		if ((obj == null) || !this.GetType().Equals(obj.GetType())) return false; //Check for null and compare run-time types.
-		else
-		{
-			AudioSharedData other = (AudioSharedData)obj;
-			return this.playOnStart == other.playOnStart && this.source == other.source;
-		}
+		if (!isValid || !other.isValid) return false;
+		else if (music == other.music && ambientSounds == other.ambientSounds && musicLoop == other.musicLoop && musicStart == other.musicStart) return true;
+		return false;
 	}
-	public bool Equals(AudioSharedData other){return this.playOnStart == other.playOnStart && this.source == other.source;}
-	public override int GetHashCode(){return base.GetHashCode();}
+	public override int GetHashCode()
+	{
+		return base.GetHashCode();
+	}
 }
 
 [Serializable]

@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 using Core.Particles;
-
+using Core;
 namespace Pokemon
 {
 	namespace Move
@@ -508,7 +508,7 @@ namespace Pokemon
 										offsetRotation = new float3(200f,0,0),
 										offsetScale = 1f
 									},
-									paticleSystemName = PokemonIO.StringToByteString30(pokemonMoveName),
+									paticleSystemName = new ByteString30(pokemonMoveName),
 									isValid = true
 
 								};
@@ -529,7 +529,7 @@ namespace Pokemon
 										offsetRotation = new float3(0, 0, 0),
 										offsetScale = 1f
 									},
-									paticleSystemName = PokemonIO.StringToByteString30(pokemonMoveName)
+									paticleSystemName = new ByteString30(pokemonMoveName)
 								};
 								break;
 						}
@@ -549,7 +549,7 @@ namespace Pokemon
 			}
 			public static ContactType GetPokemonMoveContactType(ByteString30 pokemonMoveName)
 			{
-				string pokemonMoveName_ = PokemonIO.ByteString30ToString(pokemonMoveName);
+				string pokemonMoveName_ = pokemonMoveName.ToString();
 				switch (pokemonMoveName_)
 				{
 					case "Tackle": return ContactType.Physical;
@@ -568,7 +568,7 @@ namespace Pokemon
 			}
 			public static BlittableBool GetPokemonMovesHaveParticles(ByteString30 pokemonMoveName)
 			{
-				string pokemonMoveName_ = PokemonIO.ByteString30ToString(pokemonMoveName);
+				string pokemonMoveName_ = pokemonMoveName.ToString();
 				switch (pokemonMoveName_)
 				{
 					case "Tackle": return false;

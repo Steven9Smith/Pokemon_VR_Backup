@@ -28,6 +28,7 @@ namespace Pokemon
 		public const uint PokemonMove = 128;
 		public const uint PokemonAttacking = 256;
 		public const uint Collidable = 512;
+		public const uint Trigger = 1024;
 		public const uint Everything = uint.MaxValue;
 
 		/// <summary>
@@ -50,6 +51,8 @@ namespace Pokemon
 				case Damage: return physicsCategory + ":Damage";
 				case PokemonMove: return physicsCategory + ":PokemonMove";
 				case PokemonAttacking: return physicsCategory + ":PokemonAttacking";
+				case Collidable: return physicsCategory + ":Collidable";
+				case Trigger: return physicsCategory + ":Trigger";
 				case uint.MaxValue: return physicsCategory + ":Everything";
 				case Nothing: return physicsCategory + "Nothing";
 				default: return physicsCategory + "~:unknown:" + physicsCategory;

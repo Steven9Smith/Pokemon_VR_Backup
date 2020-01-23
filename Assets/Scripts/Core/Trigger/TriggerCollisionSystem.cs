@@ -40,8 +40,8 @@ namespace Pokemon
 
 				//make sure the nativelist has enough space for the current amount of trigger events
 				if (counter >= currentLength) {
-					NativeArray<ATriggerEvent> _localAtes = new NativeArray<ATriggerEvent>(localAtes, Allocator.TempJob);
-					localAtes = new NativeArray<ATriggerEvent>(currentLength + oldAtesBase, Allocator.TempJob);
+					NativeArray<ATriggerEvent> _localAtes = new NativeArray<ATriggerEvent>(localAtes, Allocator.Temp);
+					localAtes = new NativeArray<ATriggerEvent>(currentLength + oldAtesBase, Allocator.Temp);
 					for(int i = 0; i < currentLength; i++)
 						localAtes[i] = _localAtes[i];
 					currentLength += oldAtesBase;
@@ -144,13 +144,13 @@ namespace Pokemon
 					};
 				default:
 					PhysicsCollider pc2 = EntityManager.GetComponentData<PhysicsCollider>(ate.entityB);
-			//		Debug.Log("Detected an Unknown TriggerType " + ate.ToString() + " ABElongsTO = \""+ EntityManager.GetName(ate.entityA)+"\"\n"+ 
+				//	Debug.Log("Detected an Unknown TriggerType " + ate.ToString() + " ABElongsTO = \""+ EntityManager.GetName(ate.entityA)+"\"\n"+ 
 				//		/*physicsCollider.Value.Value.Filter.BelongsTo+*/"|"+TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.BelongsTo) + ":"
-					//	+ /*physicsCollider.Value.Value.Filter.CollidesWith+*/"|"+ TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.CollidesWith));
-			/*		Debug.Log("Detected unknown Trigger Type:\nEntity A = \""+
+				//		+ /*physicsCollider.Value.Value.Filter.CollidesWith+*/"|"+ TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.CollidesWith));
+					Debug.Log("Detected unknown Trigger Type:\nEntity A = \""+
 						EntityManager.GetName(ate.entityA)+"\"\n\tBelongsTo: "+TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.BelongsTo)+"\n\tCollidesWith: "+ TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.CollidesWith)+
 						"\nEntity B = \""+EntityManager.GetName(ate.entityB)+"\"\n\tBelongsTo: " + TriggerEventClass.CollisionFilterValueToString(pc2.Value.Value.Filter.BelongsTo) + "\n\tCollidesWith: " + TriggerEventClass.CollisionFilterValueToString(pc2.Value.Value.Filter.CollidesWith)
-					);*/
+					);
 					break;
 			}
 			return ate;

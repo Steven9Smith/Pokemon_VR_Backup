@@ -96,10 +96,16 @@ namespace Pokemon.Player
 					PlayerInput temp = playerInput;
 					temp.forward = cameraTransform.forward;
 					temp.right = cameraTransform.right;
-
-					if (audioListenerEntities.Length > 0)
-						EntityManager.GetComponentObject<Transform>(audioListenerEntities[0]).position = playerPosition.Value;
-					EntityManager.SetComponentData(playerEntities[0], temp);
+					try
+					{
+						if (audioListenerEntities.Length > 0)
+							EntityManager.GetComponentObject<Transform>(audioListenerEntities[0]).position = playerPosition.Value;
+						EntityManager.SetComponentData(playerEntities[0], temp);
+					}
+					catch
+					{
+						Debug.LogWarning("failed to get Trasnform for Audio listener component");
+					}
 				}
 				else Debug.Log("Waiting for valid translation...amount of entities = "+playerEntities.Length);
 			}

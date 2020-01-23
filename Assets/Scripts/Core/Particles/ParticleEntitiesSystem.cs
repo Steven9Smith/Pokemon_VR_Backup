@@ -101,9 +101,9 @@ namespace Core
 										ParticleSystemSpawnData pssd = EntityManager.GetComponentData<ParticleSystemSpawnData>(particleSystemRequestEntities[i]);
 										if (pssd.paticleSystemName.A != 0)
 										{
-											GameObject temp = Resources.Load("Pokemon/PokemonMoves/" + PokemonIO.ByteString30ToString(pssd.paticleSystemName)+"/"+ PokemonIO.ByteString30ToString(pssd.paticleSystemName)+"ParticleSystem") as GameObject;
+											GameObject temp = Resources.Load("Pokemon/PokemonMoves/" + (pssd.paticleSystemName)+"/"+ (pssd.paticleSystemName)+"ParticleSystem") as GameObject;
 											if (temp != null) ps = temp.GetComponent<ParticleSystem>();
-											else Debug.LogWarning("Failed to load ParticleSystem Preset: invalid ParticleSystem, got \"Pokemon/PokemonMoves/" + PokemonIO.ByteString30ToString(pssd.paticleSystemName) + "ParticleSystem\"");
+											else Debug.LogWarning("Failed to load ParticleSystem Preset: invalid ParticleSystem, got \"Pokemon/PokemonMoves/" + (pssd.paticleSystemName) + "ParticleSystem\"");
 										}
 										else Debug.LogWarning("Failed to load ParticleSystem Preset: invalid Name");
 										if (pssd.particleSystemSpawnDataShape.isValid)

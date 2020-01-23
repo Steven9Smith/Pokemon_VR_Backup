@@ -228,7 +228,8 @@ namespace Pokemon
 						BaseAttack = 50,
 						BaseDefense = 70,
 						BaseSpeed = 150f,
-						BaseAcceleration = 2.75f,
+					//	BaseAcceleration = 2.75f,
+						BaseAcceleration = 15f,
 						BaseSpecialAttack = 80,
 						BaseSpcialDefense = 45,
 						BodyType = PokemonDataClass.BODY_TYPE_HEAD_ONLY,
@@ -384,7 +385,7 @@ namespace Pokemon
 				case "Cubone":
 					pms = new PokemonMoveSet
 					{
-						pokemonMoveA = new PokemonMove { name = PokemonIO.StringToByteString30("Tackle"),isValid = true }
+						pokemonMoveA = new PokemonMove { name = new ByteString30("Tackle"),isValid = true }
 					};
 					break;
 				case "Electrode":
@@ -443,7 +444,7 @@ namespace Pokemon
 			switch (pokemonName)
 			{
 				case "Cubone":
-					var colliders = new NativeArray<CompoundCollider.ColliderBlobInstance>(5, Allocator.TempJob);
+					var colliders = new NativeArray<CompoundCollider.ColliderBlobInstance>(5, Allocator.Temp);
 					colliders[0] = new CompoundCollider.ColliderBlobInstance
 					{
 						Collider = Unity.Physics.SphereCollider.Create(new SphereGeometry { Center = new float3(0, 0.27f, 0.03f), Radius = 0.225f },collisionFilter,material),
@@ -584,6 +585,7 @@ namespace Pokemon
 			entityManager.SetComponentData(entity, cdata);
 			SetPokemonCameraData(cdata.BaseName,entity, entityManager);
 			PokemonEntityData ped = GenerateBasePokemonEntityData(cdata.BaseName.ToString());
+			SetPhysicsDamping(entityManager, entity, cdata.BaseName, ped);
 			entityManager.SetComponentData(entity, ped);
 			PhysicsCollider pc = getPokemonPhysicsCollider(cdata.BaseName.ToString(), ped, new CollisionFilter
 			{
@@ -593,10 +595,6 @@ namespace Pokemon
 			});
 			entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(pc.MassProperties, ped.Mass));
 			entityManager.SetComponentData(entity, pc);
-			entityManager.SetComponentData(entity, new PhysicsDamping {
-				Angular = 0.05f,
-				Linear = 0.01f
-			});
 			entityManager.SetComponentData(entity, new PhysicsVelocity { Angular = float3.zero, Linear = float3.zero });
 			entityManager.SetComponentData(entity, new GroupIndexInfo {
 				CurrentGroupIndex = 1,
@@ -609,7 +607,11 @@ namespace Pokemon
 				newIndexGroup = 1,
 				pokemonName = cdata.BaseName
 			});*/
-			entityManager.AddComponentData<UIComponentRequest>(entity, new UIComponentRequest { addToWorld = true });
+			entityManager.AddComponentData<UIComponentRequest>(entity, new UIComponentRequest {
+				addToWorld = true,
+				followPlayer = true,
+				visible = true
+			});
 			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
 			
 			return entity;
@@ -624,12 +626,13 @@ namespace Pokemon
 		/// <returns></return>
 		public static bool SetRenderMesh(EntityManager entityManager,Entity entity,ByteString30 name,int type = 0)
 		{
-			GameObject go;
+			GameObject go = null;
 			string path = "";
 			switch (type)
 			{
 				case 0: path += "Pokemon/"+name+"/"+name; break;
 				case 1: path += "Pokemon/PokemonMoves/" + name+"/"+name;break;
+				case 2: path += "Enviroment/"+name;break;
 				default: Debug.LogWarning("Failed to load the render mesh for \"" + name + "\""); return false;
 			}
 			go = Resources.Load(path) as GameObject;
@@ -650,6 +653,50 @@ namespace Pokemon
 				Debug.LogError("Exception Rose when trying to create RenderMesh with name \""+name+"\" with type "+type.ToString());
 			}
 			return false;
+		}
+		public static bool SetPhysicsDamping(EntityManager entityManager,Entity entity,ByteString30 name,PokemonEntityData ped)
+		{
+			PhysicsDamping ps = new PhysicsDamping
+			{
+				Angular = 0.05f,
+				Linear = 0.01f
+			};	
+			switch (name.ToString())
+			{
+				case "Electrode":
+					ps = new PhysicsDamping
+					{
+						Angular = 0.5f,
+						Linear = 0.1f
+					};
+					break;
+				default: Debug.LogError("failed to find PhysicsDamping for pokemon \""+name+"\"");break;
+			}
+			try
+			{
+				if (entityManager.HasComponent<PhysicsDamping>(entity)) entityManager.SetComponentData<PhysicsDamping>(entity, ps);
+				else entityManager.AddComponentData(entity, ps);
+				return true;
+			}
+			catch
+			{
+				Debug.LogError("Failed to set AngularDamping!");
+			}
+			return false;
+		}
+		public static GameObject GetGameObjectPrefab(ByteString30 name, int type = 0)
+		{
+			GameObject go = null;
+			string path = "";
+			switch (type)
+			{
+				case 0: path += "Pokemon/" + name + "/" + name; break;
+				case 1: path += "Pokemon/PokemonMoves/" + name + "/" + name; break;
+				case 2: path += "Enviroment/" + name; break;
+				default: Debug.LogWarning("Failed to load the render mesh for \"" + name + "\""); return null;
+			}
+			go = Resources.Load(path) as GameObject;
+			return go;
 		}
 	}
 	//# Pokémon 	HP 	Attack 	Defense 	Sp. Attack 	Sp. Defense 	Speed 	Total 	Average

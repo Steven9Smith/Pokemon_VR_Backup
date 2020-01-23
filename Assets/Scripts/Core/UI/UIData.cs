@@ -19,6 +19,7 @@ namespace Core.UI {
 		public BlittableBool isValid;
 		public BlittableBool onWorld;
 		public BlittableBool toggleVisibility;
+		public BlittableBool followPlayer;
 		public float3 positionOffset;
 		public float3 scaleOffset;
 		public GameObject UIGameObject;
@@ -34,7 +35,11 @@ namespace Core.UI {
 		public override int GetHashCode() { return base.GetHashCode(); }
 	}
 	public struct UIComponentFilter : IComponentData { }
-	public struct UIComponentRequest : IComponentData { public BlittableBool addToWorld; }
+	public struct UIComponentRequest : IComponentData {
+		public BlittableBool addToWorld;
+		public BlittableBool visible;
+		public BlittableBool followPlayer;
+	}
 	public class UIDataClass
 	{
 		public static GameObject[] FindGameObjectsWithLayer(int layer)
@@ -60,7 +65,7 @@ namespace Core.UI {
 				if (go[i].name == name) return go[i];
 			return null;
 		}
-		public static void GenerateEntityUIGameObject(EntityManager entityManager,Entity entity,ref GameObject PlayerCanvas,ref GameObject WorldCanvas,bool addToWorld)
+		public static void GenerateEntityUIGameObject(EntityManager entityManager,Entity entity,ref GameObject PlayerCanvas,ref GameObject WorldCanvas,UIComponentRequest uicr)
 		{
 			GameObject bob = Resources.Load("Core/UI/InGameUI/PlayerBarContainers") as GameObject;
 			GameObject go = GameObject.Instantiate(bob) as GameObject;
@@ -81,7 +86,9 @@ namespace Core.UI {
 						else if (containerChildren[j].name == "EnergyBarValue") uic.EnergyBarValue = containerChildren[j].GetComponent<TextMeshProUGUI>();
 					}
 				}
-				uic.onWorld = addToWorld;
+				uic.onWorld = uicr.addToWorld;
+				uic.toggleVisibility = !uicr.visible;
+				uic.followPlayer = uicr.followPlayer;
 				if (uic.BarBorder != null && uic.HealthBarImage != null && uic.EnergyBarImage != null && uic.HealthBarValue != null && uic.EnergyBarValue != null)
 					uic.isValid = true;
 				if (uic.isValid)
@@ -92,14 +99,14 @@ namespace Core.UI {
 					//add world canvas height/2
 			//		uic.positionOffset.y += WorldCanvas.GetComponent<RectTransform>().rect.height/ 2;
 					//set the new scale offeset
-					if(addToWorld)uic.UIGameObject.GetComponent<RectTransform>().localScale = uic.scaleOffset;
+					if(uicr.addToWorld)uic.UIGameObject.GetComponent<RectTransform>().localScale = uic.scaleOffset;
 
 					if (entityManager.HasComponent<UIComponent>(entity)) entityManager.SetSharedComponentData<UIComponent>(entity, uic);
 					else entityManager.AddSharedComponentData(entity, uic);
 					if (!entityManager.HasComponent<UIComponentFilter>(entity)) entityManager.AddComponentData<UIComponentFilter>(entity, new UIComponentFilter { });
 				}
 				else { Debug.LogError("Failed to add UIComponent due to an invalid UIComponent: " + uic.BarBorder + "," + uic.EnergyBarImage + "," + uic.EnergyBarValue + "," + uic.HealthBarImage + "," + uic.HealthBarValue); return; }
-				AddToCanvas(go, ref PlayerCanvas, ref WorldCanvas, addToWorld);
+				AddToCanvas(go, ref PlayerCanvas, ref WorldCanvas, uicr.addToWorld);
 				entityManager.RemoveComponent<UIComponentRequest>(entity);
 			}
 			else { Debug.LogError("Failed to load UI COmponent because go is null"); return; }

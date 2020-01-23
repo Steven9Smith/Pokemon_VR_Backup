@@ -125,7 +125,7 @@ namespace Core.Spawning {
 				Debug.Log("executing pokemon move \"" + name + "\"");
 				PokemonMoveDataSpawn pmds = getPokemonMoveDataSpawn(entityManager, name, orgEntity, ped);
 				PlayerInput pi = entityManager.GetComponentData<PlayerInput>(orgEntity);
-				PokemonMoveDataEntity pmde = GetPokemonMoveDataEntity(PokemonIO.StringToByteString30(name), ped, pi.forward);
+				PokemonMoveDataEntity pmde = GetPokemonMoveDataEntity(new ByteString30(name), ped, pi.forward);
 				if (pmds.hasEntity)
 				{
 					entityManager.SetComponentData(entity, new EntityParent { entity = orgEntity, isValid = true, followParent = true });
@@ -136,11 +136,9 @@ namespace Core.Spawning {
 						pmde.preformActionsOn = false;
 					}
 				}
-				entityManager.AddComponentData<CoreData>(entity, new CoreData
-				{
-					Name = PokemonIO.StringToByteString30(name),
-					BaseName = PokemonIO.StringToByteString30(name)
-				});
+				CoreData cd = entityManager.GetComponentData<CoreData>(orgEntity);
+				entityManager.AddComponentData<CoreData>(entity,new CoreData(new ByteString30(name),new ByteString30("PokemonMove"),cd.size,cd.scale));
+				
 				//get Pokemon's GroupIndex
 				GroupIndexInfo gii = entityManager.GetComponentData<GroupIndexInfo>(orgEntity);
 				gii.CurrentGroupIndex = groupIndexSystem.GetNextEmptyGroup();
@@ -234,8 +232,8 @@ namespace Core.Spawning {
 				{
 					PokemonMoveDataSpawn pmds = Core.Spawning.PokemonMoveSpawn.getPokemonMoveDataSpawn(entityManager,
 						pokemonMove.name, mEntity, pmd);
-					Debug.Log("Spawning "+ PokemonIO.ByteString30ToString(pokemonMove.name) + pokemonMove.index);
-					entityManager.SetName(moveEntity, PokemonIO.ByteString30ToString(pokemonMove.name) + pokemonMove.index);
+					Debug.Log("Spawning "+ (pokemonMove.name) + pokemonMove.index);
+					entityManager.SetName(moveEntity, (pokemonMove.name) + pokemonMove.index);
 					entityManager.SetSharedComponentData(moveEntity, renderMeshDefault);
 					entityManager.SetComponentData(moveEntity, pmds.translation);
 					entityManager.SetComponentData(moveEntity, pmds.rotation);
@@ -249,7 +247,7 @@ namespace Core.Spawning {
 					{
 						entityManager.AddComponentData(moveEntity, new ParticleSystemRequest { });
 						entityManager.AddComponentData(moveEntity, new ParticleSystemData { });
-						ParticleSystemSpawnData pssd = PokemonMoves.getPokemonMoveParticleSystemData(pmd.PokedexNumber,PokemonIO.ByteString30ToString(pokemonMove.name));
+						ParticleSystemSpawnData pssd = PokemonMoves.getPokemonMoveParticleSystemData(pmd.PokedexNumber,(pokemonMove.name));
 						if (pssd.isValid)
 						{
 							Debug.Log("detected particleSystemspawn data");
@@ -266,7 +264,7 @@ namespace Core.Spawning {
 		public static PokemonMoveDataEntity GetPokemonMoveDataEntity(ByteString30 name, PokemonEntityData ped, float3 forward)
 		{
 			PokemonMoveDataEntity pmde = new PokemonMoveDataEntity { };
-			switch (PokemonIO.ByteString30ToString(name))
+			switch (name.ToString())
 			{
 				case "Tackle":
 					pmde = new PokemonMoveDataEntity

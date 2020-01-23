@@ -168,7 +168,7 @@ namespace Core
 										VFXGParticleSystemData vfxgData = EntityManager.GetComponentData<VFXGParticleSystemData>(requestEntities[i]);
 										if (vfxgData.Name.A != 0)
 										{
-											GameObject temp = Resources.Load("Core/ParticleSystem/VFXGParticles/"+PokemonIO.ByteString30ToString(vfxgData.Name)+"/"+ PokemonIO.ByteString30ToString(vfxgData.Name)) as GameObject;
+											GameObject temp = Resources.Load("Core/ParticleSystem/VFXGParticles/"+(vfxgData.Name)+"/"+ (vfxgData.Name)) as GameObject;
 											if (temp != null) vf = temp.GetComponent<VisualEffect>();
 											else Debug.LogError("Failed to get GamObject for particle");
 											vf.Play();
@@ -176,7 +176,7 @@ namespace Core
 											//EntityManager.SetComponentData(requestEntities[i],new ParticleSystemData{ });
 											EntityManager.SetComponentData(VFXGParticleEntities[j], particleEntities[j]);
 										}
-										else Debug.LogError("Cannot found VFXG Particle with the name "+PokemonIO.ByteString30ToString(vfxgData.Name));
+										else Debug.LogError("Cannot found VFXG Particle with the name "+(vfxgData.Name));
 									}
 									break;
 								}

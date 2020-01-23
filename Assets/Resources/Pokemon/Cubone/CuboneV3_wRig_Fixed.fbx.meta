@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43adf6c049a316b4c906b3c602c34909
+guid: e4f99cbbf2c721943b77d803820b5c57
 ModelImporter:
   serializedVersion: 28
   internalIDToNameTable:
@@ -11,12 +11,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__Cubone_Body
-    second: {fileID: 2100000, guid: 97ba7ef601dab7a4db29ac9737f9bad2, type: 2}
+    second: {fileID: 2100000, guid: 626bf7fae3b6f9646af738a40a84e4fa, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__Cubone_Eyes
-    second: {fileID: 2100000, guid: 8225227cb0b15214aae0ba36705636d6, type: 2}
+    second: {fileID: 2100000, guid: 3e0eb41743cc1244b8a04afceed797b7, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

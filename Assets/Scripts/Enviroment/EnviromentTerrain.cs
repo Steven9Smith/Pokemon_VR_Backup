@@ -75,10 +75,6 @@ namespace Core.Terrain
 						CollidesWith = TriggerEventClass.Pokemon | TriggerEventClass.Player | TriggerEventClass.NPC | TriggerEventClass.Collidable,
 						GroupIndex = 0
 					}
-			//		,
-			//		new Unity.Physics.Material {
-			//			
-			//		}
 			);
 				float3 position = new float3(size.x - 1, 0f, size.y - 1) * scale * -0.5f;
 				staticEntity = Bodies.Bodies.CreateStaticBodyWithMesh(entityManager, mat,mesh, position, quaternion.identity, collider);

@@ -142,7 +142,10 @@ namespace Pokemon.Player
 				}
 
 				force *= deltaTime;
+				force.y = 0f;
 				//Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
+			//	if(pokemonEntityData.BodyType != PokemonDataClass.BODY_TYPE_HEAD_ONLY) velocity.Linear += force;
+			//	else velocity.Angular += force;
 				velocity.Linear += force;
 				//Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
 			}
@@ -237,7 +240,7 @@ namespace Pokemon.Player
 						playerInputs[i].attackCDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveC :
 						playerInputs[i].attackDDown ? pokemonEntityDatas[i].pokemonMoveSet.pokemonMoveD :
 						new PokemonMove { isValid = false };
-					//Debug.Log(pm.isValid.Value+","+PokemonIO.ByteString30ToString(pm.name)+","+pm.isValid.Value);
+					//Debug.Log(pm.isValid.Value+","+(pm.name)+","+pm.isValid.Value);
 					if (pm.isValid)
 					{
 						pm = new PokemonMove
@@ -280,17 +283,21 @@ namespace Pokemon.Player
 
 					if (pokemonMoves[i].name.ToString() != "spawnPoke")
 					{
-						PokemonMoveSpawn.ExecutePokemonMove(EntityManager, PokemonIO.ByteString30ToString(pokemonMoves[i].name),
+						PokemonMoveSpawn.ExecutePokemonMove(EntityManager, pokemonMoves[i].name.ToString(),
 							EntityManager.GetComponentData<CoreData>(entities[i]).BaseName, entities[i],
 							pokemonMoveEntities[i], pmds[i], groupIndexSystem);
 					}
 					else
 					{
 						EntityManager.DestroyEntity(pokemonMoveEntities[i]);
+						//ignore this because this is a test anyway and i haven't got to this yet
 						PokemonDataClass.GeneratePokemonEntity(new CoreData
 						{
 							BaseName = new ByteString30("Electrode"),
-							Name = new ByteString30("Entity")
+							Name = new ByteString30("Entity"),
+							isValid = true,
+							scale = new float3(1f,1f,1f),
+							size = new float3(1f,1f,1f)
 						},
 							EntityManager,
 							quaternion.identity,

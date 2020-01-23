@@ -29,7 +29,7 @@ namespace Pokemon
 				//get the pokemone entity to get the pokemon name
 				PokemonEntity pe = dstManager.GetComponentData<PokemonEntity>(entity);
 				//load pokeomn base data
-				PokemonData pd = PokemonDataClass.getBasePokemonData(PokemonDataClass.StringToPokedexEntry(PokemonIO.ByteString30ToString(pe.pokemonName)));
+				PokemonData pd = PokemonDataClass.getBasePokemonData(PokemonDataClass.StringToPokedexEntry((pe.pokemonName)));
 				//convert base data to pokemon eneity data
 				PokemonEntityData ped = new PokemonEntityData {
 						Acceleration = pd.BaseAcceleration,
@@ -55,12 +55,12 @@ namespace Pokemon
 							pokemonMoveA = new PokemonMove
 							{
 								isValid = true,
-								name = PokemonIO.StringToByteString30("Tackle")
+								name = new ByteString30("Tackle")
 							},
 							pokemonMoveB = new PokemonMove
 							{
 								isValid = true,
-								name = PokemonIO.StringToByteString30("ThunderShock")
+								name = new ByteString30("ThunderShock")
 							}
 						}
 						

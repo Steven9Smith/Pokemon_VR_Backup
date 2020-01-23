@@ -85,7 +85,7 @@ namespace Core.Spawning {
 		{
 			JobHandle changeRequestJob = new GroupIndexChangeGroupIndexJob { }.Schedule(this,inputDeps);
 			changeRequestJob.Complete();
-			PrintGroupIndexInfo(EntityManager);
+	//		PrintGroupIndexInfo(EntityManager);
 			return changeRequestJob;
 		}
 		public int ExludeGroupIndexNumber(int exclude)
@@ -234,12 +234,12 @@ namespace Core.Spawning {
 			public void Execute(Entity entity, int index, ref GroupIndexChangeRequest request, ref PhysicsCollider collider, ref PokemonEntityData ped,ref GroupIndexInfo gii)
 			{	
 				//now change the GroupIndex in the entity
-				collider = PokemonDataClass.getPokemonPhysicsCollider(PokemonIO.ByteString30ToString(request.pokemonName),
+				collider = PokemonDataClass.getPokemonPhysicsCollider((request.pokemonName),
 					ped, new CollisionFilter {
 						BelongsTo = collider.Value.Value.Filter.BelongsTo,
 						CollidesWith = collider.Value.Value.Filter.CollidesWith,
 						GroupIndex = request.newIndexGroup
-					}, PokemonDataClass.GetPokemonColliderMaterial(PokemonIO.ByteString30ToString(request.pokemonName)));
+					}, PokemonDataClass.GetPokemonColliderMaterial((request.pokemonName)));
 				gii = new GroupIndexInfo { GroupIndex = request.newIndexGroup,oldIndexGroup = gii.GroupIndex };
 				
 			}
