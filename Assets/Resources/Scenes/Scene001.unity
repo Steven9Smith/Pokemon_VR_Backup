@@ -9063,7 +9063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629796321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7374434, y: 0.08595753, z: 1.6762476}
+  m_LocalPosition: {x: 1.7374434, y: -0.79, z: 1.6762476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 862016057}
@@ -11513,6 +11513,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11567,11 +11572,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.162
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
@@ -11647,6 +11647,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1832494837}
     m_Modifications:
+    - target: {fileID: -1732193097911402930, guid: 419be3732aec2c24d868c22255e4ce04,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Table (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -1435037248114605323, guid: 419be3732aec2c24d868c22255e4ce04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11702,11 +11707,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -1732193097911402930, guid: 419be3732aec2c24d868c22255e4ce04,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Table (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 419be3732aec2c24d868c22255e4ce04, type: 3}
 --- !u!1 &531533296978498919
@@ -11732,6 +11732,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865993136}
     m_Modifications:
+    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Labtop
+      objectReference: {fileID: 0}
     - target: {fileID: 1200580074891071644, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11786,11 +11791,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Labtop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aedcdd2e911f8fb4fbb62489a0b52eec, type: 3}
@@ -12364,6 +12364,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12418,11 +12423,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.21900001
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
@@ -12697,6 +12697,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865993136}
     m_Modifications:
+    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Labtop
+      objectReference: {fileID: 0}
     - target: {fileID: 1200580074891071644, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12752,11 +12757,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Labtop
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aedcdd2e911f8fb4fbb62489a0b52eec, type: 3}
 --- !u!1 &3747581382241843189
@@ -12798,6 +12798,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12853,11 +12858,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.22000001
       objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+    - target: {fileID: 8281660958274909134, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (1)
-      objectReference: {fileID: 0}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5829055188283619187, guid: 855d4d3d272a7cc41b6795ca362d41b7,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
 --- !u!1 &3882776407366857403
@@ -13455,6 +13461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13509,11 +13520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.034
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
@@ -13692,6 +13698,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865993136}
     m_Modifications:
+    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Labtop
+      objectReference: {fileID: 0}
     - target: {fileID: 1200580074891071644, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13746,11 +13757,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030411469776702790, guid: aedcdd2e911f8fb4fbb62489a0b52eec,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Labtop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aedcdd2e911f8fb4fbb62489a0b52eec, type: 3}
@@ -13919,6 +13925,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13973,11 +13984,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.012
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
@@ -14166,6 +14172,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629796322}
     m_Modifications:
+    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Chair (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 8281660957472528098, guid: 94063370fc2f24f4091f70d6db4ee603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14221,11 +14232,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.17600001
       objectReference: {fileID: 0}
-    - target: {fileID: 8281660958274909130, guid: 94063370fc2f24f4091f70d6db4ee603,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Chair (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94063370fc2f24f4091f70d6db4ee603, type: 3}
 --- !u!33 &8205434115279614669
@@ -14251,7 +14257,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8455956622897744144}
-  m_Mesh: {fileID: 5608681000444889738, guid: b1710c3c9eb09d94ea33ef33e0b16cd4, type: 3}
+  m_Mesh: {fileID: 5608681000444889738, guid: 1771236ac6de3594397517f095e36cd3, type: 3}
 --- !u!1 &8296172668533964223
 GameObject:
   m_ObjectHideFlags: 0
@@ -14369,8 +14375,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kanto Pokemon Ccenter
   BaseName: Pokemon Center
-  transform: {fileID: 0}
-  meshFilter: {fileID: 0}
+  transform: {fileID: 4978755666604526854}
+  meshFilter: {fileID: 8247934732860673170}
 --- !u!4 &9070631406027754116
 Transform:
   m_ObjectHideFlags: 0
@@ -14404,6 +14410,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1832494837}
     m_Modifications:
+    - target: {fileID: -1732193097911402930, guid: 419be3732aec2c24d868c22255e4ce04,
+        type: 3}
+      propertyPath: m_Name
+      value: PokemonCenter_Table
+      objectReference: {fileID: 0}
     - target: {fileID: -1435037248114605323, guid: 419be3732aec2c24d868c22255e4ce04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14458,11 +14469,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1732193097911402930, guid: 419be3732aec2c24d868c22255e4ce04,
-        type: 3}
-      propertyPath: m_Name
-      value: PokemonCenter_Table
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 419be3732aec2c24d868c22255e4ce04, type: 3}
