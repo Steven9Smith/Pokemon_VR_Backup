@@ -43,7 +43,8 @@ namespace Core.Enviroment
 				typeof(CoreData)
 			);
 			Entity entity = entityManager.CreateEntity(defaultArchtype);
-			entityManager.SetComponentData(entity, new Translation { Value = position });
+			Translation trans = new Translation { Value = position };
+			entityManager.SetComponentData(entity,trans);
 			entityManager.SetComponentData(entity, new Scale { Value = scale.x });
 			CoreData _cd = new CoreData(new ByteString30(enviroment), new ByteString30(region), bounds, new float3(1f, 1f, 1f));
 			entityManager.SetComponentData(entity, _cd);
@@ -71,27 +72,34 @@ namespace Core.Enviroment
 						NativeArray<CoreData> excludes = new NativeArray<CoreData>(1, Allocator.TempJob);
 						excludes[0] = _cd;
 						//get all the entities position/size within an area
-						NativeArray<Bounds> cubes = GetEntitiesWIthinArea(entityManager, position, bounds, excludes, true);
+					//	NativeArray<Bounds> cubes = CoreFunctionsClass.GetEntitiesWIthinArea(entityManager, position, bounds, excludes, true);
 
-						Debug.Log("bounds = "+ ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size);
-						NativeArray<Entity> trees = new NativeArray<Entity>(30, Allocator.Temp);
-						entityManager.CreateEntity(GetEnviromentArchtype(entityManager, "Tree"), trees);
+					//	Debug.Log("bounds = "+ ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size);
+						//	NativeArray<Entity> trees = new NativeArray<Entity>(30, Allocator.Temp);
+						//	entityManager.CreateEntity(GetEnviromentArchtype(entityManager, "Tree"), trees);
 
 						//calculate size
-						float3 size = ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size;
+						//	float3 size = ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size;
 
 
 						//set the values
-						SetEnviromentEntityData(entityManager, ForestTreeGO, trees,cubes,true, region, "Tree",
-							size, position, bounds);
-						trees.Dispose();
+						//	SetEnviromentEntityData(entityManager, ForestTreeGO, trees,cubes,true, region, "Tree",
+						//		size, position, bounds);
+						//	trees.Dispose();
+
+
+
 						excludes.Dispose();
 
 
 						Entity e = new Entity { };
-						if (CoreFunctionsClass.FindEntity(entityManager, ref e, "Tree", "Kanto/Landscapes/Tree"))
+						bool a = CoreFunctionsClass.FindEntity(entityManager, ref e, "Tree", "Kanto/Landscapes/Tree");
+						if(a)
 						{
+							NativeArray<Entity> generatedEntities = CoreFunctionsClass.SpawnEntitiesWithinBounds(entityManager, e, new Bounds(trans.Value, _cd.size), 30, excludes,new float[0,0],true);
 							entityManager.AddComponentData(e, new DestroyMe { });
+
+							generatedEntities.Dispose();
 						}
 						else Debug.LogError("Failed to find Tree entity");
 

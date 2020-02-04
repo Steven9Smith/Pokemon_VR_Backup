@@ -1,9 +1,11 @@
-﻿using Unity.Entities;
+﻿using System;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Pokemon
 {
+	[Serializable]
 	public struct StateData : IComponentData
 	{
 		//using bools for now but in the future this may change to char

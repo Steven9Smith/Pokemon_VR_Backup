@@ -147,10 +147,10 @@ namespace Pokemon
 				//	Debug.Log("Detected an Unknown TriggerType " + ate.ToString() + " ABElongsTO = \""+ EntityManager.GetName(ate.entityA)+"\"\n"+ 
 				//		/*physicsCollider.Value.Value.Filter.BelongsTo+*/"|"+TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.BelongsTo) + ":"
 				//		+ /*physicsCollider.Value.Value.Filter.CollidesWith+*/"|"+ TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.CollidesWith));
-					Debug.Log("Detected unknown Trigger Type:\nEntity A = \""+
+			/*	Debug.Log("Detected unknown Trigger Type:\nEntity A = \""+
 						EntityManager.GetName(ate.entityA)+"\"\n\tBelongsTo: "+TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.BelongsTo)+"\n\tCollidesWith: "+ TriggerEventClass.CollisionFilterValueToString(physicsCollider.Value.Value.Filter.CollidesWith)+
 						"\nEntity B = \""+EntityManager.GetName(ate.entityB)+"\"\n\tBelongsTo: " + TriggerEventClass.CollisionFilterValueToString(pc2.Value.Value.Filter.BelongsTo) + "\n\tCollidesWith: " + TriggerEventClass.CollisionFilterValueToString(pc2.Value.Value.Filter.CollidesWith)
-					);
+					);*/
 					break;
 			}
 			return ate;

@@ -9,6 +9,10 @@ using Unity.Jobs;
 using Unity.Physics.Authoring;
 using System;
 using System.Text;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 [RequiresEntityConversion]
 public class CoreDataComponent : MonoBehaviour, IConvertGameObjectToEntity
@@ -43,6 +47,7 @@ namespace Core
 	/// <summary>
 	/// Data that all entities should have that make calculations and entity look up mush easier
 	/// </summary>
+	[Serializable]
 	public struct CoreData : IComponentData
 	{
 		public ByteString30 Name;
@@ -139,6 +144,7 @@ namespace Core
 		{
 			return "CoreData: " + Name + "," + BaseName + "," + size + "," + scale + "," + isValid.Value;
 		}
+		public string ToNameString() { return Name + ":" + BaseName; }
 	}
 
 	public class CoreFunctionsClass {
@@ -441,18 +447,32 @@ namespace Core
 			}
 			return bs;
 		}
-
-		public static void SpawnEntitiesWithinBounds(EntityManager entityManager,Bounds bounds,float3 boundsPosition,GameObject objectToSpawn,int amountOfObjectsToSpawn,NativeArray<CoreData> entitiesToExclude)
+		/// <summary>
+		/// This spawn the given entity x number of times within a certain bounds
+		/// </summary>
+		/// <param name="entityManager">EntityManager</param>
+		/// <param name="objectToSpawn">entity that you want to be spawned within an area</param>
+		/// <param name="areaBounds">bounds of the area</param>
+		/// <param name="areaBoundsPosition">position of the area</param>
+		/// <param name="amountOfObjectsToSpawn">amount of entities to spawn</param>
+		/// <param name="entitiesToExclude">NativeArray of entities to trigger false</param>
+		public static NativeArray<Entity> SpawnEntitiesWithinBounds(EntityManager entityManager, Entity objectToSpawn, Bounds areaBounds, int amountOfObjectsToSpawn, NativeArray<CoreData> entitiesToExclude, float[,] heightMap, bool zeroHeight = true)
 		{
-			if (objectToSpawn != null)
+			if (!objectToSpawn.Equals(new Entity { }))
 			{
 				//first we get entities within the area
-				NativeArray<Bounds> _exclusions = GetEntitiesWIthinArea(entityManager, boundsPosition, bounds.size, entitiesToExclude,false);
+				NativeArray<Bounds> _exclusions = GetEntitiesWIthinArea(entityManager,areaBounds, entitiesToExclude,false);
 				NativeArray<Bounds> exclusions = new NativeArray<Bounds>(_exclusions.Length + amountOfObjectsToSpawn, Allocator.TempJob);
 				//setup the random number generator
 				Unity.Mathematics.Random rand = new Unity.Mathematics.Random((uint)System.Environment.TickCount); //not truly random but we are getting close
 																												  //rand.Next(1, 100);
-				Bounds objectBounds = objectToSpawn.GetComponent<MeshFilter>().sharedMesh.bounds;
+				CoreData cd = entityManager.GetComponentData<CoreData>(objectToSpawn);
+				bool useHeightMap = heightMap.Length > 0 && heightMap.GetLength(0) == cd.size.x && heightMap.GetLength(1) == cd.size.z;
+
+				NativeArray<Entity> newEntities = new NativeArray<Entity>(amountOfObjectsToSpawn, Allocator.TempJob);
+				bool[] validEntities = new bool[amountOfObjectsToSpawn];
+				entityManager.Instantiate(objectToSpawn, newEntities);
+				//objectToSpawn.GetComponent<MeshFilter>().sharedMesh.bounds;
 				for(int i = 0; i < amountOfObjectsToSpawn; i++)
 				{
 					int maxTries = 10;
@@ -460,29 +480,77 @@ namespace Core
 					while (counter < maxTries)
 					{
 						//first let's generate a position within the bounds
-						float3 newPosition = rand.NextFloat3(float3.zero, (float3)bounds.size);
+						float3 newPosition = rand.NextFloat3(float3.zero, (float3)areaBounds.size)+(float3)areaBounds.center;
 						//remove extra bounds
-						newPosition.x -= bounds.extents.x;
-						newPosition.y -= bounds.extents.y;
-						newPosition.z -= bounds.extents.z;
-						Bounds newBounds = new Bounds(newPosition, objectBounds.size);
-						for (int j = 0; j < exclusions.Length; j++)
+						newPosition.x -= areaBounds.extents.x;
+						newPosition.z -= areaBounds.extents.z;
+						if (useHeightMap) newPosition.y = heightMap[(int)newPosition.x,(int)newPosition.z];
+						else if (zeroHeight) newPosition.y = 0;
+						else newPosition.y -= areaBounds.extents.y;
+						Bounds newBounds = new Bounds(newPosition, cd.size*cd.scale);
+						Translation t;
+						int j = 0;
+						bool overlap = false;
+						for (; j < exclusions.Length; j++)
 						{
-							if (!exclusions[i].Intersects(newBounds))
+							if (exclusions[i] != null)
 							{
-								
+								if (exclusions[i].Intersects(newBounds))
+								{
+									overlap = true;
+									break;
+								}
 							}
 						}
-						counter++;
+						if (!overlap)
+						{
+							//ok now we have to make sure it doesn't intesect the new entities we made
+							for (int k = 0; k < i; k++)
+							{
+								t = entityManager.GetComponentData<Translation>(newEntities[k]);
+								if (!t.Value.Equals(new float3()) && new Bounds(t.Value, cd.size * cd.scale).Intersects(newBounds))
+								{
+									overlap = true;
+									break;
+								}
+							}
+
+						}
+						if (!overlap)
+						{
+							entityManager.SetComponentData(newEntities[i], new Translation { Value = newPosition });
+							entityManager.SetName(newEntities[i], cd.Name + "|" + cd.BaseName + i);
+							validEntities[i] = true;
+							break;
+						}
+						else counter++;
 					}
+					if(!validEntities[i])
+					{
+						//failed to find a location so lets destroy it
+						Debug.LogWarning("Failed to generate a safe space for entity "+i);
+						validEntities[i] = false;
+					}//elswe do nothing
 				}
+				for(var i = 0; i < validEntities.Length; i++)
+					if(!validEntities[i])
+						entityManager.DestroyEntity(newEntities[i]);
 				_exclusions.Dispose();
 				exclusions.Dispose();
-				
+				return newEntities;
 			}
-			else Debug.LogError("Given Object to spawn is null");
+			else Debug.LogError("Given Object to spawn is null or invalid");
+			return new NativeArray<Entity>(0, Allocator.TempJob);
 		}
-		public static NativeArray<Bounds> GetEntitiesWIthinArea(EntityManager entityManager, float3 position, float3 area, NativeArray<CoreData> exclude, bool onlyXZ = true)
+		/// <summary>
+		/// get all entities within a given area
+		/// </summary>
+		/// <param name="entityManager">EntityManager</param>
+		/// <param name="bounds">area bounds</param>
+		/// <param name="exclude">list of CoreData to not include witht the result</param>
+		/// <param name="onlyXZ">set to true if you do not want to deal with the y bounds</param>
+		/// <returns></returns>
+		public static NativeArray<Bounds> GetEntitiesWIthinArea(EntityManager entityManager, Bounds bounds, NativeArray<CoreData> exclude, bool onlyXZ = true)
 		{
 			EntityQuery eq = entityManager.CreateEntityQuery(typeof(Translation), typeof(CoreData));
 			NativeArray<Entity> entities = eq.ToEntityArray(Allocator.TempJob);
@@ -492,7 +560,6 @@ namespace Core
 			if (ValidCubes.Length > 0)
 			{
 				ValidCubes[0] = new Bounds(new float3(-1f, -1f, -1f), new float3(-1f, -1f, -1f));
-				Bounds marea = new Bounds(position, area);
 				int count = 0;
 				for (int i = 0; i < entities.Length; i++)
 				{
@@ -507,7 +574,7 @@ namespace Core
 								if (!cds[i].Equals(exclude[j]))
 								{
 									Bounds b = new Bounds(translations[i].Value, cds[i].size);
-									if (marea.Intersects(b))
+									if (bounds.Intersects(b))
 									{
 										Debug.Log("Adding " + entityManager.GetName(entities[i]) + "to aviodables");
 										ValidCubes[count] = b;
@@ -528,7 +595,79 @@ namespace Core
 			}
 			return ValidCubes;
 		}
+		/// <summary>
+		/// returns a list of gameobjects within a given layer
+		/// </summary>
+		/// <param name="layer">layer</param>
+		/// <returns></returns>
+		public static GameObject[] FindGameObjectsWithLayer(int layer)
+		{
+			GameObject[] goArray = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+			List<GameObject> goList = new List<GameObject>();
+			for (int i = 0; i < goArray.Length; i++)
+				if (goArray[i].layer == layer) goList.Add(goArray[i]);
+			if (goList.Count == 0) return null;
+			return goList.ToArray();
+		}
+		/// <summary>
+		/// returns all the children within a gameObject
+		/// </summary>
+		/// <param name="go"></param>
+		/// <returns></returns>
+		public static GameObject[] GetGameObjectChildren(GameObject go)
+		{
+			List<GameObject> gos = new List<GameObject>();
+			for (int i = 0; i < go.transform.childCount; i++)
+				gos.Add(go.transform.GetChild(i).gameObject);
+			return gos.ToArray();
+		}
+		/// <summary>
+		/// looks for gameobjects within a list with a given namew
+		/// </summary>
+		/// <param name="go"></param>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public static GameObject FindGameObjectWithName(GameObject[] go, string name)
+		{
+			if (go != null)
+			{
+				for (int i = 0; i < go.Length; i++)
+					if (go[i].name == name) return go[i];
+			}
+			return null;
+		}
 
+		/// <summary>
+		/// Reference Article http://www.codeproject.com/KB/tips/SerializedObjectCloner.aspx
+		/// Provides a method for performing a deep copy of an object.
+		/// Binary Serialization is used to perform the copy.
+		/// Perform a deep Copy of the object.
+		/// </summary>
+		/// <typeparam name="T">The type of object being copied.</typeparam>
+		/// <param name="source">The object instance to copy.</param>
+		/// <returns>The copied object.</returns>
+		public static T Clone<T>(T source)
+		{
+			if (!typeof(T).IsSerializable)
+			{
+				throw new ArgumentException("The type must be serializable.", nameof(source));
+			}
+
+			// Don't serialize a null object, simply return the default for that object
+			if (System.Object.ReferenceEquals(source, null))
+			{
+				return default(T);
+			}
+
+			IFormatter formatter = new BinaryFormatter();
+			Stream stream = new MemoryStream();
+			using (stream)
+			{
+				formatter.Serialize(stream, source);
+				stream.Seek(0, SeekOrigin.Begin);
+				return (T)formatter.Deserialize(stream);
+			}
+		}
 	}
 
 	//Core structs

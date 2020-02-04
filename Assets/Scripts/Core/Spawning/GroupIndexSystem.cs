@@ -14,7 +14,7 @@ namespace Core.Spawning {
 		private EntityCommandBufferSystem ecbs;
 		private EntityQuery GroupIndexInfoQuery;
 		private int i;
-		private static int iia = 0, iib = 0, iic = 0, iid = 0, iie = 0, iif = 0;
+//		private static int iia = 0, iib = 0, iic = 0, iid = 0, iie = 0, iif = 0;
 		private string a; //used for debugging
 
 		protected override void OnCreate()

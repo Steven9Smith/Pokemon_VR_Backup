@@ -7,6 +7,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Core;
 
 namespace Core.UI {
 	public struct UIComponent : ISharedComponentData, IEquatable<UIComponent>
@@ -42,29 +43,7 @@ namespace Core.UI {
 	}
 	public class UIDataClass
 	{
-		public static GameObject[] FindGameObjectsWithLayer(int layer)
-		{
-			GameObject[] goArray = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
-			List<GameObject> goList = new List<GameObject>();
-			for (int i = 0; i < goArray.Length; i++)
-				if (goArray[i].layer == layer) goList.Add(goArray[i]);
-			if (goList.Count == 0) return null;
-			return goList.ToArray();
-		}
 		
-		public static GameObject[] GetGameObjectChildren(GameObject go)
-		{
-			List<GameObject> gos = new List<GameObject>();
-			for (int i = 0; i < go.transform.childCount; i++)
-				gos.Add(go.transform.GetChild(i).gameObject);
-			return gos.ToArray();
-		}
-		public static GameObject findGameObjectWithName(GameObject[] go, string name)
-		{
-			for (int i = 0; i < go.Length; i++)
-				if (go[i].name == name) return go[i];
-			return null;
-		}
 		public static void GenerateEntityUIGameObject(EntityManager entityManager,Entity entity,ref GameObject PlayerCanvas,ref GameObject WorldCanvas,UIComponentRequest uicr)
 		{
 			GameObject bob = Resources.Load("Core/UI/InGameUI/PlayerBarContainers") as GameObject;
@@ -72,10 +51,10 @@ namespace Core.UI {
 			UIComponent uic = new UIComponent { };
 			if (go != null)
 			{
-				GameObject[] containers = GetGameObjectChildren(go);
+				GameObject[] containers = CoreFunctionsClass.GetGameObjectChildren(go);
 				for (int i = 0; i < containers.Length; i++)
 				{
-					GameObject[] containerChildren = GetGameObjectChildren(containers[i]);
+					GameObject[] containerChildren = CoreFunctionsClass.GetGameObjectChildren(containers[i]);
 					for (int j = 0; j < containerChildren.Length; j++)
 					{
 					//	Debug.Log("Children: name = \"" + containerChildren[j].name + "\"");

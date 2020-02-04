@@ -92,11 +92,11 @@ namespace Pokemon
 		}
 	}
 	*/
-	[Serializable]
 	///<summary>
 	///Holds the data of a pokemon Entity
 	///</summary>
 	///
+	[Serializable]
 	public struct PokemonEntityData : IComponentData
 	{
 		public ushort PokedexNumber;
@@ -120,6 +120,32 @@ namespace Pokemon
 		public PokemonMoveSet pokemonMoveSet;
 		public int guiId;
 		public char BodyType;
+		public PokemonEntityData(ushort pokedexNumber = 0,float height = 0,ushort _experienceYield = 0, ushort levelingRate = 0,ushort freindship = 0,float speed = 0,float acceleration = 0,
+			float hp = 0,ushort attack = 0,ushort defense = 0,ushort specialAttack = 0, ushort specialDefense = 0, float CurrentStamina = 0,float MaxStamina = 0,float CurrentHp = 0,
+			float mass = 0, float JumpHeight = 0,int CurrentLevel = 0, PokemonMoveSet pms = new PokemonMoveSet(),int guiID = 0,char bodyType = (char)0)
+		{
+			PokedexNumber = pokedexNumber;
+			Height = height;
+			experienceYield = _experienceYield;
+			LevelingRate = levelingRate;
+			Freindship = freindship;
+			Speed = speed;
+			Acceleration = acceleration;
+			Hp = hp;
+			Attack = attack;
+			Defense = defense;
+			SpecialAttack = specialAttack;
+			SpecialDefense = specialDefense;
+			currentStamina = CurrentStamina;
+			maxStamina = MaxStamina;
+			currentHp = CurrentHp;
+			Mass = mass;
+			jumpHeight = JumpHeight;
+			currentLevel = CurrentLevel;
+			pokemonMoveSet = pms;
+			guiId = guiID;
+			BodyType = bodyType;
 
+		}
 	}
 }
