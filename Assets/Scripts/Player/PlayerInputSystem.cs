@@ -132,10 +132,20 @@ namespace Pokemon.Player
 						}
 						force *= acceleration;
 					}
+
+			//		if(maxVelocity.y < 0)
+			//		{
+//
+//					}
+
+
 					if (input.SpaceDown.Value == 1 && stateData.onGround)
 					{
+						//check stamina
 						float realJumpheight = pokemonEntityData.jumpHeight < pokemonEntityData.currentStamina ? pokemonEntityData.jumpHeight : pokemonEntityData.currentStamina;
+						//apply calculated jumpheight
 						velocity.Linear.y += realJumpheight;
+
 						pokemonEntityData.currentStamina = math.clamp(pokemonEntityData.currentStamina - realJumpheight, 0, pokemonEntityData.maxStamina);
 						if (!stateData.isJumping) StateDataClass.SetState(ref stateData, StateDataClass.State.Jumping);
 					}

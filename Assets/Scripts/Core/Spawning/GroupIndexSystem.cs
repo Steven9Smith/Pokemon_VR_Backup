@@ -7,6 +7,7 @@ using Unity.Physics;
 using UnityEngine;
 using Pokemon;
 using System.Collections;
+using Unity.Transforms;
 
 namespace Core.Spawning {
 	public class GroupIndexSystem : JobComponentSystem
@@ -27,9 +28,9 @@ namespace Core.Spawning {
 		/// this job changes the colliders groupindex into a new one
 		/// </summary>
 		//	[BurstCompile] <- in order for this to work we need to remove string from the getPokemonPhysicsCollider function
-		private struct GroupIndexChangeGroupIndexJob : IJobForEach<PhysicsCollider, PokemonEntityData,GroupIndexInfo,CoreData>
+		private struct GroupIndexChangeGroupIndexJob : IJobForEach<PhysicsCollider, PokemonEntityData,Scale,GroupIndexInfo,CoreData>
 		{
-			public void Execute(ref PhysicsCollider collider, ref PokemonEntityData ped,ref GroupIndexInfo gii,ref CoreData coreData)
+			public void Execute(ref PhysicsCollider collider, ref PokemonEntityData ped,ref Scale scale,ref GroupIndexInfo gii,ref CoreData coreData)
 			{
 				if (gii.Update)
 				{
@@ -76,7 +77,7 @@ namespace Core.Spawning {
 							BelongsTo = collider.Value.Value.Filter.BelongsTo,
 							CollidesWith = collider.Value.Value.Filter.CollidesWith,
 							GroupIndex = gii.CurrentGroupIndex
-						}, PokemonDataClass.GetPokemonColliderMaterial(coreData.BaseName.ToString()));
+						}, scale.Value,PokemonDataClass.GetPokemonColliderMaterial(PokemonDataClass.StringToPokedexEntry(coreData.BaseName.ToString())));
 				}
 			}
 		}

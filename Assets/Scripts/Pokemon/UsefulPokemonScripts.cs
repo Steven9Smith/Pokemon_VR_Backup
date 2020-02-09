@@ -467,7 +467,7 @@ namespace Pokemon
 					string pokemonName = psd.playerData.PokemonName.ToString();
 					if (pokemonName == "") pokemonName = "Electrode";
 					PlayerData pd = new PlayerData { Name = new ByteString30(playerName), PokemonName = new ByteString30(pokemonName) };
-					PokemonEntityData ped = PokemonDataClass.GenerateBasePokemonEntityData(pokemonName);
+					PokemonEntityData ped = PokemonDataClass.GenerateBasePokemonEntityData(PokemonDataClass.StringToPokedexEntry(pokemonName));
 					if (SavePlayerData(pd, ped))
 						LoadPlayerData(entityManager, entity, playerName);
 				}

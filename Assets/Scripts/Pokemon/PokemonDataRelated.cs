@@ -103,7 +103,7 @@ namespace Pokemon
 		public float3 firstPersonOffset;
 		public float3 thridPersonOffset;
 	}
-	public class PokemonDataClass {
+	public static class PokemonDataClass {
 		//use char to save space
 		public const char BODY_TYPE_HEAD_ONLY = (char)0;
 		public const char BODY_TYPE_HEAD_AND_LEGS = (char)1;
@@ -119,19 +119,185 @@ namespace Pokemon
 		public const char BODY_TYPE_SINGLE_PAIR_OF_WINGS = (char)11;
 		public const char BODY_TYPE_SERPANT_BODY = (char)12;
 		public const char BODY_TYPE_HEAD_WITH_ARMS = (char)13;
+		public const int MaxPokedexNumber = 151; //doing first gen first
+
+
+		public static PokemonData[] PokemonBaseData = GenerateBasePokemonDatas();
+		public static PokemonEntityData[] PokemonBaseEntityData = GenerateBasePokemonEntityDatas();
+		public static CompoundCollider.ColliderBlobInstance[][] PokemonBaseColliderData = GenerateBasePokemonColliderData();
+
+		/// <summary>
+		/// generates the base Pokemon Data for the PokemonBaseData Array
+		/// </summary>
+		/// <param name="exclude">array of indexs to exclude in the creation</param>
+		/// <returns></returns>
+		public static PokemonData[] GenerateBasePokemonDatas(int[] exclude = null)
+		{
+			if (PokemonBaseData == null) PokemonBaseData = new PokemonData[MaxPokedexNumber];
+			PokemonData[] temp = new PokemonData[MaxPokedexNumber];
+			if (exclude == null) exclude = new int[0];
+			for(var i = 1; i < MaxPokedexNumber; i++)
+			{
+				if(exclude.Length > 0)
+				{
+					bool match = false;
+					for(int j = 0; j < exclude.Length; j++)
+					{
+						if(exclude[j] == i)
+						{
+							temp[i] = PokemonBaseData[i];
+							match = true;
+							break;
+						}
+					}
+					if(!match) temp[i] = getBasePokemonData(i);
+				}
+				else temp[i] = getBasePokemonData(i);
+				
+			}
+			return temp;
+		}
+		
+		public static PokemonEntityData[] GenerateBasePokemonEntityDatas(int[] exclude = null)
+		{
+			if(exclude == null) exclude = new int[0];
+			PokemonEntityData[] pokemonEntityDatas = new PokemonEntityData[MaxPokedexNumber];
+			for (int i = 1; i < MaxPokedexNumber; i++)
+			{
+				if (exclude != null && exclude.Length > 0)
+				{
+					//	if (exclude.Length > 0)
+					//	{
+					bool match = false;
+					for (int j = 0; j < exclude.Length; j++)
+						if (exclude[j] != i){match = true; break;}
+					if(!match) pokemonEntityDatas[i] = GenerateBasePokemonEntityData(i);
+					//	}
+					//	else 
+				}
+				else pokemonEntityDatas[i] = GenerateBasePokemonEntityData(i);
+			}
+			return pokemonEntityDatas;
+		}
+
+		public static CompoundCollider.ColliderBlobInstance[][] GenerateBasePokemonColliderData(CollisionFilter[] collisionFilter = null,
+			Unity.Physics.Material[] material = null, int[] groupIndex = null,int[] exclude = null)
+		{
+			if (exclude == null) exclude = new int[0];
+			if (collisionFilter == null) collisionFilter = new CollisionFilter[MaxPokedexNumber];
+			if (material == null) material = new Unity.Physics.Material[MaxPokedexNumber];
+			if (groupIndex == null)
+			{
+				groupIndex = new int[MaxPokedexNumber];
+				for (int i = 0; i < MaxPokedexNumber; i++)groupIndex[i] = 1;
+			}
+			CompoundCollider.ColliderBlobInstance[][] temp = new CompoundCollider.ColliderBlobInstance[MaxPokedexNumber][];
+			PhysicsCollider physicsCollider = new PhysicsCollider { };
+			NativeArray<CompoundCollider.ColliderBlobInstance> colliders;
+
+			Quaternion rotation = new quaternion();
+			for (int i = 1; i < MaxPokedexNumber; i++)
+			{
+			//	Debug.Log("Height = "+ PokemonBaseEntityData[i].Height+" i = "+i);
+				if (collisionFilter[i].Equals(new CollisionFilter()))
+				{
+				//	Debug.Log("Creating new Collision Filter");
+					collisionFilter[i] = new CollisionFilter
+					{
+						BelongsTo = TriggerEventClass.Pokemon | TriggerEventClass.Collidable,
+						CollidesWith = TriggerEventClass.Collidable,
+						GroupIndex = groupIndex[i]
+					};
+				}
+				if (material[i].Equals(new Unity.Physics.Material())) material[i] = GetPokemonColliderMaterial(i);
+				temp[i] = GeneratePokemonCollider(i, collisionFilter[i], material[i], groupIndex[i]);
+			}
+			return temp;
+		}
+
+		public static CompoundCollider.ColliderBlobInstance[] GeneratePokemonCollider(int i,CollisionFilter collisionFilter,Unity.Physics.Material material,int groupIndex = 1,float scale = 1f)
+		{
+			CompoundCollider.ColliderBlobInstance[] colliders = new CompoundCollider.ColliderBlobInstance[0];
+			Quaternion rotation = new Quaternion();
+			switch (i)
+			{
+				case 104:
+					colliders = new CompoundCollider.ColliderBlobInstance[5];
+					colliders[0] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.SphereCollider.Create(new SphereGeometry { Center = new float3(0, 0.27f, 0.03f), Radius = 0.225f }, collisionFilter, material),
+						CompoundFromChild = new RigidTransform { pos = new float3 { x = 0, y = 0, z = 0 }, rot = quaternion.identity }
+					};
+					var a = GenerateCapsuleData(float3.zero, Vector3.right, 0.1f, 0.3f);
+					rotation.SetFromToRotation(Vector3.right, new Vector3(0, 90f, 0));
+					colliders[1] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.CapsuleCollider.Create(new CapsuleGeometry { Vertex0 = a.pointA, Vertex1 = a.pointB, Radius = 0.1f }, collisionFilter, material),
+						CompoundFromChild = new RigidTransform { pos = new float3(-0.17f, 0.19f, 0), rot = rotation }
+					};
+					colliders[2] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.CapsuleCollider.Create(new CapsuleGeometry { Vertex0 = a.pointA, Vertex1 = a.pointB, Radius = 0.1f }, collisionFilter, material),
+						CompoundFromChild = new RigidTransform { pos = new float3(0.17f, 0.19f, 0), rot = rotation }
+					};
+					colliders[3] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.SphereCollider.Create(new SphereGeometry { Center = float3.zero, Radius = 0.23f }, collisionFilter, material),
+						CompoundFromChild = new RigidTransform { pos = new float3(0, 0.75f, 0.03f), rot = rotation }
+					};
+					a = GenerateCapsuleData(float3.zero, Vector3.right, 0.1f, 0.3f);
+					rotation = Quaternion.Euler(0, 90f, 26f);
+					colliders[4] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.CapsuleCollider.Create(new CapsuleGeometry { Vertex0 = a.pointA, Vertex1 = a.pointB, Radius = 0.1f }, collisionFilter, material),
+						CompoundFromChild = new RigidTransform { pos = new float3(0, 0.63f, 0.33f), rot = rotation }
+					};
+					break;
+				case 101:
+					colliders = new CompoundCollider.ColliderBlobInstance[1];
+					colliders[0] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.SphereCollider.Create(new SphereGeometry
+						{
+							Center = float3.zero,
+							Radius = PokemonBaseEntityData[i].Height / 2
+						},
+						collisionFilter,
+						material
+						)
+					};
+					break;
+				default:
+					Debug.LogWarning("Failed to find collider for pokemon \"" + PokedexEntryToString((ushort)i) + "\"");
+					colliders = new CompoundCollider.ColliderBlobInstance[1];
+					colliders[0] = new CompoundCollider.ColliderBlobInstance
+					{
+						Collider = Unity.Physics.SphereCollider.Create(new SphereGeometry
+						{
+							Center = float3.zero,
+							Radius = PokemonBaseEntityData[i].Height > 0 ? PokemonBaseEntityData[i].Height / 2 : 1f
+						},
+						   collisionFilter,
+						   material
+						)
+					};
+					break;
+			}
+			return colliders;
+		} 
+
 
 		/// <summary>
 		/// returns the pokemon's base data
 		/// </summary>
 		/// <param name="pokedexEntry">pokedex entry number</param>
 		/// <returns>PokemonData</returns>
-		public static PokemonData getBasePokemonData(uint pokedexEntry = 0)
+		public static PokemonData getBasePokemonData(int pokedexEntry = 0)
 		{
 			PokemonData pd = new PokemonData { };
 			switch (pokedexEntry)
 			{
 				//Bulbasaur
-				case 0:
 				case 1: //bulbasaur
 					pd = new PokemonData
 					{
@@ -210,6 +376,7 @@ namespace Pokemon
 						PokedexNumber = 3
 					};
 					break;
+				case 0:
 				case 101: //Electrode
 					pd = new PokemonData {
 						CatchRate = 14.8f,
@@ -262,6 +429,9 @@ namespace Pokemon
 						PokedexNumber = 104
 					};
 					break;
+				default:
+					Debug.LogWarning("Failed to get BasePokemonData for \""+pokedexEntry+"\"");
+					break;
 			}
 			return pd;
 		}
@@ -280,6 +450,18 @@ namespace Pokemon
 				case "Electrode": return 101;
 				case "Cubone": return 104;
 				default: return 0;
+			}
+		}
+		
+		public static string PokedexEntryToString(ushort entry)
+		{
+			switch (entry)
+			{
+				case 1: return "Bulbasaur";
+				case 2: return "Ivysaur";
+				case 3: return "Venasaur";
+				case 101: return "Electrode";
+				default: return "unknown_pokemon "+entry.ToString();
 			}
 		}
 		/// <summary>
@@ -332,44 +514,43 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName">the name oof the pokemon</param>
 		/// <returns>PokemonEntityData</returns>
-		public static PokemonEntityData GenerateBasePokemonEntityData(string pokemonName)
+		public static PokemonEntityData GenerateBasePokemonEntityData(int pokedexEntry)
 		{
-			PokemonData pd = getBasePokemonData(StringToPokedexEntry(pokemonName));
+			//	PokemonData pd = getBasePokemonData(StringToPokedexEntry(pokemonName));
+			PokemonData pd = PokemonBaseData[pokedexEntry];
 			//add the PokemonEntityData
-			if (pd.PokedexNumber == 0) { Debug.LogError("Failed to get basic pokemonData"); return new PokemonEntityData { }; }
-			else
+
+			float jumpHeight = 1.0f;
+			switch (pokedexEntry)
 			{
-				float jumpHeight = 1.0f;
-				switch (pokemonName.ToString()){
-					case "Electrode": jumpHeight = 5.0f; break;
-					case "Cubone": jumpHeight = 5f;break;
-					default: Debug.LogError("Failed to find a jumpHeight multipler for \""+pokemonName+"\"");break;
-				}
-			//	Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
-				return new PokemonEntityData
-				{
-					Acceleration = pd.BaseAcceleration,
-					Attack = pd.BaseAttack,
-					SpecialAttack = pd.BaseSpecialAttack,
-					currentHp = pd.BaseHp,
-					SpecialDefense = pd.BaseSpcialDefense,
-					Speed = pd.BaseSpeed,
-					currentStamina = pd.BaseHp,
-					maxStamina = pd.BaseHp,
-					Mass = pd.Mass,
-					jumpHeight = jumpHeight,
-					Hp = pd.BaseHp,
-					Defense = pd.BaseDefense,
-					currentLevel = 1,
-					experienceYield = pd.BaseExpericeYield,
-					Height = pd.Height,
-					LevelingRate = pd.LevelingRate,
-					guiId = 123,
-					PokedexNumber = pd.PokedexNumber,
-					Freindship = pd.BaseFriendship,
-					pokemonMoveSet = getBasePokemonMoveSet(pokemonName)
-				};
+				case 101: jumpHeight = 5.0f; break;
+				default: Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\""); break;
 			}
+			//	Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
+			return new PokemonEntityData
+			{
+				Acceleration = pd.BaseAcceleration,
+				Attack = pd.BaseAttack,
+				SpecialAttack = pd.BaseSpecialAttack,
+				currentHp = pd.BaseHp,
+				SpecialDefense = pd.BaseSpcialDefense,
+				Speed = pd.BaseSpeed,
+				currentStamina = pd.BaseHp,
+				maxStamina = pd.BaseHp,
+				Mass = pd.Mass,
+				jumpHeight = jumpHeight,
+				Hp = pd.BaseHp,
+				Defense = pd.BaseDefense,
+				currentLevel = 1,
+				experienceYield = pd.BaseExpericeYield,
+				Height = pd.Height,
+				LevelingRate = pd.LevelingRate,
+				guiId = 123,
+				PokedexNumber = pd.PokedexNumber,
+				Freindship = pd.BaseFriendship,
+				pokemonMoveSet = getBasePokemonMoveSet(PokedexEntryToString((ushort)pokedexEntry))
+			};
+
 
 		}
 		/// <summary>
@@ -416,7 +597,7 @@ namespace Pokemon
 		/// <param name="pokemonName">Name of the pokemon</param>
 		/// <returns>PhysicsCollider</returns>
 		public static PhysicsCollider getPokemonPhysicsCollider(string pokemonName,PokemonEntityData ped,
-			CollisionFilter collisionFilter = new CollisionFilter(),Unity.Physics.Material material = new Unity.Physics.Material(),
+			CollisionFilter collisionFilter = new CollisionFilter(), float scale = 1f,Unity.Physics.Material material = new Unity.Physics.Material(),
 			int groupIndex = 1) 
 		{
 			///FUTURE UPDATE
@@ -424,9 +605,6 @@ namespace Pokemon
 
 			//needs collision groups
 			PhysicsCollider physicsCollider = new PhysicsCollider { };
-			PhysicsShapeAuthoring physicsShape;
-			float radius, height;
-			float3 center;
 			Quaternion rotation = new quaternion();
 			//if default collision filter is detected then create one realted to the pokemon
 			if (collisionFilter.Equals(new CollisionFilter()))
@@ -440,7 +618,7 @@ namespace Pokemon
 				};
 			}
 			if (material.Equals(new Unity.Physics.Material()))
-				material = GetPokemonColliderMaterial(pokemonName);
+				material = GetPokemonColliderMaterial(StringToPokedexEntry(pokemonName));
 			switch (pokemonName)
 			{
 				case "Cubone":
@@ -475,6 +653,7 @@ namespace Pokemon
 						CompoundFromChild = new RigidTransform { pos = new float3(0, 0.63f, 0.33f),rot = rotation }
 					};
 					physicsCollider = new PhysicsCollider { Value = CompoundCollider.Create(colliders) };
+					if (scale > 1f) Debug.LogWarning("Cannot scale Cubone");
 					colliders.Dispose();
 					break;
 				case "Electrode":
@@ -482,7 +661,7 @@ namespace Pokemon
 					physicsCollider = new PhysicsCollider { Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
 						{
 							Center = float3.zero,
-							Radius = ped.Height/2
+							Radius = ped.Height/2*scale
 						},
 						collisionFilter,
 						material
@@ -495,7 +674,7 @@ namespace Pokemon
 						Value = Unity.Physics.SphereCollider.Create(new SphereGeometry
 						{
 							Center = float3.zero,
-							Radius = ped.Height / 2
+							Radius = ped.Height / 2*scale
 						},
 					   collisionFilter,
 					   material
@@ -507,17 +686,17 @@ namespace Pokemon
 			return physicsCollider; 
 		}
 
-		public static Unity.Physics.Material GetPokemonColliderMaterial(string pokemonName,
+		public static Unity.Physics.Material GetPokemonColliderMaterial(int pokedexEntry,
 			Unity.Physics.Material.MaterialFlags materialFlags = Unity.Physics.Material.MaterialFlags.EnableMassFactors)
 		{
 			Unity.Physics.Material material = Unity.Physics.Material.Default;
-			switch (pokemonName)
+			switch (pokedexEntry)
 			{
-				case "Electrode":
+				case 101:
 					material = Unity.Physics.Material.Default;
 					break;
 				default:
-					Debug.Log("PokemonDataRealted: GetPokemonColliderMaterial: Failed to get a ColliderMaterial for \""+pokemonName+"\"");
+					Debug.LogWarning("PokemonDataRealted: GetPokemonColliderMaterial: Failed to get a ColliderMaterial for \""+"\"");
 					material = Unity.Physics.Material.Default;
 					break;
 			}
@@ -528,7 +707,7 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="material">material to stringify</param>
 		/// <returns>string</returns>
-		public string PhysicsMaterialToString(Unity.Physics.Material material)
+		public static string PhysicsMaterialToString(Unity.Physics.Material material)
 		{
 			return "Unity.Physics.Material: \nEnableCollision: "+material.EnableCollisionEvents+", EnableMassFactors: "+material.EnableMassFactors+", EnableSurfaceVelocity: "+material.EnableSurfaceVelocity+", IsTrigger: "+material.IsTrigger+
 				"\nCustom Tags: "+material.CustomTags.ToString()+"\nFriction: "+material.Friction.ToString()+"\nRestitution: "+material.Restitution.ToString();
@@ -584,15 +763,20 @@ namespace Pokemon
 			entityManager.SetComponentData(entity, new Translation { Value = position });
 			entityManager.SetComponentData(entity, cdata);
 			SetPokemonCameraData(cdata.BaseName,entity, entityManager);
-			PokemonEntityData ped = GenerateBasePokemonEntityData(cdata.BaseName.ToString());
+			PokemonEntityData ped = GenerateBasePokemonEntityData(StringToPokedexEntry(cdata.BaseName.ToString()));
 			SetPhysicsDamping(entityManager, entity, cdata.BaseName, ped);
 			entityManager.SetComponentData(entity, ped);
+		/*	NativeArray<CompoundCollider.ColliderBlobInstance> cc = new NativeArray<CompoundCollider.ColliderBlobInstance>(PokemonBaseColliderData[StringToPokedexEntry(cdata.BaseName.ToString())],Allocator.TempJob);
+			PhysicsCollider pc = new PhysicsCollider{
+				Value = CompoundCollider.Create(cc)
+			};
+			cc.Dispose();*/
 			PhysicsCollider pc = getPokemonPhysicsCollider(cdata.BaseName.ToString(), ped, new CollisionFilter
 			{
 				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
 				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
 				GroupIndex = 1
-			});
+			},scale);
 			entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(pc.MassProperties, ped.Mass));
 			entityManager.SetComponentData(entity, pc);
 			entityManager.SetComponentData(entity, new PhysicsVelocity { Angular = float3.zero, Linear = float3.zero });
@@ -613,7 +797,6 @@ namespace Pokemon
 				visible = true
 			});
 			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
-			
 			return entity;
 		}
 		/// <summary>

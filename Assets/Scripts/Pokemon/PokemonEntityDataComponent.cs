@@ -119,10 +119,12 @@ namespace Pokemon
 		public int currentLevel;
 		public PokemonMoveSet pokemonMoveSet;
 		public int guiId;
+		public float jumpMultiplier;
+		public float longJumpMultiplier;
 		public char BodyType;
 		public PokemonEntityData(ushort pokedexNumber = 0,float height = 0,ushort _experienceYield = 0, ushort levelingRate = 0,ushort freindship = 0,float speed = 0,float acceleration = 0,
 			float hp = 0,ushort attack = 0,ushort defense = 0,ushort specialAttack = 0, ushort specialDefense = 0, float CurrentStamina = 0,float MaxStamina = 0,float CurrentHp = 0,
-			float mass = 0, float JumpHeight = 0,int CurrentLevel = 0, PokemonMoveSet pms = new PokemonMoveSet(),int guiID = 0,char bodyType = (char)0)
+			float mass = 0, float JumpHeight = 0,int CurrentLevel = 0, PokemonMoveSet pms = new PokemonMoveSet(),int guiID = 0,char bodyType = (char)0,float jMultiplier = 2f,float ljMultiplier = 2.5f)
 		{
 			PokedexNumber = pokedexNumber;
 			Height = height;
@@ -145,7 +147,8 @@ namespace Pokemon
 			pokemonMoveSet = pms;
 			guiId = guiID;
 			BodyType = bodyType;
-
+			jumpMultiplier = jMultiplier;
+			longJumpMultiplier = ljMultiplier;
 		}
 	}
 }

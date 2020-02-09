@@ -423,7 +423,7 @@ namespace Core.Spawning {
 		}
 		
 
-		public static void ExecutePhysicalAttack(EntityManager entityManager,string pokemonName,Entity pokemonEntity,PokemonEntityData ped)
+		public static void ExecutePhysicalAttack(EntityManager entityManager,string pokemonName,Entity pokemonEntity,PokemonEntityData ped,Scale scale)
 		{
 			//change the Entity's CollisionFilter From player/entity to attacking player/ entity
 			entityManager.AddComponentData(pokemonEntity, PokemonDataClass.getPokemonPhysicsCollider(pokemonName,
@@ -432,7 +432,7 @@ namespace Core.Spawning {
 					BelongsTo = TriggerEventClass.PokemonAttacking,
 					CollidesWith = uint.MaxValue,
 					GroupIndex = 1
-				},new Unity.Physics.Material {
+				},scale.Value,new Unity.Physics.Material {
 					Flags = Unity.Physics.Material.MaterialFlags.IsTrigger
 				})
 			);
