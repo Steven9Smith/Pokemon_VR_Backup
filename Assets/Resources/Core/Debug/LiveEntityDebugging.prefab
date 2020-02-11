@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &652141146240414004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 316385119027941936}
+  - component: {fileID: 645487715514675539}
+  m_Layer: 0
+  m_Name: LiveEntityDebugging
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &316385119027941936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652141146240414004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645487715514675539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652141146240414004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b09b37268dd768419f359579c5c644f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Display:
+    EntityName: 
+    position:
+      x: 0
+      y: 0
+      z: 0
+    scale: 0
+    physicsVelocity:
+      Angular:
+        x: 0
+        y: 0
+        z: 0
+      Linear:
+        x: 0
+        y: 0
+        z: 0
+    physicsDamping:
+      Angular:
+        x: 0
+        y: 0
+        z: 0
+      Linear:
+        x: 0
+        y: 0
+        z: 0
+    coreData:
+      Name: 
+      BaseName: 
+    stateData:
+      isJumping: 0
+      isCreeping: 0
+      isWalking: 0
+      isCrouching: 0
+      isIdle: 0
+      isRunning: 0
+      isAttacking1: 0
+      isAttacking2: 0
+      isAttacking3: 0
+      isAttacking4: 0
+      isEmoting1: 0
+      isEmoting2: 0
+      isEmoting3: 0
+      isEmoting4: 0
+      onGround: 0
+    pokemonEntityData:
+      PokedexNumber: 0
+      Height: 0
+      experienceYield: 0
+      LevelingRate: 0
+      Freindship: 0
+      Speed: 0
+      Acceleration: 0
+      Hp: 0
+      Attack: 0
+      Defense: 0
+      SpecialAttack: 0
+      SpecialDefense: 0
+      currentStamina: 0
+      maxStamina: 0
+      currentHp: 0
+      Mass: 0
+      jumpHeight: 0
+      currentLevel: 0
+      pokemonMoveSet:
+        pokemonMoveA:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveB:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveC:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveD:
+          name: 
+          isValid: 0
+          index: 0
+      guiId: 0
+      BodyType: 0
+  Change:
+    EntityName: 
+    position:
+      x: 0
+      y: 0
+      z: 0
+    scale: 0
+    physicsVelocity:
+      Angular:
+        x: 0
+        y: 0
+        z: 0
+      Linear:
+        x: 0
+        y: 0
+        z: 0
+    physicsDamping:
+      Angular:
+        x: 0
+        y: 0
+        z: 0
+      Linear:
+        x: 0
+        y: 0
+        z: 0
+    coreData:
+      Name: 
+      BaseName: 
+    stateData:
+      isJumping: 0
+      isCreeping: 0
+      isWalking: 0
+      isCrouching: 0
+      isIdle: 0
+      isRunning: 0
+      isAttacking1: 0
+      isAttacking2: 0
+      isAttacking3: 0
+      isAttacking4: 0
+      isEmoting1: 0
+      isEmoting2: 0
+      isEmoting3: 0
+      isEmoting4: 0
+      onGround: 0
+    pokemonEntityData:
+      PokedexNumber: 0
+      Height: 0
+      experienceYield: 0
+      LevelingRate: 0
+      Freindship: 0
+      Speed: 0
+      Acceleration: 0
+      Hp: 0
+      Attack: 0
+      Defense: 0
+      SpecialAttack: 0
+      SpecialDefense: 0
+      currentStamina: 0
+      maxStamina: 0
+      currentHp: 0
+      Mass: 0
+      jumpHeight: 0
+      currentLevel: 0
+      pokemonMoveSet:
+        pokemonMoveA:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveB:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveC:
+          name: 
+          isValid: 0
+          index: 0
+        pokemonMoveD:
+          name: 
+          isValid: 0
+          index: 0
+      guiId: 0
+      BodyType: 0

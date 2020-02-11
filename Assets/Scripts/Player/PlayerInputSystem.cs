@@ -10,6 +10,7 @@ using Unity.Transforms;
 using Unity.Rendering;
 using Core.ParentChild;
 using Core.Spawning;
+using UnityEngine;
 using Core;
 
 namespace Pokemon.Player
@@ -84,7 +85,7 @@ namespace Pokemon.Player
 				//store the the velocity 
 				float3 maxVelocity = math.abs(velocity.Linear);
 				float acceleration = pokemonEntityData.Acceleration;
-				//improve ground detection by using Collision Filters rather than bad math
+		/*		//improve ground detection by using Collision Filters rather than bad math
 				if (maxVelocity.y < 1 && maxVelocity.y >= 0) stateData.onGround = true;
 				else stateData.onGround = false;
 
@@ -133,10 +134,7 @@ namespace Pokemon.Player
 						force *= acceleration;
 					}
 
-			//		if(maxVelocity.y < 0)
-			//		{
-//
-//					}
+					
 
 
 					if (input.SpaceDown.Value == 1 && stateData.onGround)
@@ -152,12 +150,43 @@ namespace Pokemon.Player
 				}
 
 				force *= deltaTime;
-				force.y = 0f;
+				force.y = 0f;*/
 				//Debug.Log("input "+input.forward+" force = "+force+" velocity = "+velocity.Linear);
 			//	if(pokemonEntityData.BodyType != PokemonDataClass.BODY_TYPE_HEAD_ONLY) velocity.Linear += force;
 			//	else velocity.Angular += force;
 				velocity.Linear += force;
 				//Debug.Log("move = "+input.Move+" | acceleration = "+acceleration+" | playerMaxSpeed = "+playerMaxSpeed+" \nvelocity = "+velocity.Linear+" rotation = "+rotation.Value);
+
+				float3 currentVelocity = velocity.Linear;
+				//if player is trying to move on x or z
+				Vector3 camF = input.forward;
+				Vector3 camR = input.right;
+				camF.y = 0f;
+				camR.y = 0f;
+				camF = camF.normalized;
+				camR = camR.normalized;
+				float3 movement = ((input.Move.x * acceleration * (float3)camR)+ (input.Move.z*acceleration*(float3)camF)) * deltaTime;
+
+				
+				if (currentVelocity.y < 1 && input.SpaceDown.Value == 1)
+				{
+					movement.y = pokemonEntityData.jumpHeight;
+				}else if(currentVelocity.y > 1 && input.SpaceDown.Value == 1)
+				{
+				//	float realJumpheight = pokemonEntityData.jumpHeight < pokemonEntityData.currentStamina ? pokemonEntityData.jumpHeight : pokemonEntityData.currentStamina;
+
+					movement.y = (pokemonEntityData.longJumpMultiplier - 1) * deltaTime;
+				}
+				else if (currentVelocity.y > 1 && input.SpaceDown.Value == 1)
+				{
+					movement.y = (pokemonEntityData.jumpMultiplier - 1) * deltaTime;
+				}
+
+				velocity.Linear += movement;
+			//	Debug.Log(velocity.Linear+","+pokemonEntityData.Speed);
+				velocity.Linear.x = Mathf.Clamp(velocity.Linear.x, -pokemonEntityData.Speed/ PokemonDataClass.PokemonSpeedStatDivider, pokemonEntityData.Speed/ PokemonDataClass.PokemonSpeedStatDivider);
+				velocity.Linear.z = Mathf.Clamp(velocity.Linear.z, -pokemonEntityData.Speed/PokemonDataClass.PokemonSpeedStatDivider, pokemonEntityData.Speed/ PokemonDataClass.PokemonSpeedStatDivider);
+		//		Debug.Log(velocity.Linear+","+movement+","+currentVelocity);
 			}
 			private void gainEnergy(StateData stateData,ref PokemonEntityData ped, float time) { if (ped.currentStamina < ped.maxStamina && ped.currentHp > 0 && !stateData.isRunning ) ped.currentStamina = math.clamp(ped.currentStamina + (ped.Mass / (ped.Hp / ped.currentHp) * time), 0, ped.maxStamina); }
 		}

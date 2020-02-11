@@ -1,0 +1,260 @@
+fileFormatVersion: 2
+guid: b1710c3c9eb09d94ea33ef33e0b16cd4
+ModelImporter:
+  serializedVersion: 28
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black_lambert
+    second: {fileID: 2100000, guid: fda947c467dabb34eb587cf87daaf511, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 082fd7f3305dbc74a8f66bf343854363, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gray_Lambert
+    second: {fileID: 2100000, guid: 410f0129ed4520f46b351ff3c16c1da1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Chair_0_Allu
+    second: {fileID: 2100000, guid: fe9316824f9ad0e4b844c8c0fa490a8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Chair_0_Yellow
+    second: {fileID: 2100000, guid: a189e7d4d0da67a4c820ceb652402395, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Computer_0_Red
+    second: {fileID: 2100000, guid: 001106cdada04e643964373b97b2abc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Computer_0_Screen
+    second: {fileID: 2100000, guid: 2475dbf8cd547764ca96a1b4b0178d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Computer_0_White
+    second: {fileID: 2100000, guid: 59228a96cd0b5d64d870d7ca03e0908b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Desk_Bottom_0
+    second: {fileID: 2100000, guid: e3b336ee57599c54c9358f4fd257b255, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Desk_Swinging_Door_0_Allu
+    second: {fileID: 2100000, guid: ef7ff36331678654e881dbe603ba707e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Desk_Swinging_Door_0_White
+    second: {fileID: 2100000, guid: e78a378bad9e95e4db7e8df872d75ba8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Desk_Top_0
+    second: {fileID: 2100000, guid: 001106cdada04e643964373b97b2abc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Healing_Machine_0_Allu
+    second: {fileID: 2100000, guid: fe9316824f9ad0e4b844c8c0fa490a8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Healing_Machine_0_Aqua
+    second: {fileID: 2100000, guid: 307e1b9a555f6a94790ce9cadaacd6cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Healing_Machine_0_Gray
+    second: {fileID: 2100000, guid: 410f0129ed4520f46b351ff3c16c1da1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Healing_Machine_0_Screen
+    second: {fileID: 2100000, guid: fda947c467dabb34eb587cf87daaf511, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Healing_Machine_0_White
+    second: {fileID: 2100000, guid: 450b149051176e74fb0ef693ea478826, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_LIght_Allu_0
+    second: {fileID: 2100000, guid: 36f3ddcbef682584cb9ee507ed434282, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Plant_Pot_0_Dirt
+    second: {fileID: 2100000, guid: 1510e6fb019e76b4db8ffa31aa188f5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Plant_Pot_0_Light_Brown
+    second: {fileID: 2100000, guid: 94de78f9739406545b002ecbcd7f4c87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Table_0_Allu
+    second: {fileID: 2100000, guid: 3617d1d6900a1bc47af2364fcf0fb718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Table_0_Logo
+    second: {fileID: 2100000, guid: 90b98238157260d4f8760882d31b3c5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Table_0_Red
+    second: {fileID: 2100000, guid: 14a042a178a67224ca067cdd84a0b4d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Center_Wall_0
+    second: {fileID: 2100000, guid: 5f0ae3fd85521304bbb5a61a04bacdd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pokemon_Symbol_Stripe
+    second: {fileID: 2100000, guid: 4fd4033d5622dea4498825ea4edec5b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red_Lambert
+    second: {fileID: 2100000, guid: 001106cdada04e643964373b97b2abc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_Glass
+    second: {fileID: 2100000, guid: 952bca6b7ead9bd4e906d9c610c7e70f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White_Lambert
+    second: {fileID: 2100000, guid: 1ce1a7e5f71b4384e80a8cefe31abc43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 1d511142fee1d5e4282def6be0e30af3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert11
+    second: {fileID: 2100000, guid: 7415ea0bce04ceb4f80fbda4e4013f3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert13
+    second: {fileID: 2100000, guid: 2355b4c78ef42c54fa75a5c41c2db874, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert14
+    second: {fileID: 2100000, guid: 6d0ed5aa58b912745b94c18cf73d5b1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: surfaceShader1
+    second: {fileID: 2100000, guid: 1b8ae0f3344eca7488850bdbe2d73659, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

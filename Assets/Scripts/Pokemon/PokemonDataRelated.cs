@@ -102,6 +102,8 @@ namespace Pokemon
 	{
 		public float3 firstPersonOffset;
 		public float3 thridPersonOffset;
+		public BlittableBool offsetSet;
+		public int viewMode;
 	}
 	public static class PokemonDataClass {
 		//use char to save space
@@ -125,6 +127,7 @@ namespace Pokemon
 		public static PokemonData[] PokemonBaseData = GenerateBasePokemonDatas();
 		public static PokemonEntityData[] PokemonBaseEntityData = GenerateBasePokemonEntityDatas();
 		public static CompoundCollider.ColliderBlobInstance[][] PokemonBaseColliderData = GenerateBasePokemonColliderData();
+		public static float PokemonSpeedStatDivider = 10f;
 
 		/// <summary>
 		/// generates the base Pokemon Data for the PokemonBaseData Array

@@ -77,7 +77,7 @@ namespace Core
 								DebugComponent.GlobalSettings.applyChange = false;
 								DebugComponent.GlobalSettings.editMode = false;
 							}
-							else if (!DebugComponent.GlobalSettings.IsUpdated())
+							else if (!DebugComponent.GlobalSettings.IsUpdated() && !DebugComponent.GlobalSettings.editMode)
 								DebugComponent.GlobalSettings.Update();
 						}
 					}

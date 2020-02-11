@@ -27,19 +27,36 @@ public class GlobalSettings
 {
 	public bool applyChange;							//whether or not to apply the change to Global Settings when applyChange is clicked
 	public bool editMode;								//enable edit mode for Global Settings
-	public PokemonStatSettings mPokmonStatSettings;		//Pokemon Stat  Settings
+	public PokemonStatSettings mPokmonStatSettings;     //Pokemon Stat  Settings
+	public PokemonCalculationSettings mPokemonCalculationSettings;
 	public void Update()
 	{
 		this.mPokmonStatSettings.Update();
+		mPokemonCalculationSettings.Update();
 	}
 	public bool IsUpdated()
 	{
 		if (!this.mPokmonStatSettings.IsUpdated()) return false;
+		else if (!mPokemonCalculationSettings.IsUpdated()) return false;
 		return true;
 	}
 	public void ApplyChanges()
 	{
 		this.mPokmonStatSettings.ApplyChanges();
+		mPokemonCalculationSettings.ApplyChanges();
+	}
+}
+[Serializable]
+public class PokemonCameraOffset
+{
+	public float3 offset;
+	public void Update(PokemonCameraData pcd)
+	{
+		
+	}
+	public void ApplyChanges()
+	{
+
 	}
 }
 [Serializable]
@@ -82,7 +99,8 @@ public class PokemonColliderArray
 /// </summary>
 [Serializable]
 public class PokemonStatSettings
-{
+{ 
+	public bool DoNotChange = true;
 	public PokemonData[] PokemonBaseDataStats;				//Pokemon Base Stats (these are the base stats new pokemon are given when spawned)
 	public PokemonEntityData[] PokemonEntityDataStats;		//Pokemon Entity Data Stats these are the base entity data stats given when a new pokemon is spawned
 //	public PokemonColliderArray PokemonColliderDataStats;
@@ -120,12 +138,58 @@ public class PokemonStatSettings
 	}
 	public void ApplyChanges()
 	{
-		PokemonDataClass.PokemonBaseData = PokemonBaseDataStats;
-		PokemonDataClass.PokemonBaseEntityData = PokemonEntityDataStats;
-//		for(int i = 1; i < PokemonColliderDataStats.vColliders.Length; i++) 
-//			PokemonDataClass.PokemonBaseColliderData[i] = PokemonColliderDataStats.vColliders[i].Colliders;
+		if (!DoNotChange)
+		{
+			PokemonDataClass.PokemonBaseData = PokemonBaseDataStats;
+			PokemonDataClass.PokemonBaseEntityData = PokemonEntityDataStats;
+			//		for(int i = 1; i < PokemonColliderDataStats.vColliders.Length; i++) 
+			//			PokemonDataClass.PokemonBaseColliderData[i] = PokemonColliderDataStats.vColliders[i].Colliders;
+		}
 	}
 }
+[Serializable]
+public class PokemonCalculationSettings
+{
+	public DebugPokemonSpeedStatDivider PokemonSpeedStatDivider;
+
+	public void Update()
+	{
+		PokemonSpeedStatDivider.Update();
+	}
+	public bool IsUpdated()
+	{
+		return PokemonSpeedStatDivider.IsUpdated();
+	}
+	public void ApplyChanges()
+	{
+		PokemonSpeedStatDivider.ApplyChange();
+	}
+}
+[Serializable]
+public class DebugPokemonSpeedStatDivider
+{
+	public bool DoNotChange = true;
+	public float PokemonSpeedStatDivider;
+	public void Update()
+	{
+		PokemonSpeedStatDivider = PokemonDataClass.PokemonSpeedStatDivider;
+	}
+	public bool IsUpdated()
+	{
+		return PokemonSpeedStatDivider == PokemonDataClass.PokemonSpeedStatDivider;
+	}
+	public void ApplyChange()
+	{
+		Debug.Log("Chainging");
+		if (!DoNotChange)
+		{
+			Debug.Log("setting to "+PokemonSpeedStatDivider);
+			PokemonDataClass.PokemonSpeedStatDivider = PokemonSpeedStatDivider;
+		}
+		else Debug.Log("chagne failed");
+	}
+}
+
 [Serializable]
 public class EntityDebug
 {
@@ -143,7 +207,7 @@ public class EntityDebug
 	public DebugCoreData coreData;						//CoreData component of the Entity (this game is being made with every entity having a CoreData component)
 	public DebugPhysicsMass physicsMass;                //PhysicsMass of the Entity (cannot be edited due to its reliance on the PokemonEntityData) (if it has one)
 	public DebugPokemonEntityData pokemonEntityData;    //PokemonEntityData of the Entity (if it has one)
-
+	public PokemonCameraOffset pokemonCameraOffset; 
 	private string[] temp;
 
 	public void Update(EntityManager entityManager, Entity entity)
