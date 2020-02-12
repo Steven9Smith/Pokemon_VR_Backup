@@ -208,7 +208,7 @@ namespace Pokemon
 		}
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			return new PokemonMoveEntityJob { deltaTime = Time.deltaTime,
+			return new PokemonMoveEntityJob { deltaTime = Time.DeltaTime,
 			//	hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
 			}.Schedule(this, inputDeps);
 		}
@@ -273,7 +273,7 @@ namespace Pokemon
 		{
 			return new PokemonMoveEntityJob
 			{
-				deltaTime = Time.deltaTime,
+				deltaTime = Time.DeltaTime,
 			//	hasGroupIndexChangeRequest = GetComponentDataFromEntity<GroupIndexChangeRequest>(),
 			}.Schedule(this, inputDeps);
 		}

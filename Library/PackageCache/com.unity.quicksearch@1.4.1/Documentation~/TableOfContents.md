@@ -1,0 +1,5 @@
+* [Quick Search](index)
+* [Usage](usage)
+* [Search Providers](providers)
+* [Preferences](settings)
+* [API](api)

@@ -108,7 +108,12 @@ namespace Pokemon
 		public Entity CreateDynamicSphere(RenderMesh displayMesh, float radius, float3 position, quaternion orientation)
 		{
 			// Sphere with default filter and material. Add to Create() call if you want non default:
-			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(float3.zero, radius, new CollisionFilter { BelongsTo= TriggerEventClass.NPC, CollidesWith = uint.MaxValue, GroupIndex = 0 });
+			SphereGeometry sphereGeometry = new SphereGeometry
+			{
+				Center = float3.zero,
+				Radius = radius
+			};
+			BlobAssetReference<Unity.Physics.Collider> spCollider = Unity.Physics.SphereCollider.Create(sphereGeometry, new CollisionFilter { BelongsTo= TriggerEventClass.NPC, CollidesWith = uint.MaxValue, GroupIndex = 0 });
 			return CreateBody(displayMesh, position, orientation, spCollider, float3.zero, float3.zero, 1.0f, true);
 		}
 		public Entity CreateBody(RenderMesh displayMesh, float3 position, quaternion orientation,

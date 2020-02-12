@@ -1,0 +1,8 @@
+{
+  "ExternalFunctions": [
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility::MemMove",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility.MemMove(void* destination, void* source, long size)_9CDB0308405CA07A"
+    }
+  ]
+}

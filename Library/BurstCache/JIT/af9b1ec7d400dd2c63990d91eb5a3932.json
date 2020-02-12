@@ -1,0 +1,12 @@
+{
+  "ExternalFunctions": [
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility::Malloc",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility.Malloc(long size, int alignment, Unity.Collections.Allocator allocator)_FEDE5F1D450F457E"
+    },
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility::MemCpy",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility.MemCpy(void* destination, void* source, long size)_8CCD34AD7DB6E2F7"
+    }
+  ]
+}

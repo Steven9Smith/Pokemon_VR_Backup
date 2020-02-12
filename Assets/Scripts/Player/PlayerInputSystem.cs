@@ -176,7 +176,7 @@ namespace Pokemon.Player
 				Mouse2Down = Input.GetKeyDown(KeyCode.Mouse2),
 				MouseX = Input.GetAxis("Mouse X"),
 				MouseY = Input.GetAxis("Mouse Y"),
-				deltaTime = Time.deltaTime,
+				deltaTime = Time.DeltaTime,
 				attackADown = inputDefinitionsClass.isAttackA(),
 				attackBDown = inputDefinitionsClass.isAttackB(),
 				attackCDown = inputDefinitionsClass.isAttackC(),

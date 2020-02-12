@@ -25,7 +25,7 @@ namespace Pokemon
 
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			return  new DamageTriggerJob { time = Time.deltaTime}.Schedule(this,inputDeps);
+			return  new DamageTriggerJob { time = Time.DeltaTime}.Schedule(this,inputDeps);
 		}
 	}
 	public struct DamageTriggerData : IComponentData
@@ -52,7 +52,7 @@ namespace Pokemon
 
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
-			return new DamageCollisionJob { time = Time.deltaTime }.Schedule(this, inputDeps);
+			return new DamageCollisionJob { time = Time.DeltaTime }.Schedule(this, inputDeps);
 		}
 	}
 	public struct DamageCollisionData : IComponentData

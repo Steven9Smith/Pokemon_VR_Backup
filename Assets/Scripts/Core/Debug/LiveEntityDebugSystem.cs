@@ -24,20 +24,24 @@ namespace Core
 			{
 				CoreDataQuery = GetEntityQuery(typeof(CoreData));
 				GameObject a = Resources.Load("Core/Debug/LiveEntityDebugging") as GameObject;
-				EntityDebug = GameObject.Instantiate(a);
-				if (EntityDebug != null)
+				if (a != null)
 				{
-					GameObject[] debugs = CoreFunctionsClass.FindGameObjectsWithLayer(8);
-					if (debugs != null)
+					EntityDebug = GameObject.Instantiate(a);
+					if (EntityDebug != null)
 					{
-						GameObject parent = CoreFunctionsClass.FindGameObjectWithName(debugs, "GameSettings");
-						if (parent != null) EntityDebug.transform.SetParent(parent.transform);
-						else Debug.LogWarning("Failed to set parent of the LiveENtityComponent, failed to find GameSettings thing");
+						GameObject[] debugs = CoreFunctionsClass.FindGameObjectsWithLayer(8);
+						if (debugs != null)
+						{
+							GameObject parent = CoreFunctionsClass.FindGameObjectWithName(debugs, "GameSettings");
+							if (parent != null) EntityDebug.transform.SetParent(parent.transform);
+							else Debug.LogWarning("Failed to set parent of the LiveENtityComponent, failed to find GameSettings thing");
+						}
+						else Debug.LogWarning("Failed to set parent of the LiveEntityComponent");
+						DebugComponent = EntityDebug.GetComponent<LiveEntityDebugComponent>();
 					}
-					else Debug.LogWarning("Failed to set parent of the LiveEntityComponent");
-					DebugComponent = EntityDebug.GetComponent<LiveEntityDebugComponent>();
+					else Debug.LogError("EntityDebug is invalid!");
 				}
-				else Debug.LogError("EntityDenig is invalid!");
+				else Debug.LogError("Failed to locate Prefab at Core/Debug/LiveEntityDebugging");
 			}
 			protected override JobHandle OnUpdate(JobHandle inputDeps)
 			{
