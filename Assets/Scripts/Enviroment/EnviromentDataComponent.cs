@@ -81,7 +81,7 @@ namespace Core
 	{
 		private EntityQuery enviromentQuery;
 
-		protected override void OnCreateManager()
+		protected override void OnCreate()
 		{
 			enviromentQuery = GetEntityQuery(typeof(CoreData),typeof(EnviromentEntityData),typeof(Translation),typeof(EnviromentNotSet));
 		}

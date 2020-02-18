@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
 
 [RequiresEntityConversion]
 public class CoreDataComponent : MonoBehaviour, IConvertGameObjectToEntity
@@ -152,16 +153,18 @@ namespace Core
 		static int i;
 		public static bool FindEntity(EntityManager em, ref Entity entity, string name, string baseName = "")
 		{
-			eq = em.CreateEntityQuery(typeof(CoreData), typeof(Translation));
+			eq = em.CreateEntityQuery(typeof(CoreData));
 			NativeArray<Entity> entities = eq.ToEntityArray(Allocator.TempJob);
 			NativeArray<CoreData> cds = eq.ToComponentDataArray<CoreData>(Allocator.TempJob);
 			bool ok = false;
 			for (i = 0; i < entities.Length; i++)
 			{
+				Debug.Log("aaaaaaaaaaaaTesting \""+name+"\" =? \""+cds[i].Name.ToString()+"\"");
 				if (cds[i].Name.ToString() == name)
 				{
 					if (baseName != "")
 					{
+						Debug.Log("bbbbbbbbbbbTesting \""+baseName+"\" =? \""+cds[i].BaseName.ToString()+"\"");
 						if (baseName == cds[i].BaseName.ToString())
 						{
 							entity = entities[i];
@@ -666,6 +669,16 @@ namespace Core
 				stream.Seek(0, SeekOrigin.Begin);
 				return (T)formatter.Deserialize(stream);
 			}
+		}
+
+		/// <summary>
+		/// wait for x seconds
+		/// </summary>
+		/// <param name="seconds"></param>
+		/// <returns></returns>
+		public static IEnumerator WaitFor(int seconds)
+		{
+			yield return new WaitForSeconds(seconds);
 		}
 	}
 

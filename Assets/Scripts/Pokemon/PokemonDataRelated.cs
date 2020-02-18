@@ -268,7 +268,7 @@ namespace Pokemon
 					};
 					break;
 				default:
-					Debug.LogWarning("Failed to find collider for pokemon \"" + PokedexEntryToString((ushort)i) + "\"");
+			//		Debug.LogWarning("Failed to find collider for pokemon \"" + PokedexEntryToString((ushort)i) + "\"");
 					colliders = new CompoundCollider.ColliderBlobInstance[1];
 					colliders[0] = new CompoundCollider.ColliderBlobInstance
 					{
@@ -430,7 +430,7 @@ namespace Pokemon
 					};
 					break;
 				default:
-					Debug.LogWarning("Failed to get BasePokemonData for \""+pokedexEntry+"\"");
+				//	Debug.LogWarning("Failed to get BasePokemonData for \""+pokedexEntry+"\"");
 					break;
 			}
 			return pd;
@@ -524,7 +524,9 @@ namespace Pokemon
 			switch (pokedexEntry)
 			{
 				case 101: jumpHeight = 5.0f; break;
-				default: Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\""); break;
+				default:
+					//Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\""); 
+					break;
 			}
 			//	Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
 			return new PokemonEntityData
@@ -696,7 +698,7 @@ namespace Pokemon
 					material = Unity.Physics.Material.Default;
 					break;
 				default:
-					Debug.LogWarning("PokemonDataRealted: GetPokemonColliderMaterial: Failed to get a ColliderMaterial for \""+"\"");
+				//	Debug.LogWarning("PokemonDataRealted: GetPokemonColliderMaterial: Failed to get a ColliderMaterial for \""+"\"");
 					material = Unity.Physics.Material.Default;
 					break;
 			}

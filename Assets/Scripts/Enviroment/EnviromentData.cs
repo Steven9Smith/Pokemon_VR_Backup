@@ -30,21 +30,21 @@ namespace Core.Enviroment
 	{
 
 		public static void GenerateEnviroment(string region, string enviroment, EntityManager entityManager,
-			float3 bounds, float3 position, quaternion rotation, float3 scale,float bevelRadius = 0)
+			float3 bounds, float3 position, quaternion rotation, float3 scale, float bevelRadius = 0)
 		{
 			EntityArchetype defaultArchtype = entityManager.CreateArchetype(
 				typeof(Translation),
 				typeof(Rotation),
 				typeof(Scale),
 				typeof(LocalToWorld),
-		//		typeof(PhysicsCollider),
+				//		typeof(PhysicsCollider),
 				typeof(AudioSharedData),
 				typeof(AudioData),
 				typeof(CoreData)
 			);
 			Entity entity = entityManager.CreateEntity(defaultArchtype);
 			Translation trans = new Translation { Value = position };
-			entityManager.SetComponentData(entity,trans);
+			entityManager.SetComponentData(entity, trans);
 			entityManager.SetComponentData(entity, new Scale { Value = scale.x });
 			CoreData _cd = new CoreData(new ByteString30(enviroment), new ByteString30(region), bounds, new float3(1f, 1f, 1f));
 			entityManager.SetComponentData(entity, _cd);
@@ -65,48 +65,24 @@ namespace Core.Enviroment
 					//populate forest entities
 					//we gonna need some trees, and bushes
 					GameObject ForestTreeGO = Resources.Load("Enviroment/Kanto/Forest/Landscapes/Tree/Tree") as GameObject;
-					ForestTreeGO = GameObject.Instantiate(ForestTreeGO);
+				//	ForestTreeGO = GameObject.Instantiate(ForestTreeGO);
+				//	CoreFunctionsClass.WaitFor(2);
 					if (ForestTreeGO != null)
 					{
 						//create the exclude list
 						NativeArray<CoreData> excludes = new NativeArray<CoreData>(1, Allocator.TempJob);
 						excludes[0] = _cd;
-						//get all the entities position/size within an area
-					//	NativeArray<Bounds> cubes = CoreFunctionsClass.GetEntitiesWIthinArea(entityManager, position, bounds, excludes, true);
-
-					//	Debug.Log("bounds = "+ ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size);
-						//	NativeArray<Entity> trees = new NativeArray<Entity>(30, Allocator.Temp);
-						//	entityManager.CreateEntity(GetEnviromentArchtype(entityManager, "Tree"), trees);
-
-						//calculate size
-						//	float3 size = ForestTreeGO.GetComponent<MeshFilter>().mesh.bounds.size;
-
-
-						//set the values
-						//	SetEnviromentEntityData(entityManager, ForestTreeGO, trees,cubes,true, region, "Tree",
-						//		size, position, bounds);
-						//	trees.Dispose();
-
-
-
 						excludes.Dispose();
 
-
-						Entity e = new Entity { };
-						bool a = CoreFunctionsClass.FindEntity(entityManager, ref e, "Tree", "Kanto/Landscapes/Tree");
-						if(a)
-						{
-							NativeArray<Entity> generatedEntities = CoreFunctionsClass.SpawnEntitiesWithinBounds(entityManager, e, new Bounds(trans.Value, _cd.size), 30, excludes,new float[0,0],true);
+						Entity e = GenerateEntity(entityManager, 0, ForestTreeGO);
+							NativeArray<Entity> generatedEntities = CoreFunctionsClass.SpawnEntitiesWithinBounds(entityManager, e, new Bounds(trans.Value, _cd.size), 30, excludes, new float[0, 0], true);
 							entityManager.AddComponentData(e, new DestroyMe { });
 
 							generatedEntities.Dispose();
-						}
-						else Debug.LogError("Failed to find Tree entity");
-
 					}
 					else Debug.LogError("Failed to successfully load ForestTree");
-					GameObject.Destroy(ForestTreeGO);
-
+				//	GameObject.Destroy(ForestTreeGO);
+					
 
 					break;
 				default: Debug.LogError("cannot create enviroment with name \"" + enviroment + "\""); break;
@@ -121,8 +97,8 @@ namespace Core.Enviroment
 					{
 						GameObject go = Resources.Load("Enviroment/" + region + "/Forest/ForestEnviroment") as GameObject;
 						AudioSource a = go.GetComponent<AudioSource>();
-						AudioClip b = Resources.Load("Enviroment/"+region+"/Forest/Sounds/KantoForestStart.mp3") as AudioClip;
-						AudioClip c = Resources.Load("Enviroment/"+region+"/Forest/Sounds/KantoForestStart.mp3") as AudioClip;
+						AudioClip b = Resources.Load("Enviroment/" + region + "/Forest/Sounds/KantoForestStart.mp3") as AudioClip;
+						AudioClip c = Resources.Load("Enviroment/" + region + "/Forest/Sounds/KantoForestStart.mp3") as AudioClip;
 						return new AudioSharedData
 						{
 							isValid = true,
@@ -145,32 +121,32 @@ namespace Core.Enviroment
 		}
 
 		public static void SetEnviromentEntityData(EntityManager entityManager, GameObject go, NativeArray<Entity> entities,
-			NativeArray<Bounds> entitiesToAviod,bool disposeOnCompletion,string region, string name, float3 entitySize, float3 center, float3 bounds)
+			NativeArray<Bounds> entitiesToAviod, bool disposeOnCompletion, string region, string name, float3 entitySize, float3 center, float3 bounds)
 		{
 			Unity.Mathematics.Random rand = new Unity.Mathematics.Random(0x6E624EB7u);
 			float3 newPosition;
-			Debug.Log("entitySize = "+entitySize);
+			Debug.Log("entitySize = " + entitySize);
 			for (int i = 0; i < entities.Length; i++)
 			{
 				switch (name)
 				{
 					case "Tree":
-						center.y = 0;					//	bounds -= entitySize;
+						center.y = 0;                   //	bounds -= entitySize;
 						bool overlap = false;
 						float3 scale = go.GetComponent<Transform>().localScale;
 						Bounds _bounds = go.GetComponent<MeshFilter>().sharedMesh.bounds;
-						Debug.Log("Tree stuff = "+scale.ToString()+","+_bounds.ToString()+","+(_bounds.size*scale));
+						Debug.Log("Tree stuff = " + scale.ToString() + "," + _bounds.ToString() + "," + (_bounds.size * scale));
 						int attempt = 0;
 						while (true)
 						{
-							newPosition = center+rand.NextFloat3(-bounds/2,bounds/2);
+							newPosition = center + rand.NextFloat3(-bounds / 2, bounds / 2);
 							newPosition.y = -0.1f; //spawning on flat land for now
 							for (int j = 0; j < i; j++)
 							{
 								float3 entityPosition = entityManager.GetComponentData<Translation>(entities[j]).Value;
 								//Note that this treats the coreData position and size as cube which may not be tree for all entities (we just want the AABBs)
-								Bounds a = new Bounds(newPosition, _bounds.size*scale);
-								if (!a.Intersects( new Bounds(entityPosition, _bounds.size*scale)))
+								Bounds a = new Bounds(newPosition, _bounds.size * scale);
+								if (!a.Intersects(new Bounds(entityPosition, _bounds.size * scale)))
 								{
 									if (entitiesToAviod.Length > 0 && !entitiesToAviod[0].size.Equals(new float3(-1f, -1f, -1f)))
 									{
@@ -192,7 +168,7 @@ namespace Core.Enviroment
 									overlap = true;
 									break;
 								}
-								
+
 							}
 							if (!overlap) break;
 							else attempt++;
@@ -229,35 +205,36 @@ namespace Core.Enviroment
 			if (disposeOnCompletion) entitiesToAviod.Dispose();
 		}
 
-		public static void GenerateFloraAroundEntities(EntityManager entityManager,NativeArray<Entity> spawnAround,float3 spawnAroundSize,string floraPath,string floraName,int floraPerEntity,int shape)
+		public static void GenerateFloraAroundEntities(EntityManager entityManager, NativeArray<Entity> spawnAround, float3 spawnAroundSize, string floraPath, string floraName, int floraPerEntity, int shape)
 		{
 			GameObject go = Resources.Load(floraPath) as GameObject;
-			if(go != null)
+			if (go != null)
 			{
 				go = GameObject.Instantiate(go);
-				NativeArray<Entity> entities = new NativeArray<Entity>(spawnAround.Length*floraPerEntity, Allocator.Temp);
-				entityManager.CreateEntity(GetEnviromentArchtype(entityManager,floraName), entities);
-				for(int i = 0; i < spawnAround.Length; i++)
+				NativeArray<Entity> entities = new NativeArray<Entity>(spawnAround.Length * floraPerEntity, Allocator.Temp);
+				entityManager.CreateEntity(GetEnviromentArchtype(entityManager, floraName), entities);
+				for (int i = 0; i < spawnAround.Length; i++)
 				{
 					float3 position = entityManager.GetComponentData<Translation>(spawnAround[i]).Value;
 					CoreData coreData = entityManager.GetComponentData<CoreData>(spawnAround[i]);
-					for (int j = i*floraPerEntity; j < floraPerEntity; j++)
+					for (int j = i * floraPerEntity; j < floraPerEntity; j++)
 					{
-						switch (shape) {
+						switch (shape)
+						{
 							case 0://box
 
 								break;
 						}
 
 					}
-				//	entityManager.SetComponentData()
+					//	entityManager.SetComponentData()
 				}
 				GameObject.Destroy(go);
 				entities.Dispose();
 			}
 			else
 			{
-				Debug.LogWarning("Failed to get flora gameobject using path \""+floraPath+"\"");
+				Debug.LogWarning("Failed to get flora gameobject using path \"" + floraPath + "\"");
 			}
 		}
 
@@ -275,7 +252,7 @@ namespace Core.Enviroment
 						typeof(LocalToWorld),
 						typeof(PhysicsCollider),
 						typeof(CoreData)
-					//	typeof(PhysicsMass)
+						//	typeof(PhysicsMass)
 						);
 					break;
 				case "BushA":
@@ -291,8 +268,8 @@ namespace Core.Enviroment
 			}
 			return ea;
 		}
-	
-		public static PhysicsCollider GetEnviromentPhysicsCollider(string name,float scale = 1f)
+
+		public static PhysicsCollider GetEnviromentPhysicsCollider(string name, float scale = 1f)
 		{
 			PhysicsCollider pc = new PhysicsCollider { };
 			switch (name)
@@ -322,10 +299,10 @@ namespace Core.Enviroment
 
 						Collider = CylinderCollider.Create(new CylinderGeometry
 						{
-							Center = new float3(0,1.7f,0)*scale,
+							Center = new float3(0, 1.7f, 0) * scale,
 							Orientation = Quaternion.Euler(new float3(90f, 0, 0)),
-							Height = 1.5f*scale,
-							Radius = 1f*scale,
+							Height = 1.5f * scale,
+							Radius = 1f * scale,
 							SideCount = 20
 						}, new CollisionFilter
 						{
@@ -335,36 +312,85 @@ namespace Core.Enviroment
 						}),
 						CompoundFromChild = new RigidTransform { rot = quaternion.identity }
 					};
-					pc = new PhysicsCollider {Value = CompoundCollider.Create(cs)};
+					pc = new PhysicsCollider { Value = CompoundCollider.Create(cs) };
 					cs.Dispose();
 					break;
 				default:
-					Debug.LogWarning("Failed to get collider for \""+name+"\"");
+					Debug.LogWarning("Failed to get collider for \"" + name + "\"");
 					break;
 			}
 			return pc;
 		}
 
-	}
+		public static Entity GenerateEntity(EntityManager entityManager, int entity, GameObject go = null)
+		{
+			Entity e = new Entity { };
+			EntityArchetype ea;
+			switch (entity)
+			{
+				case 0: //Tree
+					e = entityManager.CreateEntity(new ComponentType[] {
+						typeof(Translation),
+						typeof(LocalToWorld),
+						typeof(Rotation),
+						typeof(RenderMesh),
+						typeof(CoreData)
+					});
+					if (go != null)
+					{
+						MeshRenderer mr = go.GetComponent<MeshRenderer>();
+						MeshFilter mf = go.GetComponent<MeshFilter>();
+						entityManager.SetSharedComponentData(e, new RenderMesh
+						{
+							mesh = mf.sharedMesh,
+							material = mr.sharedMaterial,
+							receiveShadows = true,
+							castShadows = UnityEngine.Rendering.ShadowCastingMode.On
+						});
+						entityManager.SetComponentData(e, new CoreData
+						{
+							Name = new ByteString30("Tree"),
+							isValid = true,
+							scale = 1,
+							size = mf.sharedMesh.bounds.size
+						});
 
-	/*
-		ok so what does a forest have?
-		Trees
-		bushes
-		flowers
-		rocks
-		Pokemon?
-			Grass, Flying, Bug, special pokemon (like pikachu), and forest based pokemon
+						entityManager.AddComponentData(e, new NonUniformScale { Value = go.GetComponent<Transform>().localScale });
+					}
+					else
+					{
+						entityManager.AddComponentData(e, new Scale { Value = 1f });
+					}
+					entityManager.SetComponentData(e, new Rotation { Value = quaternion.identity});
+				
+					break;
+				default:
+					Debug.LogError("Failed to get entity " + entity);
+					break;
+			}
+			return e;
 
-		forest components?
-		Music,
-		ambient sound (maybe some chirping or something),
-		some  trigger collider to change music and stuff
-	*/
-	public struct LocationData : IComponentData
-	{
-		public CoreData locationCoreData; //holds forest "ui" name and base name (forest)
-		public ByteString30 region;
-		public float3 position;
+		}
+
+		/*
+			ok so what does a forest have?
+			Trees
+			bushes
+			flowers
+			rocks
+			Pokemon?
+				Grass, Flying, Bug, special pokemon (like pikachu), and forest based pokemon
+
+			forest components?
+			Music,
+			ambient sound (maybe some chirping or something),
+			some  trigger collider to change music and stuff
+		*/
+		public struct LocationData : IComponentData
+		{
+			public CoreData locationCoreData; //holds forest "ui" name and base name (forest)
+			public ByteString30 region;
+			public float3 position;
+		}
 	}
 }

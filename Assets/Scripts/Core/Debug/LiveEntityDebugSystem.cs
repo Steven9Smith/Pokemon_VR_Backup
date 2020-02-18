@@ -20,7 +20,7 @@ namespace Core
 			private LiveEntityDebugComponent DebugComponent;
 			private Entity desiredEntity;
 
-			protected override void OnCreateManager()
+			protected override void OnCreate()
 			{
 				CoreDataQuery = GetEntityQuery(typeof(CoreData));
 				GameObject a = Resources.Load("Core/Debug/LiveEntityDebugging") as GameObject;

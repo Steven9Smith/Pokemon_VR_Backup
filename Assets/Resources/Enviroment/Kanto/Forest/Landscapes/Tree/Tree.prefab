@@ -74,6 +74,7 @@ MonoBehaviour:
     m_BevelRadius: 0
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Tree
-  BaseName: Kanto/Landscapes/Tree
+  BaseName: Kanto/Forest/Landscapes/Tree
   transform: {fileID: 7100741522184743707}
   meshFilter: {fileID: 5870447750898207790}
 --- !u!114 &6634290309991715436
@@ -339,6 +340,7 @@ MonoBehaviour:
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}

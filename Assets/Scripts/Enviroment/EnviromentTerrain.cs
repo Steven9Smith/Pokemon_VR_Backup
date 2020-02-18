@@ -26,7 +26,6 @@ public class EnviromentTerrain : MonoBehaviour, IConvertGameObjectToEntity
 	//		Debug.Log(mesh.bounds.size);
 			entity = Core.Terrain.TerrianBuilder.generateTerrianEntity(dstManager, material,mesh,terrainData);;
 			dstManager.SetName(entity,name);
-			
 		}
 	}
 }
@@ -66,7 +65,7 @@ namespace Core.Terrain
 			else Debug.LogError("failed to get terrain size");
 			return heights;
 		}
-		public static unsafe Entity generateTerrianEntity(EntityManager entityManager, UnityEngine.Material mat,Mesh mesh,TerrainData terrainData)
+		public static Entity generateTerrianEntity(EntityManager entityManager, UnityEngine.Material mat,Mesh mesh,TerrainData terrainData)
 		{
 			//	float* heights = GenerateMeshHeights(mesh);
 			//	float* heights = HeightsToFloatArray(terrainData);
@@ -74,7 +73,6 @@ namespace Core.Terrain
 			int2 size = new int2((int)terrainData.size.x,(int) terrainData.size.z);
 			
 			float3 scale = terrainData.heightmapScale;
-	//		Debug.Log(terrainData.size);
 			Entity staticEntity = new Entity { };
 			if (heights.Length == 0)
 			{
@@ -86,7 +84,7 @@ namespace Core.Terrain
 			else
 			{
 				Debug.Log("Creating terrain...");
-				BlobAssetReference<Unity.Physics.Collider> collider = Unity.Physics.TerrainCollider.Create(heights,size, scale, Method,
+			/*	BlobAssetReference<Unity.Physics.Collider> collider = Unity.Physics.TerrainCollider.Create(heights,size, scale, Method,
 					new CollisionFilter {
 						BelongsTo = TriggerEventClass.Floor,
 						CollidesWith = TriggerEventClass.Pokemon | TriggerEventClass.Player | TriggerEventClass.NPC | TriggerEventClass.Collidable,
@@ -94,7 +92,12 @@ namespace Core.Terrain
 					}
 			);
 				float3 position = new float3(size.x - 1, 0f, size.y - 1) * scale * -0.5f;
-				staticEntity = Bodies.Bodies.CreateStaticBodyWithMesh(entityManager, mat,mesh, position, quaternion.identity, collider);
+				
+			//	staticEntity = Bodies.Bodies.CreateStaticBodyWithMesh(entityManager, mat,mesh, position, quaternion.identity, collider);*/
+				staticEntity = Bodies.Bodies.CreateTerrain(entityManager, heights, new int2((int)terrainData.size.x,(int)terrainData.size.z),
+					(float3)terrainData.heightmapScale,mat,false);
+
+
 			}
 
 			//	UnsafeUtility.Free(heights, Allocator.Temp);
