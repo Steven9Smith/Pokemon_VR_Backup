@@ -20,7 +20,7 @@ namespace Core
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
 			if (transform == null) Debug.LogError("given trans is null or invalid!");
-			CoreData cd = new CoreData(new ByteString30(EnviromentName), new ByteString30(Region),bounds,transform.localScale);
+			CoreData cd = new CoreData(new ByteString30(EnviromentName), new ByteString30(Region),bounds,transform.localScale,entity);
 			if (!cd.isValid) Debug.LogError("failed to successfully create COreData for To-Be Entity \"" + EnviromentName + "\":\"" + Region + "\"");
 			else
 			{

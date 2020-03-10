@@ -9,6 +9,7 @@ using Unity.Rendering;
 using Unity.Physics;
 using Core;
 using Unity.Collections;
+using Pokemon.Player;
 
 namespace Pokemon
 {
@@ -32,6 +33,7 @@ namespace Pokemon
 				dstManager.AddComponentData(entity, pd);
 				//add controls
 				dstManager.AddComponentData(entity, new PlayerInput { });
+				dstManager.AddComponentData(entity, new EntityControllerStepInput { });
 				dstManager.AddComponentData(entity, new StateData { });
 
 			//	PlayerSaveData psd = new PlayerSaveData { };

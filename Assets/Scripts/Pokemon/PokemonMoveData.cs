@@ -9,6 +9,11 @@ namespace Pokemon
 {
 	namespace Move
 	{
+
+
+
+
+
 		/// This holds four pokemon Moves
 		/// </summary>
 		[Serializable]
@@ -27,7 +32,6 @@ namespace Pokemon
 			public BlittableBool isValid;
 			public int index; //used for spawning moves
 		}
-
 		//this allows for custom stuff. here we go again
 		[Serializable]
 		public struct PokemonMoveAdjustmentData : IComponentData

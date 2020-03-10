@@ -28,10 +28,9 @@ namespace Core {
 			}
 			protected override void OnCreate()
 			{
-				playerEntityQuery = GetEntityQuery(typeof(PlayerData),typeof(PokemonEntityData));
+				playerEntityQuery = GetEntityQuery(typeof(PlayerData),typeof(PokemonEntityData),typeof(Translation),typeof(PlayerInput));
 				UIComponentRequests = GetEntityQuery(typeof(UIComponentRequest));
 				UIComponents = GetEntityQuery(typeof(UIComponentFilter), typeof(PokemonEntityData));
-				Player = GetEntityQuery(typeof(PlayerInput), typeof(Translation));
 			}
 			protected override JobHandle OnUpdate(JobHandle inputDeps)
 			{
@@ -43,30 +42,34 @@ namespace Core {
 				requests.Dispose();
 				NativeArray<Entity> entities = UIComponents.ToEntityArray(Allocator.TempJob);
 				NativeArray<PokemonEntityData> peds = UIComponents.ToComponentDataArray<PokemonEntityData>(Allocator.TempJob);
-				NativeArray<Translation> positions = Player.ToComponentDataArray<Translation>(Allocator.TempJob);
-				fakePlayerPosition.transform.SetPositionAndRotation(positions[0].Value, Quaternion.identity);
-				for (int i = 0; i < entities.Length; i++) {
-					UIComponent uic = EntityManager.GetSharedComponentData<UIComponent>(entities[i]);
-					if(uic.toggleVisibility)
+				NativeArray<Translation> positions = playerEntityQuery.ToComponentDataArray<Translation>(Allocator.TempJob);
+				if (positions.Length > 0)
+				{
+					fakePlayerPosition.transform.SetPositionAndRotation(positions[0].Value, Quaternion.identity);
+					for (int i = 0; i < entities.Length; i++)
 					{
-						if (uic.UIGameObject.activeSelf) uic.UIGameObject.SetActive(false);
-						else uic.UIGameObject.SetActive(true);
-					}
-					if (uic.UIGameObject.activeSelf)
-					{
-						uic.HealthBarValue.SetText(peds[i].currentHp + "/" + peds[i].Hp);
-						uic.HealthBarImage.fillAmount = peds[i].currentHp / peds[i].Hp;
-						uic.EnergyBarValue.SetText(peds[i].currentStamina + "/" + peds[i].maxStamina);
-						uic.EnergyBarImage.fillAmount = peds[i].currentStamina / peds[i].maxStamina;
-						if (uic.onWorld)
+						UIComponent uic = EntityManager.GetSharedComponentData<UIComponent>(entities[i]);
+						if (uic.toggleVisibility)
 						{
-							uic.UIGameObject.transform.localPosition = EntityManager.GetComponentData<Translation>(entities[i]).Value + uic.positionOffset;
-							if (uic.followPlayer)
-								uic.UIGameObject.transform.LookAt(fakePlayerPosition.transform);
-							
+							if (uic.UIGameObject.activeSelf) uic.UIGameObject.SetActive(false);
+							else uic.UIGameObject.SetActive(true);
 						}
+						if (uic.UIGameObject.activeSelf)
+						{
+							uic.HealthBarValue.SetText(peds[i].currentHp + "/" + peds[i].Hp);
+							uic.HealthBarImage.fillAmount = peds[i].currentHp / peds[i].Hp;
+							uic.EnergyBarValue.SetText(peds[i].currentStamina + "/" + peds[i].maxStamina);
+							uic.EnergyBarImage.fillAmount = peds[i].currentStamina / peds[i].maxStamina;
+							if (uic.onWorld)
+							{
+								uic.UIGameObject.transform.localPosition = EntityManager.GetComponentData<Translation>(entities[i]).Value + uic.positionOffset;
+								if (uic.followPlayer)
+									uic.UIGameObject.transform.LookAt(fakePlayerPosition.transform);
+
+							}
+						}
+						//	else Debug.Log("Not Visible");
 					}
-				//	else Debug.Log("Not Visible");
 				}
 				entities.Dispose();
 				peds.Dispose();

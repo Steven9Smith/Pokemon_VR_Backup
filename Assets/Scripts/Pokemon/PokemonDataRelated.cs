@@ -93,6 +93,7 @@ namespace Pokemon
 		//8 = head with base	9 = biped with tail				10 = biped tailess		11 = single pair of wings
 		//12 = serpant body		13 = head with arms
 		public char BodyType;
+		public char MovementType;
 
 
 		//base pokemon move data
@@ -120,6 +121,15 @@ namespace Pokemon
 		public const char BODY_TYPE_SERPANT_BODY = (char)12;
 		public const char BODY_TYPE_HEAD_WITH_ARMS = (char)13;
 		public const int MaxPokedexNumber = 151; //doing first gen first
+		//Movement types
+		public const char MOVEMENT_TYPE_ROLL = (char)0;
+		public const char MOVEMENT_TYPE_SMALL_SURF = (char)1;
+		public const char MOVEMENT_TYPE_SLUSH_SLIDE = (char)2;
+		public const char MOVEMENT_TYPE_FLY = (char)3;
+		public const char MOVEMENT_TYPE_FLOAT = (char)4;
+		public const char MOVEMENT_TYPE_HOP = (char)5;
+		public const char MOVEMENT_TYPE_WALK = (char)6;
+
 
 
 		public static PokemonData[] PokemonBaseData = GenerateBasePokemonDatas();
@@ -321,7 +331,8 @@ namespace Pokemon
 						BaseSpecialAttack = 65,
 						BaseSpcialDefense = 65,
 						BodyType = PokemonDataClass.BODY_TYPE_QUADRUPED_BODY,
-						PokedexNumber = 1
+						PokedexNumber = 1,
+						MovementType = (char)6
 					};
 					break;
 				case 2: //Ivysaur
@@ -347,7 +358,8 @@ namespace Pokemon
 						BaseSpecialAttack = 80,
 						BaseSpcialDefense = 80,
 						BodyType = PokemonDataClass.BODY_TYPE_QUADRUPED_BODY,
-						PokedexNumber = 2
+						PokedexNumber = 2,
+						MovementType = (char)6
 					};
 					break;
 				case 3: //Venasaur
@@ -373,7 +385,8 @@ namespace Pokemon
 						BaseSpecialAttack = 100,
 						BaseSpcialDefense = 100,
 						BodyType = PokemonDataClass.BODY_TYPE_QUADRUPED_BODY,
-						PokedexNumber = 3
+						PokedexNumber = 3,
+						MovementType = (char)6
 					};
 					break;
 				case 0:
@@ -400,7 +413,8 @@ namespace Pokemon
 						BaseSpecialAttack = 80,
 						BaseSpcialDefense = 45,
 						BodyType = PokemonDataClass.BODY_TYPE_HEAD_ONLY,
-						PokedexNumber = 101
+						PokedexNumber = 101,
+						MovementType = PokemonDataClass.MOVEMENT_TYPE_ROLL
 					};
 					break;
 				case 104: //Cubone
@@ -426,7 +440,8 @@ namespace Pokemon
 						BaseSpecialAttack = 40,
 						BaseSpcialDefense = 50,
 						BodyType = PokemonDataClass.BODY_TYPE_BIPED_WITH_TAIL,
-						PokedexNumber = 104
+						PokedexNumber = 104,
+						MovementType = (char)6
 					};
 					break;
 				default:
@@ -521,9 +536,15 @@ namespace Pokemon
 			//add the PokemonEntityData
 
 			float jumpHeight = 1.0f;
+			float jumpMultiplier = 2f;
+			float longJumpMultiplier = 2.5f;
 			switch (pokedexEntry)
 			{
-				case 101: jumpHeight = 5.0f; break;
+				case 101:
+					jumpHeight = 5.0f;
+					jumpMultiplier = 2f;
+					longJumpMultiplier = 2.5f;
+					break;
 				default:
 					//Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\""); 
 					break;
@@ -550,7 +571,11 @@ namespace Pokemon
 				guiId = 123,
 				PokedexNumber = pd.PokedexNumber,
 				Freindship = pd.BaseFriendship,
-				pokemonMoveSet = getBasePokemonMoveSet(PokedexEntryToString((ushort)pokedexEntry))
+				pokemonMoveSet = getBasePokemonMoveSet(PokedexEntryToString((ushort)pokedexEntry)),
+				BodyType = pd.BodyType,
+				MovementType = pd.MovementType,
+				jumpMultiplier = jumpMultiplier,
+				longJumpMultiplier = longJumpMultiplier
 			};
 
 

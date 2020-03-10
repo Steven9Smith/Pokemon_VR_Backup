@@ -10,7 +10,7 @@ using System;
 
 namespace Pokemon
 {
-	namespace Animation
+/*	namespace Animation
 	{
 		public struct PokemonAnimationData : ISharedComponentData,IEquatable<PokemonAnimationData> {
 			public Animator animator;
@@ -57,5 +57,5 @@ namespace Pokemon
 				entities.Dispose();
 			}
 		}
-	}
+	}*/
 }

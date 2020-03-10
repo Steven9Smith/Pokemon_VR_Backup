@@ -11,8 +11,6 @@ namespace Core
 {
 	namespace _Debug
 	{
-		
-
 		public class LiveEntityDebugSystem : JobComponentSystem
 		{
 			private EntityQuery CoreDataQuery;

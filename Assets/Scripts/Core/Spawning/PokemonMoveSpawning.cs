@@ -137,7 +137,7 @@ namespace Core.Spawning {
 					}
 				}
 				CoreData cd = entityManager.GetComponentData<CoreData>(orgEntity);
-				entityManager.AddComponentData<CoreData>(entity,new CoreData(new ByteString30(name),new ByteString30("PokemonMove"),cd.size,cd.scale));
+				entityManager.AddComponentData<CoreData>(entity,new CoreData(new ByteString30(name),new ByteString30("PokemonMove"),cd.size,cd.scale,entity));
 				
 				//get Pokemon's GroupIndex
 				GroupIndexInfo gii = entityManager.GetComponentData<GroupIndexInfo>(orgEntity);

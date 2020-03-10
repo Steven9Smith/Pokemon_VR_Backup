@@ -347,7 +347,7 @@ public class DebugPokemonEntityData
 	public ushort LevelingRate;
 	public ushort Freindship;
 	public float Speed;
-	public float Acceleration;
+	public float Acceleration;																    
 	public float Hp;
 	public ushort Attack;
 	public ushort Defense;

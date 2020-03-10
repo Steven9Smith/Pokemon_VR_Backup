@@ -2,6 +2,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using static CharacterControllerUtilities;
 
 namespace Pokemon
 {
@@ -9,7 +10,7 @@ namespace Pokemon
 	[DisallowMultipleComponent]
 	public class PlayerInputComponent : MonoBehaviour, IConvertGameObjectToEntity
 	{
-		public float3 Move;
+		public float2 Move;
 		public float4 Rotation;
 		//bytes replace bool with value of 1 or 0
 		public bool SpaceDown;
@@ -22,10 +23,6 @@ namespace Pokemon
 		public bool attackBDown;
 		public bool attackCDown;
 		public bool attackDDown;
-		//max speed the player can acheive on their own using the player acceleration
-		public float MaxInputVelocity;
-		//acceleration the player is currently allowed to move
-		public float PlayerCurrentAcceleration;
 		//used for camera stuff
 		public float MouseX, MouseY;
 		public float smoothingSpeed;
@@ -39,12 +36,10 @@ namespace Pokemon
 				LCtrlDown = LCtrlDown,
 				LShiftDown = LShiftDown,
 				SpaceDown = SpaceDown,
-				MaxInputVelocity = MaxInputVelocity,
 				Mouse1Down = Mouse1Down,
 				Mouse2Down = Mouse2Down,
 				RShiftDown = RShiftDown,
 				Rotation = Rotation,
-				PlayerCurrentAcceleration = PlayerCurrentAcceleration,
 				attackADown = attackADown,
 				attackBDown = attackBDown,
 				attackCDown = attackCDown,
@@ -59,7 +54,7 @@ namespace Pokemon
 	[Serializable]
 	public struct PlayerInput : IComponentData
 	{
-		public float3 Move;
+		public float2 Move;
 		public float4 Rotation;
 		//bytes replace bool with value of 1 or 0
 		public BlittableBool SpaceDown;
@@ -72,14 +67,69 @@ namespace Pokemon
 		public BlittableBool attackBDown;
 		public BlittableBool attackCDown;
 		public BlittableBool attackDDown;
-		//max speed the player can acheive on their own using the player acceleration
-		public float MaxInputVelocity;
-		//acceleration the player is currently allowed to move
-		public float PlayerCurrentAcceleration;
 		//used for camera stuff
 		public float MouseX, MouseY;
-		public float smoothingSpeed;
 		public float3 forward;
 		public float3 right;
+		public int jumpCount;
+
+		public PlayerInput(float2 move,quaternion rotation,bool spaceDown,bool lShiftDown,bool rShiftDown,
+			bool mouse1Down,bool mouseDown2,bool lCtrlDown,bool attackaDown, bool attackbDown, bool attackcDown,
+			bool attackdDown,int mjumpCount)
+		{
+			Move = move;
+			jumpCount = mjumpCount;
+			Rotation = rotation.value;
+			SpaceDown = spaceDown;
+			LShiftDown = lShiftDown;
+			RShiftDown = rShiftDown;
+			Mouse1Down = mouse1Down;
+			Mouse2Down = mouseDown2;
+			LCtrlDown = lCtrlDown;
+			attackADown = attackaDown;
+			attackBDown = attackbDown;
+			attackCDown = attackbDown;
+			attackDDown = attackdDown;
+			MouseX = 0;
+			MouseY = 0;
+			forward = float3.zero;
+			right = float3.zero;
+		}
+	}
+
+
+
+	public struct CharacterControllerInput : IComponentData
+	{
+		public float2 Movement;
+		public float2 Looking;
+		public int Jumped;
+	}
+
+	public struct CharacterControllerInternalData : IComponentData
+	{
+		public float CurrentRotationAngle;
+		public CharacterSupportState SupportedState;
+		public float3 UnsupportedVelocity;
+		public float3 LinearVelocity;
+		public Entity Entity;
+		public bool IsJumping;
+		public CharacterControllerInput Input;
+	}
+
+	[Serializable]
+	public struct CharacterControllerComponentData : IComponentData
+	{
+		public float3 Gravity;
+		public float MovementSpeed;
+		public float MaxMovementSpeed;
+		public float RotationSpeed;
+		public float JumpUpwardsSpeed;
+		public float MaxSlope; // radians
+		public int MaxIterations;
+		public float CharacterMass;
+		public float SkinWidth;
+		public float ContactTolerance;
+		public int AffectsPhysicsBodies;
 	}
 }

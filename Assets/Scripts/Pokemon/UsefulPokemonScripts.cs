@@ -16,6 +16,7 @@ using System;
 using Core.Spawning;
 using Core;
 using Core.UI;
+using static CharacterControllerUtilities;
 
 namespace Pokemon
 {
@@ -359,7 +360,8 @@ namespace Pokemon
 			entityManager.SetName(entity,playerName+":"+pokemonName);
 			Debug.Log(Application.persistentDataPath);
 			//get gameobject prefab
-			GameObject go = PokemonDataClass.GetGameObjectPrefab(psd.playerData.PokemonName,0);
+			GameObject go = PokemonDataClass.GetGameObjectPrefab(psd.playerData.PokemonName, 0);
+
 			//get and add renderMesh
 			PokemonDataClass.SetRenderMesh(entityManager,entity,psd.playerData.PokemonName,0);
 			if (entityManager.HasComponent<PokemonEntityData>(entity)) entityManager.SetComponentData(entity,psd.pokemonEntityData);
@@ -367,8 +369,8 @@ namespace Pokemon
 			//add this component (filter to seperate living entities from nonliving)
 			if (!entityManager.HasComponent<LivingEntity>(entity)) entityManager.AddComponentData<LivingEntity>(entity, new LivingEntity { });
 			//add the CoreData
-			if (entityManager.HasComponent<CoreData>(entity)) entityManager.SetComponentData(entity, new CoreData(psd.playerData.Name,psd.playerData.PokemonName,go));
-			else entityManager.AddComponentData(entity, new CoreData(psd.playerData.Name, psd.playerData.PokemonName, go));
+			if (entityManager.HasComponent<CoreData>(entity)) entityManager.SetComponentData(entity, new CoreData(psd.playerData.Name,psd.playerData.PokemonName,go,entity));
+			else entityManager.AddComponentData(entity, new CoreData(psd.playerData.Name, psd.playerData.PokemonName, go,entity));
 			//	Debug.LogWarning("Player name = "+playerName+", pokemon name = "+pokemonName);
 			//add the UI Components(s)
 			entityManager.AddComponentData<UIComponentRequest>(entity,new UIComponentRequest { addToWorld = false,followPlayer = false,visible = true});
@@ -398,6 +400,7 @@ namespace Pokemon
 			//add physics velocity
 			if (!entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.AddComponentData(entity, new PhysicsVelocity { });
 			else entityManager.SetComponentData<PhysicsVelocity>(entity, new PhysicsVelocity { });
+
 
 			PokemonDataClass.SetPhysicsDamping(entityManager, entity, psd.playerData.PokemonName, psd.pokemonEntityData);
 
@@ -623,7 +626,7 @@ namespace Pokemon
 	public class PokemonConversion {
 		public static string PlayerInputToString(PlayerInput pi, bool includeAll = false)
 		{
-			string temp = "Move:\n\tx: " + pi.Move.x + "\n\ty:" + pi.Move.y + "\n\tz: " + pi.Move.z + "\nRotation:\n\tx: " + pi.Rotation.x + "\n\ty: " + pi.Rotation.y + "\n\tz: " + pi.Rotation.z + "\n\tw :" + pi.Rotation.w;
+			string temp = "Move:\n\tx: " + pi.Move.x + "\n\ty:" + pi.Move.y + "\nRotation:\n\tx: " + pi.Rotation.x + "\n\ty: " + pi.Rotation.y + "\n\tz: " + pi.Rotation.z + "\n\tw :" + pi.Rotation.w;
 			temp += includeAll ? "\nSpaceDown: " + pi.SpaceDown + "\nLShiftDown: " + pi.LShiftDown + "\nRShiftDown: " +
 				pi.RShiftDown + "\nMouse1Down: " + pi.Mouse1Down + "\nMouse2Down: " + pi.Mouse2Down + "\nLCtrlDown: " + pi.LCtrlDown : "";
 			return temp;

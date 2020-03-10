@@ -80,7 +80,7 @@ namespace Pokemon.Player
 				{
 	//				Debug.Log(playerPosition.Value);
 
-					if (playerInput.smoothingSpeed != cameraDataComponent.smoothingSpeed) playerInput.smoothingSpeed = cameraDataComponent.smoothingSpeed;
+				//	if (playerInput.smoothingSpeed != cameraDataComponent.smoothingSpeed) playerInput.smoothingSpeed = cameraDataComponent.smoothingSpeed;
 					if (viewMode == 0)
 					{
 						offset = Quaternion.AngleAxis(playerInput.MouseX * cameraDataComponent.smoothingSpeed,Vector3.up) 
@@ -112,8 +112,6 @@ namespace Pokemon.Player
 			else
 			{
 				Debug.LogWarning("Failed to find both player and camera components\nplayers = " + playerEntities.Length);
-		//		CameraQuery = GetEntityQuery(typeof(CameraDataComponent));
-		//		PlayerQuery = GetEntityQuery(typeof(PlayerData));
 			}
 			playerEntities.Dispose();
 			playerInputs.Dispose();

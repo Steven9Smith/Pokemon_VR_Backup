@@ -6,7 +6,6 @@ using Unity.Transforms;
 using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Physics.Authoring;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ public class CoreDataComponent : MonoBehaviour, IConvertGameObjectToEntity
 		else if (transform == null) Debug.LogError("Transform is null for "+Name);
 
 
-		CoreData cd = new CoreData(new ByteString30(Name), new ByteString30(BaseName), transform, meshFilter.sharedMesh);
+		CoreData cd = new CoreData(new ByteString30(Name), new ByteString30(BaseName), transform, meshFilter.sharedMesh,entity);
 		if (!cd.isValid) Debug.LogError("failed to successfully create COreData for To-Be Entity \"" + Name + "\":\"" + BaseName + "\"");
 		else
 		{
@@ -53,16 +52,19 @@ namespace Core
 	{
 		public ByteString30 Name;
 		public ByteString30 BaseName;
+		public Entity entity;
 		public float3 size;
 		public float3 scale;
 		public BlittableBool isValid;
-		public CoreData(ByteString30 name, ByteString30 baseName, float3 mSize, float3 mScale)
+
+		public CoreData(ByteString30 name, ByteString30 baseName, float3 mSize, float3 mScale,Entity _entity)
 		{
 			Name = name;
 			BaseName = baseName;
 			size = mSize;
 			scale = mScale;
 			isValid = true;
+			entity = _entity;
 		}
 		/// <summary>
 		/// creates a new CoreData
@@ -71,10 +73,11 @@ namespace Core
 		/// <param name="baseName">BaseName of Entity</param>
 		/// <param name="transform">GameOject transform that the entity derives from</param>
 		/// <param name="mesh">GameOject mesh that the entity derives from</param>
-		public CoreData(ByteString30 name, ByteString30 baseName, Transform transform, Mesh mesh)
+		public CoreData(ByteString30 name, ByteString30 baseName, Transform transform, Mesh mesh, Entity _entity)
 		{
 			Name = name;
 			BaseName = baseName;
+			entity = _entity;
 			if (transform != null && mesh != null)
 			{
 				try
@@ -105,10 +108,11 @@ namespace Core
 		/// <param name="name">name of the Entity</param>
 		/// <param name="baseName">base name of the Entity</param>
 		/// <param name="go">GameObject (NOT PREFAB) that the Entity comes from</param>
-		public CoreData(ByteString30 name, ByteString30 baseName, GameObject go)
+		public CoreData(ByteString30 name, ByteString30 baseName, GameObject go, Entity _entity)
 		{
 			Name = name;
 			BaseName = baseName;
+			entity = _entity;
 			if (go != null)
 			{
 				try
@@ -151,6 +155,16 @@ namespace Core
 	public class CoreFunctionsClass {
 		static EntityQuery eq;
 		static int i;
+
+		public static World DefaultWorld => World.DefaultGameObjectInjectionWorld;
+		/// <summary>
+		/// Find an Entity within the active game.
+		/// </summary>
+		/// <param name="em">EntityManager</param>
+		/// <param name="entity">an empty Entity</param>
+		/// <param name="name">name of the Entity</param>
+		/// <param name="baseName">basename of the Entity</param>
+		/// <returns></returns>
 		public static bool FindEntity(EntityManager em, ref Entity entity, string name, string baseName = "")
 		{
 			eq = em.CreateEntityQuery(typeof(CoreData));
@@ -941,4 +955,5 @@ namespace Core
 			return inputDeps;
 		}
 	}
+
 }

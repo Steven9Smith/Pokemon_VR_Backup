@@ -46,7 +46,7 @@ namespace Core.Enviroment
 			Translation trans = new Translation { Value = position };
 			entityManager.SetComponentData(entity, trans);
 			entityManager.SetComponentData(entity, new Scale { Value = scale.x });
-			CoreData _cd = new CoreData(new ByteString30(enviroment), new ByteString30(region), bounds, new float3(1f, 1f, 1f));
+			CoreData _cd = new CoreData(new ByteString30(enviroment), new ByteString30(region), bounds, new float3(1f, 1f, 1f),entity);
 			entityManager.SetComponentData(entity, _cd);
 			/*	entityManager.SetComponentData(entity, new PhysicsCollider
 			{
@@ -193,7 +193,7 @@ namespace Core.Enviroment
 							});
 							entityManager.SetComponentData(entities[i], GetEnviromentPhysicsCollider(region + "|" + name, scale.x));
 							entityManager.SetName(entities[i], region + "|" + name + i);
-							entityManager.SetComponentData(entities[i], new CoreData(new ByteString30(name), new ByteString30(region), bounds, scale));
+							entityManager.SetComponentData(entities[i], new CoreData(new ByteString30(name), new ByteString30(region), bounds, scale,entities[i]));
 						}
 
 						break;
