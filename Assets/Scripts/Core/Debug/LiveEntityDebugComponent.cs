@@ -8,6 +8,7 @@ using Unity.Transforms;
 using Core;
 using Unity.Collections;
 using Core.Spawning;
+using Core.GameConfig;
 
 /// <summary>
 /// This is the Componet that will appear in the editor in the inspector
@@ -28,21 +29,34 @@ public class GlobalSettings
 	public bool applyChange;							//whether or not to apply the change to Global Settings when applyChange is clicked
 	public bool editMode;								//enable edit mode for Global Settings
 	public PokemonStatSettings mPokmonStatSettings;     //Pokemon Stat  Settings
+<<<<<<< Updated upstream
 	public PokemonCalculationSettings mPokemonCalculationSettings;
 	public void Update()
 	{
 		this.mPokmonStatSettings.Update();
 		mPokemonCalculationSettings.Update();
+=======
+	public GameConfigDebug mGameConfig;
+	public void Update()
+	{
+		this.mPokmonStatSettings.Update();
+		this.mGameConfig.Update();
+>>>>>>> Stashed changes
 	}
 	public bool IsUpdated()
 	{
 		if (!this.mPokmonStatSettings.IsUpdated()) return false;
+<<<<<<< Updated upstream
 		else if (!mPokemonCalculationSettings.IsUpdated()) return false;
+=======
+		else if (!this.mGameConfig.IsUpdated()) return false;
+>>>>>>> Stashed changes
 		return true;
 	}
 	public void ApplyChanges()
 	{
 		this.mPokmonStatSettings.ApplyChanges();
+<<<<<<< Updated upstream
 		mPokemonCalculationSettings.ApplyChanges();
 	}
 }
@@ -57,6 +71,9 @@ public class PokemonCameraOffset
 	public void ApplyChanges()
 	{
 
+=======
+		this.mGameConfig.ApplyChanges();
+>>>>>>> Stashed changes
 	}
 }
 [Serializable]
@@ -189,7 +206,36 @@ public class DebugPokemonSpeedStatDivider
 		else Debug.Log("chagne failed");
 	}
 }
+<<<<<<< Updated upstream
 
+=======
+public class GameConfigDebug
+{
+	public GameConfig gameConfig;
+	public bool saveConfig;
+	public void Update()
+	{
+		gameConfig = GameConfigClass.mGameConfig;
+	}
+	public bool IsUpdated()
+	{
+		if (saveConfig)
+		{
+			SaveConfig();
+			saveConfig = false;
+		}
+		return GameConfigClass.isValid();
+	}
+	public void ApplyChanges()
+	{
+		GameConfigClass.mGameConfig = gameConfig;
+	}
+	public void SaveConfig()
+	{
+		GameConfigClass.SaveGameConfig(gameConfig);
+	}
+}
+>>>>>>> Stashed changes
 [Serializable]
 public class EntityDebug
 {

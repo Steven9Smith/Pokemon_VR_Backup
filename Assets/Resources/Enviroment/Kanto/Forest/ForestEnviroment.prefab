@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7233497820807629516}
   - component: {fileID: -3892751340265411596}
   - component: {fileID: -8995209165890478783}
-  - component: {fileID: 4755243971567386409}
   m_Layer: 0
   m_Name: ForestEnviroment
   m_TagString: Untagged
@@ -45,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ae6f482e686ae4d8069bbe48a4d212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: -8995209165890478783}
-  musicLoop: {fileID: 8300000, guid: 00bff508ebaee4d4bb0b4bfb9085fb6f, type: 3}
-  musicStart: {fileID: 8300000, guid: c4856b9db1d2ea74cbe4b9616d007bcc, type: 3}
-  ambientSounds: {fileID: -8995209165890478783}
-  playOnStart: 1
+  music: {fileID: 0}
+  musicLoop: {fileID: 0}
+  musicStart: {fileID: 0}
+  ambientSounds: {fileID: 0}
+  playOnStart: 0
   toggleMusicStart: 0
   toggleMusicLoop: 0
   toggleAmbientSounds: 0
@@ -158,16 +157,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4755243971567386409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475962853855252671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 1

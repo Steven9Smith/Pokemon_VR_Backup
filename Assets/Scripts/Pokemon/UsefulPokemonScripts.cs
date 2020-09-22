@@ -33,27 +33,6 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName"></param>
 		/// <returns></returns>
-	/*	public static RenderMesh LoadPokemonRenderMesh(string pokemonName)
-		{
-		///	string dataPath = Application.dataPath + "/Resources/Pokemon/" + pokemonName + "/" + pokemonName + ".prefab";
-		//	if (!File.Exists(dataPath))
-		//	{
-		//		Debug.LogError(dataPath);
-		//	}
-			GameObject go = Resources.Load("Pokemon/" + pokemonName + "/" + pokemonName, typeof(GameObject)) as GameObject;
-			if (go == null) Debug.LogError("Failed to get the render mesh gameobject");
-			else Debug.Log("Succesfully Loaded \""+pokemonName+"\"");
-			//verify this works with physics
-			RenderMesh renderer = new RenderMesh
-			{
-				mesh = go.GetComponent<MeshFilter>().sharedMesh,
-				material = go.GetComponent<MeshRenderer>().sharedMaterial,
-				castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-				receiveShadows = true
-			};
-
-			return renderer;
-		}*/
 		public static RenderMesh LoadEnviromentRenderMesh(EnviromentData enviromentData, string startPath)
 		{
 			startPath += enviromentData.entityName.ToString() + "/" + enviromentData.entityName.ToString();
@@ -69,8 +48,6 @@ namespace Pokemon
 
 			return renderer;
 		}
-
-
 		/// <summary>
 		///	Returns the path of the entities base on the given type
 		/// </summary>
@@ -151,7 +128,6 @@ namespace Pokemon
 			}
 			return entities;
 		}
-
 		//Enviroment Related
 		/// <summary>
 		/// Loads the Envieoment Entity Data with the geiven arguments
@@ -174,7 +150,8 @@ namespace Pokemon
 				catch (System.ArgumentNullException ex) { PrintString("LoadEnviromentData", "The given file information was null or invalid:" + ex.Message, 2); file.Close(); return false; }
 				catch (SerializationException ex) { PrintString("LoadEnviromentData", "Failed to Deserialize the data with path:" + enviromentDataPath + "," + ex.Message); file.Close(); return false; }
 				catch (System.Security.SecurityException ex) { PrintString("LoadEnviromentData", "Deserialization security Exception:" + ex.Message); file.Close(); return false; }
-				enviromentData = new EnviromentData() {
+				enviromentData = new EnviromentData()
+				{
 					entityName = enviromentEntityDataSave.EntityName,
 					entityId = enviromentData.entityId,
 					entityParentId = enviromentData.entityParentId,
@@ -192,122 +169,6 @@ namespace Pokemon
 			}
 			return false;
 		}
-/*		/// <summary>
-		/// Saves the EnviromentData 
-		/// </summary>
-		/// <param name="enviromentData">Enviroment Data to save</param>
-		/// <param name="position">Position</param>
-		/// <param name="rotation">Rotation</param>
-		/// <param name="scale">Scale</param>
-		public static void SaveEnviromentData(EnviromentData enviromentData, Translation position, Rotation rotation,Scale scale)
-		{
-			BinaryFormatter binaryFormatter = new BinaryFormatter();
-			string dataPath = Application.dataPath + "/Resources/Scenes/" + GetCurrentSceneName() + "/IEnviroment/" +
-				GenerateObjectName(GetObjectType(enviromentData.pathString)) + "/" + ByteString30ToString(enviromentData.entityId) + ".dat";
-			FileStream file = File.Open(dataPath, FileMode.OpenOrCreate);
-			EnviromentEntityDataSave enviromentEntityDataSave = new EnviromentEntityDataSave() {
-				EntityId = enviromentData.entityId,
-				EntityName = enviromentData.entityName,
-				EntityParentId = enviromentData.entityParentId,
-				PathString = enviromentData.pathString,
-				Position = position,
-				Rotation = rotation,
-				Scale = scale
-			};
-			binaryFormatter.Serialize(file, enviromentEntityDataSave);
-			file.Close();
-		}
-		/// <summary>
-		/// generates a path based on the pathSring
-		/// </summary>
-		/// <param name="enviromentData">data to process</param>
-		/// <returns></returns>
-		public static string GenerateEnviromentPath(EnviromentData enviromentData)
-		{
-			string a = "";
-			switch (enviromentData.pathString.A)
-			{
-				case 0: a += "Kanto/"; break;
-				default: PrintString("GenerateEnviromentPath", "unable to determine path A", 1); a += "Kanto"; break;
-			}
-			switch (enviromentData.pathString.B)
-			{
-				case 0: a += "Forest/"; break;
-				case 1: a += "Desert/"; break;
-				case 2: a += "Town/"; break;
-				default: PrintString("GenerateEnviromentPath", "unable to determine path B", 1); a += "Forest/"; break;
-			}
-			//uses Generate ObjectName
-			a += GenerateObjectName(enviromentData.pathString.C) + "/";
-			if (enviromentData.pathString.length > 3)
-			{
-				//town specific stuff
-				switch (enviromentData.pathString.D)
-				{
-					case 0: a += "Buildings/"; break;
-					case 1: a += "People/"; break;
-					default: PrintString("GenerateEnviromentPath", "unable to determine path D", 1); a += "People/"; break;
-				}
-			}
-			return a;
-		}
-		/// <summary>
-		/// Generates the stirng of the object type
-		/// </summary>
-		/// <param name="type">thing to be converted</param>
-		/// <returns></returns>
-		private static string GenerateObjectName(byte type)
-		{
-			switch (type)
-			{
-				case 0: return "Landscapes";
-				case 1: return "Buildings";
-				case 255: return "PalletTown";
-				default: PrintString("GeneratePbjectType", "unable to determine object type woth byte \"" + type + "\"", 1); return "Landscapes";
-			}
-		}
-		/// <summary>
-		/// returns the enviromentPath using the given Path string
-		/// </summary>
-		/// <param name="pathString">pathString to cbe heck</param>
-		/// <returns></returns>
-		public static byte GetEnviromentType(ByteString30 pathString) { return pathString.B; }
-		/// <summary>
-		/// returns the object type using the given path string 
-		/// </summary>
-		/// <param name="pathString">pathStirng to be checked</param>
-		/// <returns></returns>
-		public static byte GetObjectType(ByteString30 pathString) { return pathString.C; }
-		/// <summary>
-		/// creates a new EnviromentDataEntity saves saves it in IEnviroment (For Dev Use Only)
-		/// </summary>
-		/// <param name="enviromentId">the id of the enviroment entity</param>
-		/// <param name="enviromentName">the name</param>
-		/// <param name="enviromentParentId">the id of the parent (if it ha one)</param>
-		/// <param name="pathString">a path string see GenerateEnviromentPath for more explination</param>
-		/// <param name="enviromentType">the type of enviroment</param>
-		/// <param name="boundType">the type of bound
-		/// <para>0 = floor   1 = wall   2 = roof   3= solid</para>
-		/// </param>
-		/// <param name="position">the position of the entity</param>
-		/// <param name="rotation">the rotation of the eneity</param>
-		/// <param name="scale">the scale of the eneity</param>
-		public static void CreateNewEnviromentData(byte boundType, ByteString30 enviromentId, ByteString30 enviromentName, ByteString30 enviromentParentId, ByteString30 pathString,
-			Translation position = new Translation(), Rotation rotation = new Rotation(), Scale scale = new Scale())
-		{
-			EnviromentData enviromentData = new EnviromentData()
-			{
-				BoundType = boundType,
-				entityId = enviromentId,
-				entityName = enviromentName,
-				entityParentId = enviromentParentId,
-				pathString = pathString,
-			};
-			//	if (scale.Value == 0f && scale.Value.y == 0f && scale.Value.z == 0f) scale.Value = new float3(0f,0f,0f); 
-			SaveEnviromentData(enviromentData, position, rotation, scale);
-		}
-		*/
-		
 		/// <summary>
 		/// creates new Player Data
 		/// </summary>
@@ -321,7 +182,7 @@ namespace Pokemon
 			{
 				Name = new ByteString30(playerId),
 				PokemonName = new ByteString30(pokemonName),
-//				PokemonEntityData = pokemonEntityData
+				//				PokemonEntityData = pokemonEntityData
 			};
 		}
 		//Pokemon Entity Data Related
@@ -335,7 +196,7 @@ namespace Pokemon
 			PokemonEntityData pokemonEntityData = new PokemonEntityData() { PokedexNumber = 0, Height = -1.0f };
 			return pokemonEntityData;
 		}
-	
+
 		/// <summary>
 		/// generates and randomized height based on the default height given and the height varibation range
 		/// </summary>
@@ -350,6 +211,7 @@ namespace Pokemon
 		/// <param name="MassVariation">Mass variation of the pokemon (Default is 0.5f)</param>
 		/// <returns></returns>
 		public static float RandomizeMass(float defaultMass, float MassVariation = 0.5f) { return (defaultMass * UnityEngine.Random.Range((MassVariation * -1), MassVariation)) + defaultMass; }
+<<<<<<< Updated upstream
 		
 		public static void LoadPokemonEntity(Entity entity,EntityManager entityManager,PlayerSaveData psd)
 		{
@@ -432,14 +294,22 @@ namespace Pokemon
 		}
 
 		public static void LoadPlayerData(EntityManager entityManager, Entity entity, string playerName)
+=======
+
+		
+		public static void LoadPlayerData(EntityManager entityManager, Entity entity, string playerName, bool reset = false)
+>>>>>>> Stashed changes
 		{
 			FileStream file = null;
 			PlayerSaveData psd = new PlayerSaveData { };
+			BinaryFormatter bf = new BinaryFormatter();
 			try
 			{
-				BinaryFormatter bf = new BinaryFormatter();
-				file = File.Open(Application.persistentDataPath + "/Players/" + playerName + ".dat", FileMode.Open);
-				psd = (PlayerSaveData)bf.Deserialize(file);
+				if (!reset)
+				{
+					file = File.Open(Application.persistentDataPath + "/Players/" + playerName + ".dat", FileMode.Open);
+					psd = (PlayerSaveData)bf.Deserialize(file);
+				}
 			}
 			catch (Exception e)
 			{
@@ -448,18 +318,19 @@ namespace Pokemon
 					//handle exception
 					Debug.LogError("Failed to load the player data");
 				}
-
+				reset = true;
 			}
 			finally
 			{
 				if (file != null) file.Close();
-				if (psd.isValid)
+				if (psd.isValid && !reset)
 				{
-					Debug.Log("Loading player data, name = '"+psd.playerData.Name+"' pokemon = '"+psd.playerData.PokemonName+"'");
-					string pokemonName =psd.playerData.PokemonName.ToString();
-					if (entityManager.HasComponent<PlayerData>(entity)) entityManager.SetComponentData(entity, psd.isValid ? psd.playerData : new PlayerData { Name = new ByteString30(playerName), PokemonName = new ByteString30("Bulbasaur") });
+					Debug.Log("Loading player data, name = '" + psd.playerData.Name + "' pokemon = '" + psd.playerData.PokemonName + "'");
+					string pokemonName = psd.playerData.PokemonName.ToString();
+					if (entityManager.HasComponent<PlayerData>(entity)) entityManager.SetComponentData(entity, psd.isValid ? psd.playerData : new PlayerData { Name = new ByteString30(playerName), PokemonName = new ByteString30("Electrode") });
 					else entityManager.AddComponentData(entity, psd.isValid ? psd.playerData : new PlayerData { Name = new ByteString30(playerName), PokemonName = new ByteString30("Electrode") });
-					LoadPokemonEntity(entity, entityManager, psd);
+					Debug.LogError("This function is obselete, it no longer functions as expected");
+					//	PokemonDataClass.LoadPokemonEntity(entity, entityManager, psd);
 				}
 				else
 				{
@@ -468,39 +339,44 @@ namespace Pokemon
 					if (pokemonName == "") pokemonName = "Electrode";
 					PlayerData pd = new PlayerData { Name = new ByteString30(playerName), PokemonName = new ByteString30(pokemonName) };
 					PokemonEntityData ped = PokemonDataClass.GenerateBasePokemonEntityData(PokemonDataClass.StringToPokedexEntry(pokemonName));
-					if (SavePlayerData(pd, ped))
+					if (SavePlayerData(pd, ped,new CoreData {
+						translation = new Translation { },
+						rotation = new Rotation { }
+					}))
 						LoadPlayerData(entityManager, entity, playerName);
 				}
 			}
 		}
-		
-		public static bool SavePlayerData(PlayerData pd,PokemonEntityData ped)
+
+		public static bool SavePlayerData(PlayerData pd, PokemonEntityData ped, CoreData cd)
 		{
 			FileStream file = null;
 			PlayerSaveData psd = new PlayerSaveData
 			{
 				playerData = pd,
 				pokemonEntityData = ped,
+				position = cd.translation,
+				rotation = cd.rotation,
 				isValid = true
 			};
 			try
 			{
 				BinaryFormatter bf = new BinaryFormatter();
 				file = File.Create(Application.persistentDataPath + "/Players/" + psd.playerData.Name + ".dat");
-				bf.Serialize(file,psd);
+				bf.Serialize(file, psd);
 				return true;
 			}
 			catch (Exception e)
 			{
-				if(e != null)
+				if (e != null)
 				{
 					//handle exception
-					Debug.LogError("Failed to save the player data"+e);
+					Debug.LogError("Failed to save the player data" + e);
 				}
 			}
 			finally
 			{
-				if(file!=null)file.Close();
+				if (file != null) file.Close();
 			}
 			return false;
 		}
@@ -510,7 +386,7 @@ namespace Pokemon
 		/// </summary>
 		/// <returns></returns>
 		public static string GetCurrentSceneName() { return SceneManager.GetActiveScene().name; }
-		
+
 		/// <summary>
 		/// Takes in a ushort pokedex entry number and retuns the name of the pokemon
 		/// </summary>
@@ -532,7 +408,8 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="a">the string to be passed</param>
 		/// <param name="mode">0 = Log, 1 = Warning, 2 = Error, 3 = Assertion</param>
-		public static void PrintString(string functionName, string message, ushort mode = 0) {
+		public static void PrintString(string functionName, string message, ushort mode = 0)
+		{
 			switch (mode)
 			{
 				case 0: Debug.Log(functionName + "\t" + message); break;
@@ -591,7 +468,8 @@ namespace Pokemon
 		public static List<string> GetDirectoryNamesInDirectory(string dir, bool namesOnly = true)
 		{
 			List<string> fileNames = new List<string>();
-			if (Directory.Exists(dir)) {
+			if (Directory.Exists(dir))
+			{
 				//create new List<String>
 				try
 				{
@@ -614,12 +492,14 @@ namespace Pokemon
 				{
 					Debug.LogError(PathEx.Message);
 				}
-			} else Debug.LogError("GetDirectoryNamesInDirectory:\tInvalid directory \"" + dir + "\" was given");
+			}
+			else Debug.LogError("GetDirectoryNamesInDirectory:\tInvalid directory \"" + dir + "\" was given");
 
 			return fileNames;
 		}
 
 	}
+<<<<<<< Updated upstream
 	public class PokemonConversion {
 		public static string PlayerInputToString(PlayerInput pi, bool includeAll = false)
 		{
@@ -654,3 +534,15 @@ namespace Pokemon
 		}
 	}
 }
+=======
+	[Serializable]
+	public struct PlayerDataSaves
+	{
+		PlayerSaveData player1;
+		PlayerSaveData player2;
+		PlayerSaveData player3;
+		PlayerSaveData player4;
+	} 
+}
+	
+>>>>>>> Stashed changes

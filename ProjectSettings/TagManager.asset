@@ -6,6 +6,9 @@ TagManager:
   tags:
   - HealthBar
   - EnergyBar
+  - ParticlePrefab
+  - PlayerCameras
+  - CameraParents
   layers:
   - Default
   - TransparentFX

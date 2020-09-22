@@ -19,6 +19,7 @@ namespace Core
 		public float3 bounds;
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
+<<<<<<< Updated upstream
 			if (transform == null) Debug.LogError("given trans is null or invalid!");
 			CoreData cd = new CoreData(new ByteString30(EnviromentName), new ByteString30(Region),bounds,transform.localScale);
 			if (!cd.isValid) Debug.LogError("failed to successfully create COreData for To-Be Entity \"" + EnviromentName + "\":\"" + Region + "\"");
@@ -29,6 +30,18 @@ namespace Core
 				dstManager.AddComponentData(entity, new EnviromentEntityData(cd));
 				dstManager.AddComponentData(entity, cd);
 			}
+=======
+		//	if (transform == null) Debug.LogError("given trans is null or invalid!");
+		//	CoreData cd = new CoreData(new ByteString30(EnviromentName), new ByteString30(Region),bounds,transform.localScale,entity,new Translation { Value = transform.position},new Rotation { },new Unity.Physics.PhysicsDamping { });
+		//	if (!cd.isValid) Debug.LogError("failed to successfully create COreData for To-Be Entity \"" + EnviromentName + "\":\"" + Region + "\"");
+		//	else
+		//	{
+		//		dstManager.SetName(entity, EnviromentName +"|"+Region );
+		//		dstManager.AddComponentData(entity, new EnviromentNotSet { });
+		//		dstManager.AddComponentData(entity, new EnviromentEntityData(cd));
+		//		dstManager.AddComponentData(entity, cd);
+		//	}
+>>>>>>> Stashed changes
 		}
 	//	public IEnumerator Co()
 	//	{

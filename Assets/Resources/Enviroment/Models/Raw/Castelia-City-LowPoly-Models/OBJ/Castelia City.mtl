@@ -1,0 +1,2419 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Material103
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.321569 0.321569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material103.png
+
+newmtl M_94_20Statue_20of_20Liberty
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty.jpg
+
+newmtl Google_Earth_Snapshot2
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.431373 0.403922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot2.jpg
+
+newmtl _101
+Ka 0.000000 0.000000 0.000000
+Kd 0.325490 0.325490 0.325490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_101.jpg
+
+newmtl M_94_20Statue_20of_20Liberty1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty1_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty2_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty3_.jpg
+
+newmtl _Gray6_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.498039 0.498039 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_Gray6_1.jpg
+
+newmtl M_94_20Statue_20of_20Liberty4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty4_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty5_.jpg
+
+newmtl _102
+Ka 0.000000 0.000000 0.000000
+Kd 0.329412 0.498039 0.486275
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_102.jpg
+
+newmtl M_94_20Statue_20of_20Liberty6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty6_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty7_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty7_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty8_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty8_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty9_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty9_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty10_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty10_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty11_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty11_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty12_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty12_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty13_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty13_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty14_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty14_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty15_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty15_.jpg
+
+newmtl Color_H10
+Ka 0.000000 0.000000 0.000000
+Kd 0.517647 0.768627 0.752941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Color_H10.jpg
+
+newmtl M_94_20Statue_20of_20Liberty16_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty16_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty17_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty17_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty18_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_94_20Statue_20of_20Liberty18_.jpg
+
+newmtl Statue_thumb
+Ka 0.000000 0.000000 0.000000
+Kd 0.352941 0.600000 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Statue_thumb.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Tree3
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.239216 0.203922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Tree3.png
+
+newmtl Tree2
+Ka 0.000000 0.000000 0.000000
+Kd 0.254902 0.309804 0.211765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Tree2.png
+
+newmtl simple
+Ka 0.000000 0.000000 0.000000
+Kd 0.184314 0.164706 0.141176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/simple.png
+
+newmtl Gate_Post
+Ka 0.000000 0.000000 0.000000
+Kd 0.411765 0.309804 0.278431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Gate_Post.png
+
+newmtl M_9025884_2_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.458824 0.400000 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_4.jpg
+
+newmtl M_9025884_2_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.105882 0.113725 0.113725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_2.png
+
+newmtl Google_Earth_Snapshot5
+Ka 0.000000 0.000000 0.000000
+Kd 0.250980 0.262745 0.270588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot5.jpg
+
+newmtl Google_Earth_Snapshot4
+Ka 0.000000 0.000000 0.000000
+Kd 0.349020 0.321569 0.305882
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot4.jpg
+
+newmtl Google_Earth_Snapshot3
+Ka 0.000000 0.000000 0.000000
+Kd 0.329412 0.317647 0.305882
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot3.jpg
+
+newmtl building_4_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.662745 0.666667 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/building_4_2.jpg
+
+newmtl Trent_Liberty_Island_raw_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.596078 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Trent_Liberty_Island_raw_2.jpg
+
+newmtl building_52_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.627451 0.639216 0.603922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/building_52_2.jpg
+
+newmtl M_9025884_2_13
+Ka 0.000000 0.000000 0.000000
+Kd 0.466667 0.329412 0.294118
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_13.jpg
+
+newmtl Building_3_Entrance2_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.588235 0.415686 0.368627
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Building_3_Entrance2_1.jpg
+
+newmtl M_9025884_2_7
+Ka 0.000000 0.000000 0.000000
+Kd 0.592157 0.478431 0.447059
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_7.jpg
+
+newmtl M_9025884_2_8
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.423529 0.372549
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_8.jpg
+
+newmtl Building_3_Entrance2
+Ka 0.000000 0.000000 0.000000
+Kd 0.572549 0.482353 0.443137
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Building_3_Entrance2.jpg
+
+newmtl M_9025884_2_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.266667 0.258824 0.227451
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_3.jpg
+
+newmtl _100
+Ka 0.000000 0.000000 0.000000
+Kd 0.023529 0.007843 0.007843
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_100.jpg
+
+newmtl Google_Earth_Snapshot6
+Ka 0.000000 0.000000 0.000000
+Kd 0.372549 0.364706 0.349020
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot6.jpg
+
+newmtl M_9025884_2_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.121569 0.109804 0.098039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9025884_2_5.png
+
+newmtl Trent_Liberty_Island_raw_2_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.596078 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Trent_Liberty_Island_raw_2_1_.jpg
+
+newmtl building_4_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.466667 0.490196 0.443137
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/building_4_1.jpg
+
+newmtl building_52
+Ka 0.000000 0.000000 0.000000
+Kd 0.564706 0.580392 0.545098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/building_52.jpg
+
+newmtl _1
+Ka 0.000000 0.000000 0.000000
+Kd 0.054902 0.054902 0.058824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_1.jpg
+
+newmtl Trent_Liberty_Island_raw_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.596078 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Trent_Liberty_Island_raw_1.jpg
+
+newmtl M_389662198_28e64017ea_o_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.407843 0.407843 0.403922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_389662198_28e64017ea_o_1.jpg
+
+newmtl building_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.545098 0.549020 0.513725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/building_4.jpg
+
+newmtl Flag
+Ka 0.000000 0.000000 0.000000
+Kd 0.062745 0.047059 0.054902
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Flag.png
+
+newmtl material_1_Terrain_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.407843 0.439216 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/material_1_Terrain_1.jpg
+
+newmtl drop_result_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.627451 0.705882 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/drop_result_6.jpg
+
+newmtl Stone_Pavers_Flagstone_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.631373 0.631373 0.631373
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Stone_Pavers_Flagstone_Gray.jpg
+
+newmtl windows2
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2.jpg
+
+newmtl _71
+Ka 0.000000 0.000000 0.000000
+Kd 0.400000 0.521569 0.690196
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_71.jpg
+
+newmtl _91
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.486275 0.521569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_91.jpg
+
+newmtl _86
+Ka 0.000000 0.000000 0.000000
+Kd 0.329412 0.552941 0.611765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_86.jpg
+
+newmtl _65
+Ka 0.000000 0.000000 0.000000
+Kd 0.258824 0.392157 0.556863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_65.jpg
+
+newmtl _88
+Ka 0.000000 0.000000 0.000000
+Kd 0.439216 0.564706 0.678431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_88.jpg
+
+newmtl _72
+Ka 0.000000 0.000000 0.000000
+Kd 0.478431 0.576471 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_72.jpg
+
+newmtl _67
+Ka 0.000000 0.000000 0.000000
+Kd 0.376471 0.490196 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_67.jpg
+
+newmtl _CoolGray5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.560784 0.568627 0.600000
+Ks 0.330000 0.330000 0.330000
+
+newmtl _SkyBlue_
+Ka 0.000000 0.000000 0.000000
+Kd 0.733333 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+d 0.900000
+
+newmtl Water_Sparkling
+Ka 0.000000 0.000000 0.000000
+Kd 0.560784 0.690196 0.729412
+Ks 0.330000 0.330000 0.330000
+d 0.620000
+map_Kd Castelia City/Water_Sparkling.jpg
+
+newmtl Tile_Travertine_2inch1
+Ka 0.000000 0.000000 0.000000
+Kd 0.772549 0.831373 0.901961
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Tile_Travertine_2inch1.jpg
+
+newmtl Stone_Pavers_Flagstone_Gray1
+Ka 0.000000 0.000000 0.000000
+Kd 0.878431 0.878431 0.878431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Stone_Pavers_Flagstone_Gray1.jpg
+
+newmtl Stone_Terrazzo
+Ka 0.000000 0.000000 0.000000
+Kd 0.709804 0.705882 0.709804
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Stone_Terrazzo.jpg
+
+newmtl Stone_Vein_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.650980 0.647059 0.647059
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Stone_Vein_Gray.jpg
+
+newmtl Metal_Aluminum_Anodized
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.705882 0.737255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Metal_Aluminum_Anodized.jpg
+
+newmtl Concrete_Block_Retaining_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.474510 0.474510 0.474510
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Concrete_Block_Retaining_Gray.jpg
+
+newmtl _Metal_Seamed_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.462745 0.466667 0.450980
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Metal_Corrogated_Shiny_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.756863 0.756863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_Metal_Corrogated_Shiny_1.jpg
+
+newmtl _Gray6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.419608 0.419608
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_Gray6_.jpg
+
+newmtl _70
+Ka 0.000000 0.000000 0.000000
+Kd 0.388235 0.603922 0.729412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_70.jpg
+
+newmtl _Metal_Aluminum_Anodized_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.784314 0.819608 0.854902
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_Metal_Aluminum_Anodized_2.jpg
+
+newmtl _76
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.537255 0.784314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_76.bmp
+
+newmtl _83
+Ka 0.000000 0.000000 0.000000
+Kd 0.580392 0.658824 0.749020
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_83.jpg
+
+newmtl _13
+Ka 0.000000 0.000000 0.000000
+Kd 0.772549 0.705882 0.552941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_13.jpg
+
+newmtl stone
+Ka 0.000000 0.000000 0.000000
+Kd 0.705882 0.698039 0.670588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/stone.jpg
+
+newmtl _Celery_
+Ka 0.000000 0.000000 0.000000
+Kd 0.945098 0.925490 0.709804
+Ks 0.330000 0.330000 0.330000
+
+newmtl Color_000
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl _DarkGoldenrod_
+Ka 0.000000 0.000000 0.000000
+Kd 0.721569 0.525490 0.043137
+Ks 0.330000 0.330000 0.330000
+
+newmtl _66
+Ka 0.000000 0.000000 0.000000
+Kd 0.380392 0.494118 0.603922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_66.jpg
+
+newmtl _78
+Ka 0.000000 0.000000 0.000000
+Kd 0.427451 0.560784 0.678431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_78.jpg
+
+newmtl M_9767810614_7d8710eee4_h_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.490196 0.498039 0.517647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9767810614_7d8710eee4_h_1_.jpg
+
+newmtl M_9767810614_7d8710eee4_h_1__1
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.670588 0.721569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9767810614_7d8710eee4_h_1__1.jpg
+
+newmtl M_9767810614_7d8710eee4_h_1_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.462745 0.537255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9767810614_7d8710eee4_h_1_1_.jpg
+
+newmtl M_9767810614_7d8710eee4_h_1_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.490196 0.498039 0.517647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9767810614_7d8710eee4_h_1_2_.jpg
+
+newmtl _7
+Ka 0.000000 0.000000 0.000000
+Kd 0.368627 0.588235 0.788235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_7.jpg
+
+newmtl M_9767810614_7d8710eee4_h_1__2
+Ka 0.000000 0.000000 0.000000
+Kd 0.901961 0.905882 0.882353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9767810614_7d8710eee4_h_1__2.jpg
+
+newmtl _82
+Ka 0.000000 0.000000 0.000000
+Kd 0.411765 0.576471 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_82.jpg
+
+newmtl _74
+Ka 0.000000 0.000000 0.000000
+Kd 0.329412 0.552941 0.611765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_74.jpg
+
+newmtl _73
+Ka 0.000000 0.000000 0.000000
+Kd 0.478431 0.576471 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_73.jpg
+
+newmtl _81
+Ka 0.000000 0.000000 0.000000
+Kd 0.388235 0.603922 0.729412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_81.jpg
+
+newmtl _92
+Ka 0.000000 0.000000 0.000000
+Kd 0.388235 0.603922 0.729412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_92.jpg
+
+newmtl Stone_Pavers_Flagstone_Gray1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.866667 0.866667 0.866667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Stone_Pavers_Flagstone_Gray1_.jpg
+
+newmtl Translucent_Glass_Blue
+Ka 0.000000 0.000000 0.000000
+Kd 0.254902 0.607843 0.803922
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl _99
+Ka 0.000000 0.000000 0.000000
+Kd 0.717647 0.749020 0.819608
+Ks 0.330000 0.330000 0.330000
+d 0.810000
+
+newmtl water_solid
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.513725 0.929412
+Ks 0.330000 0.330000 0.330000
+d 0.630000
+
+newmtl _MidnightBlue_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.403922 0.549020
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Blue_Glass_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.686275 0.772549 0.929412
+Ks 0.330000 0.330000 0.330000
+d 0.610000
+
+newmtl _17
+Ka 0.000000 0.000000 0.000000
+Kd 0.639216 0.768627 0.819608
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_17.jpg
+
+newmtl Cladding_Siding_White
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Cladding_Siding_White.jpg
+
+newmtl Cladding_Stucco_White
+Ka 0.000000 0.000000 0.000000
+Kd 0.858824 0.858824 0.858824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Cladding_Stucco_White.jpg
+
+newmtl M_8_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.396078 0.388235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_8_1.jpg
+
+newmtl tower
+Ka 0.000000 0.000000 0.000000
+Kd 0.345098 0.392157 0.450980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/tower.jpg
+
+newmtl Screen_shot_2010_03_16_at_2_55
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.611765 0.611765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_2_55.jpg
+
+newmtl _4
+Ka 0.000000 0.000000 0.000000
+Kd 0.376471 0.364706 0.360784
+Ks 0.330000 0.330000 0.330000
+
+newmtl M_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.196078 0.227451 0.266667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_5.jpg
+
+newmtl Screen_shot_2010_03_16_at_3_07
+Ka 0.000000 0.000000 0.000000
+Kd 0.462745 0.478431 0.482353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_3_07.jpg
+
+newmtl Screen_shot_2010_03_16_at_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.701961 0.713725 0.694118
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_2.jpg
+
+newmtl M_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.137255 0.160784 0.192157
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_2.jpg
+
+newmtl _9
+Ka 0.000000 0.000000 0.000000
+Kd 0.615686 0.600000 0.592157
+Ks 0.330000 0.330000 0.330000
+
+newmtl M_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.137255 0.164706 0.211765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_3.jpg
+
+newmtl Color_007
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.227451 0.227451
+Ks 0.330000 0.330000 0.330000
+
+newmtl M_4_7
+Ka 0.000000 0.000000 0.000000
+Kd 0.235294 0.274510 0.325490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_4_7.jpg
+
+newmtl M_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.266667 0.309804 0.364706
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_4.jpg
+
+newmtl Color_008
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.223529 0.254902
+Ks 0.330000 0.330000 0.330000
+
+newmtl Color_004
+Ka 0.000000 0.000000 0.000000
+Kd 0.556863 0.556863 0.556863
+Ks 0.330000 0.330000 0.330000
+
+newmtl Material_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.458824 0.443137 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material_3.jpg
+
+newmtl M_4_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.509804 0.494118 0.466667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_4_1.jpg
+
+newmtl Photo_Texture
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture.jpg
+
+newmtl Photo_Texture1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture1_.jpg
+
+newmtl Material_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.215686 0.184314 0.164706
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material_2.jpg
+
+newmtl Google_Earth_Snapshot
+Ka 0.000000 0.000000 0.000000
+Kd 0.345098 0.333333 0.329412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot.jpg
+
+newmtl Photo_Texture2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM.jpg
+
+newmtl Color_003
+Ka 0.000000 0.000000 0.000000
+Kd 0.666667 0.666667 0.666667
+Ks 0.330000 0.330000 0.330000
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM1_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM2_.jpg
+
+newmtl M_1_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.458824 0.439216 0.435294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_1_1.jpg
+
+newmtl M_10_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.313725 0.345098 0.384314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_1.jpg
+
+newmtl M_10_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.258824 0.282353 0.329412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_2.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM3_.jpg
+
+newmtl Screen_shot_2010_03_16_at_4_13_36_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.345098 0.341176 0.337255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_4_13_36_PM.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM4_.jpg
+
+newmtl Screen_shot_2010_03_16_at_5_09_50_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.192157 0.192157 0.176471
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_5_09_50_PM.jpg
+
+newmtl M_9_8
+Ka 0.000000 0.000000 0.000000
+Kd 0.380392 0.392157 0.415686
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_8.jpg
+
+newmtl M_9_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.674510 0.674510 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_3.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM5_.jpg
+
+newmtl M_1_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.576471 0.545098 0.533333
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_1_2.jpg
+
+newmtl _6
+Ka 0.000000 0.000000 0.000000
+Kd 0.376471 0.356863 0.364706
+Ks 0.330000 0.330000 0.330000
+
+newmtl Material
+Ka 0.000000 0.000000 0.000000
+Kd 0.243137 0.254902 0.278431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material.jpg
+
+newmtl M_9
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM6_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM7_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM7_.jpg
+
+newmtl M_9_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.572549 0.580392 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_6.jpg
+
+newmtl M_9_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_1_.jpg
+
+newmtl M_9_7
+Ka 0.000000 0.000000 0.000000
+Kd 0.427451 0.423529 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_7.jpg
+
+newmtl M_10_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.388235 0.384314 0.384314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_5.jpg
+
+newmtl M_9_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.403922 0.415686 0.435294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_1.jpg
+
+newmtl M_10_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.360784 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_3.jpg
+
+newmtl M_10_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.498039 0.498039 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_6.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM8_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM8_.jpg
+
+newmtl M_9_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.376471 0.400000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_5.jpg
+
+newmtl M_9_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.239216 0.262745
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_2.jpg
+
+newmtl M_7
+Ka 0.000000 0.000000 0.000000
+Kd 0.443137 0.439216 0.435294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_7.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM9_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM9_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM10_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM10_.jpg
+
+newmtl M_9_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.380392 0.380392 0.380392
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_4.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM11_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM11_.jpg
+
+newmtl Photo_Texture9
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.396078 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture9.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM12_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM12_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM13_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM13_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM14_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM14_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM15_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM15_.jpg
+
+newmtl M_4_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.113725 0.113725 0.109804
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_4_2.jpg
+
+newmtl M_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.423529 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_1.jpg
+
+newmtl M_1_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.423529 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_1_1_.jpg
+
+newmtl M_4_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.784314 0.756863 0.725490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_4_3.jpg
+
+newmtl M_8_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.509804 0.482353 0.474510
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_8_4.jpg
+
+newmtl Photo_Texture_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.192157 0.211765 0.200000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture_1.jpg
+
+newmtl M_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.403922 0.372549
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_6.jpg
+
+newmtl Photo_Texture1_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.223529 0.223529 0.196078
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture1_1.jpg
+
+newmtl Photo_Texture2_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.223529 0.262745 0.262745
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_3.jpg
+
+newmtl M_1_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.400000 0.388235 0.368627
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_1_3.jpg
+
+newmtl Photo_Texture3
+Ka 0.000000 0.000000 0.000000
+Kd 0.239216 0.262745 0.258824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture3.jpg
+
+newmtl Photo_Texture2_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.298039 0.266667 0.266667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_1.jpg
+
+newmtl M_9_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_2_.jpg
+
+newmtl Photo_Texture3_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.376471 0.356863 0.270588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture3_1.jpg
+
+newmtl Photo_Texture2_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.219608 0.239216 0.270588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_4.jpg
+
+newmtl Photo_Texture5
+Ka 0.000000 0.000000 0.000000
+Kd 0.250980 0.282353 0.270588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture5.jpg
+
+newmtl Photo_Texture3_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.341176 0.235294 0.235294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture3_2.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM16_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM16_.jpg
+
+newmtl M_9_3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_3_.jpg
+
+newmtl M_9_4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_4_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM17_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM17_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM18_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM18_.jpg
+
+newmtl M_9_5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.305882 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_5_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM19_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM19_.jpg
+
+newmtl M_8_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.407843 0.384314 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_8_5.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM20_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM20_.jpg
+
+newmtl Photo_Texture3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture3_.jpg
+
+newmtl Photo_Texture4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_.jpg
+
+newmtl Photo_Texture4_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.168627 0.180392 0.180392
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_2.jpg
+
+newmtl M_9_10
+Ka 0.000000 0.000000 0.000000
+Kd 0.674510 0.678431 0.690196
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_10.jpg
+
+newmtl Material_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.301961 0.274510
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material_1.jpg
+
+newmtl Photo_Texture2
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.372549 0.337255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2.jpg
+
+newmtl Photo_Texture9_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.396078 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture9_1_.jpg
+
+newmtl Photo_Texture4
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.364706 0.341176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4.jpg
+
+newmtl Photo_Texture4_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.364706 0.341176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_1_.jpg
+
+newmtl Photo_Texture2_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.372549 0.337255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_1_.jpg
+
+newmtl Photo_Texture3_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.239216 0.262745 0.258824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture3_1_.jpg
+
+newmtl Photo_Texture4_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.247059 0.262745 0.223529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_1.jpg
+
+newmtl Photo_Texture2_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.211765 0.239216 0.227451
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_5.jpg
+
+newmtl Photo_Texture5_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.309804 0.305882 0.301961
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture5_1.jpg
+
+newmtl Photo_Texture2_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.247059 0.262745 0.239216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_2.jpg
+
+newmtl Photo_Texture2_7
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.266667 0.270588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_7.jpg
+
+newmtl Photo_Texture5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.317647 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture5_.jpg
+
+newmtl Material_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.333333 0.337255 0.294118
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material_4.jpg
+
+newmtl Photo_Texture2_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.372549 0.337255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_2_.jpg
+
+newmtl Photo_Texture4_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.364706 0.341176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_2_.jpg
+
+newmtl Photo_Texture2_3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.372549 0.337255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_3_.jpg
+
+newmtl Photo_Texture9_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.396078 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture9_2_.jpg
+
+newmtl Photo_Texture4_3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.364706 0.341176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture4_3_.jpg
+
+newmtl Photo_Texture9_3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.396078 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture9_3_.jpg
+
+newmtl M_8_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.403922 0.380392 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_8_2.jpg
+
+newmtl M_10_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.368627 0.368627 0.372549
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10_4.jpg
+
+newmtl Photo_Texture1
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.294118 0.282353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture1.jpg
+
+newmtl Photo_Texture2_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.254902 0.274510 0.239216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture2_6.jpg
+
+newmtl Photo_Texture1_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.152941 0.172549 0.160784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture1_2.jpg
+
+newmtl Photo_Texture6
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.301961 0.278431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture6.jpg
+
+newmtl M_8
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.349020 0.349020
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_8.jpg
+
+newmtl Photo_Texture8
+Ka 0.000000 0.000000 0.000000
+Kd 0.325490 0.309804 0.290196
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture8.jpg
+
+newmtl Photo_Texture7
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.333333 0.298039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Photo_Texture7.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM21_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM21_.jpg
+
+newmtl Screen_shot_2010_03_16_at_12_14_04_PM22_
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.313725 0.317647
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_03_16_at_12_14_04_PM22_.jpg
+
+newmtl M_9_9
+Ka 0.000000 0.000000 0.000000
+Kd 0.647059 0.650980 0.662745
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_9_9.jpg
+
+newmtl chrystler_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.670588 0.674510 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler_3.jpg
+
+newmtl chrysler
+Ka 0.000000 0.000000 0.000000
+Kd 0.250980 0.274510 0.282353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrysler.jpg
+
+newmtl chrystler_4
+Ka 0.000000 0.000000 0.000000
+Kd 0.886275 0.862745 0.839216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler_4.jpg
+
+newmtl chrystler
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler.jpg
+
+newmtl chrystler1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler1_.jpg
+
+newmtl chrystler_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.611765 0.631373 0.658824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler_2.jpg
+
+newmtl chrystler2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler2_.jpg
+
+newmtl chrystler3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler3_.jpg
+
+newmtl chrystler4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler4_.jpg
+
+newmtl chrystler5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler5_.jpg
+
+newmtl garg
+Ka 0.000000 0.000000 0.000000
+Kd 0.670588 0.678431 0.698039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/garg.png
+
+newmtl chrystler_6
+Ka 0.000000 0.000000 0.000000
+Kd 0.721569 0.721569 0.721569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler_6.jpg
+
+newmtl Empire_State_Building_Side1_Windows
+Ka 0.000000 0.000000 0.000000
+Kd 0.584314 0.564706 0.564706
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Empire_State_Building_Side1_Windows.jpg
+
+newmtl chrystler_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.635294 0.650980 0.658824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler_5.jpg
+
+newmtl chrystler6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler6_.jpg
+
+newmtl chrystler7_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler7_.jpg
+
+newmtl chrystler8_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler8_.jpg
+
+newmtl chrystler9_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler9_.jpg
+
+newmtl chrystler10_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler10_.jpg
+
+newmtl chrystler11_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler11_.jpg
+
+newmtl chrystler12_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler12_.jpg
+
+newmtl chrystler13_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler13_.jpg
+
+newmtl chrystler14_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler14_.jpg
+
+newmtl chrystler15_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler15_.jpg
+
+newmtl chrystler16_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler16_.jpg
+
+newmtl chrystler17_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler17_.jpg
+
+newmtl chrystler18_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler18_.jpg
+
+newmtl chrystler19_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler19_.jpg
+
+newmtl chrystler20_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler20_.jpg
+
+newmtl chrystler21_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler21_.jpg
+
+newmtl chrystler22_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler22_.jpg
+
+newmtl chrystler23_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler23_.jpg
+
+newmtl chrystler24_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler24_.jpg
+
+newmtl chrystler25_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler25_.jpg
+
+newmtl chrystler26_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler26_.jpg
+
+newmtl chrystler27_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler27_.jpg
+
+newmtl chrystler28_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler28_.jpg
+
+newmtl chrystler29_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler29_.jpg
+
+newmtl chrystler30_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler30_.jpg
+
+newmtl chrystler31_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler31_.jpg
+
+newmtl chrystler32_
+Ka 0.000000 0.000000 0.000000
+Kd 0.294118 0.419608 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/chrystler32_.jpg
+
+newmtl _LightGray_
+Ka 0.000000 0.000000 0.000000
+Kd 0.662745 0.662745 0.662745
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Pool_Water_
+Ka 0.000000 0.000000 0.000000
+Kd 0.372549 0.513725 0.654902
+Ks 0.330000 0.330000 0.330000
+d 0.600000
+map_Kd Castelia City/_Pool_Water_.jpg
+
+newmtl Screen_shot_2010_06_05_at_9_36_06_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.411765 0.388235 0.356863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_06_05_at_9_36_06_PM.jpg
+
+newmtl Screen_shot_2010_06_05_at_9_34_39_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.603922 0.623529 0.592157
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Screen_shot_2010_06_05_at_9_34_39_PM.jpg
+
+newmtl _68
+Ka 0.000000 0.000000 0.000000
+Kd 0.513725 0.549020 0.603922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_68.jpg
+
+newmtl _79
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.486275 0.521569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_79.jpg
+
+newmtl _80
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.490196 0.521569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_80.jpg
+
+newmtl Color_H25
+Ka 0.000000 0.000000 0.000000
+Kd 0.156863 0.200000 0.200000
+Ks 0.330000 0.330000 0.330000
+
+newmtl INT59
+Ka 0.000000 0.000000 0.000000
+Kd 0.921569 0.921569 0.921569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/INT59.jpg
+
+newmtl _19
+Ka 0.000000 0.000000 0.000000
+Kd 0.607843 0.623529 0.603922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_19.jpg
+
+newmtl _58
+Ka 0.000000 0.000000 0.000000
+Kd 0.556863 0.560784 0.588235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_58.jpg
+
+newmtl _20
+Ka 0.000000 0.000000 0.000000
+Kd 0.380392 0.439216 0.454902
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_20.jpg
+
+newmtl _16
+Ka 0.000000 0.000000 0.000000
+Kd 0.564706 0.576471 0.580392
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_16.jpg
+
+newmtl _21
+Ka 0.000000 0.000000 0.000000
+Kd 0.372549 0.333333 0.274510
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_21.jpg
+
+newmtl _22
+Ka 0.000000 0.000000 0.000000
+Kd 0.596078 0.631373 0.654902
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_22.jpg
+
+newmtl _23
+Ka 0.000000 0.000000 0.000000
+Kd 0.525490 0.521569 0.470588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_23.jpg
+
+newmtl _24
+Ka 0.000000 0.000000 0.000000
+Kd 0.384314 0.392157 0.388235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_24.jpg
+
+newmtl _26
+Ka 0.000000 0.000000 0.000000
+Kd 0.200000 0.192157 0.184314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_26.jpg
+
+newmtl _29
+Ka 0.000000 0.000000 0.000000
+Kd 0.427451 0.396078 0.329412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_29.jpg
+
+newmtl _37
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.400000 0.443137
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_37.jpg
+
+newmtl _38
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.443137 0.450980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_38.jpg
+
+newmtl _39
+Ka 0.000000 0.000000 0.000000
+Kd 0.407843 0.427451 0.415686
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_39.jpg
+
+newmtl _41
+Ka 0.000000 0.000000 0.000000
+Kd 0.639216 0.662745 0.666667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_41.jpg
+
+newmtl _42
+Ka 0.000000 0.000000 0.000000
+Kd 0.662745 0.635294 0.560784
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_42.jpg
+
+newmtl _34
+Ka 0.000000 0.000000 0.000000
+Kd 0.537255 0.313725 0.098039
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_34.jpg
+
+newmtl _43
+Ka 0.000000 0.000000 0.000000
+Kd 0.321569 0.360784 0.372549
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_43.jpg
+
+newmtl _44
+Ka 0.000000 0.000000 0.000000
+Kd 0.301961 0.250980 0.250980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_44.jpg
+
+newmtl _12
+Ka 0.000000 0.000000 0.000000
+Kd 0.741176 0.788235 0.784314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_12.bmp
+
+newmtl _45
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.372549 0.427451
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_45.jpg
+
+newmtl _46
+Ka 0.000000 0.000000 0.000000
+Kd 0.439216 0.443137 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_46.jpg
+
+newmtl _18
+Ka 0.000000 0.000000 0.000000
+Kd 0.509804 0.596078 0.647059
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_18.jpg
+
+newmtl _35
+Ka 0.000000 0.000000 0.000000
+Kd 0.631373 0.313725 0.129412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_35.jpg
+
+newmtl _22_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.596078 0.631373 0.654902
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_22_1_.jpg
+
+newmtl Google_Earth_Snapshot1
+Ka 0.000000 0.000000 0.000000
+Kd 0.215686 0.215686 0.215686
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot1.jpg
+
+newmtl _53
+Ka 0.000000 0.000000 0.000000
+Kd 0.160784 0.156863 0.141176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_53.jpg
+
+newmtl _51
+Ka 0.000000 0.000000 0.000000
+Kd 0.207843 0.203922 0.180392
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_51.jpg
+
+newmtl _54
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.439216 0.450980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_54.jpg
+
+newmtl _60
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.329412 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_60.jpg
+
+newmtl _55
+Ka 0.000000 0.000000 0.000000
+Kd 0.505882 0.447059 0.411765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_55.jpg
+
+newmtl _57
+Ka 0.000000 0.000000 0.000000
+Kd 0.313725 0.321569 0.345098
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_57.jpg
+
+newmtl _61
+Ka 0.000000 0.000000 0.000000
+Kd 0.886275 0.862745 0.858824
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_61.jpg
+
+newmtl _62
+Ka 0.000000 0.000000 0.000000
+Kd 0.670588 0.698039 0.713725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_62.jpg
+
+newmtl _63
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.305882 0.333333
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_63.jpg
+
+newmtl _48
+Ka 0.000000 0.000000 0.000000
+Kd 0.572549 0.458824 0.411765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_48.jpg
+
+newmtl _56
+Ka 0.000000 0.000000 0.000000
+Kd 0.505882 0.415686 0.364706
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_56.jpg
+
+newmtl _31
+Ka 0.000000 0.000000 0.000000
+Kd 0.443137 0.443137 0.435294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_31.jpg
+
+newmtl _59
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.286275 0.313725
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_59.jpg
+
+newmtl _49
+Ka 0.000000 0.000000 0.000000
+Kd 0.619608 0.592157 0.556863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_49.jpg
+
+newmtl _50
+Ka 0.000000 0.000000 0.000000
+Kd 0.517647 0.521569 0.501961
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_50.jpg
+
+newmtl _27
+Ka 0.000000 0.000000 0.000000
+Kd 0.545098 0.552941 0.537255
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_27.jpg
+
+newmtl _52
+Ka 0.000000 0.000000 0.000000
+Kd 0.313725 0.317647 0.321569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_52.jpg
+
+newmtl _Stone_Pavers_Flagstone_Gray_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.635294 0.635294 0.635294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_Stone_Pavers_Flagstone_Gray_1.jpg
+
+newmtl _36
+Ka 0.000000 0.000000 0.000000
+Kd 0.258824 0.376471 0.474510
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_36.jpg
+
+newmtl _30
+Ka 0.000000 0.000000 0.000000
+Kd 0.341176 0.439216 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_30.jpg
+
+newmtl _33
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.360784 0.486275
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_33.jpg
+
+newmtl _40
+Ka 0.000000 0.000000 0.000000
+Kd 0.039216 0.050980 0.066667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_40.png
+
+newmtl Metal_Corrogated_Shiny
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.756863 0.756863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Metal_Corrogated_Shiny.jpg
+
+newmtl Metal_Seamed
+Ka 0.000000 0.000000 0.000000
+Kd 0.584314 0.588235 0.568627
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Metal_Seamed.jpg
+
+newmtl _32
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.556863 0.709804
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_32.jpg
+
+newmtl _14
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.458824 0.592157
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_14.jpg
+
+newmtl Google_Earth_Snapshot_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.376471 0.427451
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot_3.jpg
+
+newmtl _47
+Ka 0.000000 0.000000 0.000000
+Kd 0.392157 0.423529 0.462745
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_47.jpg
+
+newmtl _3
+Ka 0.000000 0.000000 0.000000
+Kd 0.490196 0.572549 0.588235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_3.jpg
+
+newmtl _2
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.513725 0.549020
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_2.jpg
+
+newmtl _5
+Ka 0.000000 0.000000 0.000000
+Kd 0.254902 0.407843 0.549020
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_5.jpg
+
+newmtl _14_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.313725 0.501961 0.670588
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_14_1_.jpg
+
+newmtl _8
+Ka 0.000000 0.000000 0.000000
+Kd 0.192157 0.309804 0.419608
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_8.jpg
+
+newmtl _111
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.576471 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_111.jpg
+
+newmtl Material10
+Ka 0.000000 0.000000 0.000000
+Kd 0.600000 0.686275 0.839216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Material10.bmp
+
+newmtl _28
+Ka 0.000000 0.000000 0.000000
+Kd 0.490196 0.635294 0.729412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_28.jpg
+
+newmtl ventana__22
+Ka 0.000000 0.000000 0.000000
+Kd 0.341176 0.478431 0.552941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/ventana__22.bmp
+
+newmtl Google_Earth_Snapshot7
+Ka 0.000000 0.000000 0.000000
+Kd 0.682353 0.729412 0.784314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot7.bmp
+
+newmtl Google_Earth_Snapshot8
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.525490 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Google_Earth_Snapshot8.bmp
+
+newmtl _11
+Ka 0.000000 0.000000 0.000000
+Kd 0.474510 0.600000 0.733333
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_11.jpg
+
+newmtl _64
+Ka 0.000000 0.000000 0.000000
+Kd 0.364706 0.529412 0.643137
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_64.jpg
+
+newmtl _105
+Ka 0.000000 0.000000 0.000000
+Kd 0.631373 0.686275 0.752941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_105.jpg
+
+newmtl touka_poke_gym_mark_mat_003_001_001
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.533333 0.364706
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/touka_poke_gym_mark_mat_003_001_001.png
+
+newmtl _106
+Ka 0.000000 0.000000 0.000000
+Kd 0.262745 0.309804 0.356863
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_106.jpg
+
+newmtl drop_result_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.439216 0.568627
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/drop_result_5.jpg
+
+newmtl City_of_London_skyline_from_London_City_Hall___Oct_2008_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.223529 0.258824 0.301961
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/City_of_London_skyline_from_London_City_Hall___Oct_2008_1.jpg
+
+newmtl additional10_hudson_yards_kohn_pedersen_fox_kpf_coach_office_skyscraper_new_york_city_usa_dezeen_936_2_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.352941 0.576471 0.721569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/additional10_hudson_yards_kohn_pedersen_fox_kpf_coach_office_skyscraper_new_york_city_usa_dezeen_936_2_2.jpg
+
+newmtl additional10_hudson_yards_kohn_pedersen_fox_kpf_coach_office_skyscraper_new_york_city_usa_dezeen_936_2_3
+Ka 0.000000 0.000000 0.000000
+Kd 0.356863 0.572549 0.721569
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/additional10_hudson_yards_kohn_pedersen_fox_kpf_coach_office_skyscraper_new_york_city_usa_dezeen_936_2_3.jpg
+
+newmtl _108
+Ka 0.000000 0.000000 0.000000
+Kd 0.411765 0.513725 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_108.jpg
+
+newmtl windows2_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_1_.jpg
+
+newmtl windows2_2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_2_.jpg
+
+newmtl windows2_3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_3_.jpg
+
+newmtl windows2_4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_4_.jpg
+
+newmtl windows2_5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_5_.jpg
+
+newmtl windows2_6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_6_.jpg
+
+newmtl windows2_7_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_7_.jpg
+
+newmtl windows2_8_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_8_.jpg
+
+newmtl windows2_9_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_9_.jpg
+
+newmtl windows2_10_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_10_.jpg
+
+newmtl windows2_11_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_11_.jpg
+
+newmtl windows2_12_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_12_.jpg
+
+newmtl windows2_13_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_13_.jpg
+
+newmtl windows2_14_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_14_.jpg
+
+newmtl windows2_15_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_15_.jpg
+
+newmtl windows2_16_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_16_.jpg
+
+newmtl windows2_17_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_17_.jpg
+
+newmtl windows2_18_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_18_.jpg
+
+newmtl windows2_19_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_19_.jpg
+
+newmtl windows2_20_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_20_.jpg
+
+newmtl windows2_21_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_21_.jpg
+
+newmtl windows2_22_
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.529412 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/windows2_22_.jpg
+
+newmtl _110
+Ka 0.000000 0.000000 0.000000
+Kd 0.643137 0.717647 0.784314
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_110.jpg
+
+newmtl C_ModeC_d_wind_w5_0_h5_0
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.317647 0.329412
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/C_ModeC_d_wind_w5_0_h5_0.jpg
+
+newmtl Image19
+Ka 0.000000 0.000000 0.000000
+Kd 0.345098 0.474510 0.615686
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Image19.jpg
+
+newmtl M_10
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.576471 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_10.jpg
+
+newmtl _112
+Ka 0.000000 0.000000 0.000000
+Kd 0.349020 0.458824 0.619608
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_112.jpg
+
+newmtl M_33
+Ka 0.000000 0.000000 0.000000
+Kd 0.470588 0.600000 0.678431
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_33.jpg
+
+newmtl _107
+Ka 0.000000 0.000000 0.000000
+Kd 0.262745 0.337255 0.411765
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_107.jpg
+
+newmtl _87
+Ka 0.000000 0.000000 0.000000
+Kd 0.478431 0.576471 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_87.jpg
+
+newmtl Logo_Color_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.898039 0.964706 0.992157
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Logo_Color_1.jpg
+
+newmtl Logo_Color_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.258824 0.607843 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Logo_Color_2.jpg
+
+newmtl Building_Color
+Ka 0.000000 0.000000 0.000000
+Kd 0.921569 0.243137 0.070588
+Ks 0.330000 0.330000 0.330000
+
+newmtl Arch_Color
+Ka 0.000000 0.000000 0.000000
+Kd 0.847059 0.843137 0.847059
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Arch_Color.jpg
+
+newmtl Entrance
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.517647 0.541176
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Entrance.jpg
+
+newmtl Lower_Floor_Windows
+Ka 0.000000 0.000000 0.000000
+Kd 0.349020 0.490196 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Lower_Floor_Windows.jpg
+
+newmtl Walls
+Ka 0.000000 0.000000 0.000000
+Kd 0.843137 0.843137 0.847059
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Walls.jpg
+
+newmtl M_0130_Gainsboro
+Ka 0.000000 0.000000 0.000000
+Kd 0.580392 0.588235 0.580392
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_0130_Gainsboro.jpg
+
+newmtl Concrete_Sidewalk
+Ka 0.000000 0.000000 0.000000
+Kd 0.729412 0.694118 0.666667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Concrete_Sidewalk.jpg
+
+newmtl Metal_Steel_Textured_White
+Ka 0.000000 0.000000 0.000000
+Kd 0.576471 0.576471 0.576471
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/Metal_Steel_Textured_White.jpg
+
+newmtl M_0129_WhiteSmoke
+Ka 0.000000 0.000000 0.000000
+Kd 0.788235 0.788235 0.788235
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/M_0129_WhiteSmoke.jpg
+
+newmtl _98
+Ka 0.000000 0.000000 0.000000
+Kd 0.450980 0.572549 0.219608
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_98.jpg
+
+newmtl C_ClasA_d_wind1_w4_0_h4_5
+Ka 0.000000 0.000000 0.000000
+Kd 0.494118 0.498039 0.466667
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/C_ClasA_d_wind1_w4_0_h4_5.jpg
+
+newmtl C_ChicC_d_wind_w5_0_h5_65
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.396078 0.352941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/C_ChicC_d_wind_w5_0_h5_65.jpg
+
+newmtl _89
+Ka 0.000000 0.000000 0.000000
+Kd 0.572549 0.580392 0.552941
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_89.jpg
+
+newmtl _85
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.423529 0.435294
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_85.jpg
+
+newmtl _104
+Ka 0.000000 0.000000 0.000000
+Kd 0.345098 0.568627 0.600000
+Ks 0.330000 0.330000 0.330000
+map_Kd Castelia City/_104.jpg
+

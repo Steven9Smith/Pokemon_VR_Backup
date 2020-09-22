@@ -11,6 +11,9 @@ using Core;
 using Unity.Rendering;
 using Core.Spawning;
 using Core.UI;
+using Pokemon.Player;
+using Pokemon.EntityController;
+using Core.Camera;
 
 namespace Pokemon
 {
@@ -98,6 +101,7 @@ namespace Pokemon
 		//base pokemon move data
 
 	}
+<<<<<<< Updated upstream
 	public struct PokemonCameraData : IComponentData
 	{
 		public float3 firstPersonOffset;
@@ -105,6 +109,9 @@ namespace Pokemon
 		public BlittableBool offsetSet;
 		public int viewMode;
 	}
+=======
+	
+>>>>>>> Stashed changes
 	public static class PokemonDataClass {
 		//use char to save space
 		public const char BODY_TYPE_HEAD_ONLY = (char)0;
@@ -122,7 +129,20 @@ namespace Pokemon
 		public const char BODY_TYPE_SERPANT_BODY = (char)12;
 		public const char BODY_TYPE_HEAD_WITH_ARMS = (char)13;
 		public const int MaxPokedexNumber = 151; //doing first gen first
+<<<<<<< Updated upstream
 
+=======
+		//Movement types
+		public const char MOVEMENT_TYPE_ROLL = (char)0;
+		public const char MOVEMENT_TYPE_SMALL_SURF = (char)1;
+		public const char MOVEMENT_TYPE_SLUSH_SLIDE = (char)2;
+		public const char MOVEMENT_TYPE_FLY = (char)3;
+		public const char MOVEMENT_TYPE_FLOAT = (char)4;
+		public const char MOVEMENT_TYPE_HOP = (char)5;
+		public const char MOVEMENT_TYPE_WALK = (char)6;
+
+		public const float PokemonSmoothingSpeed = 15f;
+>>>>>>> Stashed changes
 
 		public static PokemonData[] PokemonBaseData = GenerateBasePokemonDatas();
 		public static PokemonEntityData[] PokemonBaseEntityData = GenerateBasePokemonEntityDatas();
@@ -289,6 +309,27 @@ namespace Pokemon
 			return colliders;
 		} 
 
+		public static EntityControllerStepInput GeneratePokemonControllerStepInput(int pokedexEntry,PhysicsVelocity velocity,PhysicsDamping damping)
+		{
+			EntityControllerStepInput stepInput = new EntityControllerStepInput
+			{
+				input = new PlayerInput { },
+				Velocity = velocity,
+				AffectsPhysicsBodies = 1,
+				Damping = new PhysicsDamping
+				{
+					Angular = damping.Angular,
+					Linear = damping.Linear != 0 ? damping.Linear : CharacterControllerUtilities.k_DefaultDamping
+				},
+				ContactTolerance = CharacterControllerUtilities.ContactTolerance,
+				MaxIterations = CharacterControllerUtilities.MaxIterations,
+				stateData = new StateData { },
+				MaxSlope = CharacterControllerUtilities.MaxSlope,
+				SkinWidth = CharacterControllerUtilities.SkinWidth,
+				Tau = CharacterControllerUtilities.k_DefaultTau
+			};
+			return stepInput;
+		}
 
 		/// <summary>
 		/// returns the pokemon's base data
@@ -467,19 +508,20 @@ namespace Pokemon
 				default: return "unknown_pokemon "+entry.ToString();
 			}
 		}
+
 		/// <summary>
 		/// returns the pokemon's camera offset
 		/// </summary>
-		/// <param name="pokemonName"></param>
-		/// <param name="entity"></param>
-		/// <param name="entityManager"></param>
-		public static void SetPokemonCameraData(ByteString30 pokemonName,Entity entity,EntityManager entityManager)
+		/// <param name="pokemonName">name of the pokemon</param>
+		public static CameraOffsetData GetCameraOffsetData(string pokemonName)
 		{
-			PokemonCameraData pcd = new PokemonCameraData {
-				thridPersonOffset = new float3(0,5f,-10f),
-				firstPersonOffset = new float3(0,2f,0f)
+			CameraOffsetData pcd = new CameraOffsetData
+			{
+				thridPersonOffset = new float3(0, 5f, -10f),
+				firstPersonOffset = new float3(0, 2f, 0f),
+				smoothingSpeed = PokemonDataClass.PokemonSmoothingSpeed
 			};
-			switch (pokemonName.ToString())
+			switch (pokemonName)
 			{
 				case "Bulbasaur":
 					break;
@@ -488,24 +530,35 @@ namespace Pokemon
 				case "Venasaur":
 					break;
 				case "Electrode":
-					pcd = new PokemonCameraData
+					pcd = new CameraOffsetData
 					{
 						thridPersonOffset = new float3(0, 2f, 3.5f),
-						firstPersonOffset = new float3(0, 0.3f, -0.35f)
+						firstPersonOffset = new float3(0, 0.3f, -0.35f),
+						smoothingSpeed = PokemonDataClass.PokemonSmoothingSpeed
 					};
 					break;
 				case "Cubone":
-					pcd = new PokemonCameraData {
-						firstPersonOffset = new float3(0,0.3f,-0.35f),
-						thridPersonOffset = new float3(0,1f,-3f)
+					pcd = new CameraOffsetData
+					{
+						firstPersonOffset = new float3(0, 0.3f, -0.35f),
+						thridPersonOffset = new float3(0, 1f, -3f),
+						smoothingSpeed = PokemonDataClass.PokemonSmoothingSpeed
 					};
 					break;
 				default:
-					Debug.LogError("Failed to get pokemonCameraData!");
+					Debug.LogWarning("Failed to get pokemonCameraData!");
 					break;
 			}
-			if (entityManager.HasComponent<PokemonCameraData>(entity)) entityManager.SetComponentData<PokemonCameraData>(entity, pcd);
-			else entityManager.AddComponentData(entity, pcd);
+			return pcd;
+		}
+		/// <summary>
+		/// gets the pokemon camera offset data
+		/// </summary>
+		/// <param name="pokedexEntry"></param>
+		/// <returns></returns>
+		public static CameraOffsetData GetCameraOffsetData(ushort pokedexEntry)
+		{
+			return GetCameraOffsetData(PokedexEntryToString(pokedexEntry));
 		}
 
 		public static float CalculateJumpHeight(float maxHeight,float time,float gravity = -9.81f)
@@ -517,17 +570,29 @@ namespace Pokemon
 		/// </summary>
 		/// <param name="pokemonName">the name oof the pokemon</param>
 		/// <returns>PokemonEntityData</returns>
-		public static PokemonEntityData GenerateBasePokemonEntityData(int pokedexEntry)
+		public static PokemonEntityData GenerateBasePokemonEntityData(int pokedexEntry,bool loadFromIConvertToEntity = false)
 		{
-			//	PokemonData pd = getBasePokemonData(StringToPokedexEntry(pokemonName));
-			PokemonData pd = PokemonBaseData[pokedexEntry];
+			PokemonData pd;
+			if(loadFromIConvertToEntity) pd = getBasePokemonData(pokedexEntry);
+			else pd = PokemonBaseData[pokedexEntry]; //<- this does not work if the function is called using IConvertToEntity because the static class hasn't been loaded yet
 			//add the PokemonEntityData
 
 			float jumpHeight = 1.0f;
 			switch (pokedexEntry)
 			{
+<<<<<<< Updated upstream
 				case 101: jumpHeight = 5.0f; break;
 				default: Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\""); break;
+=======
+				case 101:
+					jumpHeight = 5.0f;
+					jumpMultiplier = 2f;
+					longJumpMultiplier = 2.5f;
+					break;
+				default:
+					Debug.LogWarning("Failed to find a jumpHeight multipler for \"" + PokedexEntryToString((ushort)pokedexEntry) + "\":"+pokedexEntry); 
+					break;
+>>>>>>> Stashed changes
 			}
 			//	Debug.Log("height jump thing = "+ CalculateJumpHeight(pd.Height * 2.5f, 2));
 			return new PokemonEntityData
@@ -594,6 +659,86 @@ namespace Pokemon
 		{
 			return createDynamic? PhysicsMass.CreateDynamic(physicsCollider.MassProperties, mass) : PhysicsMass.CreateKinematic(physicsCollider.MassProperties);
 		}
+
+		public static void ChangeEntityPokemon(Entity entity, EntityManager entityManager, ref CoreData coreData, ref PokemonEntityData ped,bool changePed)
+		{
+			//get gameobject prefab
+			GameObject go = CoreFunctionsClass.GetGameObjectPrefab(coreData.BaseName, 0);
+
+			//changes ped based on core data
+			if (changePed)
+				ped = PokemonDataClass.GenerateBasePokemonEntityData(PokemonDataClass.StringToPokedexEntry(coreData.BaseName.ToString()));
+
+			//get and add renderMesh
+			RenderMesh renderMesh = new RenderMesh { };
+			CoreFunctionsClass.SetRenderMesh(entityManager, entity, coreData.BaseName,out renderMesh, 0);
+			//add this component (filter to seperate living entities from nonliving)
+			if (!entityManager.HasComponent<LivingEntity>(entity)) entityManager.AddComponentData<LivingEntity>(entity, new LivingEntity { });
+			// Render bounds should be added by default now
+			//	if (!entityManager.HasChunkComponent<RenderBounds>(entity)) entityManager.AddComponentData(entity, new RenderBounds { });
+			PhysicsDamping pd = CoreFunctionsClass.SetPhysicsDamping(entityManager, entity,coreData.BaseName, ped);
+
+			//add the CoreData
+		//	if (entityManager.HasComponent<CoreData>(entity)) entityManager.SetComponentData(entity, new CoreData(psd.playerData.Name, psd.playerData.PokemonName, go, entity, position, rotation, pd));
+		//	else entityManager.AddComponentData(entity, new CoreData(psd.playerData.Name, psd.playerData.PokemonName, go, entity, position, rotation, pd));
+			//	Debug.LogWarning("Player name = "+playerName+", pokemon name = "+pokemonName);
+			//add the UI Components(s) // This will need to change
+		//	entityManager.AddComponentData<UIComponentRequest>(entity, new UIComponentRequest { addToWorld = false, followPlayer = false, visible = true });
+
+			//add third and first person camera offets
+			//	PokemonDataClass.SetPokemonCameraData(new ByteString30(pokemonName), entity, entityManager);
+			
+			//add the PhysicsCollider data
+			PhysicsCollider ps = PokemonDataClass.getPokemonPhysicsCollider(coreData.BaseName.ToString(), ped, new CollisionFilter
+			{
+				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon | TriggerEventClass.Player,
+				CollidesWith = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
+				GroupIndex = 1
+			});
+			//	Debug.Log("Creating player eith group index of " + ps.Value.Value.Filter.GroupIndex.ToString());
+			if (!entityManager.HasComponent<PhysicsCollider>(entity)) entityManager.AddComponentData(entity, ps);
+			else entityManager.SetComponentData(entity, ps);
+
+			//add mass
+			if (!entityManager.HasComponent<PhysicsMass>(entity)) entityManager.AddComponentData(entity, PhysicsMass.CreateDynamic(MassProperties.UnitSphere, ped.Mass));
+			else entityManager.SetComponentData(entity, PhysicsMass.CreateDynamic(MassProperties.UnitSphere, ped.Mass));
+			//add physics velocity // Change request assumes the entity already has a physics velocity
+			//	if (!entityManager.HasComponent<PhysicsVelocity>(entity)) entityManager.AddComponentData(entity, new PhysicsVelocity { });
+			//	else entityManager.SetComponentData<PhysicsVelocity>(entity, new PhysicsVelocity { });
+
+
+
+			//set EntityControllerStepInput
+			//	entityManager.AddComponentData(entity, PokemonDataClass.GeneratePokemonControllerStepInput(psd.pokemonEntityData.PokedexNumber, new PhysicsVelocity { }, pd));
+
+			// Now we add stuff related to pokemon systems
+
+
+			// If the entity is a player change its camera offset
+			if (entityManager.HasComponent<PlayerCameraComponentData>(entity)) {
+				PlayerCameraComponentData pccd = entityManager.GetComponentData<PlayerCameraComponentData>(entity);
+				entityManager.SetComponentData(entity, new PlayerCameraComponentData
+				{
+					cameraOffsetComponent = PokemonDataClass.GetCameraOffsetData(ped.PokedexNumber),
+					ViewMode = pccd.ViewMode,
+					CameraEntity = pccd.CameraEntity,
+					index = pccd.index,
+					invertY = pccd.invertY
+				});
+			}
+
+			//add the group index
+			entityManager.AddComponentData(entity, new GroupIndexInfo
+			{
+				CurrentGroupIndex = 1,
+				OldGroupIndex = 1,
+				OriginalGroupIndex = 1,
+				Update = true
+			});
+
+		}
+
+
 		/// <summary>
 		/// creates and returns the pokemoon's PhysicsCollider
 		/// </summary>
@@ -689,9 +834,9 @@ namespace Pokemon
 			return physicsCollider; 
 		}
 
-		public static Unity.Physics.Material GetPokemonColliderMaterial(int pokedexEntry,
-			Unity.Physics.Material.MaterialFlags materialFlags = Unity.Physics.Material.MaterialFlags.EnableMassFactors)
+		public static Unity.Physics.Material GetPokemonColliderMaterial(int pokedexEntry)
 		{
+
 			Unity.Physics.Material material = Unity.Physics.Material.Default;
 			switch (pokedexEntry)
 			{
@@ -743,13 +888,13 @@ namespace Pokemon
 		{
 			Debug.Log("Generating new pokemon!");
 			Entity entity;
+			//create Archtype
 			EntityArchetype ea = entityManager.CreateArchetype(
 				typeof(Translation),
 				typeof(Rotation),
 				typeof(Scale),
 				typeof(LocalToWorld),
 				typeof(RenderMesh),
-				typeof(PokemonCameraData),
 				typeof(PokemonEntityData),
 				typeof(PhysicsMass),
 				typeof(PhysicsCollider),
@@ -757,23 +902,30 @@ namespace Pokemon
 				typeof(PhysicsDamping),
 				typeof(GroupIndexInfo),
 				typeof(UIComponent),
-				typeof(CoreData)
+				typeof(CoreData),
+				typeof(RenderBounds)
 				);
 			entity = entityManager.CreateEntity(ea);
+			//set the name
 			entityManager.SetName(entity,cdata.Name.ToString());
+			//set scale
 			entityManager.SetComponentData(entity, new Scale { Value = scale });
+			//set rotation
 			entityManager.SetComponentData(entity, new Rotation { Value = rotation });
+			//set position
 			entityManager.SetComponentData(entity, new Translation { Value = position });
+			//set coreData	
 			entityManager.SetComponentData(entity, cdata);
-			SetPokemonCameraData(cdata.BaseName,entity, entityManager);
+			//set pokemonCameraData
+			entityManager.SetComponentData<CameraOffsetData>(entity,PokemonDataClass.GetCameraOffsetData(cdata.BaseName.ToString()));
+		//	CoreFunctionsClass.SetCameraOffsetData(cdata.BaseName.ToString(),entity, entityManager);
+			//set pokemonEntityData
 			PokemonEntityData ped = GenerateBasePokemonEntityData(StringToPokedexEntry(cdata.BaseName.ToString()));
-			SetPhysicsDamping(entityManager, entity, cdata.BaseName, ped);
 			entityManager.SetComponentData(entity, ped);
-		/*	NativeArray<CompoundCollider.ColliderBlobInstance> cc = new NativeArray<CompoundCollider.ColliderBlobInstance>(PokemonBaseColliderData[StringToPokedexEntry(cdata.BaseName.ToString())],Allocator.TempJob);
-			PhysicsCollider pc = new PhysicsCollider{
-				Value = CompoundCollider.Create(cc)
-			};
-			cc.Dispose();*/
+			//set Physics Damping
+			PhysicsDamping pd =CoreFunctionsClass.SetPhysicsDamping(entityManager, entity, cdata.BaseName, ped);
+			//set EntityControllerStepInput
+			entityManager.AddComponentData(entity, PokemonDataClass.GeneratePokemonControllerStepInput(ped.PokedexNumber, new PhysicsVelocity { },pd));
 			PhysicsCollider pc = getPokemonPhysicsCollider(cdata.BaseName.ToString(), ped, new CollisionFilter
 			{
 				BelongsTo = TriggerEventClass.Collidable | TriggerEventClass.Pokemon,
@@ -789,101 +941,16 @@ namespace Pokemon
 				OriginalGroupIndex = 1,
 				Update = true
 			});
-		/*	entityManager.AddComponentData(entity, new GroupIndexChangeRequest
-			{
-				newIndexGroup = 1,
-				pokemonName = cdata.BaseName
-			});*/
 			entityManager.AddComponentData<UIComponentRequest>(entity, new UIComponentRequest {
 				addToWorld = true,
 				followPlayer = true,
 				visible = true
 			});
-			if (!SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
+			if (!CoreFunctionsClass.SetRenderMesh(entityManager, entity, cdata.BaseName, 0)) return new Entity();
 			return entity;
 		}
-		/// <summary>
-		/// gets the render mesh for any gameobject (that has been coded) and set the RenderMesh Component Data
-		/// </summary>
-		/// <param name="entityManager">EntityManager</param>
-		/// <param name="entity">entity to be modified</param>
-		/// <param name="name">base name of the entity</param>
-		/// <param name="type">type of entity 0 = Pokemon, 1 = PokemonMove</param>
-		/// <returns></return>
-		public static bool SetRenderMesh(EntityManager entityManager,Entity entity,ByteString30 name,int type = 0)
-		{
-			GameObject go = null;
-			string path = "";
-			switch (type)
-			{
-				case 0: path += "Pokemon/"+name+"/"+name; break;
-				case 1: path += "Pokemon/PokemonMoves/" + name+"/"+name;break;
-				case 2: path += "Enviroment/"+name;break;
-				default: Debug.LogWarning("Failed to load the render mesh for \"" + name + "\""); return false;
-			}
-			go = Resources.Load(path) as GameObject;
-			try
-			{
-				RenderMesh rm = new RenderMesh
-				{
-					mesh = go.GetComponent<MeshFilter>().sharedMesh,
-					castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-					material = go.GetComponent<MeshRenderer>().sharedMaterial,
-					receiveShadows = true
-				};
-				if (entityManager.HasComponent<RenderMesh>(entity)) entityManager.SetSharedComponentData(entity, rm);
-				else entityManager.AddSharedComponentData(entity, rm);
-			}
-			catch
-			{
-				Debug.LogError("Exception Rose when trying to create RenderMesh with name \""+name+"\" with type "+type.ToString());
-			}
-			return false;
-		}
-		public static bool SetPhysicsDamping(EntityManager entityManager,Entity entity,ByteString30 name,PokemonEntityData ped)
-		{
-			PhysicsDamping ps = new PhysicsDamping
-			{
-				Angular = 0.05f,
-				Linear = 0.01f
-			};	
-			switch (name.ToString())
-			{
-				case "Electrode":
-					ps = new PhysicsDamping
-					{
-						Angular = 0.5f,
-						Linear = 0.1f
-					};
-					break;
-				default: Debug.LogError("failed to find PhysicsDamping for pokemon \""+name+"\"");break;
-			}
-			try
-			{
-				if (entityManager.HasComponent<PhysicsDamping>(entity)) entityManager.SetComponentData<PhysicsDamping>(entity, ps);
-				else entityManager.AddComponentData(entity, ps);
-				return true;
-			}
-			catch
-			{
-				Debug.LogError("Failed to set AngularDamping!");
-			}
-			return false;
-		}
-		public static GameObject GetGameObjectPrefab(ByteString30 name, int type = 0)
-		{
-			GameObject go = null;
-			string path = "";
-			switch (type)
-			{
-				case 0: path += "Pokemon/" + name + "/" + name; break;
-				case 1: path += "Pokemon/PokemonMoves/" + name + "/" + name; break;
-				case 2: path += "Enviroment/" + name; break;
-				default: Debug.LogWarning("Failed to load the render mesh for \"" + name + "\""); return null;
-			}
-			go = Resources.Load(path) as GameObject;
-			return go;
-		}
+	
+	
 	}
 	//# Pokémon 	HP 	Attack 	Defense 	Sp. Attack 	Sp. Defense 	Speed 	Total 	Average
 	

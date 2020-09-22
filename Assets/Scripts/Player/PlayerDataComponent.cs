@@ -9,6 +9,11 @@ using Unity.Rendering;
 using Unity.Physics;
 using Core;
 using Unity.Collections;
+<<<<<<< Updated upstream
+=======
+using Pokemon.Player;
+using Pokemon.EntityController;
+>>>>>>> Stashed changes
 
 namespace Pokemon
 {
@@ -17,20 +22,27 @@ namespace Pokemon
 	{
 		public string playerName;
 		public string pokemonName;
+		public int PlayerNumber = 1;
+		public bool force_save_file_reset = false;
+		public bool load_from_file = false;
 		//		public AnimatorController anim;
 		public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 		{
+			if (PlayerNumber > 4)
+				Debug.LogError("Cannot have more than 4 players atm");
 			if (playerName != "")
 			{
 			//	Debug.Log(Application.persistentDataPath);
 				PlayerData pd = new PlayerData
 				{
 					Name = new ByteString30(playerName),
-					PokemonName = new ByteString30(pokemonName)
+					PokemonName = new ByteString30(pokemonName),
+					PlayerNumber = PlayerNumber
 				};
-				Debug.Log("aaa"+pd.Name+",,,ss "+pd.PokemonName);
+				Debug.Log("Adding CoreData with Name: \""+pd.Name+"\" and PokemonName: \""+pd.PokemonName+"\"");
 				dstManager.AddComponentData(entity, pd);
 				//add controls
+<<<<<<< Updated upstream
 				dstManager.AddComponentData(entity, new PlayerInput { });
 				dstManager.AddComponentData(entity, new StateData { });
 
@@ -55,62 +67,21 @@ namespace Pokemon
 					if (!dstManager.HasComponent<PokemonAnimationVerifier>(entity)) dstManager.AddComponentData(entity, new PokemonAnimationVerifier { });
 				}
 				else Debug.LogError("Cannot get Animator because the anim was not set");	*/
+=======
+				dstManager.AddComponentData(entity, new EntityControllerStepInput {
+					ContactTolerance = CharacterControllerUtilities.ContactTolerance,
+					MaxIterations = CharacterControllerUtilities.MaxIterations,
+					MaxSlope = CharacterControllerUtilities.MaxSlope,
+					Tau = CharacterControllerUtilities.k_DefaultTau,
+					SkinWidth = CharacterControllerUtilities.SkinWidth,
+					AffectsPhysicsBodies = CharacterControllerUtilities.AffectsPhysicsBodies,
+					Gravity = CharacterControllerUtilities.Gravity
+					
+				});
+		
+>>>>>>> Stashed changes
 			}
 			else Debug.LogError("Cannot load player data without a name");
-		}
-	}
-	public class PlayerSystem : JobComponentSystem
-	{
-	//	UISystem uiSystem;
-		Entity PlayerEntity;
-		EntityArchetype PlayerArchetype;
-
-		protected override void OnCreate()
-		{
-			/*	//	uiSystem = World.GetOrCreateSystem<UISystem>();
-					//create type thing
-					PlayerArchetype = EntityManager.CreateArchetype(
-						typeof(Translation),
-						typeof(Rotation),
-						typeof(RenderMesh),
-						typeof(LocalToWorld),
-					//	typeof(PhysicsMass),
-						typeof(PhysicsCollider),
-					//	typeof(PhysicsVelocity), //<-render and collider delete when this is added or set
-						typeof(Scale)
-					//	typeof(CoreData),
-					//	typeof(LivingEntity),
-					//	typeof(PlayerInput),
-					//	typeof(StateData),
-					);*/
-			PlayerArchetype = EntityManager.CreateArchetype(
-					typeof(Translation),
-					typeof(Rotation),
-					typeof(RenderMesh),
-					typeof(LocalToWorld),
-					typeof(PhysicsCollider),
-					typeof(PhysicsVelocity),
-					typeof(TranslationProxy),
-					typeof(RotationProxy)
-				);
-		}
-		protected override void OnStartRunning()
-		{
-			//LoadPlayer
-		//	NativeArray<Entity> playerEntities = new NativeArray<Entity>(3, Allocator.TempJob);
-		//	EntityManager.CreateEntity(PlayerArchetype, playerEntities);
-			//		EntityManager.SetComponentData(PlayerEntity, new PlayerData {
-			//			PokemonName = new ByteString30("Electrode"),
-			//			Name = new ByteString30("Player1")
-			//		});
-		//	EntityManager.SetComponentData(playerEntities[0], new Scale { Value = 1f });
-		//	PokemonIO.LoadPlayerData(EntityManager, playerEntities[0], "Player1");
-		//	playerEntities.Dispose();
-		}
-
-		protected override JobHandle OnUpdate(JobHandle inputDeps)
-		{
-			return inputDeps;
 		}
 	}
 	/// <summary>
@@ -121,6 +92,7 @@ namespace Pokemon
 	{
 		public ByteString30 Name;
 		public ByteString30 PokemonName;
+		public int PlayerNumber;
 		//   public PokemonEntityData PokemonEntityData;
 	}
 	[Serializable]
@@ -128,6 +100,8 @@ namespace Pokemon
 	{
 		public PlayerData playerData;
 		public PokemonEntityData pokemonEntityData;
+		public Translation position;
+		public Rotation rotation;
 		public bool isValid;
 	}
 }

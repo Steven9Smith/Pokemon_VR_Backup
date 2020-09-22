@@ -14,6 +14,32 @@ using Core;
 
 namespace Pokemon
 {
+	public struct ChangeEntityPokemonRequest : IComponentData {
+		public ByteString30 PokemonName;
+		public BlittableBool UseCoreDataName;
+	}
+
+
+	/// <summary>
+	/// These are systems related to pokemon
+	/// </summary>
+	public class CorePokemonSystems : JobComponentSystem
+	{
+		protected override JobHandle OnUpdate(JobHandle inputDeps)
+		{
+			// This Changes the Entity's pokemon to the one in coreData.BaseName
+			Entities.ForEach((Entity entity,ref CoreData coreData,ref PokemonEntityData ped, ref ChangeEntityPokemonRequest cepr)=> {
+				if(!cepr.UseCoreDataName)
+					coreData.BaseName = cepr.PokemonName;
+				PokemonDataClass.ChangeEntityPokemon(entity, EntityManager,ref coreData,ref ped, true);
+				EntityManager.RemoveComponent<ChangeEntityPokemonRequest>(entity);
+			}).WithoutBurst().WithStructuralChanges().WithName("PokemonChangeSystem").Run();
+
+			return inputDeps;
+		}
+	}
+
+
 	/// <summary>
 	/// made to set some varibles in the eneity that has an PokemonEntityData
 	/// </summary>
@@ -139,6 +165,7 @@ namespace Pokemon
 			return jh;
 		}
 	}
+	/*
 	/// <summary>
 	/// This is a Job. This Job preforms a move adjustment which is either a AngularVelocty, Velocity, Translation, Rotation, and/or Scale
 	/// </summary>
@@ -278,7 +305,7 @@ namespace Pokemon
 			}.Schedule(this, inputDeps);
 		}
 	}
-
+	
 	public class EntitySpawnSystem : JobComponentSystem
 	{
 		private EntityQuery pokemonRequestQuery;
@@ -297,4 +324,5 @@ namespace Pokemon
 			return inputDeps;
 		}
 	}
+	*/
 }

@@ -13,23 +13,39 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+<<<<<<< Updated upstream
+=======
+using System.Collections;
+using Unity.Physics;
+using Core.Camera;
+using Unity.Rendering;
+>>>>>>> Stashed changes
 
 [RequiresEntityConversion]
 public class CoreDataComponent : MonoBehaviour, IConvertGameObjectToEntity
 {
+	[Tooltip("Name of the Entity")]
 	public string Name;
+	[Tooltip("Category of Entity (please see code for names)")]
 	public string BaseName;
+	[Tooltip("Transform of the GameObject")]
 	public new Transform transform;
+	[Tooltip("MeshFilter of the GameObject")]
 	public MeshFilter meshFilter;
+	[Tooltip("Set to true to set the name of the entity to the \"Name:BaseName\"")]
+	public bool setName = true;
 	public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
 	{
-		dstManager.SetName(entity, Name + "|" + BaseName);
 		//Debug.Log(Name + "|" + BaseName);
 		if (meshFilter == null) Debug.LogError("MeshFilter is null for " + Name);
 		else if (transform == null) Debug.LogError("Transform is null for "+Name);
 
+<<<<<<< Updated upstream
 
 		CoreData cd = new CoreData(new ByteString30(Name), new ByteString30(BaseName), transform, meshFilter.sharedMesh);
+=======
+		CoreData cd = new CoreData(new ByteString30(Name), new ByteString30(BaseName), transform, meshFilter.sharedMesh,entity,new Translation { Value = transform.position },new Rotation { },new PhysicsDamping { });
+>>>>>>> Stashed changes
 		if (!cd.isValid) Debug.LogError("failed to successfully create COreData for To-Be Entity \"" + Name + "\":\"" + BaseName + "\"");
 		else
 		{
@@ -39,6 +55,7 @@ public class CoreDataComponent : MonoBehaviour, IConvertGameObjectToEntity
 				dstManager.SetComponentData(entity, cd);
 			}
 			else dstManager.AddComponentData<CoreData>(entity, cd);
+<<<<<<< Updated upstream
 		}
 	}
 }
@@ -125,27 +142,15 @@ namespace Core
 				}
 			}
 			else
+=======
+			if (setName)
+>>>>>>> Stashed changes
 			{
-				scale = new float3();
-				size = new float3();
-				isValid = false;
+				dstManager.AddComponentData(entity, new CoreDataNameRequest { });
 			}
 		}
-
-		public bool Equals(CoreData other)
-		{
-			if (!other.isValid || !isValid) {
-				Debug.LogWarning("CoreData: comparing invalid cds");
-				return false;
-			}
-			return Name.Equals(other.Name) && BaseName.Equals(other.BaseName) && size.Equals(other.size) && scale.Equals(other.scale);
-		}
-		public override string ToString()
-		{
-			return "CoreData: " + Name + "," + BaseName + "," + size + "," + scale + "," + isValid.Value;
-		}
-		public string ToNameString() { return Name + ":" + BaseName; }
 	}
+<<<<<<< Updated upstream
 
 	public class CoreFunctionsClass {
 		static EntityQuery eq;
@@ -929,3 +934,6 @@ namespace Core
 		}
 	}
 }
+=======
+}
+>>>>>>> Stashed changes

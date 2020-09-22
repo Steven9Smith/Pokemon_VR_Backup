@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6243765187328606238}
   - component: {fileID: 6973126132197010093}
   - component: {fileID: 8893473084514745278}
+  - component: {fileID: -8557135821655622449}
+  - component: {fileID: 4877463862548097225}
   m_Layer: 0
   m_Name: PokemonCenter_Table
   m_TagString: Untagged
@@ -52,6 +54,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -78,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &6243765187328606238
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -148,6 +152,36 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
+--- !u!114 &-8557135821655622449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: -1732193097911402930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915157eac4c319145ba17216840148e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: PokemonCenterTable
+  BaseName: Table
+  transform: {fileID: -1435037248114605323}
+  meshFilter: {fileID: 6243765187328606238}
+  setName: 1
+--- !u!114 &4877463862548097225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: -1732193097911402930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326abd393f6d11c4dbe8e2d3e06d736f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transform: {fileID: -1435037248114605323}
 --- !u!1 &267307965
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,9 +264,9 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1.5
+    Height: 1
     Radius: 0.75
-    Axis: 1
+    Axis: 2
   m_Cylinder:
     Height: 1
     Radius: 0.75
@@ -245,6 +279,7 @@ MonoBehaviour:
     m_BevelRadius: 0
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}
@@ -371,6 +406,7 @@ MonoBehaviour:
     m_BevelRadius: 0
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}
@@ -482,9 +518,9 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1.0000002
+    Height: 1
     Radius: 0.5000001
-    Axis: 1
+    Axis: 2
   m_Cylinder:
     Height: 1
     Radius: 0.5000001
@@ -497,6 +533,7 @@ MonoBehaviour:
     m_BevelRadius: 0.01
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}

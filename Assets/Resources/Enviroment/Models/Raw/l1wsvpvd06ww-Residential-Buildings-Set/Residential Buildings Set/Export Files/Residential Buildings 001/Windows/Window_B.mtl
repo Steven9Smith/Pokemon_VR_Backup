@@ -1,0 +1,16 @@
+newmtl ResidentialFBXASC032BuildingsFBXASC032001SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 7.61
+newmtl ResidentialFBXASC032BuildingsFBXASC032001SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.44 0.44 0.44
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 7.61

@@ -57,7 +57,7 @@ namespace Pokemon
 				spawnSpheresLength = 0;
 				for (i = 0; i < entities.Length; i++)
 				{
-					if (playerInputs[i].attackADown)
+					if (playerInputs[i].ReqAttackA)
 					{
 				//		Debug.Log("Detected an E press!");
 						float3 nPosition = translations[i].Value;
